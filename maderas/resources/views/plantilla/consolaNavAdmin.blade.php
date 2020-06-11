@@ -20,20 +20,20 @@
 <nav class="fadeInDown">
   <img class="navImg" src="img/image.png" alt="">
   <ul class="nav_options">
-    <li @click="menu=0"><a class="black-text" href="#">Categorias</a></li>
-    <li @click="menu=1"><a class="black-text" href="#">SubCategorias</a></li>
-    <li @click="menu=2"><a class="black-text" href="#">Productos</a></li>
-    <li @click="menu=3"><a class="black-text" href="#">Sliders</a></li>
-    <li @click="menu=4"><a class="black-text" href="#">Usuarios</a>
+    <li @click="menu=0"><a href="#">Categorias</a></li>
+    <li @click="menu=1"><a href="#">SubCategorias</a></li>
+    <li @click="menu=2"><a href="#">Productos</a></li>
+    <li @click="menu=3"><a href="#">Sliders</a></li>
+    <li @click="menu=4"><a href="#">Usuarios</a>
       <ul class="subOptions">
         <li><a href="">Empleados</a></li>
         <li><a href="">Clientes</a></li>
       </ul>
     </li>
 
-    <li @click="menu=5"><a class="black-text" href="#">Envios</a></li>
-    <li @click="menu=6"><a class="black-text" href="#">Cambiar contraseña </a></li>
-    <li @click="menu=6"><a class="black-text" href="#">Cerrar sesión</a></li>
+    <li @click="menu=5"><a href="#">Envios</a></li>
+    <li @click="menu=6"><a href="#">Cambiar contraseña </a></li>
+    <li @click="menu=6"><a href="#">Cerrar sesión</a></li>
   </ul>
 </nav>
 
