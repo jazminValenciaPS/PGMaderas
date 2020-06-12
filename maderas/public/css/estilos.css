@@ -86,7 +86,7 @@ footer{
   grid-row: repeat(5,200px);
   grid-gap: 5px;
 }
-.form .botonContra{
+.botonContra{
   width: 100%;
 
 }
