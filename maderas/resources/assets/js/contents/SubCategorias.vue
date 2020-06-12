@@ -2,17 +2,18 @@
     <main class="row hero">
         <div class="col s12 m12 gl6">
             <div class=" title">
-                <h5>Categorias</h5>
+                <h5>SubCategorias</h5>
             </div>
             <div class="right form ">
                 <button type="summit">
-                    Agregar Categorias
+                    Agregar SubCategorias
                 </button>
             </div>
             <table class="tabla centered">
                 <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th class="hide-on-small-only">Categoria</th>
                         <th class="hide-on-small-only">Descripcion</th>
                         <th class="hide-on-small-only">Imagen</th>
                         <th class="hide-on-small-only">Status</th>
@@ -47,46 +48,9 @@
         </div>
     </main>
 </template>
-<script>
-import categorias from './Categorias.vue'
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
 
-export default {
-    data() {
-        return {
-            idCategoria: 0,
-            nombre: '',
-            status : true,
-            arrayCategoria:[],
-            idCaracteristica: 0,
-            arrayCaracteristicas: [],
-            arrayIdCaracteristica:[],
-            arrayCaracteristicaCategoria:[],
-            modal : 0,
-            tituloModal : 'Registrar Categorias' ,
-            cambio : 0,
-            tipoAccion: 0,
-            errorCategoria : 0,
-            errorMostrarMsjCategoria : []
-        }
-    },
-    methods:{
-            listarCategoria(){
-                let m=this;
-                axios.get('/categoria').then(function (response){
-                    m.arrayCategoria = response.data;
-                    m.status = response.status.data;
-                    if(status == true){
-                        status = 1
-                    }else{
-                        status = 0
-                    }
-                  
-                })
-                .catch(function(error){
-                    console.log(error);
-                });
-            }
-    }
-}
-
+})
 </script>

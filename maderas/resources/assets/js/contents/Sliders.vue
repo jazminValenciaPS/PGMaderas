@@ -1,31 +1,27 @@
 <template>
-    <main class="row hero">
+     <main class="row hero">
         <div class="col s12 m12 gl6">
             <div class=" title">
-                <h5>Categorias</h5>
+                <h5>Sliders</h5>
             </div>
             <div class="right form ">
                 <button type="summit">
-                    Agregar Categorias
+                    Agregar Sliders
                 </button>
             </div>
             <table class="tabla centered">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
+                        <th>Titulo</th>
                         <th class="hide-on-small-only">Descripcion</th>
                         <th class="hide-on-small-only">Imagen</th>
-                        <th class="hide-on-small-only">Status</th>
-                        <th>Editar</th>
-                        <th>Desactivar/Activar</th>
+                        
                     </tr>
                 </thead>
-                    <tbody  v-for="categoria in arrayCategoria" :key="categoria.idCategoria">
+                <tbody  v-for="categoria in arrayCategoria" :key="categoria.idCategoria">
                     <tr>
                         <td v-text="categoria.nombre"></td> 
                         <td class="hide-on-small-only"  v-text="categoria.nombreCaracteristica"></td>
-                        <td class="hide-on-small-only"  v-if="categoria.status == 1">Activado</td>
-                        <td class="hide-on-small-only"  v-if="categoria.status == 0">Desactivado</td>
                         <td>
                             <i class="material-icons color-text " @click="abrirModal('Categoria','actualizar',categoria,categoria.idCategoria)">create</i>
                         </td>
@@ -42,51 +38,8 @@
                             </a>
                         </td>
                     </tr>
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
         </div>
     </main>
 </template>
-<script>
-import categorias from './Categorias.vue'
-
-export default {
-    data() {
-        return {
-            idCategoria: 0,
-            nombre: '',
-            status : true,
-            arrayCategoria:[],
-            idCaracteristica: 0,
-            arrayCaracteristicas: [],
-            arrayIdCaracteristica:[],
-            arrayCaracteristicaCategoria:[],
-            modal : 0,
-            tituloModal : 'Registrar Categorias' ,
-            cambio : 0,
-            tipoAccion: 0,
-            errorCategoria : 0,
-            errorMostrarMsjCategoria : []
-        }
-    },
-    methods:{
-            listarCategoria(){
-                let m=this;
-                axios.get('/categoria').then(function (response){
-                    m.arrayCategoria = response.data;
-                    m.status = response.status.data;
-                    if(status == true){
-                        status = 1
-                    }else{
-                        status = 0
-                    }
-                  
-                })
-                .catch(function(error){
-                    console.log(error);
-                });
-            }
-    }
-}
-
-</script>

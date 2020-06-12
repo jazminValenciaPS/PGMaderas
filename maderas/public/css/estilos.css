@@ -52,3 +52,41 @@ footer{
   height: 50px;
   background: #dcdcdc;
 }
+.hero{
+  /* border:1px solid red; */
+  display: grid;
+  padding: 5px;
+  justify-content: center;
+  grid-template-columns: minmax(auto,100%);
+}
+.form button{
+  background: #419141;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  border: 2px solid #7abb87;
+  display: inline-block;
+}
+.form button:hover{
+  color: black
+}
+.title{
+  font-size: 36px;
+  margin: 0;
+  justify-content: center;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+}
+.contraseñas{
+  display: grid;
+  justify-content: center;
+  grid-row: repeat(5,200px);
+  grid-gap: 5px;
+}
+.form .botonContra{
+  width: 100%;
+
+}
