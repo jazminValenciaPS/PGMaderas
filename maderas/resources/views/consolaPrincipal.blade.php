@@ -13,50 +13,51 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">  
       <link href="https://unpkg.com/vueperslides/dist/vueperslides.css" rel="stylesheet">
       <link rel="stylesheet" href="css/estilos.css">
-   </head>
-    <style>
-    nav{
-      background-color: transparent;
-    }
-    footer{
-      background-color: black;
-    }
-    nav ul a {
-      font-size: 1rem;
-      color: #100c0c;
-      display: block;
-      padding: 0 15px;
-    }
-    </style>
+  </head>
+  <style>
+  nav{
+    background-color: transparent;
+  }
+  footer{
+    background-color: black;
+  }
+  nav ul a {
+    font-size: 1rem;
+    color: #100c0c;
+    display: block;
+    padding: 0 15px;
+  }
+  </style>
   <body>
-     <div id="app">
+    <div id="app">
     
       @include('plantilla.consolaNavAdmin')   
+
       <!-- Contenido principal -->
       @yield('consola')
       <!-- Termina contenido principal -->
 
-     </div>
+    </div>
 
     <!-- <footer class=" ">
       
         <div class="container brown-text">
-         <p class="white-text"> © 2020 Copyright</p>
+          <p class="white-text"> © 2020 Copyright</p>
         <a class="brown-text right" href="#!"></a>
         </div>
-  
+
     </footer> -->
     
   </body>
 
 
-      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <!-- <script src="js/plantilla.js"></script> -->
-      <script src="js/app.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-      <script src="https://unpkg.com/vue"></script>
-      <script src="https://unpkg.com/vueperslides"></script>
-      
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+<!-- <script src="js/plantilla.js"></script> -->
+<script src="js/app.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vueperslides"></script> -->
+
    <!-- <script>
 
       document.addEventListener('DOMContentLoaded', function() {
@@ -70,5 +71,5 @@
 
    </script> -->
 
-   
+
 </html>

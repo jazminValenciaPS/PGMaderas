@@ -1,24 +1,27 @@
 @extends('consolaPrincipal')
 @section('consola')
     <template v-if="menu==0">
-        <categorias-component></categorias-component>
+        <h1>Categorias</h1>
+        <categoria></categoria>
     </template>
     <template v-if="menu==1">
-        <subcategorias-component></subcategorias-component>
+        <h1>Subcategorias</h1>
+        <subcategorias></subcategorias>
     </template>
     <template v-if="menu==2">
-        <productos-component></productos-component>
+        <h1>Productos</h1>
+        <productos></productos>
     </template>
     <template v-if="menu==3">
-        <slider-component></slider-component>
+        <slider></slider>
     </template>
     <template v-if="menu==4">
-        <usuarios-component></usuarios-component>
+        <usuarios></usuarios>
     </template>
     <template v-if="menu==5">
-        <envios-component></envios-component>
+        <envios></envios>
     </template>
     <template v-if="menu==6">
-        <contraseña-component></contraseña-component>
+        <contraseña></contraseña>
     </template>
 @endsection

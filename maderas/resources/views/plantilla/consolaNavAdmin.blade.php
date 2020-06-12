@@ -24,16 +24,18 @@
     <li @click="menu=1"><a href="#">SubCategorias</a></li>
     <li @click="menu=2"><a href="#">Productos</a></li>
     <li @click="menu=3"><a href="#">Sliders</a></li>
-    <li @click="menu=4"><a href="#">Usuarios</a>
+    <li @click=""><a href="#">Usuarios</a>
       <ul class="subOptions">
-        <li><a href="">Empleados</a></li>
-        <li><a href="">Clientes</a></li>
+        <li @click="menu=4"><a href="">Empleados</a></li>
+        <li @click="menu=5"><a href="">Clientes</a></li>
       </ul>
     </li>
 
-    <li @click="menu=5"><a href="#">Envios</a></li>
-    <li @click="menu=6"><a href="#">Cambiar contraseña </a></li>
-    <li @click="menu=6"><a href="#">Cerrar sesión</a></li>
+    <li @click="menu=6"><a href="#">Envios</a></li>
+    <li @click="menu=7"><a href="#">Cambiar contraseña </a></li>
+    <li>
+      <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
+    </li>
   </ul>
 </nav>
 
@@ -51,5 +53,6 @@
           {{ csrf_field() }}
           </form> 
       </ul>
-  
+
+      
 </nav> -->
