@@ -34,7 +34,7 @@
                         <!-- input para la imagen del producto --> 
                         <div class="col s10 center">
                             <div class="file-field input-field">
-                                <div class="waves-effect waves-light btn color">
+                                <div class="btn button-image">
                                     <span>Imagen</span>
                                     <input id="file" ref="filea"  type="file" data-vv-scope="new"  v-on:change="seleccionarImagen(1)" class="productoAlta">
                                 </div>

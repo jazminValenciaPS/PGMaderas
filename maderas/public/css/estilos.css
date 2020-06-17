@@ -105,3 +105,10 @@ footer{
   width: 30%;
   margin: 1%;
 }
+
+.button-image{
+  height: 20%;
+  width: 20%;
+  background: green;
+  border-radius: 5px;
+}

@@ -23718,28 +23718,24 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col s10 center" }, [
                   _c("div", { staticClass: "file-field input-field" }, [
-                    _c(
-                      "div",
-                      { staticClass: "waves-effect waves-light btn color" },
-                      [
-                        _c("span", [_vm._v("Imagen")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          ref: "filea",
-                          staticClass: "productoAlta",
-                          attrs: {
-                            id: "file",
-                            type: "file",
-                            "data-vv-scope": "new"
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.seleccionarImagen(1)
-                            }
+                    _c("div", { staticClass: "btn button-image" }, [
+                      _c("span", [_vm._v("Imagen")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        ref: "filea",
+                        staticClass: "productoAlta",
+                        attrs: {
+                          id: "file",
+                          type: "file",
+                          "data-vv-scope": "new"
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.seleccionarImagen(1)
                           }
-                        })
-                      ]
-                    ),
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _vm._m(1)
                   ])
