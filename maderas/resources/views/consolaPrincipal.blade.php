@@ -5,30 +5,33 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <!-- <link rel="stylesheet" href='css/plantilla.css' > -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> -->
       <!--Let browser know website is optimized for mobile-->
       <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
       <meta name="csrf-token" content="{{ csrf_token()  }}">
       <meta name="viewport" content="width=device-width, initial-scale=1">  
       <link href="https://unpkg.com/vueperslides/dist/vueperslides.css" rel="stylesheet">
+      <link rel="stylesheet" href='./css/plantilla.css' >
+      <link rel="shortcut icon" href="img/44742972_183514302527228_7107553413201657856_n.jpg" type="image/x-icon">
+
       <link rel="stylesheet" href="css/estilos.css">
   </head>
   <style>
-  nav{
-    background-color: transparent;
-  }
-  footer{
-    background-color: black;
-  }
-  nav ul a {
-    font-size: 1rem;
-    color: #100c0c;
-    display: block;
-    padding: 0 15px;
-  }
-  ul li a {
-    color:black;
-  }
+    nav{
+      background-color: transparent;
+    }
+    footer{
+      background-color: black;
+    }
+    nav ul a {
+      font-size: 1rem;
+      color: #100c0c;
+      display: block;
+      padding: 0 15px;
+    }
+    ul li a {
+      color:black;
+    }
   </style>
   <body>
     <div id="app">
