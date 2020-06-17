@@ -94,3 +94,14 @@ footer{
   height:auto !important;
   color: black !important;
 }
+
+.button-container{
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+}
+
+.button-type{
+  width: 30%;
+  margin: 1%;
+}

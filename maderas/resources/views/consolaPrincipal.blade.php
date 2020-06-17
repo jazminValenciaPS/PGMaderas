@@ -65,24 +65,36 @@
 
 <script>
   $(document).ready(function(){
-   $('.dropdown-trigger').dropdown();
+    $('.dropdown-trigger').dropdown();
   });
+
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+
 
 
 </script>
 
-    <script>
+<script>
 
-      document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('select');
-            var instances = M.FormSelect.init(elems);
-        });
-        document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(elems);
+    });
+  document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems, {closeOnClick: true});
   });
 
-   </script> 
+  document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.modal');
+      var instances = M.Modal.init(elems);
+  });
+
+  //     // Or with jQuery
+
+</script> 
 
 
 </html>

@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('contenido/consola');
 })->name('consola');
 
+Route::get('/logout','Auth\LoginController@logout')->name('logout');
 Route::get('/categoria','CategorieController@index');
 Route::post('/categoria/registrar','CategorieController@store');
 Route::put('/categoria/actualizar','CategorieController@update');
