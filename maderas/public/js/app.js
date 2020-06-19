@@ -5123,8 +5123,8 @@ __webpack_require__.r(__webpack_exports__);
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        this.listarCategoria(); // me.cerrarModal();
-        // me.limpiar();
+        this.listarCategoria();
+        this.cerrarModal(); // me.limpiar();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -5157,7 +5157,18 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     validarCategoria: function validarCategoria() {},
-    cerrarModal: function cerrarModal() {}
+    cerrarModal: function cerrarModal() {
+      this.PK_categories = 0;
+      this.name = '';
+      this.description = '';
+      this.image = '';
+      this.status = true;
+      this.arrayCategoria = [];
+      this.cambio = 0;
+      this.tipoAccion = 0;
+      this.errorCategoria = 0;
+      this.errorMostrarMsjCategoria = [];
+    }
   },
   mounted: function mounted() {
     this.listarCategoria();

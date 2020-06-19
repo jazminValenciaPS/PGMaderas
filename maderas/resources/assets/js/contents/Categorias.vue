@@ -188,7 +188,7 @@ export default {
             })
             .then(function (response) {
                 this.listarCategoria();
-                // me.cerrarModal();
+                this.cerrarModal();
                 // me.limpiar();
             })
             .catch(function (error) {
@@ -225,7 +225,16 @@ export default {
             
         },
         cerrarModal(){
-
+            this.PK_categories = 0;
+            this.name = '';
+            this.description = '';
+            this.image = '';
+            this.status = true;
+            this.arrayCategoria = [];
+            this.cambio = 0;
+            this.tipoAccion = 0;
+            this.errorCategoria = 0;
+            this.errorMostrarMsjCategoria = [];
         },
 
     },
