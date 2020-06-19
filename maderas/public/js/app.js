@@ -5037,7 +5037,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 // import categorias from './Categorias.vue'
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5048,8 +5047,6 @@ __webpack_require__.r(__webpack_exports__);
       image: '',
       status: true,
       arrayCategoria: [],
-      idCaracteristica: 0,
-      arrayCaracteristicas: [],
       modal: 0,
       tituloModal: 'Registrar Categorias',
       cambio: 0,
@@ -5107,7 +5104,60 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
       }
-    }
+    },
+    nuevaCategoria: function nuevaCategoria() {
+      if (this.validarCategoria()) {
+        return;
+      }
+
+      var me = this;
+      var formData = new FormData();
+      formData.append('file', me.file);
+      formData.append('PK_categories', me.PK_categories);
+      formData.append('name', me.name);
+      formData.append('description', me.description); // Registramos la informacion
+
+      var url = '/categoria/registrar';
+      axios.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        this.listarCategoria(); // me.cerrarModal();
+        // me.limpiar();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    seleccionarImagen: function seleccionarImagen(img) {
+      if (img == 1) {
+        this.file = this.$refs.filea.files[0];
+        readURL(document.getElementsByClassName("categoriaAlta")[0], 1);
+      } else {
+        this.file = this.$refs.filec.files[0];
+        readURL(document.getElementsByClassName("categoriaEdit")[0], 2);
+      }
+
+      this.cambio = 1;
+
+      function readURL(input, img) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            if (img == 1) {
+              $('.imgAlta').attr('src', e.target.result);
+            } else {
+              $('.imgCambio').attr('src', e.target.result);
+            }
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    },
+    validarCategoria: function validarCategoria() {},
+    cerrarModal: function cerrarModal() {}
   },
   mounted: function mounted() {
     this.listarCategoria();
@@ -23723,7 +23773,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("input", {
                         ref: "filea",
-                        staticClass: "productoAlta",
+                        staticClass: "categoriaAlta",
                         attrs: {
                           id: "file",
                           type: "file",

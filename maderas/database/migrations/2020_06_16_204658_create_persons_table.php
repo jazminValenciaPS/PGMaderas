@@ -21,7 +21,7 @@ class CreatePersonsTable extends Migration
             $table->date('birth_date');
             $table->unsignedTinyInteger('gender')->default(0);
             
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

@@ -23,7 +23,7 @@ class CreatePGBranchesTable extends Migration
             $table->string('number',255);
             $table->string('postal_code',255);
             $table->string('phone',255);
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

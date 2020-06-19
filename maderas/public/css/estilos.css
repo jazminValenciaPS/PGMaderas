@@ -2,6 +2,7 @@
 :root{
   --green-color: #419141 ;
   --green-button-radius-color: #7abb87;
+  --pading-button: 10px;
 }
 html, body{
   padding: 0;
@@ -67,7 +68,7 @@ footer{
 .form button{
   background: var(--green-color);
   color: white;
-  padding: 5px;
+  padding: var(--pading-button);
   border-radius: 5px;
   border: none;
   font-size: 16px;

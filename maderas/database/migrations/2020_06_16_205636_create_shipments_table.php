@@ -21,7 +21,7 @@ class CreateShipmentsTable extends Migration
             $table->time('shipping_time');
             $table->decimal('subtotal',16, 8);
             $table->unsignedBigInteger('status')->unsigned();
-            // $table->timestamps();
+            $table->timestamps();
 
             $table->foreign('id_type')->references('PK_shipment_type')->on('shipment_type')->onDelete('cascade');
             $table->foreign('id_address')->references('PK_addresses')->on('addresses')->onDelete('cascade');

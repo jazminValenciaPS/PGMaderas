@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price',16, 8);
             $table->unsignedTinyInteger('avaible')->default(1);
             $table->unsignedTinyInteger('status')->default(1);
-            // $table->timestamps();
+            $table->timestamps();
             $table->foreign('id_subcategory')->references('PK_subcategories')->on('subcategories')->unsigned();
         });
     }

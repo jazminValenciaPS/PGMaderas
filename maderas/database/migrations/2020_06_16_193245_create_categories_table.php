@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('description',5000)->nullable();
             $table->string('image',500)->nullable();
             $table->unsignedTinyInteger('status')->default(1);
-            // $table->timestamps();
+            $table->timestamps();
         });
 
     }

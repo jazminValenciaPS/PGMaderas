@@ -17,7 +17,7 @@ class CreateOrderStatusTable extends Migration
             $table->bigIncrements('PK_order_status');
             $table->string('status_name',255);
             $table->string('description',5000)->nullable();
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('total',16, 8);
             $table->unsignedBigInteger('id_payment')->unsigned();
             $table->unsignedBigInteger('status')->unsigned();
+            $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_shipment')->references('PK_shipments')->on('shipments')->onDelete('cascade');

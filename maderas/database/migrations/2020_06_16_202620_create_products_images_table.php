@@ -17,7 +17,7 @@ class CreateProductsImagesTable extends Migration
             $table->bigIncrements('PK_product_images');
             $table->unsignedBigInteger('id_product')->unsigned();
             $table->string('image',500)->nullable();
-            // $table->timestamps();
+            $table->timestamps();
             $table->foreign('id_product')->references('PK_products')->on('products')->onDelete('cascade');
         });
     }

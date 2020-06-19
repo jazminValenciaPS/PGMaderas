@@ -20,7 +20,7 @@ class CreateSubcategoriesTable extends Migration
             $table->string('description',5000)->nullable();
             $table->string('image',500)->nullable();
             $table->unsignedTinyInteger('status')->default(1);
-            // $table->timestamps();
+            $table->timestamps();
 
             $table->foreign('id_category')->references('PK_categories')->on('categories')->onDelete('cascade');
 

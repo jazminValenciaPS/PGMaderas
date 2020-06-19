@@ -19,7 +19,7 @@ class CreateSliderTable extends Migration
             $table->string('title')->nullable();
             $table->string('image',500)->nullable();
             $table->string('description',5000)->nullable();
-            // $table->timestamps();
+            $table->timestamps();
 
             // $table->foreign('id_user')->references('id')->on('user')->onDelete('cascade');
         });
