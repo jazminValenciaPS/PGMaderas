@@ -17,7 +17,7 @@ class CreateShipmentStatusTable extends Migration
             $table->bigIncrements('PK_shipment_status');
             $table->string('name',255);
             $table->string('description',5000)->nullable();
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

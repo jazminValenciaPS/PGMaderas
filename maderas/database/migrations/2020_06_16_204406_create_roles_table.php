@@ -17,7 +17,7 @@ class CreateRolesTable extends Migration
             $table->bigIncrements('PK_roles');
             $table->string('roles_name')->nullable();
             $table->string('description',5000)->nullable();
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

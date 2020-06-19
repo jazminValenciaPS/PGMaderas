@@ -17,7 +17,7 @@ class CreateShipmentTypeTable extends Migration
             $table->bigIncrements('PK_shipment_type');
             $table->string('shipment_type',255);
             $table->string('description',5000)->nullable();
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

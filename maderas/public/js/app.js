@@ -6283,7 +6283,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 // import categorias from './Categorias.vue'
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6294,8 +6293,6 @@ __webpack_require__.r(__webpack_exports__);
       image: '',
       status: true,
       arrayCategoria: [],
-      idCaracteristica: 0,
-      arrayCaracteristicas: [],
       modal: 0,
       tituloModal: 'Registrar Categorias',
       cambio: 0,
@@ -6373,6 +6370,68 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
       }
+    },
+    nuevaCategoria: function nuevaCategoria() {
+      if (this.validarCategoria()) {
+        return;
+      }
+
+      var me = this;
+      var formData = new FormData();
+      formData.append('file', me.file);
+      formData.append('PK_categories', me.PK_categories);
+      formData.append('name', me.name);
+      formData.append('description', me.description); // Registramos la informacion
+
+      var url = '/categoria/registrar';
+      axios.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        this.listarCategoria();
+        this.cerrarModal(); // me.limpiar();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    seleccionarImagen: function seleccionarImagen(img) {
+      if (img == 1) {
+        this.file = this.$refs.filea.files[0];
+        readURL(document.getElementsByClassName("categoriaAlta")[0], 1);
+      } else {
+        this.file = this.$refs.filec.files[0];
+        readURL(document.getElementsByClassName("categoriaEdit")[0], 2);
+      }
+
+      this.cambio = 1;
+
+      function readURL(input, img) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            if (img == 1) {
+              $('.imgAlta').attr('src', e.target.result);
+            } else {
+              $('.imgCambio').attr('src', e.target.result);
+            }
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    },
+    validarCategoria: function validarCategoria() {},
+    cerrarModal: function cerrarModal() {
+      this.modal = 0;
+      this.tituloModal = '';
+      this.name = '';
+      this.description = '';
+      this.image = '';
+      this.tipoAccion = 0;
+      this.errorCategoria = 0;
+      this.errorMostrarMsjCategoria = [];
     }
   },
   mounted: function mounted() {
@@ -21518,8 +21577,234 @@ var render = function() {
     _c("div", { staticClass: "col s12 m12 gl6" }, [
       _vm._m(0),
       _vm._v(" "),
+<<<<<<< HEAD
       _vm._m(1),
       _vm._v(" "),
+=======
+      _c("div", { staticClass: "right form " }, [
+        _c(
+          "button",
+          {
+            staticClass: "modal-trigger",
+            attrs: { type: "summit", "data-target": "modal1" },
+            on: {
+              click: function($event) {
+                return _vm.abrirModal("categorias", "registrar")
+              }
+            }
+          },
+          [_vm._v("\n                Agregar Categorias\n            ")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { mostrar: _vm.modal },
+        staticStyle: { display: "none" },
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "myModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-primary modal-lg ",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "container" }, [
+              _c("br"),
+              _vm._v(" "),
+              _c("div", { staticClass: "center" }, [
+                _c("h3", { domProps: { textContent: _vm._s(_vm.tituloModal) } })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col s5 center" }, [
+                _vm.tipoAccion == 2
+                  ? _c("img", {
+                      staticClass: "imagenEdit",
+                      attrs: { src: "img/" + _vm.image, alt: "" }
+                    })
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.name,
+                      expression: "name"
+                    }
+                  ],
+                  staticClass: "validate",
+                  attrs: {
+                    id: "nombre",
+                    type: "text",
+                    placeholder: "Nombre Categoria"
+                  },
+                  domProps: { value: _vm.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.name = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.description,
+                      expression: "description"
+                    }
+                  ],
+                  staticClass: "validate",
+                  attrs: {
+                    id: "descripcion",
+                    type: "text",
+                    placeholder: "Descripcion"
+                  },
+                  domProps: { value: _vm.description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.description = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "col s10 center" }, [
+                  _c("div", { staticClass: "file-field input-field" }, [
+                    _c("div", { staticClass: "btn button-image" }, [
+                      _c("span", [_vm._v("Imagen")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        ref: "filea",
+                        staticClass: "categoriaAlta",
+                        attrs: {
+                          id: "file",
+                          type: "file",
+                          "data-vv-scope": "new"
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.seleccionarImagen(1)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.errorCategoria,
+                      expression: "errorCategoria"
+                    }
+                  ],
+                  staticClass: "form-group row div-error"
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "text-center text-error" },
+                    _vm._l(_vm.errorMostrarMsjCategoria, function(error) {
+                      return _c("div", {
+                        key: error,
+                        domProps: { textContent: _vm._s(error) }
+                      })
+                    }),
+                    0
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "button-container form formmodal-footer" },
+                [
+                  _vm.tipoAccion == 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "button-type",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.nuevaCategoria()
+                            }
+                          }
+                        },
+                        [_vm._v("Guardar")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.tipoAccion == 2
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "button-type",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.actualizarCategoria(_vm.id_categorias)
+                            }
+                          }
+                        },
+                        [_vm._v("Actualizar")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button-type",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.cerrarModal()
+                        }
+                      }
+                    },
+                    [_vm._v("Cerrar")]
+                  )
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "col s12 m12 gl6" }, [
+>>>>>>> be7fe111065d873240fef9820808a1901c5d6a53
       _c(
         "table",
         { staticClass: "tabla centered" },

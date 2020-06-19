@@ -16,7 +16,7 @@ class CreatePaymentTypeTable extends Migration
         Schema::create('payment_type', function (Blueprint $table) {
             $table->bigIncrements('PK_payment_type');
             $table->string('nam_type',255);
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

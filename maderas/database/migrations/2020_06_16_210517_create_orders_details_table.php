@@ -21,6 +21,7 @@ class CreateOrdersDetailsTable extends Migration
             $table->decimal('subtotal',16, 8);
             $table->string('comments',5000)->nullable();
             $table->unsignedTinyInteger('status')->default(1);
+            $table->timestamps();
 
             $table->foreign('id_product')->references('PK_products')->on('products')->onDelete('cascade');
             $table->foreign('id_order')->references('PK_orders')->on('orders')->onDelete('cascade');

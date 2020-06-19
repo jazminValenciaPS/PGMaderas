@@ -4,7 +4,6 @@
             <div class=" title">
                 <h5>Categorias</h5>
             </div>
-        <!-- fin boton abrir modal -->
             <div class="right form ">
                 <button type="summit"  data-target="modal1" class="modal-trigger" @click="abrirModal('categorias','registrar')">
                     Agregar Categorias
@@ -36,7 +35,7 @@
                             <div class="file-field input-field">
                                 <div class="btn button-image">
                                     <span>Imagen</span>
-                                    <input id="file" ref="filea"  type="file" data-vv-scope="new"  v-on:change="seleccionarImagen(1)" class="productoAlta">
+                                    <input id="file" ref="filea"  type="file" data-vv-scope="new"  v-on:change="seleccionarImagen(1)" class="categoriaAlta">
                                 </div>
                                 <div class="file-path-wrapper">
                                     <input class="file-path validate" type="text">
@@ -114,8 +113,6 @@ export default {
             image:'',
             status : true,
             arrayCategoria:[],
-            idCaracteristica: 0,
-            arrayCaracteristicas: [],
             modal : 0,
             tituloModal : 'Registrar Categorias' ,
             cambio : 0,
@@ -167,6 +164,75 @@ export default {
                     }
                 }
             }
+        },
+        nuevaCategoria(){
+            if (this.validarCategoria()){
+                return;
+            }
+            let me = this;
+
+            let formData = new FormData();
+
+            formData.append('file', me.file);
+            formData.append('PK_categories', me.PK_categories);
+            formData.append('name', me.name);
+            formData.append('description', me.description);
+            
+            // Registramos la informacion
+            let url = '/categoria/registrar';
+            axios.post(url, formData,{
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    
+                }
+            })
+            .then(function (response) {
+                this.listarCategoria();
+                this.cerrarModal();
+                // me.limpiar();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+        seleccionarImagen(img){
+            if (img == 1) {            
+                this.file = this.$refs.filea.files[0];
+                readURL(document.getElementsByClassName("categoriaAlta")[0], 1);
+            }
+            else {
+                this.file = this.$refs.filec.files[0];
+                readURL(document.getElementsByClassName("categoriaEdit")[0], 2);
+            }
+            this.cambio = 1;
+
+            function readURL(input, img) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        if (img == 1) {
+                            $('.imgAlta').attr('src', e.target.result);
+                        }
+                        else {
+                            $('.imgCambio').attr('src', e.target.result);
+                        }
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        },
+        validarCategoria(){
+            
+        },
+        cerrarModal(){
+            this.modal = 0;
+            this.tituloModal = '';
+            this.name = '';
+            this.description = '';
+            this.image = '';
+            this.tipoAccion = 0;
+            this.errorCategoria = 0;
+            this.errorMostrarMsjCategoria = [];
         },
 
     },
