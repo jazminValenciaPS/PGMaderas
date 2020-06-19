@@ -5158,13 +5158,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     validarCategoria: function validarCategoria() {},
     cerrarModal: function cerrarModal() {
-      this.PK_categories = 0;
+      this.modal = 0;
+      this.tituloModal = '';
       this.name = '';
       this.description = '';
       this.image = '';
-      this.status = true;
-      this.arrayCategoria = [];
-      this.cambio = 0;
       this.tipoAccion = 0;
       this.errorCategoria = 0;
       this.errorMostrarMsjCategoria = [];

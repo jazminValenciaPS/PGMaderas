@@ -225,13 +225,11 @@ export default {
             
         },
         cerrarModal(){
-            this.PK_categories = 0;
+            this.modal = 0;
+            this.tituloModal = '';
             this.name = '';
             this.description = '';
             this.image = '';
-            this.status = true;
-            this.arrayCategoria = [];
-            this.cambio = 0;
             this.tipoAccion = 0;
             this.errorCategoria = 0;
             this.errorMostrarMsjCategoria = [];
