@@ -23,6 +23,6 @@ Route::put('/categoria/activar','CategorieController@activar');
 Route::put('/categoria/desactivar','CategorieController@desactivar');
 
 
-
+Route::get('/subcategoria','SubcategoriesController@index');
 
 

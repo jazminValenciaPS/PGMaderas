@@ -21,24 +21,24 @@
                         <th>Desactivar/Activar</th>
                     </tr>
                 </thead>
-                    <tbody  v-for="categoria in arrayCategoria" :key="categoria.idCategoria">
+                    <tbody  v-for="subcategoria in arraySubcategoria" :key="subcategoria.idSubcategoria">
                     <tr>
-                        <td v-text="categoria.nombre"></td> 
-                        <td class="hide-on-small-only"  v-text="categoria.nombreCaracteristica"></td>
-                        <td class="hide-on-small-only"  v-if="categoria.status == 1">Activado</td>
-                        <td class="hide-on-small-only"  v-if="categoria.status == 0">Desactivado</td>
+                        <td v-text="subcategoria.name"></td> 
+                        <td class="hide-on-small-only"  v-text="subcategoria.categoria"></td>
+                        <td class="hide-on-small-only"  v-if="subcategoria.status == 1">Activado</td>
+                        <td class="hide-on-small-only"  v-if="categosubcategoriaria.status == 0">Desactivado</td>
                         <td>
                             <i class="material-icons color-text " @click="abrirModal('Categoria','actualizar',categoria,categoria.idCategoria)">create</i>
                         </td>
                         <td class="desactivarActivar">
-                            <a href="#!" class="secondary-content" v-if="categoria.status == 1">
+                            <a href="#!" class="secondary-content" v-if="subcategoria.status == 1">
                                 <i class="switch">
-                                    <label><input type="checkbox" checked="checked" name="status" v-model="categoria.status" @click="desactivarCategoria(categoria.idCategoria)"><span class="lever"></span></label>
+                                    <label><input type="checkbox" checked="checked" name="status" v-model="subcategoria.status" @click="desactivarCategoria(subcategoria.idCategoria)"><span class="lever"></span></label>
                                 </i>
                             </a>
-                            <a href="#!" class="secondary-content" v-if="categoria.status == 0">
+                            <a href="#!" class="secondary-content" v-if="subcategoria.status == 0">
                                 <i class="switch">
-                                    <label><input type="checkbox"  name="status" v-model="categoria.status" @click="activarCategoria(categoria.idCategoria)"><span class="lever"></span></label>
+                                    <label><input type="checkbox"  name="status" v-model="subcategoria.status" @click="activarCategoria(subcategoria.idCategoria)"><span class="lever"></span></label>
                                 </i>
                             </a>
                         </td>
@@ -49,8 +49,46 @@
     </main>
 </template>
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
+// import Vue from 'vue'
 
-})
+export default {
+    data() {
+        return {
+            PK_subcategories: 0,
+            id_category: 0,
+            name: '',
+            description:'', 
+            image:'',
+            status : true,
+            arrayCategoria:[],
+            arraySubcategoria: [],
+            modal : 0,
+            tituloModal : 'Registrar Categorias' ,
+            cambio : 0,
+            tipoAccion: 0,
+            errorSubcategoria : 0,
+            errorMostrarMsjSubcategoria : []
+        }
+    },
+    methods:{
+        listarSubcategoria(){
+            let m=this;
+            axios.get('/subcategoria').then(function (response){
+                m.arraySubcategoria = response.data;
+                m.status = response.status.data;
+                if(status == true){
+                    status = 1
+                }else{
+                    status = 0
+                }
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+        },
+    },
+    mounted() {
+        this.listarSubcategoria();
+    }
+}
 </script>

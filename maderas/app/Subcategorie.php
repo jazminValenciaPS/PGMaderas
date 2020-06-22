@@ -8,7 +8,7 @@ class Subcategorie extends Model
 {
     protected $table = 'subcategories';
     
-    protected $primarykey = "PK_subcategories";
+    protected $primaryKey = 'PK_subcategories';
     protected $fillable =['id_categories','name','description','image','status'];
 
     public function Categories()

@@ -49,17 +49,10 @@ class CategorieController extends Controller
 
   
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
 
-        $categorias = Categorie::findOrFail($request->$id);
+        $categorias = Categorie::findOrFail($request->PK_categories);
         $categorias->name = $request->name;
         $categorias->description = $request->description;
         $categorias->image = $request->image;
@@ -67,24 +60,19 @@ class CategorieController extends Controller
         $categorias->save();
     }
 
-       /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function desactivar(Request $request, $id)
+
+    public function desactivar(Request $request)
     {
-        $categorias = Categorie::findOrFail($request->$id);
+        $id = $request->PK_categories;
+        $categorias = Categorie::findOrFail($id);
         $categorias->status = '0';
         $categorias->save();
     }
 
    
-    public function activar(Request $request, $id)
+    public function activar(Request $request)
     {
-        $categorias = Categorie::findOrFail($request->$id);
+        $categorias = Categorie::findOrFail($request->PK_categories);
         $categorias->status = '1';
         $categorias->save();
     }

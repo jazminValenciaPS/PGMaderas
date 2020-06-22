@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use App\SubCategorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Request as Peticion;
 
 class SubcategoriesController extends Controller
 {
     public function index()
     {
-        $subcategorias = SubCategorie::all();
-        return $subcategorias;
+        return $subcategorias = DB::table('subcategories')
+        ->join('categories', 'categories.PK_categories', '=', 'subcategories.id_categories')
+        ->select('subcategories.PK_subcategories','subcategories.name','subcategories.description'
+        ,'subcategories.image','subcategories.status','categories.name','categories.PK_categories')
+        ->get();
     }
 
-  
+
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +38,7 @@ class SubcategoriesController extends Controller
         $img->move('img', $nombreImagen);
 
         $subcategorias = new SubCategorie();
-        $producto->id_categories = $request->id_categories;
+        $subcategorias->id_categories = $request->id_categories;
         $subcategorias->name = $request->name;
         $subcategorias->description = $request->description;
         $subcategorias->image = $nombreImagen;
