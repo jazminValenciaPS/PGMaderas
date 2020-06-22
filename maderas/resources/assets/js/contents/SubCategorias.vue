@@ -87,11 +87,25 @@ export default {
             .catch(function(error){
                 console.log(error);
             });
+        }, 
+        verSelects(){
+                let me=this;
+                me.listado=2;
+                //Obtener los datos del ingreso de sub categorias
+                var url= '/categoria';
+                axios.get(url).then(function (response) {
+                    var arrayCategoria= response.data;
+                    me.arrayCategoria = arrayCategoria.map(object => ({idSubCategorias: object.idSubCategorias, NombreSub: object.NombreSub})); 
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         },
         cerrarModal(){
             this.modal = 0;
             this.tituloModal = '';
             this.name = '';
+            this.id_category = "";
             this.description = '';
             this.image = '';
             this.tipoAccion = 0;
