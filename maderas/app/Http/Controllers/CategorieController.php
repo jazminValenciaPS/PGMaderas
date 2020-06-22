@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Categorie;
 use Request as Peticion;
+use File;
 
 class CategorieController extends Controller
 {
@@ -53,11 +54,23 @@ class CategorieController extends Controller
     {
 
         $categorias = Categorie::findOrFail($request->PK_categories);
+       
+        $imagen = Peticion::file('file');
+        
+        $extension = $imagen -> guessExtension();
+        $date = date('d-m-Y_h-i-s-ms-a');
+        $prefijo = 'Image';
+        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        $imagen->move('img', $nombreImagen);
+        File::delete('img/' . $categorias->Imagen);
+
         $categorias->name = $request->name;
         $categorias->description = $request->description;
-        $categorias->image = $request->image;
+        $categorias->image = $nombreImagen;
         $categorias->status = '1';
         $categorias->save();
+
+
     }
 
 

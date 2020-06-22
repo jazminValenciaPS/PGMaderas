@@ -5236,9 +5236,237 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/contents/SubCategorias.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/package.json: Error while parsing JSON - Unexpected token < in JSON at position 1148\n    at JSON.parse (<anonymous>)\n    at /Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/core/lib/config/files/package.js:57:20\n    at /Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/core/lib/config/files/utils.js:37:12\n    at Generator.next (<anonymous>)\n    at Function.<anonymous> (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/core/lib/gensync-utils/async.js:26:3)\n    at Generator.next (<anonymous>)\n    at evaluateSync (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/gensync/index.js:244:28)\n    at Function.sync (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/gensync/index.js:84:14)\n    at sync (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/core/lib/gensync-utils/async.js:66:25)\n    at sync (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/gensync/index.js:177:19)\n    at onFirstPause (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/gensync/index.js:204:19)\n    at Generator.next (<anonymous>)\n    at cachedFunction (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/core/lib/config/caching.js:68:46)\n    at cachedFunction.next (<anonymous>)\n    at findPackageData (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/core/lib/config/files/package.js:33:18)\n    at findPackageData.next (<anonymous>)\n    at buildRootChain (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/core/lib/config/config-chain.js:105:92)\n    at buildRootChain.next (<anonymous>)\n    at loadPrivatePartialConfig (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/core/lib/config/partial.js:95:62)\n    at loadPrivatePartialConfig.next (<anonymous>)\n    at Function.<anonymous> (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/core/lib/config/partial.js:120:25)\n    at Generator.next (<anonymous>)\n    at evaluateSync (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/gensync/index.js:244:28)\n    at Function.sync (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/gensync/index.js:84:14)\n    at Object.<anonymous> (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/core/lib/config/index.js:43:61)\n    at Object.<anonymous> (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/babel-loader/lib/index.js:151:26)\n    at Generator.next (<anonymous>)\n    at asyncGeneratorStep (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/babel-loader/lib/index.js:3:103)\n    at _next (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/babel-loader/lib/index.js:5:194)\n    at /Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/babel-loader/lib/index.js:5:364\n    at new Promise (<anonymous>)\n    at Object.<anonymous> (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/babel-loader/lib/index.js:5:97)\n    at Object.loader (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/babel-loader/lib/index.js:64:18)\n    at Object.<anonymous> (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/babel-loader/lib/index.js:59:12)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import categorias from './Categorias.vue'
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      PK_subcategories: 0,
+      id_category: 0,
+      name: '',
+      description: '',
+      image: '',
+      status: true,
+      arraySubcategoria: [],
+      modal: 0,
+      tituloModal: '',
+      cambio: 0,
+      tipoAccion: 0,
+      errorCategoria: 0,
+      errorMostrarMsjCategoria: []
+    };
+  },
+  methods: {
+    listarSubcategoria: function listarSubcategoria() {
+      var m = this;
+      axios.get('/subcategoria').then(function (response) {
+        m.arraySubcategoria = response.data;
+        m.status = response.status.data;
+
+        if (status == true) {
+          status = 1;
+        } else {
+          status = 0;
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    abrirModal: function abrirModal(modelo, accion) {
+      var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+      var id = arguments.length > 3 ? arguments[3] : undefined;
+      var m = this;
+
+      switch (modelo) {
+        case "subcategoria":
+          {
+            switch (accion) {
+              case 'registrar':
+                {
+                  m.modal = 1;
+                  m.name = '';
+                  m.descripcion = '';
+                  m.image = 'Selecciona imagen';
+                  m.tipoAccion = 1;
+                  m.tituloModal = 'Registrar subcategoría';
+                  break;
+                }
+
+              case 'actualizar':
+                {
+                  m.modal = 2;
+                  m.PK_categories = data['PK_subcategories'];
+                  m.tipoAccion = 2;
+                  m.imagen = data['image'];
+                  m.name = data['name'];
+                  m.description = data['description'];
+                  m.tituloModal = 'Actualizar subcategoría';
+                }
+            }
+          }
+      }
+    },
+    nuevaSubcategoria: function nuevaSubcategoria() {
+      if (this.validarSubcategoria()) {
+        return;
+      }
+
+      var me = this;
+      var formData = new FormData();
+      formData.append('file', me.file);
+      formData.append('PK_categories', me.PK_categories);
+      formData.append('name', me.name);
+      formData.append('description', me.description); // Registramos la informacion
+
+      var url = '/categoria/registrar';
+      axios.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        this.listarCategoria(); // me.cerrarModal();
+        // me.limpiar();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    seleccionarImagen: function seleccionarImagen(img) {
+      if (img == 1) {
+        this.file = this.$refs.filea.files[0];
+        readURL(document.getElementsByClassName("categoriaAlta")[0], 1);
+      } else {
+        this.file = this.$refs.filec.files[0];
+        readURL(document.getElementsByClassName("categoriaEdit")[0], 2);
+      }
+
+      this.cambio = 1;
+
+      function readURL(input, img) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            if (img == 1) {
+              $('.imgAlta').attr('src', e.target.result);
+            } else {
+              $('.imgCambio').attr('src', e.target.result);
+            }
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    },
+    validarCategoria: function validarCategoria() {},
+    cerrarModal: function cerrarModal() {}
+  },
+  mounted: function mounted() {
+    this.listarCategoria();
+  }
+});
 
 /***/ }),
 
