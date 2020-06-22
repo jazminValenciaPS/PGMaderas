@@ -9,6 +9,56 @@
                     Agregar SubCategorias
                 </button>
             </div>
+        <!--Inicio del modal-->
+
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-primary modal-lg " role="document">
+                <div class = "container">
+                    <br>
+                    <div class="center">
+                        <h3 v-text="tituloModal"></h3>
+                    </div>
+                    <div class="col s5 center">
+                        <img v-if="tipoAccion==2" :src="'img/'+image"  class="imagenEdit" alt="">
+                    </div>
+                    <div class="form-group row">
+                        <!-- input para el nombre de la subCategoria --> 
+                        <input id="nombre" type="text" v-model="name" placeholder="Nombre de la subcategoría"  class="validate" >
+                        <!-- <label  for="nombre">Nombre</label> -->
+                        <br>  
+                        <!-- input para la descripción de la subcategoria-->
+                        <input id="descripcion" type="text" v-model="description" placeholder="Descripcion" class="validate">
+                        <!-- <label  for="descripcion"></label> -->
+                        <br> 
+                        <!-- input para la imagen de la subcategoria --> 
+                        <div class="col s10 center">
+                            <div class="file-field input-field">
+                                <div class="btn button-image">
+                                    <span>Imagen</span>
+                                    <input id="file" ref="filea"  type="file" data-vv-scope="new"  v-on:change="seleccionarImagen(1)" class="categoriaAlta">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div v-show="errorSubcategoria" class="form-group row div-error">
+                        <div class="text-center text-error">
+                            <div v-for="error in errorMostrarMsjSubcategoria" :key="error" v-text="error">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container form formmodal-footer">
+                        <button class="button-type" type="button" v-if="tipoAccion==1"  @click="nuevaSubcategoria()">Guardar</button>
+                        <button class="button-type" type="button" v-if="tipoAccion==2" @click="actualizarSubcategoria(id_Subcategoria)">Actualizar</button>
+                        <button class="button-type" type="button" @click="cerrarModal()">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+            <!-- Mostrar datos -->
             <table class="tabla centered">
                 <thead>
                     <tr>
@@ -44,12 +94,12 @@
                         </td>
                     </tr>
                     </tbody>
-                </table>
+            </table>
         </div>
     </main>
 </template>
-<script lang="ts">
-// import Vue from 'vue'
+<script>
+// import categorias from './Categorias.vue'
 
 export default {
     data() {
@@ -60,14 +110,13 @@ export default {
             description:'', 
             image:'',
             status : true,
-            arrayCategoria:[],
-            arraySubcategoria: [],
+            arraySubcategoria:[],
             modal : 0,
-            tituloModal : 'Registrar Categorias' ,
+            tituloModal : '' ,
             cambio : 0,
             tipoAccion: 0,
-            errorSubcategoria : 0,
-            errorMostrarMsjSubcategoria : []
+            errorCategoria : 0,
+            errorMostrarMsjCategoria : []
         }
     },
     methods:{
@@ -86,9 +135,122 @@ export default {
                 console.log(error);
             });
         },
+        abrirModal(modelo,accion, data = [],id){
+            let m=this;
+            switch(modelo){
+                case "subcategoria":{
+                    switch(accion){
+                        case 'registrar':{
+                            m.modal = 1;
+                            m.name = '';
+                            m.descripcion = '';
+                            m.image= 'Selecciona imagen';
+                            m.tipoAccion = 1;
+                            m.tituloModal = 'Registrar subcategoría';
+                            break;
+
+                        }
+                        case 'actualizar':{
+                            m.modal = 2;
+                            m.PK_categories = data['PK_subcategories'];
+                            m.tipoAccion = 2;
+                            m.imagen=data['image'];
+                            m.name=data['name'];
+                            m.description=data['description'];
+                            m.tituloModal = 'Actualizar subcategoría';
+                        }
+                    }
+                }
+            }
+        },
+        nuevaSubcategoria(){
+            if (this.validarSubcategoria()){
+                return;
+            }
+            let me = this;
+
+            let formData = new FormData();
+
+            formData.append('file', me.file);
+            formData.append('PK_categories', me.PK_categories);
+            formData.append('name', me.name);
+            formData.append('description', me.description);
+            
+            // Registramos la informacion
+            let url = '/categoria/registrar';
+            axios.post(url, formData,{
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    
+                }
+            })
+            .then(function (response) {
+                this.listarCategoria();
+                // me.cerrarModal();
+                // me.limpiar();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+        seleccionarImagen(img){
+            if (img == 1) {            
+                this.file = this.$refs.filea.files[0];
+                readURL(document.getElementsByClassName("categoriaAlta")[0], 1);
+            }
+            else {
+                this.file = this.$refs.filec.files[0];
+                readURL(document.getElementsByClassName("categoriaEdit")[0], 2);
+            }
+            this.cambio = 1;
+
+            function readURL(input, img) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        if (img == 1) {
+                            $('.imgAlta').attr('src', e.target.result);
+                        }
+                        else {
+                            $('.imgCambio').attr('src', e.target.result);
+                        }
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        },
+        validarCategoria(){
+            
+        },
+        cerrarModal(){
+
+        },
+
     },
     mounted() {
-        this.listarSubcategoria();
+        this.listarCategoria();
     }
 }
 </script>
+<style>
+    .modal-content{
+        width: 100% !important;
+        position: absolute !important;
+        height: 600px;
+    }
+    .mostrar{
+        display: list-item !important;
+        opacity: 1 !important;
+        position: absolute !important;
+        z-index: 100;
+    }
+    .centrado{
+        height:560px;
+        margin-left: 20%;
+        margin-right: 30%;
+    }
+    .espacioButton{
+        margin-left: 10px !important;
+    }
+</style>
+
