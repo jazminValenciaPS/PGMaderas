@@ -27,10 +27,8 @@ class CreateUsersTable extends Migration
             $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
 
-             // $table->foreign('idCate')->references('idCategoria')->on('categorias');
-            //  $table->foreign('idCate')->references('idCategoria')->on('categorias');
-
         });
+
     }
 
     /**
