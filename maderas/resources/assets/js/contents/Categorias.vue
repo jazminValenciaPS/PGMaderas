@@ -249,7 +249,7 @@ export default {
                 formData.append('file', me.file);
 
                 //Registramos la informacion
-                axios.put('/categoria/actualizar',formData,{
+                axios.post('/categoria/actualizar',formData,{
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -301,6 +301,45 @@ export default {
                         me.listarCategoria();
                     }
             })
+        },
+        activarCategoria(PK_categories){
+            let me = this;
+
+            Swal.fire({
+            title: '¿Está seguro de activar esta Categoria?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar!',
+            cancelButtonText: 'Cancelar',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false,
+            reverseButtons: true
+            }).then((result) => {
+            if (result.value) {
+                axios.put('/categoria/activar',{
+                    'PK_categories': PK_categories
+                }).then(function (response) {
+                    me.listarCategoria();
+                    Swal.fire(
+                        'activado!',
+                        'La categoria ha sido activado con éxito.',
+                        'success'
+                    )
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            
+            } else if (
+                // Read more about handling dismissals
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                        me.listarCategoria();                    
+            }
+            }) 
+                
         },
 
     },

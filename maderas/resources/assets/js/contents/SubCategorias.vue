@@ -5,7 +5,7 @@
                 <h5>SubCategorias</h5>
             </div>
             <div class="right form ">
-                <button type="summit">
+                <button type="summit"  data-target="modal1" class="modal-trigger" @click="abrirModal('subcategorias','registrar')">
                     Agregar SubCategorias
                 </button>
             </div>
@@ -25,8 +25,10 @@
                     <tr>
                         <td v-text="subcategoria.name"></td> 
                         <td class="hide-on-small-only"  v-text="subcategoria.categoria"></td>
+                         <td class="hide-on-small-only"  v-text="subcategoria.description"></td>
+                          <td class="hide-on-small-only"  v-text="subcategoria.image"></td>
                         <td class="hide-on-small-only"  v-if="subcategoria.status == 1">Activado</td>
-                        <td class="hide-on-small-only"  v-if="categosubcategoriaria.status == 0">Desactivado</td>
+                        <td class="hide-on-small-only"  v-if="subcategoria.status == 0">Desactivado</td>
                         <td>
                             <i class="material-icons color-text " @click="abrirModal('Categoria','actualizar',categoria,categoria.idCategoria)">create</i>
                         </td>
@@ -86,9 +88,94 @@ export default {
                 console.log(error);
             });
         },
+        cerrarModal(){
+            this.modal = 0;
+            this.tituloModal = '';
+            this.name = '';
+            this.description = '';
+            this.image = '';
+            this.tipoAccion = 0;
+            this.errorCategoria = 0;
+            this.errorMostrarMsjCategoria = [];
+        },
+        seleccionarImagen(img){
+            if (img == 1) {            
+                this.file = this.$refs.filea.files[0];
+                readURL(document.getElementsByClassName("categoriaAlta")[0], 1);
+            }
+            else {
+                this.file = this.$refs.filec.files[0];
+                readURL(document.getElementsByClassName("categoriaEdit")[0], 2);
+            }
+            this.cambio = 1;
+
+            function readURL(input, img) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        if (img == 1) {
+                            readURL('.imgAlta').attr('src', e.target.result);
+                        }
+                        else {
+                            readURL('.imgCambio').attr('src', e.target.result);
+                        }
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        },
+        abrirModal(modelo,accion, data = [],PK_categories){
+            let m=this;
+            switch(modelo){
+                case "subcategorias":{
+                    switch(accion){
+                        case 'registrar':{
+                            m.modal = 1;
+                            m.name = '';
+                            m.descripcion = '';
+                            m.image= 'Selecciona imagen';
+                            m.tipoAccion = 1;
+                            m.tituloModal = 'Registrar producto';
+                            break;
+
+                        }
+                        case 'actualizar':{
+                            m.modal = 2;
+                            m.PK_categories = data['PK_categories'];
+                            m.tipoAccion = 2;
+                            m.imagen=data['image'];
+                            m.name=data['name'];
+                            m.description=data['description'];
+                            m.tituloModal = 'Actualizar producto';
+                        }
+                    }
+                }
+            }
+        },
     },
     mounted() {
         this.listarSubcategoria();
     }
 }
 </script>
+<style>
+    .modal-content{
+        width: 100% !important;
+        position: absolute !important;
+        height: 600px;
+    }
+    .mostrar{
+        display: list-item !important;
+        opacity: 1 !important;
+        position: absolute !important;
+        z-index: 100;
+    }
+    .centrado{
+        height:560px;
+        margin-left: 20%;
+        margin-right: 30%;
+    }
+    .espacioButton{
+        margin-left: 10px !important;
+    }
+</style>

@@ -12,9 +12,10 @@ class SubcategoriesController extends Controller
     public function index()
     {
         return $subcategorias = DB::table('subcategories')
-        ->join('categories', 'categories.PK_categories', '=', 'subcategories.id_categories')
+        ->join('categories', 'categories.PK_categories', '=', 'subcategories.id_category')
         ->select('subcategories.PK_subcategories','subcategories.name','subcategories.description'
-        ,'subcategories.image','subcategories.status','categories.name','categories.PK_categories')
+        ,'subcategories.image','subcategories.status','categories.name as categoria','subcategories.id_category')
+        ->distinct()
         ->get();
     }
 
