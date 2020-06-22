@@ -165,13 +165,13 @@ export default {
                     }
                 }
             }
-        },
+        }, 
         nuevaCategoria(){
             if (this.validarCategoria()){
                 return;
             }
             let me = this;
-
+ 
             let formData = new FormData();
 
             formData.append('file', me.file);

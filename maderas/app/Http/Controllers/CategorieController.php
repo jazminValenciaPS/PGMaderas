@@ -65,12 +65,30 @@ class CategorieController extends Controller
         $imagen->move('img', $nombreImagen);
         File::delete('img/' . $categorias->Imagen);
 
+<<<<<<< HEAD
+=======
+        $categorias = Categorie::findOrFail($request->PK_categories);
+       
+        $imagen = Peticion::file('file');
+        
+        $extension = $imagen -> guessExtension();
+        $date = date('d-m-Y_h-i-s-ms-a');
+        $prefijo = 'Image';
+        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        $imagen->move('img', $nombreImagen);
+        File::delete('img/' . $categorias->Imagen);
+
+>>>>>>> happiness
         $categorias->name = $request->name;
         $categorias->description = $request->description;
         $categorias->image = $nombreImagen;
         $categorias->status = '1';
         $categorias->save();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> happiness
     }
 
 
