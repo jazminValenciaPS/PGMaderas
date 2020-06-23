@@ -149,7 +149,7 @@ export default {
                             m.descripcion = '';
                             m.image= 'Selecciona imagen';
                             m.tipoAccion = 1;
-                            m.tituloModal = 'Registrar producto';
+                            m.tituloModal = 'Registrar categoría';
                             break;
 
                         }
@@ -160,7 +160,7 @@ export default {
                             m.imagen=data['image'];
                             m.name=data['name'];
                             m.description=data['description'];
-                            m.tituloModal = 'Actualizar producto';
+                            m.tituloModal = 'Actualizar categoría';
                         }
                     }
                 }
@@ -190,7 +190,7 @@ export default {
             .then(function (response) {
                 this.listarCategoria();
                 this.cerrarModal();
-                // me.limpiar();
+                me.limpiar();
             })
             .catch(function (error) {
                 console.log(error);
@@ -236,7 +236,9 @@ export default {
             this.errorMostrarMsjCategoria = [];
         },
         actualizarCategoria(PK_categories){
-
+            if (this.validarCategoria()){
+                return;
+            }
                 let me = this;
                 console.log("estoy entrando a categoria actualizar",me.name);
 
@@ -341,7 +343,6 @@ export default {
             }) 
                 
         },
-
     },
     mounted() {
         this.listarCategoria();

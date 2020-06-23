@@ -3173,6 +3173,7 @@ td, th {
 
 .secondary-content {
   float: right;
+  display: contents;
   color: #26a69a;
 }
 
@@ -7053,22 +7054,22 @@ textarea.materialize-textarea {
   cursor: pointer;
 }
 
-.switch label input[type=checkbox] {
+. {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.switch label input[type=checkbox]:checked + .lever {
-  background-color: #84c7c1;
+.:checked + .lever {
+  background-color: #419141;
 }
 
-.switch label input[type=checkbox]:checked + .lever:before, .switch label input[type=checkbox]:checked + .lever:after {
+.:checked + .lever:before, .switch label input[type=checkbox]:checked + .lever:after {
   left: 18px;
 }
 
 .switch label input[type=checkbox]:checked + .lever:after {
-  background-color: #26a69a;
+  background-color: #7abb87;
 }
 
 .switch label .lever {

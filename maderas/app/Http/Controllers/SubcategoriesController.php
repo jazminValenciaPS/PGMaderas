@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\SubCategorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use File;
 use Request as Peticion;
 
 class SubcategoriesController extends Controller
@@ -20,12 +22,7 @@ class SubcategoriesController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(Request $request)
     {
         // if (!$request->ajax()) return redirect('/administrador');
@@ -39,7 +36,7 @@ class SubcategoriesController extends Controller
         $img->move('img', $nombreImagen);
 
         $subcategorias = new SubCategorie();
-        $subcategorias->id_categories = $request->id_categories;
+        $subcategorias->id_category = $request->id_category;
         $subcategorias->name = $request->name;
         $subcategorias->description = $request->description;
         $subcategorias->image = $nombreImagen;
@@ -48,19 +45,24 @@ class SubcategoriesController extends Controller
     }
 
   
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        // if (!$request->ajax()) return redirect('/administrador');
 
-        $subcategorias = SubCategorie::findOrFail($request->$id);
-        $producto->id_categories = $request->id_categories;
+        $id = $request->PK_subcategories;
+
+        $subcategorias = SubCategorie::findOrFail($id);
+
+        $imagen = Peticion::file('file');
+        $extension = $imagen -> guessExtension();
+        $date = date('d-m-Y_h-i-s-ms-a');
+        $prefijo = 'Image';
+        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        $imagen->move('img', $nombreImagen);
+        File::delete('img/' . $subcategorias->Imagen);
+
+
+        $subcategorias->id_category = $request->id_category;
         $subcategorias->name = $request->name;
         $subcategorias->description = $request->description;
         $subcategorias->image = $nombreImagen;
@@ -68,24 +70,24 @@ class SubcategoriesController extends Controller
         $subcategorias->save();
     }
 
-       /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function desactivar(Request $request, $id)
+ 
+    public function desactivar(Request $request)
     {
-        $subcategorias = SubCategorie::findOrFail($request->$id);
+        // if (!$request->ajax()) return redirect('/administrador');
+
+        $id = $request->PK_subcategories;
+        $subcategorias = SubCategorie::findOrFail($id);
         $subcategorias->status = '0';
         $subcategorias->save();
     }
 
    
-    public function activar(Request $request, $id)
+    public function activar(Request $request)
     {
-        $subcategorias = SubCategorie::findOrFail($request->$id);
+        // if (!$request->ajax()) return redirect('/administrador');
+
+        $id = $request->PK_subcategories;
+        $subcategorias = SubCategorie::findOrFail($id);
         $subcategorias->status = '1';
         $subcategorias->save();
     }

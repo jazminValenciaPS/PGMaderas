@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 use App\Product;
 use Request as Peticion;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $producto = Product::all();
-        return $producto;
+        return $producto = DB::table('products')
+        ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
+        ->select('products.PK_products','products.SKU','products.name','products.description',
+        'products.price','products.avaible', 'products.status','subcategories.PK_subcategories','subcategories.name as subcategoria')
+        ->distinct()
+        ->get();
     }
 
   
