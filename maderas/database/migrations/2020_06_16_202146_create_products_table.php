@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('id_subcategory')->unsigned();
             $table->string('name',50);
             $table->string('description',5000)->nullable();
-            $table->decimal('price',16, 8);
+            $table->decimal('price',16, 2);
             $table->unsignedTinyInteger('avaible')->default(1);
             $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();

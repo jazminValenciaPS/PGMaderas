@@ -18,7 +18,7 @@ class CreateOrdersDetailsTable extends Migration
             $table->unsignedBigInteger('id_product')->unsigned();
             $table->unsignedBigInteger('id_order')->unsigned();
             $table->unsignedBigInteger('quantity');
-            $table->decimal('subtotal',16, 8);
+            $table->decimal('subtotal',16, 2);
             $table->string('comments',5000)->nullable();
             $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();

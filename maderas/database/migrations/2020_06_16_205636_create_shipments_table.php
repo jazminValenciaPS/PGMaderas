@@ -19,7 +19,7 @@ class CreateShipmentsTable extends Migration
             $table->unsignedBigInteger('id_address')->unsigned();
             $table->date('shipping_date');
             $table->time('shipping_time');
-            $table->decimal('subtotal',16, 8);
+            $table->decimal('subtotal',16, 2);
             $table->unsignedBigInteger('status')->unsigned();
             $table->timestamps();
 

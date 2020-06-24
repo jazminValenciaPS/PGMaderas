@@ -2,7 +2,7 @@
     <main class="row hero">
         <div class="col s12 m12 gl6">
             <div class=" title">
-                <h5>Categorias</h5>
+                <h5>Categorías</h5>
             </div>
             <div class="right form ">
                 <button type="summit"  data-target="modal1" class="modal-trigger" @click="abrirModal('categorias','registrar')">
@@ -18,8 +18,8 @@
                     <div class="center">
                         <h3 v-text="tituloModal"></h3>
                     </div>
-                    <div class="col s5 center">
-                        <img v-if="tipoAccion==2" :src="'img/'+image"  class="imagenEdit" alt="">
+                    <div class="col s12 center">
+                        <img v-if="tipoAccion==2" :src="'img/'+image"  class="tImagen imagenEdit" alt="">
                     </div>
                     <div class="form-group row">
                         <!-- input para el nombre del producto --> 
@@ -76,7 +76,7 @@
                     <tr>
                         <td v-text="categoria.name"></td> 
                         <td class="hide-on-small-only"  v-text="categoria.description"></td>
-                        <td class="hide-on-small-only" ><img :src="'img/'+categoria.image" class="square"></td>
+                        <td class="hide-on-small-only" ><img :src="'img/'+categoria.image" class="tImagen square"></td>
                         <td class="hide-on-small-only"  v-if="categoria.status == 1">Activado</td>
                         <td class="hide-on-small-only"  v-if="categoria.status == 0">Desactivado</td>
                         <td>
@@ -157,7 +157,7 @@ export default {
                             m.modal = 2;
                             m.PK_categories = data['PK_categories'];
                             m.tipoAccion = 2;
-                            m.imagen=data['image'];
+                            m.image=data['image'];
                             m.name=data['name'];
                             m.description=data['description'];
                             m.tituloModal = 'Actualizar categoría';
@@ -240,10 +240,6 @@ export default {
                 return;
             }
                 let me = this;
-                console.log("estoy entrando a categoria actualizar",me.name);
-
-                console.log("descripcion",me.description);
-
                 let formData = new FormData();
                 formData.append('PK_categories',PK_categories);
                 formData.append('name', me.name);

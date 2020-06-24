@@ -31,3 +31,14 @@ Route::put('/subcategoria/desactivar','SubcategoriesController@desactivar');
 
 
 Route::get('/producto','ProductController@index');
+Route::post('/producto/registrar','ProductController@store');
+Route::post('/producto/actualizar','ProductController@update');
+Route::put('/producto/activar','ProductController@activar');
+Route::put('/producto/desactivar','ProductController@desactivar');
+
+
+Route::get('/slider','SliderController@index');
+Route::post('/slider/registrar','SliderController@store');
+Route::post('/slider/actualizar','SliderController@update');
+Route::put('/slider/activar','SliderController@activar');
+Route::put('/slider/desactivar','SliderController@desactivar');

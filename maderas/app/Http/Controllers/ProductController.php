@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Product;
+use App\ProductImage;
 use Request as Peticion;
+use File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -12,24 +14,25 @@ class ProductController extends Controller
     {
         return $producto = DB::table('products')
         ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
+        ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
         ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price','products.avaible', 'products.status','subcategories.PK_subcategories','subcategories.name as subcategoria')
+        'products.price','products.avaible', 'products.status','subcategories.PK_subcategories',
+        'subcategories.name as subcategoria','products_images.image')
         ->distinct()
         ->get();
     }
 
   
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  
     public function store(Request $request)
     {
         // if (!$request->ajax()) return redirect('/administrador');
 
         $producto = new Product();
+        $imagen = new ProductImage();
+
+     
+
         $producto->SKU = $request->SKU;
         $producto->id_subcategory = $request->id_subcategory;
         $producto->name = $request->name;
@@ -38,21 +41,47 @@ class ProductController extends Controller
         $producto->avaible = $request->avaible;
         $producto->status = '1';
         $producto->save();
+
+        $idProduc = $producto->PK_products;
+
+        $img = Peticion::file('file');
+        
+        $extension = $img->guessExtension();
+        $date = date('d-m-Y_h-i-s-ms-a');
+        $prefijo = 'Image';
+        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        $img->move('img', $nombreImagen);
+        
+        $imagen->id_product = $idProduc;
+        $imagen ->image = $nombreImagen;
+
+        $imagen->save();
     }
 
-  
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
 
+        $id = $request->PK_products;
         $producto = Product::findOrFail($request->$id);
+
+        $img = Peticion::file('file');
+        
+        $extension = $img->guessExtension();
+        $date = date('d-m-Y_h-i-s-ms-a');
+        $prefijo = 'Image';
+        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        $img->move('img', $nombreImagen);
+
+
+        $imagen = Peticion::file('file');
+        $extension = $imagen -> guessExtension();
+        $date = date('d-m-Y_h-i-s-ms-a');
+        $prefijo = 'Image';
+        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        $imagen->move('img', $nombreImagen);
+
+        File::delete('img/' . $slider->image);
+
         $producto->id_categories = $request->id_categories;
         $producto->name = $request->name;
         $producto->description = $request->description;
@@ -68,17 +97,19 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function desactivar(Request $request, $id)
-    {
-        $producto = Product::findOrFail($request->$id);
+    public function desactivar(Request $request)
+    { 
+        $id = $request->PK_products;
+        $producto = Product::findOrFail($id);
         $producto->status = '0';
         $producto->save();
     }
 
    
-    public function activar(Request $request, $id)
+    public function activar(Request $request)
     {
-        $producto = Product::findOrFail($request->$id);
+        $id = $request->PK_products;
+        $producto = Product::findOrFail($id);
         $producto->status = '1';
         $producto->save();
     }

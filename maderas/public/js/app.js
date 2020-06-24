@@ -5099,7 +5099,7 @@ __webpack_require__.r(__webpack_exports__);
                   m.modal = 2;
                   m.PK_categories = data['PK_categories'];
                   m.tipoAccion = 2;
-                  m.imagen = data['image'];
+                  m.image = data['image'];
                   m.name = data['name'];
                   m.description = data['description'];
                   m.tituloModal = 'Actualizar categoría';
@@ -5177,8 +5177,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       var me = this;
-      console.log("estoy entrando a categoria actualizar", me.name);
-      console.log("descripcion", me.description);
       var formData = new FormData();
       formData.append('PK_categories', PK_categories);
       formData.append('name', me.name);
@@ -5275,6 +5273,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5387,26 +5389,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       PK_products: '',
       id_subcategory: '',
+      SKU: '',
       name: '',
       subcategoria: '',
       description: '',
       image: '',
       price: '',
       status: true,
-      avaible: 1000,
+      avaible: '',
+      contenido: 1000,
       arrayProductos: [],
       arraySubcategorias: [],
       tituloModal: 'Registrar Productos',
-      modal: 0,
-      tipoAccion: 0,
-      errorProducto: 0,
-      errorMostrarMsjProducto: []
-    };
+      modal: 0
+    }, _defineProperty(_ref, "SKU", ''), _defineProperty(_ref, "tipoAccion", 0), _defineProperty(_ref, "errorProducto", 0), _defineProperty(_ref, "errorMostrarMsjProducto", []), _ref;
   },
   methods: {
     listarProductos: function listarProductos() {
@@ -5426,11 +5449,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-      var PK_categories = arguments.length > 3 ? arguments[3] : undefined;
+      var PK_products = arguments.length > 3 ? arguments[3] : undefined;
       var m = this;
 
       switch (modelo) {
-        case "productos":
+        case "producto":
           {
             switch (accion) {
               case 'registrar':
@@ -5438,10 +5461,10 @@ __webpack_require__.r(__webpack_exports__);
                   m.modal = 1;
                   m.name = '';
                   m.description = '';
-                  m.price = 0, m.image = 'Selecciona imagen';
+                  m.price = '', m.image = 'Selecciona imagen';
                   m.avaible = '';
                   m.tipoAccion = 1;
-                  m.tituloModal = 'Registrar Producto';
+                  m.tituloModal = 'Registrar producto';
                   break;
                 }
 
@@ -5450,19 +5473,21 @@ __webpack_require__.r(__webpack_exports__);
                   m.modal = 2;
                   m.PK_products = data['PK_products'];
                   m.tipoAccion = 2;
-                  m.imagen = data['image'];
+                  m.image = data['image'];
                   m.name = data['name'];
+                  m.SKU = data['SKU'];
                   m.avaible = data['avaible'];
                   m.description = data['description'];
                   m.price = data['price'];
-                  m.tituloModal = 'Actualizar Producto';
+                  m.subcategoria = data['subcategoria'];
+                  m.tituloModal = 'Actualizar producto';
                 }
             }
           }
       }
     },
     nuevoProducto: function nuevoProducto() {
-      if (this.validarCategoria()) {
+      if (this.validarProducto()) {
         return;
       }
 
@@ -5473,24 +5498,515 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('id_subcategory', me.id_subcategory);
       formData.append('description', me.description);
       formData.append('price', me.price);
+      formData.append('SKU', me.SKU);
       formData.append('avaible', me.avaible); // Registramos la informacion
 
-      var url = '/categoria/registrar';
+      var url = '/producto/registrar';
       axios.post(url, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        this.listarCategoria();
+        this.listarProductos();
         this.cerrarModal();
         me.limpiar();
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    actualizarProducto: function actualizarProducto(PK_products) {
+      if (this.validarProducto()) {
+        return;
+      }
+
+      var me = this;
+      var formData = new FormData();
+      formData.append('file', me.file);
+      formData.append('name', me.name);
+      formData.append('id_subcategory', me.id_subcategory);
+      formData.append('description', me.description);
+      formData.append('price', me.price);
+      formData.append('SKU', me.SKU);
+      formData.append('avaible', me.avaible); //Registramos la informacion
+
+      axios.post('/producto/actualizar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        me.listarProductos();
+        me.cerrarModal();
+        me.limpiar();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    seleccionarImagen: function seleccionarImagen(img) {
+      if (img == 1) {
+        this.file = this.$refs.filea.files[0];
+        readURL(document.getElementsByClassName("productoAlta")[0], 1);
+      } else {
+        this.file = this.$refs.filec.files[0];
+        readURL(document.getElementsByClassName("productoEdit")[0], 2);
+      }
+
+      this.cambio = 1;
+
+      function readURL(input, img) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            if (img == 1) {
+              $('.imgAlta').attr('src', e.target.result);
+            } else {
+              $('.imgCambio').attr('src', e.target.result);
+            }
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    },
+    verSelects: function verSelects() {
+      var me = this;
+      me.listado = 2; //Obtener los datos del ingreso de sub categorias
+
+      var url = '/subcategoria';
+      axios.get(url).then(function (response) {
+        var arraySubcategorias = response.data;
+        me.arraySubcategorias = arraySubcategorias.map(function (object) {
+          return {
+            PK_subcategories: object.PK_subcategories,
+            name: object.name
+          };
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    cerrarModal: function cerrarModal() {
+      this.modal = 0;
+      this.tituloModal = '';
+      this.name = '';
+      this.description = '';
+      this.image = '';
+      this.SKU = '';
+      this.id_subcategory = '';
+      this.tipoAccion = 0;
+      this.errorProducto = 0;
+      this.errorMostrarMsjProducto = [];
+    },
+    validarProducto: function validarProducto() {},
+    activarProducto: function activarProducto(PK_products) {
+      var me = this;
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: '¿Está seguro de activar este producto?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          axios.put('/producto/activar', {
+            'PK_products': PK_products
+          }).then(function (response) {
+            me.listarProductos();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('activado!', 'El Producto ha sido activado con éxito.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
+          me.listarProductos();
+        }
+      });
+    },
+    desactivarProducto: function desactivarProducto(PK_products) {
+      var me = this;
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: '¿Está seguro de desactivar este producto?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          axios.put('/producto/desactivar', {
+            'PK_products': PK_products
+          }).then(function (response) {
+            me.listarProductos();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Desactivado!', 'El producto ha sido desactivado con éxito.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
+          me.listarProductos();
+        }
+      });
     }
   },
   mounted: function mounted() {
     this.listarProductos();
+    this.verSelects();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/contents/Sliders.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/contents/Sliders.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      arraySliders: [],
+      image: '',
+      modal: 0,
+      title: '',
+      description: '',
+      tituloModal: '',
+      status: true,
+      cambio: 0,
+      tipoAccion: 0,
+      PK_slider: '',
+      errorSlider: '',
+      errorMostrarMsjSlider: []
+    };
+  },
+  methods: {
+    listarSliders: function listarSliders() {
+      var m = this;
+      axios.get('/slider').then(function (response) {
+        m.arraySliders = response.data;
+        m.status = response.status.data;
+
+        if (status == true) {
+          status = 1;
+        } else {
+          status = 0;
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    limpiar: function limpiar() {
+      var me = this;
+      me.errors.clear('new');
+      me.errors.clear('update');
+      me.image = '';
+      me.tipoAccion = 0;
+      me.Cambio = 0;
+      me.title = '';
+      me.description = '';
+      $("#file").val("");
+    },
+    seleccionarImagen: function seleccionarImagen(img) {
+      if (img == 1) {
+        this.file = this.$refs.filea.files[0];
+        readURL(document.getElementsByClassName("sliderAlta")[0], 1);
+      } else {
+        this.file = this.$refs.filec.files[0];
+        readURL(document.getElementsByClassName("sliderEdit")[0], 2);
+      }
+
+      this.cambio = 1;
+
+      function readURL(input, img) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            if (img == 1) {
+              $('.imgAlta').attr('src', e.target.result);
+            } else {
+              $('.imgCambio').attr('src', e.target.result);
+            }
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    },
+    nuevoSlider: function nuevoSlider() {
+      if (this.validarSlider()) {
+        return;
+      }
+
+      var me = this;
+      var formData = new FormData();
+      formData.append('file', me.file);
+      formData.append('title', me.title);
+      formData.append('description', me.description);
+      axios.post('/slider/registrar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        me.listarSliders();
+        me.cerrarModal();
+        me.limpiar();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    actualizarSlider: function actualizarSlider(PK_slider) {
+      if (this.validarSlider()) {
+        return;
+      }
+
+      var me = this;
+      var formData = new FormData();
+      formData.append('file', me.file);
+      formData.append('PK_slider', PK_slider);
+      formData.append('title', me.title);
+      formData.append('description', me.description); // Regresamos la informacion
+
+      axios.post('/slider/actualizar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        me.listarSliders();
+        me.cerrarModal();
+        me.limpiar();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    cerrarModal: function cerrarModal() {
+      this.modal = 0;
+      this.tituloModal = '';
+      this.image = '';
+      this.file = '';
+      this.title = '';
+      this.description = '';
+    },
+    abrirModal: function abrirModal(modelo, accion) {
+      var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+      switch (modelo) {
+        case "sliders":
+          {
+            switch (accion) {
+              case 'registrar':
+                {
+                  this.modal = 1;
+                  this.title = '';
+                  this.description = '';
+                  this.tipoAccion = 1;
+                  this.tituloModal = 'Registrar sliders';
+                  this.image = '';
+                  break;
+                }
+
+              case 'actualizar':
+                {
+                  this.modal = 2;
+                  this.title = data['title'];
+                  this.description = data['description'];
+                  this.tipoAccion = 2;
+                  this.tituloModal = 'Actualizar slider';
+                  this.PK_slider = data['PK_slider'];
+                  this.image = data['image'];
+                  break;
+                }
+            }
+          }
+      }
+    },
+    validarSlider: function validarSlider() {
+      this.errorSlider = 0;
+      this.errorMostrarMsjSlider = [];
+      if (!this.file) this.errorMostrarMsjSlider.push("Se tiene que ingresar una imagen.");
+      if (!this.title) this.errorMostrarMsjSubcategoria.push("El titulo del Slider no puede estar vacío.");
+      if (this.errorMostrarMsjSlider.length) this.errorSlider = 1;
+      return this.errorSlider;
+    },
+    desactivarSlider: function desactivarSlider(PK_slider) {
+      var me = this;
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: '¿Está seguro de desactivar este slider?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          axios.put('/slider/desactivar', {
+            'PK_slider': PK_slider
+          }).then(function (response) {
+            me.listarSliders();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Desactivado!', 'El slider ha sido desactivado con éxito.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
+          me.listarSliders();
+        }
+      });
+    },
+    activarSlider: function activarSlider(PK_slider) {
+      var me = this;
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: '¿Está seguro de activar este slider?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          axios.put('/slider/activar', {
+            'PK_slider': PK_slider
+          }).then(function (response) {
+            me.listarSliders();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('activado!', 'El slider ha sido activado con éxito.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
+          me.listarSliders();
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.listarSliders();
   }
 });
 
@@ -5922,6 +6438,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n    height: 600px;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n.centrado{\n    height:560px;\n    margin-left: 20%;\n    margin-right: 30%;\n}\n.espacioButton{\n    margin-left: 10px !important;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/contents/Sliders.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/contents/Sliders.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n    height: 600px;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n.centrado{\n    max-height:560px !important;\n     margin-left: 20% !important;\n     margin-right: 30% ;\n}\n.espacioButton{\n    margin-left: 10px !important;\n}\n\n", ""]);
 
 // exports
 
@@ -23603,6 +24138,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/contents/Sliders.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/contents/Sliders.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Sliders.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/contents/Sliders.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/contents/SubCategorias.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/contents/SubCategorias.vue?vue&type=style&index=0&lang=css& ***!
@@ -27640,10 +28205,10 @@ var render = function() {
                 _c("h3", { domProps: { textContent: _vm._s(_vm.tituloModal) } })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col s5 center" }, [
+              _c("div", { staticClass: "col s12 center" }, [
                 _vm.tipoAccion == 2
                   ? _c("img", {
-                      staticClass: "imagenEdit",
+                      staticClass: "tImagen imagenEdit",
                       attrs: { src: "img/" + _vm.image, alt: "" }
                     })
                   : _vm._e()
@@ -27836,7 +28401,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", { staticClass: "hide-on-small-only" }, [
                   _c("img", {
-                    staticClass: "square",
+                    staticClass: "tImagen square",
                     attrs: { src: "img/" + categoria.image }
                   })
                 ]),
@@ -28029,7 +28594,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: " title" }, [
-      _c("h5", [_vm._v("Categorias")])
+      _c("h5", [_vm._v("Categorías")])
     ])
   },
   function() {
@@ -28922,7 +29487,7 @@ var render = function() {
             attrs: { type: "summit", "data-target": "modal1" },
             on: {
               click: function($event) {
-                return _vm.abrirModal("productos", "registrar")
+                return _vm.abrirModal("producto", "registrar")
               }
             }
           },
@@ -28960,16 +29525,42 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col s5 center" }, [
+                _c("div", { staticClass: "col s12 center" }, [
                   _vm.tipoAccion == 2
                     ? _c("img", {
-                        staticClass: "imagenEdit",
+                        staticClass: "tImagen",
                         attrs: { src: "img/" + _vm.image, alt: "" }
                       })
                     : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.SKU,
+                        expression: "SKU"
+                      }
+                    ],
+                    staticClass: "validate",
+                    attrs: {
+                      id: "SKU",
+                      type: "text",
+                      placeholder: "Número único del producto(SKU)"
+                    },
+                    domProps: { value: _vm.SKU },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.SKU = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
                   _c("input", {
                     directives: [
                       {
@@ -28983,7 +29574,7 @@ var render = function() {
                     attrs: {
                       id: "nombre",
                       type: "text",
-                      placeholder: "Nombre Producto"
+                      placeholder: "Nombre del producto"
                     },
                     domProps: { value: _vm.name },
                     on: {
@@ -29061,7 +29652,7 @@ var render = function() {
                     attrs: {
                       id: "descripcion",
                       type: "text",
-                      placeholder: "Descripcion"
+                      placeholder: "Descripción"
                     },
                     domProps: { value: _vm.description },
                     on: {
@@ -29083,7 +29674,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("input", {
                           ref: "filea",
-                          staticClass: "categoriaAlta",
+                          staticClass: "productoAlta",
                           attrs: {
                             id: "file",
                             type: "file",
@@ -29101,31 +29692,75 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.name,
-                        expression: "name"
-                      }
-                    ],
-                    staticClass: "validate",
-                    attrs: {
-                      id: "nombre",
-                      type: "text",
-                      placeholder: "precio del producto"
-                    },
-                    domProps: { value: _vm.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.name = $event.target.value
-                      }
-                    }
-                  }),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col s12" }, [
+                      _vm._v(
+                        "\n                            $\n                            "
+                      ),
+                      _c("div", { staticClass: "input-field inline" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.price,
+                              expression: "price"
+                            }
+                          ],
+                          staticClass: "validate",
+                          attrs: {
+                            id: "avaible",
+                            type: "text",
+                            placeholder: "precio del producto"
+                          },
+                          domProps: { value: _vm.price },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.price = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col s12" }, [
+                      _vm._v(
+                        "\n                            $\n                            "
+                      ),
+                      _c("div", { staticClass: "input-field inline" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.price,
+                              expression: "price"
+                            }
+                          ],
+                          staticClass: "validate",
+                          attrs: {
+                            id: "avaible",
+                            type: "text",
+                            placeholder: "precio del producto"
+                          },
+                          domProps: { value: _vm.price },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.price = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -29134,8 +29769,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.id_subcategory,
-                          expression: "id_subcategory"
+                          value: _vm.avaible,
+                          expression: "avaible"
                         }
                       ],
                       staticClass: "browser-default",
@@ -29150,7 +29785,7 @@ var render = function() {
                               var val = "_value" in o ? o._value : o.value
                               return val
                             })
-                          _vm.id_subcategory = $event.target.multiple
+                          _vm.avaible = $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
                         }
@@ -29163,8 +29798,10 @@ var render = function() {
                         [_vm._v("Disponibilidad del producto")]
                       ),
                       _vm._v(" "),
-                      _vm._l(_vm.avaible, function(items) {
-                        return _c("option", [_vm._v(_vm._s(items))])
+                      _vm._l(_vm.contenido, function(items) {
+                        return _c("option", { key: items.index }, [
+                          _vm._v(_vm._s(items))
+                        ])
                       })
                     ],
                     2
@@ -29227,9 +29864,7 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.actualizarCategoria(
-                                  _vm.PK_categories
-                                )
+                                return _vm.actualizarProducto(_vm.PK_products)
                               }
                             }
                           },
@@ -29267,6 +29902,8 @@ var render = function() {
           _vm._l(_vm.arrayProductos, function(producto) {
             return _c("tbody", { key: producto.PK_products }, [
               _c("tr", [
+                _c("td", { domProps: { textContent: _vm._s(producto.SKU) } }),
+                _vm._v(" "),
                 _c("td", { domProps: { textContent: _vm._s(producto.name) } }),
                 _vm._v(" "),
                 _c("td", {
@@ -29279,10 +29916,12 @@ var render = function() {
                   domProps: { textContent: _vm._s(producto.description) }
                 }),
                 _vm._v(" "),
-                _c("td", {
-                  staticClass: "hide-on-small-only",
-                  domProps: { textContent: _vm._s(producto.image) }
-                }),
+                _c("td", { staticClass: "hide-on-small-only" }, [
+                  _c("img", {
+                    staticClass: "tImagen square",
+                    attrs: { src: "img/" + producto.image }
+                  })
+                ]),
                 _vm._v(" "),
                 _c("td", {
                   staticClass: "hide-on-small-only",
@@ -29309,10 +29948,10 @@ var render = function() {
                       on: {
                         click: function($event) {
                           return _vm.abrirModal(
-                            "Categoria",
+                            "producto",
                             "actualizar",
                             producto,
-                            producto.idCategoria
+                            producto.PK_products
                           )
                         }
                       }
@@ -29353,8 +29992,8 @@ var render = function() {
                                 },
                                 on: {
                                   click: function($event) {
-                                    return _vm.desactivarCategoria(
-                                      producto.idCategoria
+                                    return _vm.desactivarProducto(
+                                      producto.PK_products
                                     )
                                   },
                                   change: function($event) {
@@ -29394,7 +30033,7 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.categoria.status == 0
+                  producto.status == 0
                     ? _c(
                         "a",
                         {
@@ -29421,8 +30060,8 @@ var render = function() {
                                 },
                                 on: {
                                   click: function($event) {
-                                    return _vm.activarCategoria(
-                                      producto.idCategoria
+                                    return _vm.activarProducto(
+                                      producto.PK_products
                                     )
                                   },
                                   change: function($event) {
@@ -29497,6 +30136,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", [_vm._v("SKU")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Nombre")]),
         _vm._v(" "),
         _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Categoria")]),
@@ -29543,7 +30184,228 @@ var render = function() {
     _c("div", { staticClass: "col s12 m12 gl6" }, [
       _vm._m(0),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { staticClass: "right form " }, [
+        _c(
+          "button",
+          {
+            staticClass: "modal-trigger",
+            attrs: { type: "summit", "data-target": "modal1" },
+            on: {
+              click: function($event) {
+                return _vm.abrirModal("sliders", "registrar")
+              }
+            }
+          },
+          [_vm._v("\n                Agregar Sliders\n            ")]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          class: { mostrar: _vm.modal },
+          staticStyle: { display: "none" },
+          attrs: {
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-primary modal-lg ",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "container" }, [
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "center" }, [
+                  _c("h3", {
+                    domProps: { textContent: _vm._s(_vm.tituloModal) }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col s12 center" }, [
+                  _vm.tipoAccion == 2
+                    ? _c("img", {
+                        staticClass: "tImagen imagenEdit",
+                        attrs: { src: "img/" + _vm.image, alt: "" }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.title,
+                        expression: "title"
+                      }
+                    ],
+                    staticClass: "validate",
+                    attrs: {
+                      id: "title",
+                      type: "text",
+                      placeholder: "titulo Slider"
+                    },
+                    domProps: { value: _vm.title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.title = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.description,
+                        expression: "description"
+                      }
+                    ],
+                    staticClass: "validate",
+                    attrs: {
+                      id: "descripcion",
+                      type: "text",
+                      placeholder: "Descripcion"
+                    },
+                    domProps: { value: _vm.description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.description = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col s10 center" }, [
+                    _c("div", { staticClass: "file-field input-field" }, [
+                      _c("div", { staticClass: "btn button-image" }, [
+                        _c("span", [_vm._v("Imagen")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          ref: "filea",
+                          staticClass: "sliderAlta",
+                          attrs: {
+                            id: "file",
+                            type: "file",
+                            "data-vv-scope": "new"
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.seleccionarImagen(1)
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.errorSlider,
+                        expression: "errorSlider"
+                      }
+                    ],
+                    staticClass: "form-group row div-error"
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "text-center text-error" },
+                      _vm._l(_vm.errorMostrarMsjSlider, function(error) {
+                        return _c("div", {
+                          key: error,
+                          domProps: { textContent: _vm._s(error) }
+                        })
+                      }),
+                      0
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "button-container form formmodal-footer" },
+                  [
+                    _vm.tipoAccion == 1
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "button-type",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.nuevoSlider()
+                              }
+                            }
+                          },
+                          [_vm._v("Guardar")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.tipoAccion == 2
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "button-type",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.actualizarSlider(_vm.PK_slider)
+                              }
+                            }
+                          },
+                          [_vm._v("Actualizar")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "button-type",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cerrarModal()
+                          }
+                        }
+                      },
+                      [_vm._v("Cerrar")]
+                    )
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
       _vm._v(" "),
       _c(
         "table",
@@ -29551,19 +30413,34 @@ var render = function() {
         [
           _vm._m(2),
           _vm._v(" "),
-          _vm._l(_vm.arrayCategoria, function(categoria) {
-            return _c("tbody", { key: categoria.idCategoria }, [
+          _vm._l(_vm.arraySliders, function(slider) {
+            return _c("tbody", { key: slider.PK_slider }, [
               _c("tr", [
-                _c("td", {
-                  domProps: { textContent: _vm._s(categoria.nombre) }
-                }),
+                _c("td", { domProps: { textContent: _vm._s(slider.title) } }),
                 _vm._v(" "),
                 _c("td", {
                   staticClass: "hide-on-small-only",
-                  domProps: {
-                    textContent: _vm._s(categoria.nombreCaracteristica)
-                  }
+                  domProps: { textContent: _vm._s(slider.description) }
                 }),
+                _vm._v(" "),
+                _c("td", { staticClass: "hide-on-small-only" }, [
+                  _c("img", {
+                    staticClass: "tImagen square",
+                    attrs: { src: "img/" + slider.image }
+                  })
+                ]),
+                _vm._v(" "),
+                slider.status == 1
+                  ? _c("td", { staticClass: "hide-on-small-only" }, [
+                      _vm._v("Activado")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                slider.status == 0
+                  ? _c("td", { staticClass: "hide-on-small-only" }, [
+                      _vm._v("Desactivado")
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -29573,10 +30450,10 @@ var render = function() {
                       on: {
                         click: function($event) {
                           return _vm.abrirModal(
-                            "Categoria",
+                            "sliders",
                             "actualizar",
-                            categoria,
-                            categoria.idCategoria
+                            slider,
+                            slider.PK_slider
                           )
                         }
                       }
@@ -29586,7 +30463,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "desactivarActivar" }, [
-                  categoria.status == 1
+                  slider.status == 1
                     ? _c(
                         "a",
                         {
@@ -29601,8 +30478,8 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: categoria.status,
-                                    expression: "categoria.status"
+                                    value: slider.status,
+                                    expression: "slider.status"
                                   }
                                 ],
                                 attrs: {
@@ -29611,18 +30488,18 @@ var render = function() {
                                   name: "status"
                                 },
                                 domProps: {
-                                  checked: Array.isArray(categoria.status)
-                                    ? _vm._i(categoria.status, null) > -1
-                                    : categoria.status
+                                  checked: Array.isArray(slider.status)
+                                    ? _vm._i(slider.status, null) > -1
+                                    : slider.status
                                 },
                                 on: {
                                   click: function($event) {
-                                    return _vm.desactivarCategoria(
-                                      categoria.idCategoria
+                                    return _vm.desactivarSlider(
+                                      slider.PK_slider
                                     )
                                   },
                                   change: function($event) {
-                                    var $$a = categoria.status,
+                                    var $$a = slider.status,
                                       $$el = $event.target,
                                       $$c = $$el.checked ? true : false
                                     if (Array.isArray($$a)) {
@@ -29631,14 +30508,14 @@ var render = function() {
                                       if ($$el.checked) {
                                         $$i < 0 &&
                                           _vm.$set(
-                                            categoria,
+                                            slider,
                                             "status",
                                             $$a.concat([$$v])
                                           )
                                       } else {
                                         $$i > -1 &&
                                           _vm.$set(
-                                            categoria,
+                                            slider,
                                             "status",
                                             $$a
                                               .slice(0, $$i)
@@ -29646,7 +30523,7 @@ var render = function() {
                                           )
                                       }
                                     } else {
-                                      _vm.$set(categoria, "status", $$c)
+                                      _vm.$set(slider, "status", $$c)
                                     }
                                   }
                                 }
@@ -29658,7 +30535,7 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  categoria.status == 0
+                  slider.status == 0
                     ? _c(
                         "a",
                         {
@@ -29673,24 +30550,22 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: categoria.status,
-                                    expression: "categoria.status"
+                                    value: slider.status,
+                                    expression: "slider.status"
                                   }
                                 ],
                                 attrs: { type: "checkbox", name: "status" },
                                 domProps: {
-                                  checked: Array.isArray(categoria.status)
-                                    ? _vm._i(categoria.status, null) > -1
-                                    : categoria.status
+                                  checked: Array.isArray(slider.status)
+                                    ? _vm._i(slider.status, null) > -1
+                                    : slider.status
                                 },
                                 on: {
                                   click: function($event) {
-                                    return _vm.activarCategoria(
-                                      categoria.idCategoria
-                                    )
+                                    return _vm.activarSlider(slider.PK_slider)
                                   },
                                   change: function($event) {
-                                    var $$a = categoria.status,
+                                    var $$a = slider.status,
                                       $$el = $event.target,
                                       $$c = $$el.checked ? true : false
                                     if (Array.isArray($$a)) {
@@ -29699,14 +30574,14 @@ var render = function() {
                                       if ($$el.checked) {
                                         $$i < 0 &&
                                           _vm.$set(
-                                            categoria,
+                                            slider,
                                             "status",
                                             $$a.concat([$$v])
                                           )
                                       } else {
                                         $$i > -1 &&
                                           _vm.$set(
-                                            categoria,
+                                            slider,
                                             "status",
                                             $$a
                                               .slice(0, $$i)
@@ -29714,7 +30589,7 @@ var render = function() {
                                           )
                                       }
                                     } else {
-                                      _vm.$set(categoria, "status", $$c)
+                                      _vm.$set(slider, "status", $$c)
                                     }
                                   }
                                 }
@@ -29746,10 +30621,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "right form " }, [
-      _c("button", { attrs: { type: "summit" } }, [
-        _vm._v("\n                Agregar Sliders\n            ")
-      ])
+    return _c("div", { staticClass: "file-path-wrapper" }, [
+      _c("input", {
+        staticClass: "file-path validate",
+        attrs: { type: "text" }
+      })
     ])
   },
   function() {
@@ -29764,7 +30640,13 @@ var staticRenderFns = [
           _vm._v("Descripcion")
         ]),
         _vm._v(" "),
-        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Imagen")])
+        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Imagen")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Editar")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Desactivar/Activar")])
       ])
     ])
   }
@@ -42892,15 +43774,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Sliders_vue_vue_type_template_id_7df0874f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sliders.vue?vue&type=template&id=7df0874f& */ "./resources/assets/js/contents/Sliders.vue?vue&type=template&id=7df0874f&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Sliders_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Sliders.vue?vue&type=script&lang=js& */ "./resources/assets/js/contents/Sliders.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Sliders_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Sliders.vue?vue&type=style&index=0&lang=css& */ "./resources/assets/js/contents/Sliders.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Sliders_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Sliders_vue_vue_type_template_id_7df0874f___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Sliders_vue_vue_type_template_id_7df0874f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -42914,6 +43800,36 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/assets/js/contents/Sliders.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/contents/Sliders.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/assets/js/contents/Sliders.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sliders_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Sliders.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/contents/Sliders.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sliders_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/contents/Sliders.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************!*\
+  !*** ./resources/assets/js/contents/Sliders.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sliders_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Sliders.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/contents/Sliders.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sliders_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sliders_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sliders_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sliders_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sliders_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
