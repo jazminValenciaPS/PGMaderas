@@ -10,17 +10,45 @@ use File;
 
 class CategorieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    
+    public function index(Request $request)
     {
-        $categorias = Categorie::all();
-        return $categorias;
+        // $categorias = Categorie::all();
+        // return $categorias;
+
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        
+        if ($buscar==''){
+            $categorias = Categorie::orderBy('PK_categories', 'desc')->paginate(3);
+
+       
+        }
+        else{
+            $categorias = Categorie::where($criterio, 'like', '%'. $buscar . '%')->orderBy('PK_categories', 'desc')->paginate(3);
+        }
+
+
+
+        return [
+            'pagination' => [
+                'total'        => $categorias->total(),
+                'current_page' => $categorias->currentPage(),
+                'per_page'     => $categorias->perPage(),
+                'last_page'    => $categorias->lastPage(),
+                'from'         => $categorias->firstItem(),
+                'to'           => $categorias->lastItem(),
+            ],
+            'categorias' => $categorias
+        ];
+
     }
 
+
+    public function listar(){
+        $categoria = Categorie::all();
+        return $categoria;
+    }
   
     /**
      * Store a newly created resource in storage.

@@ -83,7 +83,7 @@
                 <td v-text="subcategoria.name"></td> 
                 <td class="hide-on-small-only"  v-text="subcategoria.categoria"></td>
                     <td class="hide-on-small-only"  v-text="subcategoria.description"></td>
-                    <td class="hide-on-small-only"><img :src="'img/'+subcategoria.image" class="square"></td>
+                    <td class="hide-on-small-only"><img :src="'img/'+subcategoria.image" class="tImagen square"></td>
                 <td class="hide-on-small-only"  v-if="subcategoria.status == 1">Activado</td>
                 <td class="hide-on-small-only"  v-if="subcategoria.status == 0">Desactivado</td>
                 <td>
@@ -169,7 +169,7 @@ export default {
                 let me=this;
                 me.listado=2;
                 //Obtener los datos del ingreso de sub categorias
-                var url= '/categoria';
+                var url= '/categoriaV';
                 axios.get(url).then(function (response) {
                     var arrayCategoria= response.data;
                     me.arrayCategoria = arrayCategoria.map(object => ({PK_categories: object.PK_categories, name: object.name})); 

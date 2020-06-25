@@ -15,5 +15,8 @@ const mix = require('laravel-mix');
 mix.styles([
     'resources/assets/plantilla/css/*',
 ],'public/css/plantilla.css')
+.scripts([
+    'resources/assets/plantilla/js/*'
+], 'public/js/plantilla.js')
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');

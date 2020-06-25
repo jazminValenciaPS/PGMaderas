@@ -61,6 +61,21 @@
 
          <!-- tabla inicio -->
          <div class="col s12 m12 gl6"> 
+             <div class="row center">
+                    <div class="form-group center">
+                            <div class="col s6">
+                                <div class="input-group">
+                                    <select class="form-control col-md-3" v-model="criterio">
+                                      <option value="name">Nombre</option>
+                                      <option value="description">Descripción</option>
+                                    </select>
+                                    <input type="text" v-model="buscar" @keyup.enter="listarCategoria(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                                    <button type="submit" @click="listarCategoria(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+             </div>
+             
             <table class="tabla centered">
                 <thead>
                     <tr>
@@ -97,6 +112,19 @@
                     </tr>
                 </tbody>
              </table>
+              <nav>
+                    <ul class="pagination">
+                        <li class="page-item" v-if="pagination.current_page > 1">
+                             <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
+                        </li>
+                         <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                             <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                         </li>
+                         <li class="page-item" v-if="pagination.current_page < pagination.last_page">
+                              <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
+                         </li>
+                     </ul>
+             </nav>
         </div>
         <!-- tabla final -->
     </main>
@@ -119,15 +147,61 @@ export default {
             cambio : 0,
             tipoAccion: 0,
             errorCategoria : 0,
-            errorMostrarMsjCategoria : []
+            errorMostrarMsjCategoria : [],
+              pagination : {
+                    'total' : 0,
+                    'current_page' : 0,
+                    'per_page' : 0,
+                    'last_page' : 0,
+                    'from' : 0,
+                    'to' : 0,
+                },
+            offset : 3,
+            criterio : 'name',
+            buscar:''
+
         }
     },
+    computed:{
+         isActived: function(){
+                return this.pagination.current_page;
+            },
+            //Calcula los elementos de la paginación
+            pagesNumber: function() {
+                if(!this.pagination.to) {
+                    return [];
+                }
+                
+                var from = this.pagination.current_page - this.offset; 
+                if(from < 1) {
+                    from = 1;
+                }
+
+                var to = from + (this.offset * 2); 
+                if(to >= this.pagination.last_page){
+                    to = this.pagination.last_page;
+                }  
+
+                var pagesArray = [];
+                while(from <= to) {
+                    pagesArray.push(from);
+                    from++;
+                }
+                return pagesArray;             
+
+            }
+    },
     methods:{
-        listarCategoria(){
+        listarCategoria(page,buscar,criterio){
             let m=this;
-            axios.get('/categoria').then(function (response){
-                m.arrayCategoria = response.data;
-                m.status = response.status.data;
+            var url='/categoria?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+
+            axios.get(url).then(function (response){
+                var respuesta= response.data;
+                m.pagination= respuesta.pagination;
+                m.arrayCategoria = respuesta.categorias.data;
+                m.status = respuesta.categorias.status.data;
+
                 if(status == true){
                     status = 1
                 }else{
@@ -137,6 +211,13 @@ export default {
             .catch(function(error){
                 console.log(error);
             });
+        },
+        cambiarPagina(page,buscar,criterio){
+           let me = this;
+            //Actualiza la página actual
+            me.pagination.current_page = page;
+            //Envia la petición para visualizar la data de esa página
+            me.listarCategoria(page,buscar,criterio);
         },
         abrirModal(modelo,accion, data = [],PK_categories){
             let m=this;
@@ -188,8 +269,8 @@ export default {
                 }
             })
             .then(function (response) {
-                this.listarCategoria();
-                this.cerrarModal();
+                me.listarCategoria(1,'','name');
+                me.cerrarModal();
                 me.limpiar();
             })
             .catch(function (error) {
@@ -223,7 +304,15 @@ export default {
             }
         },
         validarCategoria(){
-            
+              this.errorCategoria = 0;
+            this.errorMostrarMsjCategoria = [];
+
+                if (!this.file ) this.errorMostrarMsjCategoria.push("Se tiene que ingresar una imagen.");
+                if (!this.name) this.errorMostrarMsjCategoria.push("El nombre de la subcategoría no puede estar vacío.");
+                if (!this.description) this.errorMostrarMsjCategoria.push("La descripción de la subcategoría no puede estar vacío.");
+
+                if (this.errorMostrarMsjCategoria.length) this.errorCategoria = 1;
+                return this.errorCategoria;
         },
         cerrarModal(){
             this.modal = 0;
@@ -253,7 +342,7 @@ export default {
                     }
                 })
                 .then(function (response) {
-                    me.listarCategoria();
+                    me.listarCategoria(1,'','name');
                     me.cerrarModal();
                     me.limpiar();                    
                 })
@@ -265,7 +354,7 @@ export default {
             let me = this;
 
             Swal.fire({
-            title: '¿Está seguro de desactivar esta Categoria?',
+            title: '¿Está seguro de desactivar esta categoría?',
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -279,14 +368,13 @@ export default {
             }).then((result) => {
                 if (result.value) {
 
-                    console.log('id de categoria es:', PK_categories);
                     axios.put('/categoria/desactivar',{
                         'PK_categories': PK_categories
                     }).then(function (response) {
-                        me.listarCategoria();
+                        me.listarCategoria(1,'','name');
                         Swal.fire(
                             'Desactivado!',
-                            'La categoria ha sido desactivado con éxito.',
+                            'La categoría ha sido desactivada con éxito.',
                             'success'
                         )
                     }).catch(function (error) {
@@ -296,7 +384,7 @@ export default {
                         // Read more about handling dismissals
                         result.dismiss === Swal.DismissReason.cancel
                     ){
-                        me.listarCategoria();
+                        me.listarCategoria(1,'','name');
                     }
             })
         },
@@ -304,7 +392,7 @@ export default {
             let me = this;
 
             Swal.fire({
-            title: '¿Está seguro de activar esta Categoria?',
+            title: '¿Está seguro de activar esta categoría?',
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -320,10 +408,10 @@ export default {
                 axios.put('/categoria/activar',{
                     'PK_categories': PK_categories
                 }).then(function (response) {
-                    me.listarCategoria();
+                    me.listarCategoria(1,'','name');
                     Swal.fire(
                         'activado!',
-                        'La categoria ha sido activado con éxito.',
+                        'La categoria ha sido activada con éxito.',
                         'success'
                     )
                 }).catch(function (error) {
@@ -334,14 +422,14 @@ export default {
                 // Read more about handling dismissals
                 result.dismiss === Swal.DismissReason.cancel
             ) {
-                        me.listarCategoria();                    
+                        me.listarCategoria(1,'','name');                    
             }
             }) 
                 
         },
     },
     mounted() {
-        this.listarCategoria();
+        this.listarCategoria(1,this.buscar,this.criterio);
     }
 }
 </script>

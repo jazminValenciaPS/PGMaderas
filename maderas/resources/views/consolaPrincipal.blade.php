@@ -9,9 +9,6 @@
       <link href="https://unpkg.com/vueperslides/dist/vueperslides.css" rel="stylesheet">
       <link rel="stylesheet" href='./css/plantilla.css' >
       <link rel="shortcut icon" href="img/44742972_183514302527228_7107553413201657856_n.jpg" type="image/x-icon">
-      
-      <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.0.6/dist/vue-multiselect.min.css">
-     
       <link rel="stylesheet" href="css/estilos.css">
   </head>
   <style>
@@ -59,7 +56,8 @@
 <script src="js/app.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="https://unpkg.com/vue-multiselect@2.0.6"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <!--
   <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/vueperslides"></script> -->
@@ -67,17 +65,22 @@
 <script>
   $(document).ready(function(){
     $('.dropdown-trigger').dropdown();
+    
   });
-
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
   $(document).ready(function(){
     $('.modal').modal();
   });
-
-
-
 </script>
 
 <script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.datepicker');
+      var instances = M.Datepicker.init(elems);
+    });
 
   document.addEventListener('DOMContentLoaded', function() {
       var elems = document.querySelectorAll('select');

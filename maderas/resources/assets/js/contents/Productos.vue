@@ -10,7 +10,7 @@
                 </button>
             </div>
             <!-- MODAL INICIO -->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade " tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg " role="document">
                     <div class = "container">
                         <br>
@@ -27,8 +27,8 @@
                             <!-- <label  for="nombre">Nombre</label> -->
                             <br>  
                             <select name="LeaveType" class="browser-default" v-model="id_subcategory">
-                                <option value="" disabled selected>Selecciona la Subcategoría</option>
-                                <option v-for="sub in arraySubcategorias" :value="sub.PK_subcategories"  :key="sub.PK_subcategories">{{ sub.name }}</option>
+                                <option value="" disabled selected >Selecciona la Subcategoría</option>
+                                <option v-for="sub in arraySubcategorias" :value="sub.PK_subcategories"  :key="sub.PK_subcategories" >{{ sub.name }}</option>
                             </select> 
                             <!-- input para la descripción del producto-->
                             <input id="descripcion" type="text" v-model="description" placeholder="Descripción" class="validate">
@@ -56,14 +56,7 @@
                                 </div>
                             </div>
                             <!-- $ <input id="avaible" type="text"  v-model="price"   class="validate" > -->
-                    <div class="row">
-                                <div class="col s12">
-                                $
-                                <div class="input-field inline">
-                                    <input id="avaible" v-model="price" type="text" placeholder="precio del producto" class="validate">
-                                </div>
-                                </div>
-                            </div>
+                  
                             <select name="LeaveType" class="browser-default" v-model="avaible">
                                 <option value="" disabled selected>Disponibilidad del producto</option>
                                 <option v-for="items in contenido" :key="items.index">{{ items }}</option>
@@ -84,7 +77,23 @@
                 </div>
             </div>  
             <!-- MODAL FIN -->
-            <table class="tabla centered">
+         <div class="col s12 m12 gl6"> 
+
+            <div class="row">
+                <div class="form-group center">
+                    <div class="col s6">
+                        <div class="input-group">
+                            <select class="form-control col-md-3" v-model="criterio">
+                            <option value="name">Nombre</option>
+                            <option value="sku">SKU</option>
+                            </select>
+                            <input type="text" v-model="buscar" @keyup.enter="listarProductos(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                            <button type="submit" @click="listarProductos(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="striped tabla centered">
                 <thead>
                     <tr>
                         <th>SKU</th>
@@ -126,7 +135,22 @@
                     </tr>
                 </tbody>
             </table>
+             <nav>
+                    <ul class="pagination">
+                        <li class="page-item" v-if="pagination.current_page > 1">
+                             <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
+                        </li>
+                         <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                             <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                         </li>
+                         <li class="page-item" v-if="pagination.current_page < pagination.last_page">
+                              <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
+                         </li>
+                     </ul>
+             </nav>
         </div>
+        </div>
+
     </main>
 </template>
 <script>
@@ -152,15 +176,59 @@ export default {
             SKU: '',
             tipoAccion: 0,
             errorProducto : 0,
-            errorMostrarMsjProducto : []
+            errorMostrarMsjProducto : [],
+                pagination : {
+                    'total' : 0,
+                    'current_page' : 0,
+                    'per_page' : 0,
+                    'last_page' : 0,
+                    'from' : 0,
+                    'to' : 0,
+                },
+            offset : 3,
+            criterio : 'SKU',
+            buscar:''
         }
     },
+      computed:{
+         isActived: function(){
+                return this.pagination.current_page;
+            },
+            //Calcula los elementos de la paginación
+            pagesNumber: function() {
+                if(!this.pagination.to) {
+                    return [];
+                }
+                
+                var from = this.pagination.current_page - this.offset; 
+                if(from < 1) {
+                    from = 1;
+                }
+
+                var to = from + (this.offset * 2); 
+                if(to >= this.pagination.last_page){
+                    to = this.pagination.last_page;
+                }  
+
+                var pagesArray = [];
+                while(from <= to) {
+                    pagesArray.push(from);
+                    from++;
+                }
+                return pagesArray;             
+
+            }
+    },
     methods:{
-        listarProductos(){
+        listarProductos(page,buscar,criterio){
             let m=this;
-            axios.get('/producto').then(function (response){
-                m.arrayProductos = response.data;
-                m.status = response.status.data;
+            var url='/producto?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+
+            axios.get(url).then(function (response){
+                var respuesta= response.data;
+                m.pagination= respuesta.pagination;
+                m.arrayProductos = respuesta.producto.data;
+                m.status = respuesta.producto.status.data;
                 if(status == true){
                     status = 1
                 }else{
@@ -170,6 +238,13 @@ export default {
             .catch(function(error){
                 console.log(error);
             });
+        },
+        cambiarPagina(page,buscar,criterio){
+           let me = this;
+            //Actualiza la página actual
+            me.pagination.current_page = page;
+            //Envia la petición para visualizar la data de esa página
+            me.listarProductos(page,buscar,criterio);
         },
         abrirModal(modelo,accion, data = [],PK_products){
             let m=this;
@@ -198,7 +273,7 @@ export default {
                             m.avaible =data['avaible'];
                             m.description=data['description'];
                             m.price = data['price']
-                            m.subcategoria= data['subcategoria'];
+                            m.id_subcategory= data['PK_subcategories'];
                             m.tituloModal = 'Actualizar producto';
                         }
                     }
@@ -230,8 +305,8 @@ export default {
                 }
             })
             .then(function (response) {
-                this.listarProductos();
-                this.cerrarModal();
+                me.listarProductos(1,'','name');
+                me.cerrarModal();
                 me.limpiar();
             })
             .catch(function (error) {
@@ -245,6 +320,7 @@ export default {
                 let me = this;
 
                 let formData = new FormData();
+                formData.append('PK_products',PK_products);
                 formData.append('file', me.file);
                 formData.append('name', me.name);
                 formData.append('id_subcategory', me.id_subcategory);
@@ -260,7 +336,7 @@ export default {
                     }
                 })
                 .then(function (response) {
-                    me.listarProductos();
+                    me.listarProductos(1,'','name');
                     me.cerrarModal();
                     me.limpiar();                    
                 })
@@ -320,7 +396,21 @@ export default {
             this.errorMostrarMsjProducto = [];
         },
         validarProducto(){
+            this.errorProducto = 0;
+            this.errorMostrarMsjProducto = [];
 
+                if (!this.file ) this.errorMostrarMsjProducto.push("Se tiene que ingresar una imagen.");
+                if (!this.name) this.errorMostrarMsjProducto.push("El nombre de la subcategoría no puede estar vacío.");
+                if (!this.description) this.errorMostrarMsjProducto.push("La descripción de la subcategoría no puede estar vacío.");
+                if (!this.price) this.errorMostrarMsjProducto.push("Se tiene que ingresar precio.");
+                if (!this.SKU) this.errorMostrarMsjProducto.push("El SKU no puede estar vacío.");
+                if (!this.avaible) this.errorMostrarMsjProducto.push("Seleccione la disponibilidad del producto.");
+                if (!this.id_subcategory) this.errorMostrarMsjProducto.push("Seleccione una subcategoría");
+                if(isNaN(this.price))this.errorMostrarMsjProducto.push("El precio del producto debe ser numérico.");
+
+
+                if (this.errorMostrarMsjProducto.length) this.errorProducto = 1;
+                return this.errorProducto;
         },
         activarProducto(PK_products){
             let me = this;
@@ -342,7 +432,7 @@ export default {
                 axios.put('/producto/activar',{
                     'PK_products': PK_products
                 }).then(function (response) {
-                    me.listarProductos();
+                    me.listarProductos(1,'','name');
                     Swal.fire(
                         'activado!',
                         'El Producto ha sido activado con éxito.',
@@ -356,7 +446,7 @@ export default {
                 // Read more about handling dismissals
                 result.dismiss === Swal.DismissReason.cancel
             ) {
-                        me.listarProductos();                    
+                        me.listarProductos(1,'','name');                    
             }
             }) 
                 
@@ -381,7 +471,7 @@ export default {
                     axios.put('/producto/desactivar',{
                         'PK_products': PK_products
                     }).then(function (response) {
-                        me.listarProductos();
+                        me.listarProductos(1,'','name');
                         Swal.fire(
                             'Desactivado!',
                             'El producto ha sido desactivado con éxito.',
@@ -394,23 +484,22 @@ export default {
                         // Read more about handling dismissals
                         result.dismiss === Swal.DismissReason.cancel
                     ){
-                        me.listarProductos();
+                        me.listarProductos(1,'','name');
                     }
             })
         },
-
     },
     mounted() {
-        this.listarProductos();
+        this.listarProductos(1,this.buscar,this.criterio);
         this.verSelects();
     }
 }
 </script>
 <style>
     .modal-content{
-        width: 100% !important;
+        width: 80% !important;
         position: absolute !important;
-        height: 600px;
+        height: 800px;
     }
     .mostrar{
         display: list-item !important;
@@ -419,7 +508,7 @@ export default {
         z-index: 100;
     }
     .centrado{
-        height:560px;
+        height:760px;
         margin-left: 20%;
         margin-right: 30%;
     }

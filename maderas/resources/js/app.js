@@ -1,4 +1,5 @@
 require('./bootstrap');
+
 import VueRouter from 'vue-router';
 import categorias from '../assets/js/contents/Categorias.vue';
 import subcategorias from '../assets/js/contents/SubCategorias.vue';
@@ -10,6 +11,7 @@ import envios from '../assets/js/contents/Envios.vue';
 import contraseñas from '../assets/js/contents/CambioContraseña.vue';
 
 window.Vue = require('vue');
+
 
 Vue.component('categoria', categorias);
 Vue.component('subcategoria', subcategorias);

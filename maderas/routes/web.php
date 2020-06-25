@@ -21,6 +21,8 @@ Route::post('/categoria/registrar','CategorieController@store');
 Route::post('/categoria/actualizar','CategorieController@update');
 Route::put('/categoria/activar','CategorieController@activar');
 Route::put('/categoria/desactivar','CategorieController@desactivar');
+Route::get('/categoriaV','CategorieController@listar');
+
 
 
 Route::get('/subcategoria','SubcategoriesController@index');
@@ -42,3 +44,8 @@ Route::post('/slider/registrar','SliderController@store');
 Route::post('/slider/actualizar','SliderController@update');
 Route::put('/slider/activar','SliderController@activar');
 Route::put('/slider/desactivar','SliderController@desactivar');
+
+Route::get('/user','UserController@index');
+Route::post('/user/registrar','UserController@store');
+
+Route::get('/rol','RolController@index');
