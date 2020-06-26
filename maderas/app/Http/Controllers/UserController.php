@@ -57,6 +57,7 @@ class UserController extends Controller
 
         $PK_persons = $request->PK_persons;
         printf($PK_persons);
+
         $person = Person::findOrFail($PK_persons);
 
         $person->first_name = $request->first_name;
@@ -70,13 +71,12 @@ class UserController extends Controller
 
         $id_user = $person->id;
 
-            // DB::table('user')->where('id', $id)->delete();
         
         $user = User::findOrFail($id_user);
 
         // $user = new User(); 
         $user->email = $request->email;
-        $user->id_person=$id_user;
+        // $user->id_person=$PK_persons;
         $user->id_role = $request->id_role;
         $user->status = '1';
         $user->password =$request->password;

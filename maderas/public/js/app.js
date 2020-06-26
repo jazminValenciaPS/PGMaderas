@@ -5654,6 +5654,7 @@ $('.datepicker').datepicker({
       var formData = new FormData();
       formData.append('first_name', me.first_name);
       formData.append('id', id);
+      formData.append('PK_persons', me.PK_persons);
       formData.append('last_name', me.last_name);
       formData.append('phone', me.phone);
       formData.append('birth_date', me.birth_date);
