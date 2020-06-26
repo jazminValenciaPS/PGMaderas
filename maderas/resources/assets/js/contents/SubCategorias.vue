@@ -2,11 +2,11 @@
     <main class="row hero">
         <div class="col s12 m12 gl6">
             <div class=" title">
-                <h5>SubCategorias</h5>
+                <h5>Subcategorías</h5>
             </div>
             <div class="right form ">
                 <button type="summit"  data-target="modal1" class="modal-trigger" @click="abrirModal('subcategorias','registrar')">
-                    Agregar SubCategorias
+                    Agregar Subcategorías
                 </button>
             </div>
         <!--Inicio del modal-->
@@ -48,14 +48,14 @@
                         </select> 
                         <br>
                     </div> 
-                    </div> 
-                     <div v-show="errorSubcategoria" class="form-group row div-error">
-                            <div class="text-center text-error">
-                                <div v-for="error in errorMostrarMsjSubcategoria" :key="error" v-text="error">
-
-                                </div>
+                    <div v-show="errorSubcategoria" class="form-group row div-error">
+                        <div class="text-center text-error">
+                            <div v-for="error in errorMostrarMsjSubcategoria" :key="error" v-text="error">
                             </div>
+                        </div>
                     </div>
+                    </div> 
+
                     <div class="button-container form formmodal-footer">
                         <button class="button-type" type="button" v-if="tipoAccion==1"  @click="nuevaSubcategoria()">Guardar</button>
                         <button class="button-type" type="button" v-if="tipoAccion==2" @click="actualizarSubcategoria(PK_subcategories)">Actualizar</button>

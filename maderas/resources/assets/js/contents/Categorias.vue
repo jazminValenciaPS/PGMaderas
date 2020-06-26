@@ -65,10 +65,11 @@
                     <div class="form-group center">
                             <div class="col s6">
                                 <div class="input-group">
-                                    <select class="form-control col-md-3" v-model="criterio">
-                                      <option value="name">Nombre</option>
-                                      <option value="description">Descripción</option>
-                                    </select>
+                                     <select name="LeaveType" class="browser-default" v-model="criterio">
+                                        <option value="" disabled selected>Selecciona con que buscar</option>
+                                        <option value="name">Nombre</option>
+                                        <option value="description">Descripción</option>
+                                    </select> 
                                     <input type="text" v-model="buscar" @keyup.enter="listarCategoria(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarCategoria(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
@@ -113,6 +114,23 @@
                 </tbody>
              </table>
               <nav>
+                   <!-- <ul class="pagination">
+                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                        <li class="page-item" v-if="pagination.current_page > 1">
+                             <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
+                        </li>
+                         <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                             <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                         </li>
+                         <li class="page-item" v-if="pagination.current_page < pagination.last_page">
+                              <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
+                         </li>
+                        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+
+
+                       
+                    </ul> -->
+
                     <ul class="pagination">
                         <li class="page-item" v-if="pagination.current_page > 1">
                              <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
@@ -200,13 +218,13 @@ export default {
                 var respuesta= response.data;
                 m.pagination= respuesta.pagination;
                 m.arrayCategoria = respuesta.categorias.data;
-                m.status = respuesta.categorias.status.data;
+                // m.status = respuesta.categorias.status.data;
 
-                if(status == true){
-                    status = 1
-                }else{
-                    status = 0
-                }
+                // if(status == true){
+                //     status = 1
+                // }else{
+                //     status = 0
+                // }
             })
             .catch(function(error){
                 console.log(error);

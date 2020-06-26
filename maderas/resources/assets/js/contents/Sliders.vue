@@ -196,7 +196,7 @@ export default {
         console.log(error);
             });
         },
-       actualizarSlider(PK_slider){
+        actualizarSlider(PK_slider){
             if (this.validarSlider()){
                 return;
             }
@@ -267,10 +267,12 @@ export default {
             this.errorMostrarMsjSlider =[];
             
             if (!this.file ) this.errorMostrarMsjSlider.push("Se tiene que ingresar una imagen.");
-            if (!this.title) this.errorMostrarMsjSubcategoria.push("El titulo del Slider no puede estar vacío.");   
+            if (!this.title) this.errorMostrarMsjSlider.push("El titulo del Slider no puede estar vacío.");   
             if (this.errorMostrarMsjSlider.length) this.errorSlider = 1;
 
             return this.errorSlider;
+
+           
         },
         desactivarSlider(PK_slider){
             let me = this;

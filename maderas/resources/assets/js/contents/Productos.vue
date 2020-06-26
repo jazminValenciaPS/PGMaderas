@@ -83,17 +83,18 @@
                 <div class="form-group center">
                     <div class="col s6">
                         <div class="input-group">
-                            <select class="form-control col-md-3" v-model="criterio">
-                            <option value="name">Nombre</option>
-                            <option value="sku">SKU</option>
-                            </select>
+                            <select name="LeaveType" class="browser-default" v-model="criterio">
+                                 <option value="" disabled selected>Selecciona con que buscar</option>
+                                 <option value="name">Nombre</option>
+                                 <option value="SKU">SKU</option>
+                             </select>                         
                             <input type="text" v-model="buscar" @keyup.enter="listarProductos(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                             <button type="submit" @click="listarProductos(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="striped tabla centered">
+            <table class=" tabla centered">
                 <thead>
                     <tr>
                         <th>SKU</th>
@@ -228,12 +229,12 @@ export default {
                 var respuesta= response.data;
                 m.pagination= respuesta.pagination;
                 m.arrayProductos = respuesta.producto.data;
-                m.status = respuesta.producto.status.data;
-                if(status == true){
-                    status = 1
-                }else{
-                    status = 0
-                }
+                // m.status = respuesta.producto.status.data;
+                // if(status == true){
+                //     status = 1
+                // }else{
+                //     status = 0
+                // }
             })
             .catch(function(error){
                 console.log(error);

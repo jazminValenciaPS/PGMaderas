@@ -5067,6 +5067,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import categorias from './Categorias.vue'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5136,14 +5154,12 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         m.pagination = respuesta.pagination;
-        m.arrayCategoria = respuesta.categorias.data;
-        m.status = respuesta.categorias.status.data;
-
-        if (status == true) {
-          status = 1;
-        } else {
-          status = 0;
-        }
+        m.arrayCategoria = respuesta.categorias.data; // m.status = respuesta.categorias.status.data;
+        // if(status == true){
+        //     status = 1
+        // }else{
+        //     status = 0
+        // }
       })["catch"](function (error) {
         console.log(error);
       });
@@ -5363,6 +5379,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5464,22 +5482,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-// import categorias from './Categorias.vue'
+//
+//
+//
+//
 
 var currYear = new Date().getFullYear();
-$(document).ready(function () {
-  $(".datepicker").datepicker({
-    defaultDate: new Date(currYear - 5, 1, 31),
-    // setDefaultDate: new Date(2000,01,31),
-    maxDate: new Date(currYear - 5, 12, 31),
-    yearRange: [1928, currYear - 5],
-    format: "yyyy/mm/dd"
-  });
+$('.datepicker').datepicker({
+  selectMonths: true,
+  selectYears: 15
 });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      arryUser: [],
       id: 0,
+      space: " ",
       first_name: '',
       last_name: '',
       phone: '',
@@ -5495,8 +5513,11 @@ $(document).ready(function () {
       id_role: 0,
       arrayRole: [],
       email: '',
+      id_person: 0,
+      PK_persons: 0,
       email_verified_at: '',
       password: '',
+      join_ate: '',
       status: true,
       modal: 0,
       tituloModal: 'Registrar Empleado',
@@ -5510,7 +5531,7 @@ $(document).ready(function () {
     listarEmpleado: function listarEmpleado() {
       var m = this;
       axios.get('/user').then(function (response) {
-        m.arrayCategoria = response.data;
+        m.arryUser = response.data;
         m.status = response.status.data;
 
         if (status == true) {
@@ -5538,34 +5559,54 @@ $(document).ready(function () {
                   m.descripcion = '';
                   m.image = 'Selecciona imagen';
                   m.tipoAccion = 1;
-                  m.tituloModal = 'Registrar Empleado';
+                  m.tituloModal = 'Registrar empleado';
                   break;
                 }
 
               case 'actualizar':
                 {
                   m.modal = 2;
-                  m.PK_categories = data['PK_categories'];
+                  m.id = data['id'];
                   m.tipoAccion = 2;
-                  m.image = data['image'];
-                  m.name = data['name'];
-                  m.description = data['description'];
-                  m.tituloModal = 'Actualizar Empleado';
+                  m.tituloModal = 'Actualizar empleado';
+                  m.first_name = data['first_name'];
+                  m.last_name = data['last_name'];
+                  m.phone = data['phone'];
+                  m.birth_date = data['birth_date'];
+                  m.gender = data['gender'];
+                  m.email = data['email'];
+                  m.id_person = '';
+                  m.id_role = 0;
+                  m.city = data['city'];
+                  m.postal_code = data['postal_code'];
+                  m.reference = data['reference'];
+                  m.street = data['street'];
                 }
             }
           }
       }
     },
     nuevoEmpleado: function nuevoEmpleado() {
-      // if (this.validarCategoria()){
-      //     return;
-      // }
+      if (this.validarEmpleado()) {
+        return;
+      }
+
       var me = this;
       var formData = new FormData();
-      formData.append('file', me.file);
-      formData.append('PK_categories', me.PK_categories);
-      formData.append('name', me.name);
-      formData.append('description', me.description); // Registramos la informacion
+      formData.append('first_name', me.first_name);
+      formData.append('last_name', me.last_name);
+      formData.append('phone', me.phone);
+      formData.append('birth_date', me.birth_date);
+      formData.append('gender', me.gender);
+      formData.append('city', me.city);
+      formData.append('street', me.street);
+      formData.append('postal_code', me.postal_code);
+      formData.append('suburb', me.suburb);
+      formData.append('reference', me.reference);
+      formData.append('id_role', me.id_role);
+      formData.append('email', me.email);
+      formData.append('email_verified_at', me.email_verified_at);
+      formData.append('password', me.password); // Registramos la informacion
 
       var url = '/user/registrar';
       axios.post(url, formData, {
@@ -5580,11 +5621,11 @@ $(document).ready(function () {
         console.log(error);
       });
     },
-    validarCategoria: function validarCategoria() {},
+    validarEmpleado: function validarEmpleado() {},
     cerrarModal: function cerrarModal() {
       this.modal = 0;
       this.tituloModal = '';
-      this.first_name = '';
+      this.Empleado = '';
       this.last_name = '';
       this.phone = '';
       this.birth_date = '';
@@ -5603,19 +5644,21 @@ $(document).ready(function () {
       this.errorEmpleado = 0;
       this.errorMostrarMsjEmpleado = [];
     },
-    actualizarEmpleado: function actualizarEmpleado(PK_categories) {
-      if (this.validarCategoria()) {
+    actualizarEmpleado: function actualizarEmpleado(id) {
+      if (this.validarEmpleado()) {
         return;
       }
 
       var me = this;
       var formData = new FormData();
-      formData.append('PK_categories', PK_categories);
-      formData.append('name', me.name);
-      formData.append('description', me.description);
-      formData.append('file', me.file); //Registramos la informacion
+      formData.append('suburbio', me.subu);
+      formData.append('reference', me.reference);
+      formData.append('id_role', me.id_role);
+      formData.append('email', me.email);
+      formData.append('email_verified_at', me.email_verified_at);
+      formData.append('password', me.password); //Registramos la informacion
 
-      axios.post('/categoria/actualizar', formData, {
+      axios.post('/user/actualizar', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -5627,7 +5670,7 @@ $(document).ready(function () {
         console.log(error);
       });
     },
-    desactivarEmpleado: function desactivarEmpleado(PK_categories) {
+    desactivarEmpleado: function desactivarEmpleado(id) {
       var me = this;
       sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
         title: '¿Está seguro de desactivar esta Categoria?',
@@ -5658,7 +5701,7 @@ $(document).ready(function () {
         }
       });
     },
-    activarEmpleado: function activarEmpleado(PK_categories) {
+    activarEmpleado: function activarEmpleado(id) {
       var me = this;
       sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
         title: '¿Está seguro de activar esta Categoria?',
@@ -5679,6 +5722,36 @@ $(document).ready(function () {
           }).then(function (response) {
             me.listarEmpleado();
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('activado!', 'La categoria ha sido activado con éxito.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
+          me.listarEmpleado();
+        }
+      });
+    },
+    eliminarEmpleado: function eliminarEmpleado(id_user) {
+      var me = this;
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: '¿Está seguro de eliminar este empleado?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          axios.put('/empleado/eliminar', {
+            'id_user': id_user
+          }).then(function (response) {
+            me.listarEmpleado();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Eliminado!', 'El empleado ha sido eliminado con éxito.', 'success');
           })["catch"](function (error) {
             console.log(error);
           });
@@ -5711,22 +5784,14 @@ $(document).ready(function () {
     this.verSelects();
   },
   computed: {
-    firstDayOfAWeek: {
+    firstDayOfAWeek: _defineProperty({
       get: function get() {
         return this.$material.locale.firstDayOfAWeek;
       },
-      set: function set(val) {
-        this.$material.locale.firstDayOfAWeek = val;
-      }
-    },
-    dateFormat: {
-      get: function get() {
-        return this.$material.locale.dateFormat;
-      },
-      set: function set(val) {
-        this.$material.locale.dateFormat = val;
-      }
-    }
+      set: function set(val) {}
+    }, "set", function set(val) {
+      this.$material.locale.dateFormat = val;
+    })
   }
 });
 
@@ -5745,6 +5810,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -5969,14 +6035,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         m.pagination = respuesta.pagination;
-        m.arrayProductos = respuesta.producto.data;
-        m.status = respuesta.producto.status.data;
-
-        if (status == true) {
-          status = 1;
-        } else {
-          status = 0;
-        }
+        m.arrayProductos = respuesta.producto.data; // m.status = respuesta.producto.status.data;
+        // if(status == true){
+        //     status = 1
+        // }else{
+        //     status = 0
+        // }
       })["catch"](function (error) {
         console.log(error);
       });
@@ -6495,7 +6559,7 @@ __webpack_require__.r(__webpack_exports__);
       this.errorSlider = 0;
       this.errorMostrarMsjSlider = [];
       if (!this.file) this.errorMostrarMsjSlider.push("Se tiene que ingresar una imagen.");
-      if (!this.title) this.errorMostrarMsjSubcategoria.push("El titulo del Slider no puede estar vacío.");
+      if (!this.title) this.errorMostrarMsjSlider.push("El titulo del Slider no puede estar vacío.");
       if (this.errorMostrarMsjSlider.length) this.errorSlider = 1;
       return this.errorSlider;
     },
@@ -6992,7 +7056,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n    height: 600px;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n.centrado{\n    height:560px;\n    margin-left: 20%;\n    margin-right: 30%;\n}\n.espacioButton{\n    margin-left: 10px !important;\n}\n\n", ""]);
+exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n    height: 600px;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n.centrado{\n    height:560px;\n    margin-left: 20%;\n    margin-right: 30%;\n}\n.espacioButton{\n    margin-left: 10px !important;\n}\n", ""]);
 
 // exports
 
@@ -29002,7 +29066,8 @@ var render = function() {
                       expression: "criterio"
                     }
                   ],
-                  staticClass: "form-control col-md-3",
+                  staticClass: "browser-default",
+                  attrs: { name: "LeaveType" },
                   on: {
                     change: function($event) {
                       var $$selectedVal = Array.prototype.filter
@@ -29020,6 +29085,12 @@ var render = function() {
                   }
                 },
                 [
+                  _c(
+                    "option",
+                    { attrs: { value: "", disabled: "", selected: "" } },
+                    [_vm._v("Selecciona con que buscar")]
+                  ),
+                  _vm._v(" "),
                   _c("option", { attrs: { value: "name" } }, [
                     _vm._v("Nombre")
                   ]),
@@ -29728,7 +29799,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\n                Agregar Empleados\n            ")]
+          [_vm._v("\n                Agregar empleados\n            ")]
         )
       ]),
       _vm._v(" "),
@@ -29760,15 +29831,6 @@ var render = function() {
                   _c("h3", {
                     domProps: { textContent: _vm._s(_vm.tituloModal) }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col s12 center" }, [
-                  _vm.tipoAccion == 2
-                    ? _c("img", {
-                        staticClass: "tImagen imagenEdit",
-                        attrs: { src: "img/" + _vm.image, alt: "" }
-                      })
-                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row" }, [
@@ -29829,8 +29891,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.city,
-                        expression: "city"
+                        value: _vm.phone,
+                        expression: "phone"
                       }
                     ],
                     staticClass: "validate",
@@ -29839,13 +29901,13 @@ var render = function() {
                       type: "text",
                       placeholder: "Telefono"
                     },
-                    domProps: { value: _vm.city },
+                    domProps: { value: _vm.phone },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.city = $event.target.value
+                        _vm.phone = $event.target.value
                       }
                     }
                   }),
@@ -29908,11 +29970,11 @@ var render = function() {
                         [_vm._v("Selecciona el genero")]
                       ),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "M" } }, [
+                      _c("option", { attrs: { value: "0" } }, [
                         _vm._v("Masculino")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "F" } }, [
+                      _c("option", { attrs: { value: "1" } }, [
                         _vm._v("Femenino")
                       ])
                     ]
@@ -30243,7 +30305,7 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.actualizarEmpleado(_vm.PK_categories)
+                                return _vm.actualizarEmpleado(_vm.id)
                               }
                             }
                           },
@@ -30272,7 +30334,228 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._m(1)
+      _c(
+        "table",
+        { staticClass: "tabla centered" },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._l(_vm.arryUser, function(user) {
+            return _c("tbody", { key: user.id }, [
+              _c("tr", [
+                _c("td", {
+                  domProps: {
+                    textContent: _vm._s(
+                      user.first_name + _vm.space + user.last_name
+                    )
+                  }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  staticClass: "hide-on-small-only",
+                  domProps: { textContent: _vm._s(user.email) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  staticClass: "hide-on-small-only",
+                  domProps: { textContent: _vm._s(user.gender) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  staticClass: "hide-on-small-only",
+                  domProps: { textContent: _vm._s(user.join_ate) }
+                }),
+                _vm._v(" "),
+                user.status == 1
+                  ? _c("td", { staticClass: "hide-on-small-only" }, [
+                      _vm._v("Activado")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                user.status == 0
+                  ? _c("td", { staticClass: "hide-on-small-only" }, [
+                      _vm._v("Desactivado")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "i",
+                    {
+                      staticClass: "material-icons color-text ",
+                      on: {
+                        click: function($event) {
+                          return _vm.abrirModal(
+                            "empleados",
+                            "actualizar",
+                            user,
+                            user.id
+                          )
+                        }
+                      }
+                    },
+                    [_vm._v("create")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "desactivarActivar" }, [
+                  user.status == 1
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "secondary-content",
+                          attrs: { href: "#!" }
+                        },
+                        [
+                          _c("i", { staticClass: "switch" }, [
+                            _c("label", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: user.status,
+                                    expression: "user.status"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "checkbox",
+                                  checked: "checked",
+                                  name: "status"
+                                },
+                                domProps: {
+                                  checked: Array.isArray(user.status)
+                                    ? _vm._i(user.status, null) > -1
+                                    : user.status
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.desactivarEmpleado(user.id)
+                                  },
+                                  change: function($event) {
+                                    var $$a = user.status,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          _vm.$set(
+                                            user,
+                                            "status",
+                                            $$a.concat([$$v])
+                                          )
+                                      } else {
+                                        $$i > -1 &&
+                                          _vm.$set(
+                                            user,
+                                            "status",
+                                            $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1))
+                                          )
+                                      }
+                                    } else {
+                                      _vm.$set(user, "status", $$c)
+                                    }
+                                  }
+                                }
+                              }),
+                              _c("span", { staticClass: "lever" })
+                            ])
+                          ])
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  user.status == 0
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "secondary-content",
+                          attrs: { href: "#!" }
+                        },
+                        [
+                          _c("i", { staticClass: "switch" }, [
+                            _c("label", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: user.status,
+                                    expression: "user.status"
+                                  }
+                                ],
+                                attrs: { type: "checkbox", name: "status" },
+                                domProps: {
+                                  checked: Array.isArray(user.status)
+                                    ? _vm._i(user.status, null) > -1
+                                    : user.status
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.activarEmpleado(user.id)
+                                  },
+                                  change: function($event) {
+                                    var $$a = user.status,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          _vm.$set(
+                                            user,
+                                            "status",
+                                            $$a.concat([$$v])
+                                          )
+                                      } else {
+                                        $$i > -1 &&
+                                          _vm.$set(
+                                            user,
+                                            "status",
+                                            $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1))
+                                          )
+                                      }
+                                    } else {
+                                      _vm.$set(user, "status", $$c)
+                                    }
+                                  }
+                                }
+                              }),
+                              _c("span", { staticClass: "lever" })
+                            ])
+                          ])
+                        ]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "i",
+                    {
+                      staticClass: "material-icons color-text ",
+                      on: {
+                        click: function($event) {
+                          return _vm.eliminarEmpleado(user.id)
+                        }
+                      }
+                    },
+                    [_vm._v("delete")]
+                  )
+                ])
+              ])
+            ])
+          })
+        ],
+        2
+      )
     ])
   ])
 }
@@ -30289,27 +30572,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "tabla centered" }, [
-      _c("thead", [
-        _c("tr", [
-          _c("th", [_vm._v("Nombre")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("E-main")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Puesto")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "hide-on-small-only" }, [
-            _vm._v("Fecha de registro")
-          ]),
-          _vm._v(" "),
-          _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Status")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Editar")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Desactivar/Activar")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Eliminar")])
-        ])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("E-mail")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Puesto")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "hide-on-small-only" }, [
+          _vm._v("Fecha de registro")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Editar")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Desactivar/Activar")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Eliminar")])
       ])
     ])
   }
@@ -30989,7 +31270,8 @@ var render = function() {
                         expression: "criterio"
                       }
                     ],
-                    staticClass: "form-control col-md-3",
+                    staticClass: "browser-default",
+                    attrs: { name: "LeaveType" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -31007,11 +31289,17 @@ var render = function() {
                     }
                   },
                   [
+                    _c(
+                      "option",
+                      { attrs: { value: "", disabled: "", selected: "" } },
+                      [_vm._v("Selecciona con que buscar")]
+                    ),
+                    _vm._v(" "),
                     _c("option", { attrs: { value: "name" } }, [
                       _vm._v("Nombre")
                     ]),
                     _vm._v(" "),
-                    _c("option", { attrs: { value: "sku" } }, [_vm._v("SKU")])
+                    _c("option", { attrs: { value: "SKU" } }, [_vm._v("SKU")])
                   ]
                 ),
                 _vm._v(" "),
@@ -31066,7 +31354,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "table",
-          { staticClass: "striped tabla centered" },
+          { staticClass: " tabla centered" },
           [
             _vm._m(2),
             _vm._v(" "),
@@ -31945,7 +32233,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\n                Agregar SubCategorias\n            ")]
+          [_vm._v("\n                Agregar Subcategorías\n            ")]
         )
       ]),
       _vm._v(" "),
@@ -32121,36 +32409,36 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("br")
-                ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.errorSubcategoria,
+                        expression: "errorSubcategoria"
+                      }
+                    ],
+                    staticClass: "form-group row div-error"
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "text-center text-error" },
+                      _vm._l(_vm.errorMostrarMsjSubcategoria, function(error) {
+                        return _c("div", {
+                          key: error,
+                          domProps: { textContent: _vm._s(error) }
+                        })
+                      }),
+                      0
+                    )
+                  ]
+                )
               ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.errorSubcategoria,
-                      expression: "errorSubcategoria"
-                    }
-                  ],
-                  staticClass: "form-group row div-error"
-                },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "text-center text-error" },
-                    _vm._l(_vm.errorMostrarMsjSubcategoria, function(error) {
-                      return _c("div", {
-                        key: error,
-                        domProps: { textContent: _vm._s(error) }
-                      })
-                    }),
-                    0
-                  )
-                ]
-              ),
               _vm._v(" "),
               _c(
                 "div",
@@ -32428,7 +32716,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: " title" }, [
-      _c("h5", [_vm._v("SubCategorias")])
+      _c("h5", [_vm._v("Subcategorías")])
     ])
   },
   function() {
@@ -44832,15 +45120,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/assets/js/contents/Empleados.vue ***!
   \****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Empleados_vue_vue_type_template_id_37a21736___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Empleados.vue?vue&type=template&id=37a21736& */ "./resources/assets/js/contents/Empleados.vue?vue&type=template&id=37a21736&");
 /* harmony import */ var _Empleados_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Empleados.vue?vue&type=script&lang=js& */ "./resources/assets/js/contents/Empleados.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Empleados_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Empleados_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _Empleados_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Empleados.vue?vue&type=style&index=0&lang=css& */ "./resources/assets/js/contents/Empleados.vue?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Empleados_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Empleados.vue?vue&type=style&index=0&lang=css& */ "./resources/assets/js/contents/Empleados.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -44872,7 +45159,7 @@ component.options.__file = "resources/assets/js/contents/Empleados.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/assets/js/contents/Empleados.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

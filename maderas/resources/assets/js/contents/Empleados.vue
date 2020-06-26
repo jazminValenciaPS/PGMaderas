@@ -6,7 +6,7 @@
             </div>
             <div class="right form ">
                 <button type="summit" data-target="modal1" class="modal-trigger" @click="abrirModal('empleados','registrar')">
-                    Agregar Empleados
+                    Agregar empleados
                 </button>
             </div>
 
@@ -17,18 +17,15 @@
                         <div class="center">
                             <h3 v-text="tituloModal"></h3>
                         </div>
-                        <div class="col s12 center">
-                            <img v-if="tipoAccion==2" :src="'img/'+image"  class="tImagen imagenEdit" alt="">
-                        </div>
                         <div class="form-group row">
                             <input id="first_name" type="text" v-model="first_name" placeholder="Nombre"  class="validate" >  
                             <input id="last_name" type="text" v-model="last_name" placeholder="Apellidos " class="validate">
-                            <input id="phone" type="text" v-model="city" placeholder="Telefono" class="validate">
+                            <input id="phone" type="text" v-model="phone" placeholder="Telefono" class="validate">
                             <input type="date" class="datepicker" v-model="birth_date" placeholder="Fecha de nacimiento" >
                             <select name="LeaveType" class="browser-default" v-model="gender">
                                 <option value="" disabled selected>Selecciona el genero</option>
-                                <option value="M">Masculino</option>
-                                <option value="F">Femenino</option>
+                                <option value="0">Masculino</option>
+                                <option value="1">Femenino</option>
                             </select> 
                             <input id="city" type="text" v-model="city" placeholder="Ciudad" class="validate">
                             <input id="state" type="text" v-model="state" placeholder="Estado" class="validate">
@@ -52,7 +49,7 @@
                         </div>
                         <div class="button-container form formmodal-footer">
                             <button class="button-type" type="button" v-if="tipoAccion==1"  @click="nuevoEmpleado()">Guardar</button>
-                            <button class="button-type" type="button" v-if="tipoAccion==2" @click="actualizarEmpleado(PK_categories)">Actualizar</button>
+                            <button class="button-type" type="button" v-if="tipoAccion==2" @click="actualizarEmpleado(id)">Actualizar</button>
                             <button class="button-type" type="button" @click="cerrarModal()">Cerrar</button>
                         </div>
                     </div>
@@ -63,7 +60,7 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th class="hide-on-small-only">E-main</th>
+                        <th class="hide-on-small-only">E-mail</th>
                         <th class="hide-on-small-only">Puesto</th>
                         <th class="hide-on-small-only">Fecha de registro</th>
                         <th class="hide-on-small-only">Status</th>
@@ -72,53 +69,56 @@
                         <th>Eliminar</th>
                     </tr>
                 </thead>
-                <!-- <tbody  v-for="categoria in arrayCategoria" :key="categoria.idCategoria">
+                <tbody  v-for="user in arryUser" :key="user.id">
                     <tr>
-                        <td v-text="categoria.nombre"></td> 
-                        <td class="hide-on-small-only"  v-text="categoria.nombreCaracteristica"></td>
-                        <td class="hide-on-small-only"  v-if="categoria.status == 1">Activado</td>
-                        <td class="hide-on-small-only"  v-if="categoria.status == 0">Desactivado</td>
+                        <td v-text="user.first_name+space+ user.last_name "></td> 
+                        <td class="hide-on-small-only"  v-text="user.email"></td>
+                        <td class="hide-on-small-only"  v-text="user.gender"></td>
+                        <td class="hide-on-small-only"  v-text="user.join_ate"></td>
+                        <td class="hide-on-small-only"  v-if="user.status == 1">Activado</td>
+                        <td class="hide-on-small-only"  v-if="user.status == 0">Desactivado</td>
                         <td>
-                            <i class="material-icons color-text " @click="abrirModal('empleados','actualizar',categoria,categoria.idCategoria)">create</i>
+                            <i class="material-icons color-text " @click="abrirModal('empleados','actualizar',user,user.id)">create</i>
                         </td>
                         <td class="desactivarActivar">
-                            <a href="#!" class="secondary-content" v-if="categoria.status == 1">
+                            <a href="#!" class="secondary-content" v-if="user.status == 1">
                                 <i class="switch">
-                                    <label><input type="checkbox" checked="checked" name="status" v-model="categoria.status" @click="desactivarEmpleado(categoria.idCategoria)"><span class="lever"></span></label>
+                                    <label><input type="checkbox" checked="checked" name="status" v-model="user.status" @click="desactivarEmpleado(user.id)"><span class="lever"></span></label>
                                 </i>
                             </a>
-                            <a href="#!" class="secondary-content" v-if="categoria.status == 0">
+                            <a href="#!" class="secondary-content" v-if="user.status == 0">
                                 <i class="switch">
-                                    <label><input type="checkbox"  name="status" v-model="categoria.status" @click="activarEmpleado(categoria.idCategoria)"><span class="lever"></span></label>
+                                    <label><input type="checkbox"  name="status" v-model="user.status" @click="activarEmpleado(user.id)"><span class="lever"></span></label>
                                 </i>
                             </a>
                         </td>
+                        <td>
+                            <i class="material-icons color-text " @click="eliminarEmpleado(user.id)">delete</i>
+
+                        </td>
+
                     </tr>
-                </tbody> -->
+                </tbody>
             </table>
         </div>
     </main>
 </template>
 <script>
-// import categorias from './Categorias.vue'
 import Swal from 'sweetalert2';
 var currYear = (new Date()).getFullYear();
 
-$(document).ready(function() {
-  $(".datepicker").datepicker({
-    defaultDate: new Date(currYear-5,1,31),
-    // setDefaultDate: new Date(2000,01,31),
-    maxDate: new Date(currYear-5,12,31),
-    yearRange: [1928, currYear-5],
-    format: "yyyy/mm/dd"    
-  });
+$('.datepicker').datepicker({
+  selectMonths: true,
+  selectYears: 15
 });
 
 
 export default {
     data() {
         return {
+            arryUser:[],
             id: 0,
+            space:" ",
             first_name: '',
             last_name:'',
             phone:'',
@@ -134,8 +134,11 @@ export default {
             id_role:0,
             arrayRole:[],
             email:'',
+            id_person:0,
+            PK_persons:0,
             email_verified_at:'',
             password:'',
+            join_ate:'',
             status : true,
             modal : 0,
             tituloModal : 'Registrar Empleado',
@@ -149,7 +152,7 @@ export default {
         listarEmpleado(){
             let m=this;
             axios.get('/user').then(function (response){
-                m.arrayCategoria = response.data;
+                m.arryUser = response.data;
                 m.status = response.status.data;
                 if(status == true){
                     status = 1
@@ -172,35 +175,53 @@ export default {
                             m.descripcion = '';
                             m.image= 'Selecciona imagen';
                             m.tipoAccion = 1;
-                            m.tituloModal = 'Registrar Empleado';
+                            m.tituloModal = 'Registrar empleado';
                             break;
 
                         }
                         case 'actualizar':{
                             m.modal = 2;
-                            m.PK_categories = data['PK_categories'];
+                            m.id = data['id'];
                             m.tipoAccion = 2;
-                            m.image=data['image'];
-                            m.name=data['name'];
-                            m.description=data['description'];
-                            m.tituloModal = 'Actualizar Empleado';
+                            m.tituloModal = 'Actualizar empleado';
+                            m.first_name=data['first_name'];
+                            m.last_name=data['last_name'];
+                            m.phone=data['phone'];
+                            m.birth_date=data['birth_date'];
+                            m.gender=data['gender'];
+                            m.email=data['email'];
+                            m.id_person='';
+                            m.id_role=0;
+                            m.city=data['city'];
+                            m.postal_code=data['postal_code'];
+                            m.reference=data['reference'];
+                            m.street=data['street']; 
                         }
                     }
                 }
             }
-        }, 
-        nuevoEmpleado(){
-            // if (this.validarCategoria()){
-            //     return;
-            // }
+        },
+        nuevoEmpleado(){ 
+             if (this.validarEmpleado()){
+                return;
+            }
             let me = this;
- 
             let formData = new FormData();
-
-            formData.append('file', me.file);
-            formData.append('PK_categories', me.PK_categories);
-            formData.append('name', me.name);
-            formData.append('description', me.description);
+        
+            formData.append('first_name', me.first_name); 
+            formData.append('last_name', me.last_name);   
+            formData.append('phone', me.phone);    
+            formData.append('birth_date', me.birth_date);            
+            formData.append('gender', me.gender);
+            formData.append('city', me.city);            
+            formData.append('street', me.street);            
+            formData.append('postal_code', me.postal_code);            
+            formData.append('suburb', me.suburb);
+            formData.append('reference', me.reference);
+            formData.append('id_role', me.id_role);
+            formData.append('email', me.email);
+            formData.append('email_verified_at', me.email_verified_at);
+            formData.append('password', me.password);
             
             // Registramos la informacion
             let url = '/user/registrar';
@@ -219,13 +240,13 @@ export default {
                 console.log(error);
             });
         },
-        validarCategoria(){
+        validarEmpleado(){
             
         },
         cerrarModal(){
             this.modal = 0;
             this.tituloModal = '';
-            this.first_name = '';
+            this.Empleado = '';
             this.last_name = '';
             this.phone = '';
             this.birth_date = '';
@@ -243,20 +264,22 @@ export default {
             this.tipoAccion = 0;
             this.errorEmpleado = 0;
             this.errorMostrarMsjEmpleado = [];
-        },
-        actualizarEmpleado(PK_categories){
-            if (this.validarCategoria()){
+       } ,
+        actualizarEmpleado(id){
+            if (this.validarEmpleado()){
                 return;
             }
                 let me = this;
                 let formData = new FormData();
-                formData.append('PK_categories',PK_categories);
-                formData.append('name', me.name);
-                formData.append('description',me.description);
-                formData.append('file', me.file);
+                formData.append('suburbio', me.subu);
+                formData.append('reference', me.reference);
+                formData.append('id_role', me.id_role);
+                formData.append('email', me.email);
+                formData.append('email_verified_at', me.email_verified_at);
+                formData.append('password', me.password);
 
                 //Registramos la informacion
-                axios.post('/categoria/actualizar',formData,{
+                axios.post('/user/actualizar',formData,{
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -270,7 +293,7 @@ export default {
                     console.log(error);
                 });      
         },
-        desactivarEmpleado(PK_categories){
+        desactivarEmpleado(id){
             let me = this;
 
             Swal.fire({
@@ -309,7 +332,7 @@ export default {
                     }
             })
         },
-        activarEmpleado(PK_categories){
+        activarEmpleado(id){
             let me = this;
 
             Swal.fire({
@@ -346,7 +369,44 @@ export default {
                         me.listarEmpleado();                    
             }
             }) 
-                
+        },
+        eliminarEmpleado(id_user){
+          let me = this;
+
+            Swal.fire({
+            title: '¿Está seguro de eliminar este empleado?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar!',
+            cancelButtonText: 'Cancelar',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false,
+            reverseButtons: true
+            }).then((result) => {
+            if (result.value) {
+                axios.put('/empleado/eliminar',{
+                    'id_user': id_user
+                }).then(function (response) {
+                    me.listarEmpleado();
+                    Swal.fire(
+                        'Eliminado!',
+                        'El empleado ha sido eliminado con éxito.',
+                        'success'
+                    )
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            
+            } else if (
+                // Read more about handling dismissals
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                        me.listarEmpleado();                    
+            }
+            }) 
         },
         verSelects(){
             let me=this;
@@ -361,8 +421,7 @@ export default {
                 console.log(error);
             });
         },
-    },
-    mounted() {
+    },mounted() {
         this.listarEmpleado();
         this.verSelects();
     },
@@ -372,12 +431,6 @@ export default {
           return this.$material.locale.firstDayOfAWeek
         },
         set (val) {
-          this.$material.locale.firstDayOfAWeek = val
-        }
-      },
-      dateFormat: {
-        get () {
-          return this.$material.locale.dateFormat
         },
         set (val) {
           this.$material.locale.dateFormat = val
@@ -406,5 +459,4 @@ export default {
     .espacioButton{
         margin-left: 10px !important;
     }
-
 </style>
