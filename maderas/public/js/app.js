@@ -5567,6 +5567,7 @@ $('.datepicker').datepicker({
                 {
                   m.modal = 2;
                   m.id = data['id'];
+                  m.PK_persons = data['PK_persons'];
                   m.tipoAccion = 2;
                   m.tituloModal = 'Actualizar empleado';
                   m.first_name = data['first_name'];
@@ -5614,8 +5615,8 @@ $('.datepicker').datepicker({
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        this.listarEmpleado();
-        this.cerrarModal();
+        me.listarEmpleado();
+        me.cerrarModal();
         me.limpiar();
       })["catch"](function (error) {
         console.log(error);
@@ -5651,7 +5652,16 @@ $('.datepicker').datepicker({
 
       var me = this;
       var formData = new FormData();
-      formData.append('suburbio', me.subu);
+      formData.append('first_name', me.first_name);
+      formData.append('id', id);
+      formData.append('last_name', me.last_name);
+      formData.append('phone', me.phone);
+      formData.append('birth_date', me.birth_date);
+      formData.append('gender', me.gender);
+      formData.append('city', me.city);
+      formData.append('street', me.street);
+      formData.append('postal_code', me.postal_code);
+      formData.append('suburb', me.suburb);
       formData.append('reference', me.reference);
       formData.append('id_role', me.id_role);
       formData.append('email', me.email);

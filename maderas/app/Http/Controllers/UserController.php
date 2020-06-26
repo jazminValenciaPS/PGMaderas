@@ -15,7 +15,7 @@ class UserController extends Controller
         return $user = DB::table('users')
         ->join('roles', 'roles.PK_roles', '=', 'users.id_role')
         ->join('persons', 'persons.PK_persons', '=', 'users.id_person')
-        ->select('roles.roles_name','persons.first_name','persons.last_name','persons.phone',
+        ->select('persons.PK_persons','users.id','roles.roles_name','persons.first_name','persons.last_name','persons.phone',
         'persons.birth_date','persons.gender','users.email','users.created_at','users.join_ate','users.status')
         ->distinct()
         ->get();
@@ -56,7 +56,7 @@ class UserController extends Controller
         if (!$request->ajax()) return redirect('/administrador');
 
         $PK_persons = $request->PK_persons;
-
+        printf($PK_persons);
         $person = Person::findOrFail($PK_persons);
 
         $person->first_name = $request->first_name;
@@ -64,14 +64,15 @@ class UserController extends Controller
         $person->gender = $request->gender;
         $person->birth_date = $request->birth_date;
         $person->phone = $request->phone;
+
         $person->save();
        
 
-        // $id_user = $person->PK_persons;
+        $id_user = $person->id;
 
             // DB::table('user')->where('id', $id)->delete();
         
-        $user = User::findOrFail($PK_persons);
+        $user = User::findOrFail($id_user);
 
         // $user = new User(); 
         $user->email = $request->email;
