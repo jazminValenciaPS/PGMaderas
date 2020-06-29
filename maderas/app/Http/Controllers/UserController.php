@@ -12,17 +12,75 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
+    {
+        // return $user = DB::table('users')
+        // ->join('roles', 'roles.PK_roles', '=', 'users.id_role')
+        // ->join('persons', 'persons.PK_persons', '=', 'users.id_person')
+        // ->select('persons.PK_persons','users.id','roles.roles_name','persons.first_name','persons.last_name','persons.phone',
+        // 'persons.birth_date','persons.gender','users.email','users.created_at','users.join_ate','users.status')
+        // ->where('users.status', '=', '1')
+        // ->distinct()
+        // ->get();
+
+
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        
+        if ($buscar==''){
+
+            $user = DB::table('users')
+        ->join('roles', 'roles.PK_roles', '=', 'users.id_role')
+        ->join('persons', 'persons.PK_persons', '=', 'users.id_person')
+        ->select('persons.PK_persons','users.id','roles.PK_roles','roles.roles_name','persons.first_name','persons.last_name','persons.phone',
+        'persons.birth_date','persons.gender','users.email','users.created_at','users.join_ate','users.status')
+        ->where('users.status', '=', '1')
+        ->distinct()
+        ->orderBy('users.id', 'desc')->paginate(5);
+
+
+        }
+        else{
+            $user = DB::table('users')
+            ->join('roles', 'roles.PK_roles', '=', 'users.id_role')
+            ->join('persons', 'persons.PK_persons', '=', 'users.id_person')
+            ->select('persons.PK_persons','users.id','roles.PK_roles','roles.roles_name','persons.first_name','persons.last_name','persons.phone',
+            'persons.birth_date','persons.gender','users.email','users.created_at','users.join_ate','users.status')
+            ->where('users.status', '=', '1')
+            ->distinct()
+        ->where('users.'.$criterio, 'like', '%'. $buscar . '%')
+        ->orderBy('users.id', 'desc')->paginate(5);
+        }
+        
+
+        return [
+            'pagination' => [
+                'total'        => $user->total(),
+                'current_page' => $user->currentPage(),
+                'per_page'     => $user->perPage(),
+                'last_page'    => $user->lastPage(),
+                'from'         => $user->firstItem(),
+                'to'           => $user->lastItem(),
+            ],
+            'user' => $user
+        ];
+    }
+
+     
+    public function customerIndex()
     {
         return $user = DB::table('users')
         ->join('roles', 'roles.PK_roles', '=', 'users.id_role')
         ->join('persons', 'persons.PK_persons', '=', 'users.id_person')
-        ->select('persons.PK_persons','users.id','roles.roles_name','persons.first_name','persons.last_name','persons.phone',
-        'persons.birth_date','persons.gender','users.email','users.created_at','users.join_ate','users.status')
-        ->where('users.status', '=', '1')
+        ->join('addresses', 'addresses.id_user', '=', 'users.id')
+        ->select('persons.PK_persons','users.id','persons.first_name','persons.last_name','persons.phone',
+        'persons.birth_date','persons.gender','users.email','users.created_at','users.join_ate','users.status',
+        'addresses.street','addresses.suburb','addresses.city','addresses.state','addresses.postal_code','roles.PK_roles')
+        ->where('roes.PK_roles', '=', '3')
         ->distinct()
         ->get();
     }
+
 
     public function store(Request $request)
     {
@@ -30,7 +88,7 @@ class UserController extends Controller
 
         $user = new User(); 
         $person = new Person();
-        $address = new Addresse();
+        // $address = new Addresse();
 
         $person->first_name = $request->first_name;
         $person->last_name = $request->last_name;
@@ -48,26 +106,26 @@ class UserController extends Controller
         $user->id_person=$id_user;
         $user->id_role = $request->id_role;
         $user->status = '1';
-        $user->password =$request->password;
+        // $user->password =$request->password;
         $user->join_ate = now();
         $user->id_branch = '1';
         
         $user->save();
 
-        $id_user = $user->id;
+        // $id_user = $user->id;
 
-        $address->id_user=$id_user;
+        // $address->id_user=$id_user;
 
-        $address->street=$request->street;
-        $address->city=$request->city;
-        $address->state=$request->state;
-        $address->postal_code=$request->postal_code;
-        $address->suburb=$request->suburb;
-        $address->reference=$request->reference;
-        $address->is_default='0';
-        $address->status = '1';
+        // $address->street=$request->street;
+        // $address->city=$request->city;
+        // $address->state=$request->state;
+        // $address->postal_code=$request->postal_code;
+        // $address->suburb=$request->suburb;
+        // $address->reference=$request->reference;
+        // $address->is_default='0';
+        // $address->status = '1';
 
-        $address->save();
+        // $address->save();
 
     }   
     
@@ -96,7 +154,7 @@ class UserController extends Controller
         // $user->id_person=$PK_persons;
         $user->id_role = $request->id_role;
         $user->status = '1';
-        $user->password =$request->password;
+        // $user->password =$request->password;
         // $user->join_ate = now();
         $user->id_branch = '1';
         

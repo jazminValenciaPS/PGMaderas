@@ -63,6 +63,11 @@
 <script src="https://unpkg.com/vueperslides"></script> -->
 
 <script>
+  $(document).ready(function() {
+    $('input#input_text, textarea#textarea2').characterCounter();
+  });
+      
+
   $(document).ready(function(){
     $('.dropdown-trigger').dropdown();
     

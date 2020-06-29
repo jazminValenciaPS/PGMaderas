@@ -113,7 +113,7 @@
                     </tr>
                 </tbody>
              </table>
-              <ul class="pagination">
+                   <ul class="pagination">
                         <li  v-if="pagination.current_page > 1">
                                     <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
 

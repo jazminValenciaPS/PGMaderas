@@ -229,12 +229,7 @@ export default {
                 var respuesta= response.data;
                 m.pagination= respuesta.pagination;
                 m.arrayProductos = respuesta.producto.data;
-                // m.status = respuesta.producto.status.data;
-                // if(status == true){
-                //     status = 1
-                // }else{
-                //     status = 0
-                // }
+            
             })
             .catch(function(error){
                 console.log(error);

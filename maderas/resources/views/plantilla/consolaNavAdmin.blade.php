@@ -15,8 +15,14 @@
       <li @click="menu=2"><a href="#">Productos</a></li>
       <li @click="menu=3"><a href="#">Sliders</a></li>
       <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Usuarios<i class="material-icons right">arrow_drop_down</i></a></li>
-      <li @click="menu=6"><a href="#">Envios</a></li>
+      <li @click="menu=6"><a href="#">Pedidos</a></li>
       <li @click="menu=7"><a href="#">Cambiar contraseña </a></li>
+      <li>
+        <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
+      </li>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+        {{ csrf_field() }}
+      </form> 
     </ul>
   </div>
 </nav>
@@ -26,22 +32,22 @@
   <li @click="menu=5"><a href="#">Clientes</a></li>
 </ul>
 <div>
-<ul class="sidenav" id="mobile-demo">
+  <ul class="sidenav" id="mobile-demo">
     <img class="navImg" src="img/image.png" alt="">
     <li @click="menu=0"><a href="#">Categorias</a></li>
     <li @click="menu=1"><a href="#">SubCategorias</a></li>
     <li @click="menu=2"><a href="#">Productos</a></li>
     <li @click="menu=3"><a href="#">Sliders</a></li>
     <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Usuarios<i class="material-icons right">arrow_drop_down</i></a></li>
-    <li @click="menu=6"><a href="#">Envios</a></li>
-          <li @click="menu=7"><a class="black-text" href="#">Cambiar contraseña </a></li>
-          <li>
-            <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
-          </li>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" >
-          {{ csrf_field() }}
-          </form> 
-      </ul>
+    <li @click="menu=6"><a href="#">Pedidos</a></li>
+    <li @click="menu=7"><a class="black-text" href="#">Cambiar contraseña </a></li>
+    <li>
+      <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
+    </li>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+    {{ csrf_field() }}
+    </form> 
+  </ul>
 </div>
    
 
