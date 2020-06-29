@@ -5866,7 +5866,7 @@ $('.datepicker').datepicker({
       last_name: '',
       phone: '',
       birth_date: '',
-      gender: 2,
+      gender: '',
       city: '',
       street: '',
       postal_code: '',
@@ -5978,7 +5978,7 @@ $('.datepicker').datepicker({
       me.last_name = '';
       me.phone = '';
       me.email = '';
-      me.gender = 2;
+      me.gender = '';
       me.description = '';
       $("#file").val("");
     },
@@ -6074,7 +6074,7 @@ $('.datepicker').datepicker({
       if (!this.phone) this.errorMostrarMsjEmpleado.push("Se tiene que ingresar un número de teléfono.");
       if (!this.email) this.errorMostrarMsjEmpleado.push("Tiene que ingresar un correo.");
       if (!this.birth_date) this.errorMostrarMsjEmpleado.push("Seleccione la fecha de nacimiento.");
-      if (this.gender == "") this.errorMostrarMsjEmpleado.push("Seleccione el género del empleado.");
+      if (!this.gender) this.errorMostrarMsjEmpleado.push("Seleccione el género del empleado.");
       if (!this.id_role) this.errorMostrarMsjEmpleado.push("Seleccione el rol del empleado."); // if (!this.city) this.errorMostrarMsjEmpleado.push("Ingrese la ciudad del empleado.");
       // if (!this.state) this.errorMostrarMsjEmpleado.push("Ingrese el estado del empleado.");
       // if (!this.street) this.errorMostrarMsjEmpleado.push("Ingrese la calle del empleado.");
@@ -30382,15 +30382,15 @@ var render = function() {
                       [
                         _c(
                           "option",
-                          { attrs: { value: "2", disabled: "", selected: "" } },
+                          { attrs: { value: "0", disabled: "", selected: "" } },
                           [_vm._v("Selecciona el genero")]
                         ),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "0" } }, [
+                        _c("option", { attrs: { value: "1" } }, [
                           _vm._v("Masculino")
                         ]),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "1" } }, [
+                        _c("option", { attrs: { value: "2" } }, [
                           _vm._v("Femenino")
                         ])
                       ]

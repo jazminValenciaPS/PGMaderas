@@ -41,9 +41,9 @@
                           
                             <div class="input-field col s6">                          
                                 <select name="LeaveType" class="browser-default" v-model="gender">
-                                    <option value="2" disabled selected>Selecciona el genero</option>
-                                    <option value="0">Masculino</option>
-                                    <option value="1">Femenino</option>
+                                    <option value="0" disabled selected>Selecciona el genero</option>
+                                    <option value="1">Masculino</option>
+                                    <option value="2">Femenino</option>
                                 </select> 
                             </div>
 
@@ -185,7 +185,7 @@ export default {
             last_name:'',
             phone:'',
             birth_date:'',
-            gender:2, 
+            gender:'', 
             city:'',
             street:'',
             postal_code:'',
@@ -300,7 +300,7 @@ export default {
             me.last_name='';
             me.phone='';
             me.email='';
-            me.gender=2;
+            me.gender='';
             me.description='';
             $("#file").val("");
         },
@@ -397,7 +397,7 @@ export default {
                 if (!this.phone) this.errorMostrarMsjEmpleado.push("Se tiene que ingresar un número de teléfono.");
                 if (!this.email) this.errorMostrarMsjEmpleado.push("Tiene que ingresar un correo.");
                 if (!this.birth_date) this.errorMostrarMsjEmpleado.push("Seleccione la fecha de nacimiento.");
-                if (this.gender == "") this.errorMostrarMsjEmpleado.push("Seleccione el género del empleado.");
+                if (!this.gender) this.errorMostrarMsjEmpleado.push("Seleccione el género del empleado.");
                 if (!this.id_role) this.errorMostrarMsjEmpleado.push("Seleccione el rol del empleado.");
                 // if (!this.city) this.errorMostrarMsjEmpleado.push("Ingrese la ciudad del empleado.");
                 // if (!this.state) this.errorMostrarMsjEmpleado.push("Ingrese el estado del empleado.");
