@@ -113,36 +113,19 @@
                     </tr>
                 </tbody>
              </table>
-              <nav>
-                   <!-- <ul class="pagination">
-                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                        <li class="page-item" v-if="pagination.current_page > 1">
-                             <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
+              <ul class="pagination">
+                        <li  v-if="pagination.current_page > 1">
+                                    <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
+
+                             <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
                         </li>
-                         <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                             <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                         <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                             <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
                          </li>
-                         <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                              <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
-                         </li>
-                        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-
-
-                       
-                    </ul> -->
-
-                    <ul class="pagination">
-                        <li class="page-item" v-if="pagination.current_page > 1">
-                             <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
-                        </li>
-                         <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                             <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
-                         </li>
-                         <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                              <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
+                         <li v-if="pagination.current_page < pagination.last_page">
+                              <a  href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
                          </li>
                      </ul>
-             </nav>
         </div>
         <!-- tabla final -->
     </main>

@@ -65,7 +65,6 @@
                         <th class="hide-on-small-only">Fecha de registro</th>
                         <th class="hide-on-small-only">Status</th>
                         <th>Editar</th>
-                        <th>Desactivar/Activar</th>
                         <th>Eliminar</th>
                     </tr>
                 </thead>
@@ -79,18 +78,6 @@
                         <td class="hide-on-small-only"  v-if="user.status == 0">Desactivado</td>
                         <td>
                             <i class="material-icons color-text " @click="abrirModal('empleados','actualizar',user,user.id)">create</i>
-                        </td>
-                        <td class="desactivarActivar">
-                            <a href="#!" class="secondary-content" v-if="user.status == 1">
-                                <i class="switch">
-                                    <label><input type="checkbox" checked="checked" name="status" v-model="user.status" @click="desactivarEmpleado(user.id)"><span class="lever"></span></label>
-                                </i>
-                            </a>
-                            <a href="#!" class="secondary-content" v-if="user.status == 0">
-                                <i class="switch">
-                                    <label><input type="checkbox"  name="status" v-model="user.status" @click="activarEmpleado(user.id)"><span class="lever"></span></label>
-                                </i>
-                            </a>
                         </td>
                         <td>
                             <i class="material-icons color-text " @click="eliminarEmpleado(user.id)">delete</i>
@@ -164,16 +151,24 @@ export default {
                 console.log(error);
             });
         },
-        abrirModal(modelo,accion, data = [],PK_categories){
+        abrirModal(modelo,accion, data = [],id){
             let m=this;
             switch(modelo){
                 case "empleados":{
                     switch(accion){
                         case 'registrar':{
                             m.modal = 1;
-                            m.name = '';
-                            m.descripcion = '';
-                            m.image= 'Selecciona imagen';
+                            m.first_name = '';
+                            m.last_name = '';
+                            m.phone = '';
+                            m.birth_date = '';
+                            m.gender= 'Selecciona el genero';
+                            m.street = '';
+                            m.postal_code = '';
+                            m.suburb = '';
+                            m.reference = '',
+                            m.state = '';
+                            m.roles_name = 'Seleccione el rol';
                             m.tipoAccion = 1;
                             m.tituloModal = 'Registrar empleado';
                             break;
@@ -214,7 +209,8 @@ export default {
             formData.append('phone', me.phone);    
             formData.append('birth_date', me.birth_date);            
             formData.append('gender', me.gender);
-            formData.append('city', me.city);            
+            formData.append('city', me.city);       
+            formData.append('state', me.state);     
             formData.append('street', me.street);            
             formData.append('postal_code', me.postal_code);            
             formData.append('suburb', me.suburb);
@@ -307,83 +303,6 @@ export default {
                     console.log(error);
                 });      
         },
-        desactivarEmpleado(id){
-            let me = this;
-
-            Swal.fire({
-            title: '¿Está seguro de desactivar esta Categoria?',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Aceptar!',
-            cancelButtonText: 'Cancelar',
-            confirmButtonClass: 'btn btn-success',
-            cancelButtonClass: 'btn btn-danger',
-            buttonsStyling: false,
-            reverseButtons: true
-            }).then((result) => {
-                if (result.value) {
-
-                    console.log('id de categoria es:', PK_categories);
-                    axios.put('/categoria/desactivar',{
-                        'PK_categories': PK_categories
-                    }).then(function (response) {
-                        me.listarEmpleado();
-                        Swal.fire(
-                            'Desactivado!',
-                            'La categoria ha sido desactivado con éxito.',
-                            'success'
-                        )
-                    }).catch(function (error) {
-                        console.log(error);
-                    });                    
-                } else if(
-                        // Read more about handling dismissals
-                        result.dismiss === Swal.DismissReason.cancel
-                    ){
-                        me.listarEmpleado();
-                    }
-            })
-        },
-        activarEmpleado(id){
-            let me = this;
-
-            Swal.fire({
-            title: '¿Está seguro de activar esta Categoria?',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Aceptar!',
-            cancelButtonText: 'Cancelar',
-            confirmButtonClass: 'btn btn-success',
-            cancelButtonClass: 'btn btn-danger',
-            buttonsStyling: false,
-            reverseButtons: true
-            }).then((result) => {
-            if (result.value) {
-                axios.put('/categoria/activar',{
-                    'PK_categories': PK_categories
-                }).then(function (response) {
-                    me.listarEmpleado();
-                    Swal.fire(
-                        'activado!',
-                        'La categoria ha sido activado con éxito.',
-                        'success'
-                    )
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            
-            } else if (
-                // Read more about handling dismissals
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                        me.listarEmpleado();                    
-            }
-            }) 
-        },
         eliminarEmpleado(id_user){
           let me = this;
 
@@ -401,8 +320,8 @@ export default {
             reverseButtons: true
             }).then((result) => {
             if (result.value) {
-                axios.put('/empleado/eliminar',{
-                    'id_user': id_user
+                axios.put('/user/desactivar',{
+                    'id': id_user
                 }).then(function (response) {
                     me.listarEmpleado();
                     Swal.fire(

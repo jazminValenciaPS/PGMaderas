@@ -48,7 +48,6 @@ Route::put('/slider/desactivar','SliderController@desactivar');
 Route::get('/user','UserController@index');
 Route::post('/user/registrar','UserController@store');
 Route::post('/user/actualizar','UserController@update');
-Route::put('/user/activar','UserController@activar');
 Route::put('/user/desactivar','UserController@desactivar');
 
 Route::get('/rol','RolController@index');

@@ -5068,23 +5068,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 // import categorias from './Categorias.vue'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5473,19 +5456,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 var currYear = new Date().getFullYear();
 $('.datepicker').datepicker({
@@ -5545,7 +5515,7 @@ $('.datepicker').datepicker({
     },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-      var PK_categories = arguments.length > 3 ? arguments[3] : undefined;
+      var id = arguments.length > 3 ? arguments[3] : undefined;
       var m = this;
 
       switch (modelo) {
@@ -5555,9 +5525,16 @@ $('.datepicker').datepicker({
               case 'registrar':
                 {
                   m.modal = 1;
-                  m.name = '';
-                  m.descripcion = '';
-                  m.image = 'Selecciona imagen';
+                  m.first_name = '';
+                  m.last_name = '';
+                  m.phone = '';
+                  m.birth_date = '';
+                  m.gender = 'Selecciona el genero';
+                  m.street = '';
+                  m.postal_code = '';
+                  m.suburb = '';
+                  m.reference = '', m.state = '';
+                  m.roles_name = 'Seleccione el rol';
                   m.tipoAccion = 1;
                   m.tituloModal = 'Registrar empleado';
                   break;
@@ -5600,6 +5577,7 @@ $('.datepicker').datepicker({
       formData.append('birth_date', me.birth_date);
       formData.append('gender', me.gender);
       formData.append('city', me.city);
+      formData.append('state', me.state);
       formData.append('street', me.street);
       formData.append('postal_code', me.postal_code);
       formData.append('suburb', me.suburb);
@@ -5681,67 +5659,6 @@ $('.datepicker').datepicker({
         console.log(error);
       });
     },
-    desactivarEmpleado: function desactivarEmpleado(id) {
-      var me = this;
-      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-        title: '¿Está seguro de desactivar esta Categoria?',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Aceptar!',
-        cancelButtonText: 'Cancelar',
-        confirmButtonClass: 'btn btn-success',
-        cancelButtonClass: 'btn btn-danger',
-        buttonsStyling: false,
-        reverseButtons: true
-      }).then(function (result) {
-        if (result.value) {
-          console.log('id de categoria es:', PK_categories);
-          axios.put('/categoria/desactivar', {
-            'PK_categories': PK_categories
-          }).then(function (response) {
-            me.listarEmpleado();
-            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Desactivado!', 'La categoria ha sido desactivado con éxito.', 'success');
-          })["catch"](function (error) {
-            console.log(error);
-          });
-        } else if ( // Read more about handling dismissals
-        result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
-          me.listarEmpleado();
-        }
-      });
-    },
-    activarEmpleado: function activarEmpleado(id) {
-      var me = this;
-      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-        title: '¿Está seguro de activar esta Categoria?',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Aceptar!',
-        cancelButtonText: 'Cancelar',
-        confirmButtonClass: 'btn btn-success',
-        cancelButtonClass: 'btn btn-danger',
-        buttonsStyling: false,
-        reverseButtons: true
-      }).then(function (result) {
-        if (result.value) {
-          axios.put('/categoria/activar', {
-            'PK_categories': PK_categories
-          }).then(function (response) {
-            me.listarEmpleado();
-            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('activado!', 'La categoria ha sido activado con éxito.', 'success');
-          })["catch"](function (error) {
-            console.log(error);
-          });
-        } else if ( // Read more about handling dismissals
-        result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
-          me.listarEmpleado();
-        }
-      });
-    },
     eliminarEmpleado: function eliminarEmpleado(id_user) {
       var me = this;
       sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
@@ -5758,8 +5675,8 @@ $('.datepicker').datepicker({
         reverseButtons: true
       }).then(function (result) {
         if (result.value) {
-          axios.put('/empleado/eliminar', {
-            'id_user': id_user
+          axios.put('/user/desactivar', {
+            'id': id_user
           }).then(function (response) {
             me.listarEmpleado();
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Eliminado!', 'El empleado ha sido eliminado con éxito.', 'success');
@@ -29364,84 +29281,83 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _c("nav", [
-        _c(
-          "ul",
-          { staticClass: "pagination" },
-          [
-            _vm.pagination.current_page > 1
-              ? _c("li", { staticClass: "page-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.cambiarPagina(
-                            _vm.pagination.current_page - 1,
-                            _vm.buscar,
-                            _vm.criterio
-                          )
-                        }
-                      }
-                    },
-                    [_vm._v("Ant")]
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._l(_vm.pagesNumber, function(page) {
-              return _c(
-                "li",
-                {
-                  key: page,
-                  staticClass: "page-item",
-                  class: [page == _vm.isActived ? "active" : ""]
-                },
-                [
-                  _c("a", {
-                    staticClass: "page-link",
+      _c(
+        "ul",
+        { staticClass: "pagination" },
+        [
+          _vm.pagination.current_page > 1
+            ? _c("li", [
+                _c(
+                  "a",
+                  {
                     attrs: { href: "#" },
-                    domProps: { textContent: _vm._s(page) },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
-                        return _vm.cambiarPagina(page, _vm.buscar, _vm.criterio)
+                        return _vm.cambiarPagina(
+                          _vm.pagination.current_page - 1,
+                          _vm.buscar,
+                          _vm.criterio
+                        )
                       }
                     }
-                  })
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _vm.pagination.current_page < _vm.pagination.last_page
-              ? _c("li", { staticClass: "page-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.cambiarPagina(
-                            _vm.pagination.current_page + 1,
-                            _vm.buscar,
-                            _vm.criterio
-                          )
-                        }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons" }, [
+                      _vm._v("chevron_left")
+                    ])
+                  ]
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.pagesNumber, function(page) {
+            return _c(
+              "li",
+              { key: page, class: [page == _vm.isActived ? "active" : ""] },
+              [
+                _c("a", {
+                  attrs: { href: "#" },
+                  domProps: { textContent: _vm._s(page) },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.cambiarPagina(page, _vm.buscar, _vm.criterio)
+                    }
+                  }
+                })
+              ]
+            )
+          }),
+          _vm._v(" "),
+          _vm.pagination.current_page < _vm.pagination.last_page
+            ? _c("li", [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.cambiarPagina(
+                          _vm.pagination.current_page + 1,
+                          _vm.buscar,
+                          _vm.criterio
+                        )
                       }
-                    },
-                    [_vm._v("Sig")]
-                  )
-                ])
-              : _vm._e()
-          ],
-          2
-        )
-      ])
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons" }, [
+                      _vm._v("chevron_right")
+                    ])
+                  ]
+                )
+              ])
+            : _vm._e()
+        ],
+        2
+      )
     ])
   ])
 }
@@ -30409,144 +30325,6 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("td", { staticClass: "desactivarActivar" }, [
-                  user.status == 1
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "secondary-content",
-                          attrs: { href: "#!" }
-                        },
-                        [
-                          _c("i", { staticClass: "switch" }, [
-                            _c("label", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: user.status,
-                                    expression: "user.status"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "checkbox",
-                                  checked: "checked",
-                                  name: "status"
-                                },
-                                domProps: {
-                                  checked: Array.isArray(user.status)
-                                    ? _vm._i(user.status, null) > -1
-                                    : user.status
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.desactivarEmpleado(user.id)
-                                  },
-                                  change: function($event) {
-                                    var $$a = user.status,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = null,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          _vm.$set(
-                                            user,
-                                            "status",
-                                            $$a.concat([$$v])
-                                          )
-                                      } else {
-                                        $$i > -1 &&
-                                          _vm.$set(
-                                            user,
-                                            "status",
-                                            $$a
-                                              .slice(0, $$i)
-                                              .concat($$a.slice($$i + 1))
-                                          )
-                                      }
-                                    } else {
-                                      _vm.$set(user, "status", $$c)
-                                    }
-                                  }
-                                }
-                              }),
-                              _c("span", { staticClass: "lever" })
-                            ])
-                          ])
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  user.status == 0
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "secondary-content",
-                          attrs: { href: "#!" }
-                        },
-                        [
-                          _c("i", { staticClass: "switch" }, [
-                            _c("label", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: user.status,
-                                    expression: "user.status"
-                                  }
-                                ],
-                                attrs: { type: "checkbox", name: "status" },
-                                domProps: {
-                                  checked: Array.isArray(user.status)
-                                    ? _vm._i(user.status, null) > -1
-                                    : user.status
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.activarEmpleado(user.id)
-                                  },
-                                  change: function($event) {
-                                    var $$a = user.status,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = null,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          _vm.$set(
-                                            user,
-                                            "status",
-                                            $$a.concat([$$v])
-                                          )
-                                      } else {
-                                        $$i > -1 &&
-                                          _vm.$set(
-                                            user,
-                                            "status",
-                                            $$a
-                                              .slice(0, $$i)
-                                              .concat($$a.slice($$i + 1))
-                                          )
-                                      }
-                                    } else {
-                                      _vm.$set(user, "status", $$c)
-                                    }
-                                  }
-                                }
-                              }),
-                              _c("span", { staticClass: "lever" })
-                            ])
-                          ])
-                        ]
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
                 _c("td", [
                   _c(
                     "i",
@@ -30598,8 +30376,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", [_vm._v("Editar")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Desactivar/Activar")]),
         _vm._v(" "),
         _c("th", [_vm._v("Eliminar")])
       ])
@@ -31580,88 +31356,83 @@ var render = function() {
           2
         ),
         _vm._v(" "),
-        _c("nav", [
-          _c(
-            "ul",
-            { staticClass: "pagination" },
-            [
-              _vm.pagination.current_page > 1
-                ? _c("li", { staticClass: "page-item" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "page-link",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.cambiarPagina(
-                              _vm.pagination.current_page - 1,
-                              _vm.buscar,
-                              _vm.criterio
-                            )
-                          }
-                        }
-                      },
-                      [_vm._v("Ant")]
-                    )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.pagesNumber, function(page) {
-                return _c(
-                  "li",
-                  {
-                    key: page,
-                    staticClass: "page-item",
-                    class: [page == _vm.isActived ? "active" : ""]
-                  },
-                  [
-                    _c("a", {
-                      staticClass: "page-link",
+        _c(
+          "ul",
+          { staticClass: "pagination" },
+          [
+            _vm.pagination.current_page > 1
+              ? _c("li", [
+                  _c(
+                    "a",
+                    {
                       attrs: { href: "#" },
-                      domProps: { textContent: _vm._s(page) },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
                           return _vm.cambiarPagina(
-                            page,
+                            _vm.pagination.current_page - 1,
                             _vm.buscar,
                             _vm.criterio
                           )
                         }
                       }
-                    })
-                  ]
-                )
-              }),
-              _vm._v(" "),
-              _vm.pagination.current_page < _vm.pagination.last_page
-                ? _c("li", { staticClass: "page-item" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "page-link",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.cambiarPagina(
-                              _vm.pagination.current_page + 1,
-                              _vm.buscar,
-                              _vm.criterio
-                            )
-                          }
+                    },
+                    [
+                      _c("i", { staticClass: "material-icons" }, [
+                        _vm._v("chevron_left")
+                      ])
+                    ]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.pagesNumber, function(page) {
+              return _c(
+                "li",
+                { key: page, class: [page == _vm.isActived ? "active" : ""] },
+                [
+                  _c("a", {
+                    attrs: { href: "#" },
+                    domProps: { textContent: _vm._s(page) },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.cambiarPagina(page, _vm.buscar, _vm.criterio)
+                      }
+                    }
+                  })
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _vm.pagination.current_page < _vm.pagination.last_page
+              ? _c("li", [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.cambiarPagina(
+                            _vm.pagination.current_page + 1,
+                            _vm.buscar,
+                            _vm.criterio
+                          )
                         }
-                      },
-                      [_vm._v("Sig")]
-                    )
-                  ])
-                : _vm._e()
-            ],
-            2
-          )
-        ])
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "material-icons" }, [
+                        _vm._v("chevron_right")
+                      ])
+                    ]
+                  )
+                ])
+              : _vm._e()
+          ],
+          2
+        )
       ])
     ])
   ])
