@@ -11,9 +11,32 @@
 |
 */
 
+
+Route::group(['middleware'=>['guest']],function(){
+    Route::get('/login','Auth\LoginController@showLoginForm');
+    
+});
+
+
 Route::get('/', function () {
-    return view('contenido/consola');
-})->name('consola');
+    return view('contenido/contenido');
+})->name('contenido');
+
+// Route::get('/', function () {
+//     return view('contenido/consola');
+// })->name('consola');
+
+Auth::routes();
+
+
+
+Route::group(['middleware'=>['auth']],function(){
+
+    Route::get('/consola', function () {
+        return view('contenido/consola');
+    })->name('consola');
+
+});
 
 Route::get('/logout','Auth\LoginController@logout')->name('logout');
 Route::get('/categoria','CategorieController@index');
@@ -54,6 +77,8 @@ Route::put('/user/desactivar','UserController@desactivar');
 Route::get('/rol','RolController@index');
 
 Route::get('/order','OrderController@index');
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+// Route::get('/home', 'HomeController@index')->name('home');
