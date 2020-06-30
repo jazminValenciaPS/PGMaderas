@@ -54,3 +54,6 @@ Route::put('/user/desactivar','UserController@desactivar');
 Route::get('/rol','RolController@index');
 
 Route::get('/order','OrderController@index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
