@@ -1,3 +1,52 @@
+/* Utilities */
+.bg-main { background-color: #419142 !important; color: white !important; }
+.color-main { color: #419142 !important; }
+.big-size { font-size: 4em !important; }
+.p-0 { padding: 0px !important; }
+.p-1 { padding: 10px !important; }
+.p-3 { padding: 30px !important; }
+.py-1 { padding-top: 10px !important; padding-bottom: 10px !important;  }
+.pl-3 { padding-left: 30px !important; }
+.px-2 { padding-left: 20px !important; padding-right: 20px !important; }
+.m-0 { margin: 0px !important; }
+.ml-1 { margin-left: 10px !important; }
+.mt-0 { margin-top: 0px !important; }
+.mt-2 { margin-top: 20px !important; }
+.mb-2 { margin-bottom: 20px !important; }
+.mb-0 { margin-bottom: 0px !important; }
+.bold { font-weight: bold !important; }
+.shadow { text-shadow: 0px 0px 1px black !important; }
+.text-right { text-align: right !important; }
+.border { border: 2px solid #419142 !important; }
+
+
+/* Materialize customized */
+#search { height: fit-content; }
+#search-1 { height: fit-content; padding: 0 50px !important; max-width: 55vw !important; }
+nav { box-shadow: none; -webkit-box-shadow: none; }
+.carousel-fixed-item { top: 44%; }
+.indicators .indicator-item { width: 15px !important; height: 15px !important; }
+.page-footer { background-color: #419142; }
+.breadcrumb , .breadcrumb:last-child { color: #419142; }
+.breadcrumb:before { color: black; }
+.breadcrumb:first-child { padding-left: 20px !important; }
+.breadcrumb:last-child { padding-right: 20px !important; }
+.collection a { display: block; padding: 5px 0px 5px 20px; }
+
+/* Materialize + Custom */
+#Productos .card { overflow: visible; -webkit-box-shadow: none !important; box-shadow: none !important; }
+#Productos .card .card-content { padding: 10px 20px; }
+#Productos .card .card-action { border: none !important; }
+#Productos .card .card-image img { padding: 20px !important; }
+
+
+/* Custom */
+.nav-2 { position: absolute; }
+.espace-top { margin-top: 65px; }
+#services-main { padding: 0px 10%; }
+main { padding: 10px 30px; }
+
+
 /*!
  * Materialize v1.0.0 (http://materializecss.com)
  * Copyright 2014-2017 Materialize

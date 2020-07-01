@@ -19,7 +19,7 @@ Route::group(['middleware'=>['guest']],function(){
 
 
 Route::get('/', function () {
-    return view('contenido/contenido');
+    return view('contenido/ecommerce');
 })->name('contenido');
 
 // Route::get('/', function () {

@@ -3,7 +3,7 @@
   <head>
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+      
       <meta name="csrf-token" content="{{ csrf_token()  }}">
       <meta name="viewport" content="width=device-width, initial-scale=1">  
       <link href="https://unpkg.com/vueperslides/dist/vueperslides.css" rel="stylesheet">
@@ -93,7 +93,7 @@
   document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.modal');
   var instances = M.Modal.init(elems);
-});
+ });
 
   //     // Or with jQuery
 

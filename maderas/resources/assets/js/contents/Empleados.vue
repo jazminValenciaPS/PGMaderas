@@ -174,7 +174,6 @@ $('.datepicker').datepicker({
   selectYears: 15
 });
 
-
 export default {
     data() {
         return {
