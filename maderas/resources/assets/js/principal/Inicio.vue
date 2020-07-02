@@ -7,11 +7,14 @@
                 <a onclick="previous()" class="waves-effect waves-light white-text left chevron-middle"><i class="material-icons white-text big-size">chevron_left</i></a>
                 <a onclick="next()" class="waves-effect waves-light white-text right chevron-middle"><i class="material-icons white-text big-size">chevron_right</i></a>
             </div>
-            <a class="carousel-item"><img src="https://lorempixel.com/1200/400/nature/1"></a>
-            <a class="carousel-item"><img src="https://lorempixel.com/1200/400/nature/2"></a>
-            <a class="carousel-item"><img src="https://lorempixel.com/1200/400/nature/3"></a>
-            <a class="carousel-item"><img src="https://lorempixel.com/1200/400/nature/4"></a>
-            <a class="carousel-item"><img src="https://lorempixel.com/1200/400/nature/5"></a>
+            <a  class="carousel-item active" >
+                 <img  src="https://lorempixel.com/500/500/nature/1">
+                  <!-- :src="'img/'+slider.image" -->
+            </a>
+              <a  class="carousel-item active" >
+                 <img  src="https://lorempixel.com/500/500/nature/1">
+                  <!-- :src="'img/'+slider.image" -->
+            </a>
         </div>
 
 
@@ -75,3 +78,35 @@
         </div>
     </main>
 </template>
+<script>
+
+    export default {
+         data(){
+            return{
+                img: '',
+                file:'',
+                arraySliders:[],
+            }
+            },
+            methods:{
+              listarSliders(){
+                let m=this;
+
+
+                axios.get('/slider').then(function (response){
+                    m.arraySliders = response.data;
+                  
+                 })
+                 .catch(function(error){
+                    console.log(error);
+                 });
+
+             },
+            },
+        mounted() {
+            this.listarSliders();
+        }
+     }
+
+
+ </script>

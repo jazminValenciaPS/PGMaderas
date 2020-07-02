@@ -53,7 +53,18 @@ class ProductController extends Controller
         ];
     }
 
-  
+    public function listarProductos(){
+
+        return  $producto = DB::table('products')
+        ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
+        ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+        ->select('products.PK_products','products.SKU','products.name','products.description',
+        'products.price','products.avaible', 'products.status','subcategories.PK_subcategories',
+        'subcategories.name as subcategoria','products_images.image')
+        ->distinct()
+        ->get();
+
+    }
   
     public function store(Request $request)
     {

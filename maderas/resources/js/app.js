@@ -16,11 +16,11 @@ import inicios from '../assets/js/principal/Inicio.vue';
 import quien from '../assets/js/principal/QuienesSomos.vue';
 import pedido from '../assets/js/principal/Pedidos.vue';
 import cuentas from '../assets/js/principal/Cuenta.vue';
-import producto from '../assets/js/principal/Productos.vue';
+import productost from '../assets/js/principal/Productos.vue';
 import perfil from '../assets/js/principal/Perfil.vue';
-
-
-
+import contacto from '../assets/js/principal/Contacto.vue';
+import carrito from '../assets/js/principal/Carrito.vue';
+import producto from '../assets/js/principal/Producto.vue';
 
 
 window.Vue = require('vue');
@@ -40,8 +40,14 @@ Vue.component('inicio', inicios);
 Vue.component('quienes',quien);
 Vue.component('pedidos',pedido);
 Vue.component('cuenta',cuentas);
-Vue.component('productos',producto);
+Vue.component('productost',productost);
 Vue.component('perfil',perfil);
+Vue.component('contacto',contacto);
+Vue.component('carrito',carrito);
+Vue.component('producto',producto);
+
+
+
 
 
 

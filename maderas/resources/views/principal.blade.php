@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- General CSS -->
     <link rel="stylesheet" href='css/general.css' >
+    <!-- <link rel="stylesheet" href='css/estilos.css' > -->
+
     <!-- <link rel="stylesheet" href='css/plantilla.css' > -->
 
     <link rel="shortcut icon" href="img/44742972_183514302527228_7107553413201657856_n.jpg" type="image/x-icon">
@@ -30,11 +32,13 @@
     @include('plantilla.footerPrincipal')
 
     </div>
+  </body>
+
     <!-- Compiled and minified JavaScript -->
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>   -->
-    <script src="//code.jquery.com/jquery-latest.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  
+    <!-- <script src="//code.jquery.com/jquery-latest.js"></script> -->
     <script src="./js/plantilla.js"></script>
-    <script src="./js/app.js"></script>
+    <script src="js/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   
 
@@ -60,5 +64,4 @@
             }
         });
     </script>
-  </body>
 </html>

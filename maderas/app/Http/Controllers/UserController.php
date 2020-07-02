@@ -76,7 +76,22 @@ class UserController extends Controller
         ->select('persons.PK_persons','users.id','persons.first_name','persons.last_name','persons.phone',
         'persons.birth_date','persons.gender','users.email','users.created_at','users.join_ate','users.status',
         'addresses.street','addresses.suburb','addresses.city','addresses.state','addresses.postal_code','roles.PK_roles')
-        ->where('roes.PK_roles', '=', '3')
+        ->where('roles.PK_roles', '=', '3')
+        ->distinct()
+        ->get();
+    }
+    public function clientData(Request $request){
+
+        $id = $request->id;
+        return $user = DB::table('users')
+        ->join('roles', 'roles.PK_roles', '=', 'users.id_role')
+        ->join('persons', 'persons.PK_persons', '=', 'users.id_person')
+        ->join('addresses', 'addresses.id_user', '=', 'users.id')
+        ->select('persons.PK_persons','users.id','persons.first_name','persons.last_name','persons.phone',
+        'persons.birth_date','persons.gender','users.email','users.created_at','users.join_ate','users.status',
+        'addresses.street','addresses.suburb','addresses.city','addresses.state','addresses.postal_code','roles.PK_roles')
+        ->where('roles.PK_roles', '=', '3')
+        ->where('users.id','=',$id)
         ->distinct()
         ->get();
     }

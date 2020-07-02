@@ -184,36 +184,26 @@ export default {
         }
     },
     methods:{
-        listarCategoria(page,buscar,criterio){
+        listarDatos(){
             let m=this;
-            var url='/categoria?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+            var id = 2;
+            var url='/user/cliented/'+id;
 
             axios.get(url).then(function (response){
-                var respuesta= response.data;
-                m.pagination= respuesta.pagination;
-                m.arrayCategoria = respuesta.categorias.data;
-                // m.status = respuesta.categorias.status.data;
-
-                // if(status == true){
-                //     status = 1
-                // }else{
-                //     status = 0
-                // }
+                 m.arrayDatos= response.data;
+               
             })
             .catch(function(error){
                 console.log(error);
             });
         },
-        mostrarDatos(){
-
-        }
-
+ 
   
    
        
     },
     mounted() {
-        this.mostrarDatos()
+        this.listarDatos()
     }
 }
 </script>

@@ -28,92 +28,56 @@
 
             <!-- Products -->
             <div class="col m9 s12" id="Productos">
-                <div class="card sticky-action col m4 s12">
+
+                <div v-for="producto in arrayProductos"  :key="producto.PK_products" class="card sticky-action col m4 s12">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://revista-mm.com/wp-content/uploads/2018/08/madera-1.jpg">
+                        <img :src="'img/'+producto.image" class="pImagen">
                     </div>
                     <div class="card-content">
-                        <span class="card-title grey-text text-darken-4">Producto</span>
-                        <p>SKU: 123Tama456Rindo</p>
-                        <h6>$399</h6>
+                        <span class="card-title grey-text text-darken-4">{{producto.name}}</span>
+                        <p>SKU: {{producto.SKU}}</p>
+                        <h6>${{producto.price}}</h6>
                     </div>
                     <div class="card-action">
                         <a class="btn bg-main" href="#">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
                     </div>
                 </div>
 
-                <div class="card sticky-action col m4 s12">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://revista-mm.com/wp-content/uploads/2018/08/madera-1.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title grey-text text-darken-4">Producto</span>
-                        <p>SKU: 123Tama456Rindo</p>
-                        <h6>$399</h6>
-                    </div>
-                    <div class="card-action">
-                        <a class="btn bg-main" href="#">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
-                    </div>
-                </div>
-
-                <div class="card sticky-action col m4 s12">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://revista-mm.com/wp-content/uploads/2018/08/madera-1.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title grey-text text-darken-4">Producto</span>
-                        <p>SKU: 123Tama456Rindo</p>
-                        <h6>$399</h6>
-                    </div>
-                    <div class="card-action">
-                        <a class="btn bg-main" href="#">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
-                    </div>
-                </div>
-
-                <div class="card sticky-action col m4 s12">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://revista-mm.com/wp-content/uploads/2018/08/madera-1.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title grey-text text-darken-4">Producto</span>
-                        <p>SKU: 123Tama456Rindo</p>
-                        <h6>$399</h6>
-                    </div>
-                    <div class="card-action">
-                        <a class="btn bg-main" href="#">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
-                    </div>
-                </div>
-
-                <div class="card sticky-action col m4 s12">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://revista-mm.com/wp-content/uploads/2018/08/madera-1.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title grey-text text-darken-4">Producto</span>
-                        <p>SKU: 123Tama456Rindo</p>
-                        <h6>$399</h6>
-                    </div>
-                    <div class="card-action">
-                        <a class="btn bg-main" href="#">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
-                    </div>
-                </div>
-
-                <div class="card sticky-action col m4 s12">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://revista-mm.com/wp-content/uploads/2018/08/madera-1.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title grey-text text-darken-4">Producto</span>
-                        <p>SKU: 123Tama456Rindo</p>
-                        <h6>$399</h6>
-                    </div>
-                    <div class="card-action">
-                        <a class="btn bg-main" href="#">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
-                    </div>
-                </div>
             </div>
         </div>
         
 
     </main>
 </template>
+<script>
+export default {
+    data(){
+        return{
+            PK_products:'',
+            arrayProductos: [],
+            tipoAccion: 0,
+        
+        }
+    },
+    methods:{
+        listarProductos(){
+            let m=this;
+            var url='/productoL';
+
+            axios.get(url).then(function (response){
+                m.arrayProductos = response.data;
+
+            
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+        },
+    
+      
+    },
+    mounted() {
+        this.listarProductos();
+    }
+}
+</script>
