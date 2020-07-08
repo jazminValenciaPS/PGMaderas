@@ -7,7 +7,7 @@
         <quienes><quienes>
     </template>
     <template v-if="menu==2">
-        <productost></productost>
+        <productost :productoid="idProducto" @mostrar-producto="mostrarProducto"></productost>
     </template>
     <template v-if="menu==3">
         <contacto></contacto>
@@ -17,5 +17,8 @@
     </template>
     <template v-if="menu==5">
         <carrito></carrito>
+    </template>
+    <template v-if="menu==6">
+        <producto :productoid="idProducto"></producto>
     </template>
 @endsection

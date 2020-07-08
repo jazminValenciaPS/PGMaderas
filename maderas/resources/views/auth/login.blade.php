@@ -23,8 +23,7 @@
         </div>
     </div>
         <div class="col s6 center">
-        <button type="submit" class="waves-effect  btn  deep-green lighten-4  white-text">Ingresar</button>
-
+            <button type="submit" class="waves-effect  btn  deep-green lighten-4  white-text">Ingresar</button>
         </div>
 </form>
 @endsection

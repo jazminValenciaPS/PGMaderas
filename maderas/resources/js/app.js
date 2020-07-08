@@ -4,7 +4,7 @@ require('./bootstrap');
 import VueRouter from 'vue-router';
 import categorias from '../assets/js/contents/Categorias.vue';
 import subcategorias from '../assets/js/contents/SubCategorias.vue';
-import productos from '../assets/js/contents/Productos.vue';
+import productosc from '../assets/js/contents/ProductosC.vue';
 import sliders from '../assets/js/contents/Sliders.vue';
 import empleados from '../assets/js/contents/Empleados.vue';
 import clientes from '../assets/js/contents/Clientes.vue';
@@ -23,12 +23,13 @@ import carrito from '../assets/js/principal/Carrito.vue';
 import producto from '../assets/js/principal/Producto.vue';
 
 
+
 window.Vue = require('vue');
 
 // consola
 Vue.component('categoria', categorias);
 Vue.component('subcategoria', subcategorias);
-Vue.component('producto', productos);
+Vue.component('productoc', productosc);
 Vue.component('slider', sliders);
 Vue.component('empleado', empleados);
 Vue.component('cliente', clientes);
@@ -52,9 +53,25 @@ Vue.component('producto',producto);
 
 
 
+// const app = new Vue({
+//     el: '#app',
+//     data: {
+//         menu: 0
+//       },
+// });
+
+
 const app = new Vue({
-    el: '#app',
-    data: {
-        menu: 0
-      },
+  el: '#app',
+  data :{
+      menu: 0,
+      idProducto: 0
+  },
+  methods:{
+    mostrarProducto(objeto){
+          let m = this;
+       m.menu = objeto.valorMenu;
+       m.idProducto = objeto.valorId;
+      }
+  }
 });

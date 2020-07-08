@@ -1,21 +1,30 @@
 <template>
 
     <main>
+        <div class="row">
+
         <!-- Carousel -->
-        <div class="carousel carousel-slider espace-top">
+        <!-- <div class="carousel carousel-slider espace-top">
             <div class="carousel-fixed-item center">
                 <a onclick="previous()" class="waves-effect waves-light white-text left chevron-middle"><i class="material-icons white-text big-size">chevron_left</i></a>
                 <a onclick="next()" class="waves-effect waves-light white-text right chevron-middle"><i class="material-icons white-text big-size">chevron_right</i></a>
             </div>
-            <a  class="carousel-item active" >
-                 <img  src="https://lorempixel.com/500/500/nature/1">
-                  <!-- :src="'img/'+slider.image" -->
+            v-for="slider in arraySliders" :key="slider.PK_slider"
+            <a v-for="slider in arraySliders" :key="slider.PK_slider" class="carousel-item active" >
+                <img class="" :src="'./public/img/'+ slider.image">
+                 <img  :src="'img/'+slider.image">
+                  :src="'img/'+slider.image"
             </a>
               <a  class="carousel-item active" >
-                 <img  src="https://lorempixel.com/500/500/nature/1">
-                  <!-- :src="'img/'+slider.image" -->
+                 <img  src="https://www.blogbankia.es/recursos/img/blog/20190611/julio-2019/cuanto-cobra-un-astronauta-mini-783x412.jpg">
+                  :src="'img/'+slider.image"
             </a>
-        </div>
+        </div> -->
+        <!-- carrusel con vue -->
+        <vueper-slides autoplay>
+            <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" :image="'img/'+slider.image" />
+        </vueper-slides>
+
 
 
         <!-- Card Services -->
@@ -25,7 +34,7 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://lorempixel.com/500/500/nature/1">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
                         <span class="card-title">Servicio</span>
                     </div>
                 </div>
@@ -34,7 +43,7 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://lorempixel.com/500/500/nature/2">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
                         <span class="card-title">Servicio</span>
                     </div>
                 </div>
@@ -43,7 +52,16 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://lorempixel.com/500/500/nature/3">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
+                        <span class="card-title">Servicio</span>
+                    </div>
+                </div>
+            </div>
+
+             <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
                         <span class="card-title">Servicio</span>
                     </div>
                 </div>
@@ -52,7 +70,7 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://lorempixel.com/500/500/nature/4">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
                         <span class="card-title">Servicio</span>
                     </div>
                 </div>
@@ -61,26 +79,23 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://lorempixel.com/500/500/nature/5">
-                        <span class="card-title">Servicio</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://lorempixel.com/500/500/nature/6">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
                         <span class="card-title">Servicio</span>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+
     </main>
 </template>
 <script>
+import { VueperSlides, VueperSlide } from 'vueperslides';
+import 'vueperslides/dist/vueperslides.css';
+
 
     export default {
+        components: { VueperSlides, VueperSlide },
          data(){
             return{
                 img: '',

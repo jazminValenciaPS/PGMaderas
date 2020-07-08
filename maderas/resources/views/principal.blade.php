@@ -9,12 +9,14 @@
     <!-- General CSS -->
     <link rel="stylesheet" href='css/general.css' >
     <!-- <link rel="stylesheet" href='css/estilos.css' > -->
+    <link href="https://unpkg.com/vueperslides/dist/vueperslides.css" rel="stylesheet">
 
     <!-- <link rel="stylesheet" href='css/plantilla.css' > -->
 
     <link rel="shortcut icon" href="img/44742972_183514302527228_7107553413201657856_n.jpg" type="image/x-icon">
 
     <!--Let browser know website is optimized for mobile-->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="UTF-8"/>
   </head>
@@ -32,30 +34,38 @@
     @include('plantilla.footerPrincipal')
 
     </div>
-  </body>
+     <!-- Compiled and minified JavaScript -->
+     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
 
-    <!-- Compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  
     <!-- <script src="//code.jquery.com/jquery-latest.js"></script> -->
+    <!-- <script src="./js/plantilla.js"></script>
+    <script src="js/app.js"></script> -->
+    <script src="//code.jquery.com/jquery-latest.js"></script>
     <script src="./js/plantilla.js"></script>
-    <script src="js/app.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  
+    <script src="./js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vueperslides"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('DOMContentLoaded', () => {
             M.Sidenav.init(document.querySelectorAll('.sidenav'), {});
+            M.AutoInit();
 
-            var elem = document.querySelector('.carousel');
-            M.Carousel.init(elem, {
+            var options = {
                 indicators: true,
                 fullWidth: true,
                 indicators: true
-            });
-            setTimeout(autoplay, 5000); // 5 seconds
-            function autoplay() {
-                M.Carousel.getInstance(elem).next();
-            }
+            };
+            var elem = document.querySelector('.carousel');
+            var instances = M.Carousel.init(elem, options);
+            // M.Carousel.init(elem, {
+               
+            // });
+
+          
             previous = () => {
                 M.Carousel.getInstance(elem).prev();
             }
@@ -63,5 +73,9 @@
                 M.Carousel.getInstance(elem).next();
             }
         });
+  
     </script>
+  </body>
+
+   
 </html>

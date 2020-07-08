@@ -49,6 +49,11 @@ class CategorieController extends Controller
         $categoria = Categorie::all();
         return $categoria;
     }
+
+    public function listarCate(){
+        $categoria = Categorie::all()->where('status','=','1');
+        return $categoria;
+    }
   
     /**
      * Store a newly created resource in storage.
@@ -59,7 +64,7 @@ class CategorieController extends Controller
     public function store(Request $request)
     {
         print("store");
-        // if (!$request->ajax()) return redirect('/administrador');
+        if (!$request->ajax()) return redirect('/administrador');
 
         $img = Peticion::file('file');
         

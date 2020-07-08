@@ -10,7 +10,7 @@
     </template>
     <template v-if="menu==2">
         <!-- <h1>Productos</h1> -->
-        <producto></producto>
+        <productoc></productoc>
     </template>
     <template v-if="menu==3">
         <slider></slider>

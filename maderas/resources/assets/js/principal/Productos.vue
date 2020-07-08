@@ -12,9 +12,7 @@
                 <ul class="collection">
                     <li class="collection-item">
                         <h6>Categorías</h6>
-                        <a href="#!">Madera</a>
-                        <a href="#!">Tableros</a>
-                        <a href="#!">Complementos</a>
+                        <a v-for="cate in arrayCategorias" :key="cate.PK_categories" value="">{{cate.name}}</a>
                     </li>
                     <li class="collection-item">
                         <h6>Filtro de búsqueda:</h6>
@@ -30,7 +28,7 @@
             <div class="col m9 s12" id="Productos">
 
                 <div v-for="producto in arrayProductos"  :key="producto.PK_products" class="card sticky-action col m4 s12">
-                    <div class="card-image waves-effect waves-block waves-light">
+                    <div class="card-image waves-effect waves-block waves-light" @click="VerProducto(6,producto.PK_products)" >
                         <img :src="'img/'+producto.image" class="pImagen">
                     </div>
                     <div class="card-content">
@@ -39,7 +37,7 @@
                         <h6>${{producto.price}}</h6>
                     </div>
                     <div class="card-action">
-                        <a class="btn bg-main" href="#">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
+                        <a class="btn bg-main" href="">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
                     </div>
                 </div>
 
@@ -55,6 +53,7 @@ export default {
         return{
             PK_products:'',
             arrayProductos: [],
+            arrayCategorias:[],
             tipoAccion: 0,
         
         }
@@ -73,11 +72,34 @@ export default {
                 console.log(error);
             });
         },
+        listarCategorias(){
+            let m=this;
+            var url='/categoriaV';
+
+            axios.get(url).then(function (response){
+                m.arrayCategorias = response.data;
+
+            
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+
+        },
+         VerProducto(menu,id){
+                let m=this;
+                var objeto = {
+                    valorMenu: menu,
+                    valorId: id
+                }
+                 m.$emit("mostrar-producto",objeto);
+        },
     
       
     },
     mounted() {
         this.listarProductos();
+        this.listarCategorias();
     }
 }
 </script>

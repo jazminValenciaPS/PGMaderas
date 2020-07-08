@@ -9,7 +9,7 @@
                     <tr>
                         <th>Nombre</th>
                         <th class="hide-on-small-only">Fecha de Nacimiento</th>
-                        <th class="hide-on-small-only">E-main</th>
+                        <th class="hide-on-small-only">Email</th>
                         <th class="hide-on-small-only">Telefono</th>
                         <th class="hide-on-small-only">Calle</th>
                         <th class="hide-on-small-only">Colonia</th>

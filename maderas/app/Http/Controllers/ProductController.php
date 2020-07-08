@@ -65,6 +65,20 @@ class ProductController extends Controller
         ->get();
 
     }
+
+    public function mostrarProducto(Request $request){
+
+        $id = $request->id;
+
+
+        return  $producto = DB::table('products')
+        ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+        ->select('products.PK_products','products.SKU','products.name','products.description',
+        'products.price','products.avaible', 'products.status','products_images.image')
+        ->where('products.PK_products','=',$id)
+        ->where('products.status','=','1')
+        ->get();
+    }
   
     public function store(Request $request)
     {

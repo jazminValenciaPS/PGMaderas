@@ -35,6 +35,8 @@ class UserController extends Controller
         ->select('persons.PK_persons','users.id','roles.PK_roles','roles.roles_name','persons.first_name','persons.last_name','persons.phone',
         'persons.birth_date','persons.gender','users.email','users.created_at','users.join_ate','users.status')
         ->where('users.status', '=', '1')
+        ->where('roles.PK_roles', '=', '1')
+        ->orWhere('roles.PK_roles', '=', '2')
         ->distinct()
         ->orderBy('users.id', 'desc')->paginate(5);
 
@@ -47,6 +49,8 @@ class UserController extends Controller
             ->select('persons.PK_persons','users.id','roles.PK_roles','roles.roles_name','persons.first_name','persons.last_name','persons.phone',
             'persons.birth_date','persons.gender','users.email','users.created_at','users.join_ate','users.status')
             ->where('users.status', '=', '1')
+            ->where('roles.PK_roles', '=', '1')
+            ->orWhere('roles.PK_roles', '=', '2')
             ->distinct()
         ->where('users.'.$criterio, 'like', '%'. $buscar . '%')
         ->orderBy('users.id', 'desc')->paginate(5);
@@ -66,7 +70,6 @@ class UserController extends Controller
         ];
     }
 
-     
     public function customerIndex()
     {
         return $user = DB::table('users')
@@ -80,22 +83,23 @@ class UserController extends Controller
         ->distinct()
         ->get();
     }
+
     public function clientData(Request $request){
 
         $id = $request->id;
+
         return $user = DB::table('users')
         ->join('roles', 'roles.PK_roles', '=', 'users.id_role')
         ->join('persons', 'persons.PK_persons', '=', 'users.id_person')
         ->join('addresses', 'addresses.id_user', '=', 'users.id')
         ->select('persons.PK_persons','users.id','persons.first_name','persons.last_name','persons.phone',
         'persons.birth_date','persons.gender','users.email','users.created_at','users.join_ate','users.status',
-        'addresses.street','addresses.suburb','addresses.city','addresses.state','addresses.postal_code','roles.PK_roles')
+        'addresses.street','addresses.suburb','addresses.city','addresses.state','addresses.postal_code','addresses.reference','roles.PK_roles')
         ->where('roles.PK_roles', '=', '3')
         ->where('users.id','=',$id)
         ->distinct()
         ->get();
     }
-
 
     public function store(Request $request)
     {

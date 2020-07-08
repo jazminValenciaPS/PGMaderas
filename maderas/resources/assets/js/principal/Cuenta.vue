@@ -1,6 +1,5 @@
 <template>
       <main>
-
         <!-- Container -->
         <div class="row">
             <!-- Sign In -->

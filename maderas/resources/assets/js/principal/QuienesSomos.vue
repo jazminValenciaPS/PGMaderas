@@ -1,7 +1,7 @@
 <template>
     <main>
         <div class="main_section fadeIn">
-            <h1>¿Quienes Somos?</h1>
+            <h1>¿Quiénes Somos?</h1>
         </div>
 
         <div class="hero">
