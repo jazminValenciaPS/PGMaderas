@@ -21,6 +21,8 @@ class CreateAddressesTable extends Migration
             $table->string('state',255);
             $table->string('postal_code',20);
             $table->string('suburb',255);
+            $table->string('indoorNumber',10)->nullable();
+            $table->string('outdoorNumber',10);
             $table->string('reference',5000)->nullable();
             $table->unsignedTinyInteger('is_default')->default(0);
             $table->unsignedTinyInteger('status')->default(1);
