@@ -28,6 +28,7 @@
 
     <!-- Contenido principal -->
     @yield('ecommerce')
+    
     <!-- Termina contenido principal -->
 
     <!-- Footer -->
@@ -36,7 +37,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  
    
-    <script src="//code.jquery.com/jquery-latest.js"></script>
+    <!-- <script src="//code.jquery.com/jquery-latest.js"></script> -->
     <script src="./js/plantilla.js"></script>
     <script src="./js/app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

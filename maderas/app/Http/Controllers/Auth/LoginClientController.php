@@ -7,18 +7,18 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Auth as c;
 
-class LoginController extends Controller
+class LoginClientController extends Controller
 {
   use AuthenticatesUsers;
 
     public function showLoginForm(){
         if(c::check()){
-            return redirect('/consola');
+            return redirect('/perfil');
         }
-        return view('auth.login');
+        return view('auth.loginC');
     }
 
-    protected $redirectTo = '/consola';
+    protected $redirectTo = '/perfil';
 
     public function login(Request $request){
 
@@ -34,7 +34,7 @@ class LoginController extends Controller
         // ,'password' => $request->password])
             // Auth::loginUsingId(Auth::user()->userTablePrimaryKey);
             // return 'Tu sesión ha sido iniciada con éxito';
-            redirect('/consola');
+            redirect('/perfil');
         }
 
         return back()
@@ -54,7 +54,7 @@ class LoginController extends Controller
     public function logout(Request $request){
      Auth::logout();
         $request->session()->invalidate();
-        return redirect('/consola');
+        return redirect('/perfil');
     } 
 
     public function username(){

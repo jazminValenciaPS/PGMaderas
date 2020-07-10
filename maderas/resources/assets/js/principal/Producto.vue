@@ -17,18 +17,12 @@
                         <p>{{producto.description}}</p>
                         <h6 class="mt-2"><span class="color-main">{{producto.avaible}}</span> Disponibles para compra en línea</h6>
                     </div>
-                    <div class="col m8 s12 row mt-2">
-                        <select class="col m3 s5 browser-default">
-                                <option value="" disabled selected>Disponibilidad del producto</option>
-                                <option v-for="items in producto.avaible" :key="items.index">{{ items }}</option>
-                            </select> 
-
-                        <!-- <select class="col m3 s5 browser-default">
-                            <option selected value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select> -->
-                        <a class="col m8 s6 btn bg-main ml-1" href="#">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
+                    <div class="col m8 s12 row mt-2" >
+                        <select class="col m3 s5 browser-default" v-model="contenido" >
+                            <option value="" disabled selected>Disponibilidad del producto</option>
+                            <option v-for="items in producto.avaible" :key="items.index">{{ items }}</option>
+                        </select> 
+                        <a class="col m8 s6 btn bg-main ml-1" href="#" @click="addToCard(idproduct)" v-show="producto.avaible > 0">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
                     </div>
                 </div>
             </div>
@@ -45,6 +39,7 @@ export default {
         return{
             arrayProducto: [],
             idproduct:'',
+            contenido: 0,
         
         }
     },
@@ -58,13 +53,32 @@ export default {
             .catch(function(error){
                 console.log(error);
             });
-        }
+        },
+        addToCard(idproduct){
+            let m=this;
 
+            let formData = new FormData();
+            formData.append('PK_products',m.idproduct);
+            formData.append('avaible', m.contenido);
+
+            axios.post('/producto/disponibilidad',formData,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+        }
     },
      async mounted() {
             let m=this;
-            m.idproduct = await m.productoid;
-            m.listarProducto(m.idproduct);
+            const queryString = window.location.search;      
+            const urlParams = new URLSearchParams(queryString);        
+            const product = urlParams.get('id');      
+            let id = (product !== null && product !== '' && product !== undefined)? product : "";
+            m.listarProducto(id);
         }
 }
 </script>

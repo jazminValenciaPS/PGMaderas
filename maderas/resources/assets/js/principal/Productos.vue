@@ -26,10 +26,9 @@
 
             <!-- Products -->
             <div class="col m9 s12" id="Productos">
-
-                <div v-for="producto in arrayProductos"  :key="producto.PK_products" class="card sticky-action col m4 s12">
-                    <div class="card-image waves-effect waves-block waves-light" @click="VerProducto(6,producto.PK_products)" >
-                        <img :src="'img/'+producto.image" class="pImagen">
+                <div v-for="producto in arrayProductos" :key="producto.PK_products" class="card sticky-action col m4 s12" v-show="producto.avaible > 0">
+                    <div class="card-image waves-effect waves-block waves-light">
+                    <a :href="'/Ver-Producto?id='+producto.PK_products"> <img :src="'img/'+producto.image" class="pImagen"> </a>
                     </div>
                     <div class="card-content">
                         <span class="card-title grey-text text-darken-4">{{producto.name}}</span>
@@ -55,7 +54,7 @@ export default {
             arrayProductos: [],
             arrayCategorias:[],
             tipoAccion: 0,
-        
+            disponibilidad:0,
         }
     },
     methods:{
@@ -93,9 +92,7 @@ export default {
                     valorId: id
                 }
                  m.$emit("mostrar-producto",objeto);
-        },
-    
-      
+        },  
     },
     mounted() {
         this.listarProductos();

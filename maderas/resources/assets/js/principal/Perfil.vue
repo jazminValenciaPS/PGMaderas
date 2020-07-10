@@ -170,7 +170,6 @@
                     </div>
                 </div>
 
-
                 <!-- Debit/Credit Cards -->
                 <div class="col m9 s12" v-if="informacion==3">
                     <div class="text-right mb-2">
@@ -245,9 +244,6 @@
                         </tbody>
                     </table>
                 </div>
-    
-
-
          </div>
     </main>
 
@@ -264,7 +260,6 @@ export default {
             informacion:1,
             status : true,
             arrayDatos:[],
-  
 
         }
     },

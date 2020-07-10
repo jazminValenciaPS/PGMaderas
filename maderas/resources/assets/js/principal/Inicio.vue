@@ -1,31 +1,11 @@
 <template>
 
     <main>
-        <div class="row">
-
-        <!-- Carousel -->
-        <!-- <div class="carousel carousel-slider espace-top">
-            <div class="carousel-fixed-item center">
-                <a onclick="previous()" class="waves-effect waves-light white-text left chevron-middle"><i class="material-icons white-text big-size">chevron_left</i></a>
-                <a onclick="next()" class="waves-effect waves-light white-text right chevron-middle"><i class="material-icons white-text big-size">chevron_right</i></a>
-            </div>
-            v-for="slider in arraySliders" :key="slider.PK_slider"
-            <a v-for="slider in arraySliders" :key="slider.PK_slider" class="carousel-item active" >
-                <img class="" :src="'./public/img/'+ slider.image">
-                 <img  :src="'img/'+slider.image">
-                  :src="'img/'+slider.image"
-            </a>
-              <a  class="carousel-item active" >
-                 <img  src="https://www.blogbankia.es/recursos/img/blog/20190611/julio-2019/cuanto-cobra-un-astronauta-mini-783x412.jpg">
-                  :src="'img/'+slider.image"
-            </a>
-        </div> -->
+        <!-- <div class="row"> -->
         <!-- carrusel con vue -->
-        <vueper-slides autoplay>
-            <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" :image="'img/'+slider.image" />
-        </vueper-slides>
-
-
+            <vueper-slides autoplay>
+                <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" :image="'img/'+slider.image" />
+            </vueper-slides>
 
         <!-- Card Services -->
         <h3 class="color-main center">¡Nuestros Servicios!</h3>
@@ -85,7 +65,7 @@
                 </div>
             </div>
         </div>
-        </div>
+        <!-- </div> -->
 
     </main>
 </template>

@@ -14,17 +14,41 @@
 
 Route::group(['middleware'=>['guest']],function(){
     Route::get('/login','Auth\LoginController@showLoginForm');
+    Route::get('/iniciar-sesion','Auth\LoginClientController@showLoginForm');
+
     
 });
 
 
+
 Route::get('/', function () {
-    return view('contenido/ecommerce');
+    return view('tienda.pagina.Inicio');
 })->name('contenido');
 
-// Route::get('/', function () {
-//     return view('contenido/consola');
-// })->name('consola');
+Route::get('/Quienes-Somos', function () {
+    return view('tienda.pagina.QuienesSomos');
+})->name('quienes');
+
+Route::get('/Contacto', function () {
+    return view('tienda.pagina.Contacto');
+})->name('contacto');
+
+Route::get('/Productos', function () {
+    return view('tienda.pagina.Productos');
+})->name('productos');
+
+Route::get('/Ver-Producto', function () {
+    return view('tienda.pagina.Producto');
+})->name('producto');
+
+Route::get('/Carrito', function () {
+    return view('tienda.pagina.Carrito');
+})->name('carrito');
+
+Route::get('/Perfil', function () {
+    return view('tienda.pagina.Perfil');
+})->name('perfil');
+
 
 Auth::routes();
 
@@ -35,6 +59,10 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('/consola', function () {
         return view('contenido/consola');
     })->name('consola');
+
+    // Route::get('/Perfil', function () {
+    //     return view('tienda.pagina.Perfil');
+    // })->name('perfil');
 
     // Route::group(['middleware'=>['Administrador']],function() {
         Route::post('/password/actualizar','PasswordController@update');
@@ -83,7 +111,6 @@ Route::group(['middleware'=>['auth']],function(){
     // });
 
    
-   
 
 
 
@@ -101,8 +128,9 @@ Route::get('/user/cliented/{id}','UserController@clientData');
 Route::get('/categoriaV','CategorieController@listar');
 
 Route::post('contact','MessagesController@store');
+Route::post('/producto/disponibilidad','ProductController@productsSubtraction');
 
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::group(['middleware'=>['Cliente']],function() {
 
-});
+// Route::group(['middleware'=>['Cliente']],function() {
+// });

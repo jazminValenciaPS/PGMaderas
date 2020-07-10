@@ -170,4 +170,11 @@ class ProductController extends Controller
         $producto->status = '1';
         $producto->save();
     }
+
+    public function productsSubtraction(Request $request){
+        $id = $request->PK_products;
+        $producto = Product::findOrFail($id);
+        $producto->avaible= $$request->avaible;
+        $producto->save();
+    }
 }
