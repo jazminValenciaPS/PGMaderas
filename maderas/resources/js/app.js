@@ -21,6 +21,8 @@ import perfil from '../assets/js/principal/Perfil.vue';
 import contacto from '../assets/js/principal/Contacto.vue';
 import carrito from '../assets/js/principal/Carrito.vue';
 import producto from '../assets/js/principal/Producto.vue';
+import registro from '../assets/js/principal/Registro.vue';
+
 
 
 
@@ -46,6 +48,8 @@ Vue.component('perfil',perfil);
 Vue.component('contacto',contacto);
 Vue.component('carrito',carrito);
 Vue.component('producto',producto);
+Vue.component('registro',registro);
+
 
 
 

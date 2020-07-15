@@ -1,13 +1,11 @@
 <template>
     <main>
-
         <h4 class="mt-0 color-main">Carrito de Compra</h4>
-
         <!-- Container -->
-        <div class="row">
+        <div class="row" id="carrito">
             <!-- Cart -->
             <div class="col m8 s12 p-0">
-                <table class="responsive-table">
+                <table id="lista-carrito" class="responsive-table">
                     <thead>
                         <tr class="col m12 s12 p-0">
                             <th class="col m6 s6">Producto</th>
@@ -17,39 +15,22 @@
                         </tr>
                     </thead>
             
-                    <tbody>
+                    <tbody v-for="carrito in arrayProductos" :key="carrito.PK_products" >
                         <tr class="col m12 s12 p-0">
                             <td class="col m6 s6">
                                 <div class="col m12 s12 p-0">
-                                    <img class="col m6 s6 p-0 materialboxed" width="100%" src="https://revista-mm.com/wp-content/uploads/2018/08/madera-1.jpg">
-                                    <p class="col m6 s6 m-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id modi accusantium possimus incidunt ...</p>
+                                    <a :href="'/Ver-Producto?id='+carrito.PK_products"><img :src="'img/'+carrito.image" class="pImagen"></a>
+                                    <p class="col m6 s6 m-0">{{carrito.description}}</p>
                                 </div>                                
                             </td>
                             <td class="col m2 s2">
                                 <h6>1</h6>
                             </td>
                             <td class="col m2 s2">
-                                <h6>$399</h6>
+                                <h6>{{carrito.price}}</h6>
                             </td>
                             <td class="col m2 s2">
-                                <h6>$399</h6>
-                            </td>
-                        </tr>
-                        <tr class="col m12 s12 p-0">
-                            <td class="col m6 s6">
-                                <div class="col m12 s12 p-0">
-                                    <img class="col m6 s6 p-0 materialboxed" width="100%" src="https://revista-mm.com/wp-content/uploads/2018/08/madera-1.jpg">
-                                    <p class="col m6 s6 m-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id modi accusantium possimus incidunt ...</p>
-                                </div>                                
-                            </td>
-                            <td class="col m2 s2">
-                                <h6>1</h6>
-                            </td>
-                            <td class="col m2 s2">
-                                <h6>$399</h6>
-                            </td>
-                            <td class="col m2 s2">
-                                <h6>$399</h6>
+                                <h6>$11</h6>
                             </td>
                         </tr>
                     </tbody>
@@ -70,26 +51,41 @@
 
             </div>
         </div>
-        
-
     </main>
-
 </template>
+<script src="../carrito.js"></script>
+<script src="../pedido.js"></script>
 <script>
-
-    export default {
-         data(){
-            return{
-        
-            }
-            },
-            methods:{
-             
-            },
-        mounted() {
-            console.log("Component mounted");
+export default {
+    data(){
+        return{
+            PK_products:'',
+            arrayProductos: [],
+            tipoAccion: 0,
+            
         }
-     }
+    },
+    methods:{
+        // listarProductos(){
+        //     let m=this;
+        //     var url='/producto';
 
-
- </script>
+        //     axios.get(url).then(function (response){
+        //         m.arrayProductos = response.data;
+        //     })
+        //     .catch(function(error){
+        //         console.log(error);
+        //     });
+        // }
+    },
+    mounted() {
+        let carrito = JSON.parse(localStorage.getItem('carrito'));
+        if (Array.isArray(carrito)){
+            this.arrayProductos = carrito;
+        }
+        console.log(this.arrayProductos);
+        
+        // this.listarProductos();
+    }
+}
+</script>

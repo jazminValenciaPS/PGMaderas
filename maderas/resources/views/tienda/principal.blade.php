@@ -28,7 +28,7 @@
 
     <!-- Contenido principal -->
     @yield('ecommerce')
-    
+
     <!-- Termina contenido principal -->
 
     <!-- Footer -->

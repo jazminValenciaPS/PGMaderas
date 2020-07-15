@@ -8,10 +8,11 @@
         <div class="col l4 offset-l2 s12">
             <h5 class="white-text">Enlaces</h5>
             <ul>
-                <li><a class="grey-text text-lighten-3" href="#!">Enlace 1</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Enlace 2</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Enlace 3</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Enlace 4</a></li>
+                <li>
+                <a class="grey-text text-lighten-3" href="#!">Facebook</a> 
+                </li>
+                <li><a class="grey-text text-lighten-3" href="#!">Instagram</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Youtube</a></li>
             </ul>
         </div>
         </div>

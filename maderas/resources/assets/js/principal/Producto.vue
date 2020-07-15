@@ -18,11 +18,11 @@
                         <h6 class="mt-2"><span class="color-main">{{producto.avaible}}</span> Disponibles para compra en línea</h6>
                     </div>
                     <div class="col m8 s12 row mt-2" >
-                        <select class="col m3 s5 browser-default" v-model="contenido" >
+                        <select class="col m3 s5 browser-default">
                             <option value="" disabled selected>Disponibilidad del producto</option>
                             <option v-for="items in producto.avaible" :key="items.index">{{ items }}</option>
                         </select> 
-                        <a class="col m8 s6 btn bg-main ml-1" href="#" @click="addToCard(idproduct)" v-show="producto.avaible > 0">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
+                        <a class="col m8 s6 btn bg-main ml-1"   v-show="producto.avaible > 0">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
                     </div>
                 </div>
             </div>

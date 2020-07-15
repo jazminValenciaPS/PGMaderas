@@ -16,7 +16,6 @@ Route::group(['middleware'=>['guest']],function(){
     Route::get('/login','Auth\LoginController@showLoginForm');
     Route::get('/iniciar-sesion','Auth\LoginClientController@showLoginForm');
 
-    
 });
 
 
@@ -50,8 +49,15 @@ Route::get('/Perfil', function () {
 })->name('perfil');
 
 
+Route::get('/registro', function () {
+    return view('tienda.pagina.Registro');
+})->name('registro');
+
 Auth::routes();
 
+
+Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('registrar','Auth\RegisterController@register')->name('registrar');
 
 
 Route::group(['middleware'=>['auth']],function(){
@@ -124,13 +130,10 @@ Route::get('/productoL','ProductController@listarProductos');
 Route::get('/productoM/{id}', 'ProductController@mostrarProducto')->name('productos');
 
 Route::get('/user/cliented/{id}','UserController@clientData');
+Route::post('/user/registrarC','UserController@registroCliente');
+
 
 Route::get('/categoriaV','CategorieController@listar');
 
 Route::post('contact','MessagesController@store');
-Route::post('/producto/disponibilidad','ProductController@productsSubtraction');
 
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Route::group(['middleware'=>['Cliente']],function() {
-// });

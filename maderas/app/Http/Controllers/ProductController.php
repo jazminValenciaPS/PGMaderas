@@ -177,4 +177,5 @@ class ProductController extends Controller
         $producto->avaible= $$request->avaible;
         $producto->save();
     }
+
 }

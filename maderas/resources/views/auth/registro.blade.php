@@ -1,9 +1,13 @@
+@extends('auth.contenidoR')
+@section('registro')
 <main>
+        <br>
         <h4 class="mt-0 color-main">Registro de Usuario</h4>
         
         <!-- Container -->
         <div class="row">
             <!-- Sign In -->
+
             <div class="col m6 s12 p-0">
                 <p>¿No tienes cuenta?<br>Crea una cuenta facilmente obteniendo estos beneficios especiales:</p>
                 <p>
@@ -42,6 +46,9 @@
             </div>
 
             <!-- Sign Up -->
+         <form method="POST" action="{{ route('register') }}">
+             <!-- {{ csrf_field() }} -->
+
             <div class="col m6 s12 p-0">
                 <div class="input-field col m12 s12 mb-0">
                     <input id="firstname" type="text" required>
@@ -53,7 +60,6 @@
                 </div>
                 <div class="input-field col m12 s12 mb-0">
                     <input type="text" class="datepicker col m6 s12" placeholder="Nacimiento">
-                    <form action="#" class="col m6 s12">
                         <p>
                             <label class="col m3 s6">
                                 <input class="with-gap" name="group1" type="radio"  />
@@ -66,7 +72,6 @@
                                 <span class="pl-3">Masculino</span>
                             </label>
                         </p>
-                    </form>
                 </div>
                 <div class="input-field col m6 s12 mb-0">
                     <input id="state" type="text" required>
@@ -89,17 +94,16 @@
                     <label for="ext_number">Nº Exterior</label>
                 </div>
                 <div class="input-field col m6 s12 mb-0">
+                    <input id="rfc" type="text" required>
+                    <label for="rfc">RFC</label>
+                </div>
+                <!-- <div class="input-field col m6 s12 mb-0">
                     <input id="int_number" type="text" required>
                     <label for="int_number">Nº Interior</label>
-                </div>
+                </div> -->
                 <div class="input-field col m12 s12 mb-0">
                     <textarea id="references" class="materialize-textarea"></textarea>
                     <label for="references">Referencias</label>
-                </div>
-
-                <div class="input-field col m12 s12 mb-0">
-                    <input id="rfc" type="text" required>
-                    <label for="rfc">RFC</label>
                 </div>
                 <div class="input-field col m12 s12 mb-0">
                     <input id="phone" type="text" required>
@@ -122,11 +126,16 @@
                     <label for="pasword_repeat">Repetir Contraseña</label>
                 </div>
                 <div class="col m12 s12">
-                    <a class="btn bg-main mt-2 mb-2" href="#">Registrarme</a>
-                    <a class="btn green lighten-2 mt-2 mb-2" href="#">Cancelar</a>
+                    <button type="submit" class="btn bg-main mt-2 mb-2">Registrarme</button>
+
+                    <!-- <a class="btn bg-main mt-2 mb-2" href="#">Registrarme</a> -->
+                    <a class="btn green lighten-2 mt-2 mb-2" href="/iniciar-sesion">Cancelar</a>
                 </div>
             </div>
+         </form>
+
         </div>
         
 
     </main>
+@endsection

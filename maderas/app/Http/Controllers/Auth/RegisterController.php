@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Person;
+use App\Addresse;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -24,12 +26,32 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    public function showRegistrationForm()
+    {
+        $tipousuario=TipoUsuario::all();
+        $cargo=Cargo::all();
+        return view('auth.register',compact('tipousuario','cargo'));
+    }
+
+
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = User::create($request->all())));
+
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }
+
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/iniciar-sesion';
 
     /**
      * Create a new controller instance.
@@ -50,24 +72,53 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'phone' => ['required', ],
+            'birth_date' => ['required'],
+            'gender' => ['required', 'string'],
+            'street' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'state' => ['required', 'string'],
+            'postal_code' => ['required'],
+            'suburb' => ['required', 'string'],
+            'reference' => ['required', 'string'],
+
+
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
+ 
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'status' => '1',
         ]);
+
+        return Person::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'phone' => $data['phone'],
+            'birth_date' => $data['birth_date'],
+            'gender' => $data['gender'],
+
+        ]);
+
+        return Addresse::create([
+            'street' => $data['street'],
+            'city' => $data['city'],
+            'state' => $data['state'],
+            'postal_code' => $data['postal_code'],
+            'suburb' => $data['suburb'],
+            'reference' => $data['reference'],
+            'status' => '1',
+
+
+        ]);
+
     }
 }

@@ -22,7 +22,7 @@
                     <ul class="collection">
                         <li class="collection-item">
                             <h6>Datos Personales</h6>
-                            <a @click="editarDatos()">Información Personal</a>
+                            <a  @click="listarDatos()">Información Personal</a>
                             <a @click="listarTarjetas()" >Mis Tarjetas</a>
                             <a  >Cambiar Contraseña</a>
                         </li>
@@ -91,12 +91,15 @@
                         <span class="col m2 s4 bold">Correo:</span>
                         <span class="col m10 s8">{{cliente.email}}</span>
                     </div>
+                      <div class="col m12 s12">
+                        <a class="btn bg-main mt-2 mb-2" @click="editarDatos()" >Editar</a>
+                    </div>
                 </div>
 
                 <!-- Información personal editable -->               
                 <div class="col m9 s12" v-if="informacion==2">
                     <div class="input-field col m12 s12 mb-0">
-                        <input id="firstname" type="text" required>
+                        <input id="firstname" type="text" required v-model="name">
                         <label for="firstname">Nombre(s)</label>
                     </div>
                     <div class="input-field col m12 s12 mb-0">
@@ -140,10 +143,6 @@
                         <input id="ext_number" type="text" required>
                         <label for="ext_number">Nº Exterior</label>
                      </div>
-                     <div class="input-field col m6 s12 mb-0">
-                        <input id="int_number" type="text" required>
-                        <label for="int_number">Nº Interior</label>
-                    </div>
                     <div class="input-field col m12 s12 mb-0">
                          <textarea id="references" class="materialize-textarea"></textarea>
                          <label for="references">Referencias</label>
@@ -155,14 +154,6 @@
                     <div class="input-field col m12 s12 mb-0">
                         <input id="phone" type="text" required>
                         <label for="phone">Teléfono/Celular</label>
-                    </div>
-                    <div class="input-field col m12 s12 mb-0">
-                        <input id="email" type="text" required>
-                        <label for="email">Correo</label>
-                    </div>
-                    <div class="input-field col m12 s12 mb-0">
-                        <input id="email_repeat" type="text" required>
-                        <label for="email_repeat">Repetir Correo</label>
                     </div>
                     <div class="col m12 s12">
                         <a class="btn bg-main mt-2 mb-2" href="#">Guardar</a>
@@ -266,7 +257,10 @@ export default {
     methods:{
         listarDatos(){
             let m=this;
-            var id = 3;
+              
+             m.informacion= 1;
+
+            var id = 7;
             var url='/user/cliented/'+id;
 
             axios.get(url).then(function (response){

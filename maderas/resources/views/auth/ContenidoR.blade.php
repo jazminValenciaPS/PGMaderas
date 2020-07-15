@@ -17,6 +17,16 @@
 
   <body>
 
+    @include('plantilla.navEcommerce')
+   
+
+
+      @yield('registro')
+    
+
+     <!-- Footer -->
+
+    @include('plantilla.footerPrincipal')
 
 
           

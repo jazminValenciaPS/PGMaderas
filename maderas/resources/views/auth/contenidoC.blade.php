@@ -1,57 +1,84 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href='css/plantilla.css' >
-    <link rel="stylesheet" href='css/estilos.css' >
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="csrf-token" content="{{ csrf_token()  }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js">
+  <title>PG Maderas</title>
+    <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- General CSS -->
+    <link rel="stylesheet" href='css/general.css' >
+    <!-- <link rel="stylesheet" href='css/estilos.css' > -->
+    <link href="https://unpkg.com/vueperslides/dist/vueperslides.css" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href='css/plantilla.css' > -->
+
+    <link rel="shortcut icon" href="img/44742972_183514302527228_7107553413201657856_n.jpg" type="image/x-icon">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8"/>
    </head>
   
    <body class="login" >
 
-<div class="padre">
-<main>
+
+   <div id="app" class="padre">
+
 
 <!-- Container -->
-<div class="row">
     <!-- Sign In -->
-    <div class="col m6 s12 p-0 mb-2">
-        <h4 class="mt-0 color-main">Mi Cuenta</h4>
-        <p>¿Aún no tienes cuenta?<br>¡Crea tu cuenta hoy!</p>
-        <p>
-            Revisa el estatus de tus órdenes
-            <i class="material-icons left color-main">check</i>
-        </p>
-        <p>
-            Consulta tu historial de compras
-            <i class="material-icons left color-main">check</i>
-        </p>
-        <p>
-            Vuelve a comprar tus órdenes anteriores
-            <i class="material-icons left color-main">check</i>
-        </p>
-        <p>
-            Recibe nuestras promociones y ¡Aprovéchalas antes que nadie!
-            <i class="material-icons left color-main">check</i>
-        </p>
-        <a class="btn bg-main mt-2" href="#">Registrarme<i class="material-icons left">person_add</i></a>
-       
-        @yield('loginC')
-   
+    @include('plantilla.navEcommerce')
+
+
+    @yield('loginC')
+
+
     </div>
+    @include('plantilla.footerPrincipal')
 
 
 
 </div>
 
-      
-     
-      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <script src="js/plantilla.js"></script>
-      
 
-   </body>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  
+   
+   <!-- <script src="//code.jquery.com/jquery-latest.js"></script> -->
+   <script src="./js/plantilla.js"></script>
+   <script src="./js/app.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+   <script src="https://unpkg.com/vue"></script>
+   <script src="https://unpkg.com/vueperslides"></script>
+
+   <script>
+     document.addEventListener('DOMContentLoaded', () => {
+           M.Sidenav.init(document.querySelectorAll('.sidenav'), {});
+           M.AutoInit();
+
+           var options = {
+               indicators: true,
+               fullWidth: true,
+               indicators: true
+           };
+           var elem = document.querySelector('.carousel');
+           var instances = M.Carousel.init(elem, options);
+           // M.Carousel.init(elem, {
+              
+           // });
+
+         
+           previous = () => {
+               M.Carousel.getInstance(elem).prev();
+           }
+           next = () => {
+               M.Carousel.getInstance(elem).next();
+           }
+       });
+ 
+   </script>
+ </body>
 </html>
