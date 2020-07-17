@@ -27,20 +27,20 @@
     </div>
 
     <!-- Sign Up -->
-  <form  method="POST" action="{{ route('login') }}">
+  <form  method="POST" action="{{ url('iniciar-sesion') }}">
       {{ csrf_field() }}
 
     <div class="col m6 s12 p-0">
         <h4 class="mt-0 color-main">Iniciar Sesión</h4>
         <!-- <div class="input-field col m7 s12"> -->
         <div class="input-field col m7 s12 {{ $errors->has('email' ? 'has-error' : '' ) }}">
-
-            <input  value="{{old('email')}}"  name="email" id="email" type="text" class="validate" autofocus>
+            <input  value="{{old('email')}}"  name="email" id="email" type="text" class="validate" autofocus required>
             <label for="email">Correo</label>
             {!! $errors->first('email','<span class="help-block">:message</span>') !!}
         </div>
+
         <div class="input-field col m7 s12 {{$errors->has('password' ? 'has-error': '' ) }}">
-            <input id="password" type="password" required>
+            <input id="password" name="password" id="password" type="password" class="validate" required>
             <label for="password">Contraseña</label>
             {!! $errors->first('password','<span class="help-block">:message</span>') !!}
 

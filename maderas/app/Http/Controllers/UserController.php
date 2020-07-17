@@ -87,6 +87,7 @@ class UserController extends Controller
     public function clientData(Request $request){
 
         $id = $request->id;
+        printf($id);
 
         return $user = DB::table('users')
         ->join('roles', 'roles.PK_roles', '=', 'users.id_role')

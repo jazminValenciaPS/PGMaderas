@@ -31,7 +31,7 @@
                             <h6>${{producto.price}}</h6>
                         </div>
                         <div class="card-action ">
-                            <a class="btn bg-main agregar-carrito" v-on:click="cantidad += 1" @click="agregarCarrito(producto)" >Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
+                            <a class="btn bg-main agregar-carrito" v-on:click="cantidad = 1"  @click="agregarCarrito(producto)" >Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
                         </div> 
                     </div>
                 </div>
@@ -88,33 +88,27 @@ export default {
                  m.$emit("mostrar-producto",objeto);
         },
         agregarCarrito(producto){
-            // console.log(JSON.stringify(producto));
             let productosLS;
-            productosLS = this.obtenerProductosLocalStorage();
-
-            productosLS.forEach(function (productoLS){
-                if(productoLS.PK_products === producto.PK_products){
-                    productosLS = productoLS.PK_products;
-                }
-            });
-        
-            if(productosLS === producto.PK_products){
-            Swal.fire({
-                type: 'info',
-                title: 'Ooops!',
-                text: 'El producto ya está en el carrito',
-                showConfirmButton: false,
-                timer: 1000
-            })
+            let cantidad = this.cantidad;
+            console.log(producto,"producto");
+            let coincidencia = this.carrito.find((productoLS) => productoLS.PK_products === producto.PK_products);
+            if(coincidencia){
+                Swal.fire({
+                    type: 'info',
+                    title: 'Ooops!',
+                    text: 'El producto ya está en el carrito',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                return;
             }
-            else {
-                this.carrito.push(producto);
-                localStorage.setItem('carrito', JSON.stringify(this.carrito));
-            } 
+            producto.cantidad = cantidad;
+            this.carrito.push(producto);
+            localStorage.setItem('carrito', JSON.stringify(this.carrito));
+            console.log(this.carrito,"carrito en agregar");
         },
         obtenerProductosLocalStorage(){
             let productoLS;
-
             //Comprobar si hay algo en LS
             if(localStorage.getItem('carrito') === null){
                 productoLS = [];
@@ -122,17 +116,24 @@ export default {
             else {
                 productoLS = JSON.parse(localStorage.getItem('carrito'));
             }
-            return productoLS;
+            this.carrito = productoLS;
+        },
+        crearCarrito(){
+            this.carrito = JSON.parse(localStorage.getItem('carrito'));
+
+            if (!Array.isArray(this.carrito)){
+                this.carrito = [];
+            }
+
+          
+            console.log(this.carrito,"crear carrito")
         }
     },
     mounted() {
         this.listarProductos();
         this.listarCategorias();
-        this.carrito = JSON.parse(localStorage.getItem('carrito'));
-        if (!Array.isArray(this.carrito)){
-            this.carrito = [];
-        }
-        console.log(this.carrito, "carrito");
+        this.crearCarrito();
+        this.obtenerProductosLocalStorage();
     }
 
 }

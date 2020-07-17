@@ -15,7 +15,7 @@
                         </tr>
                     </thead>
             
-                    <tbody v-for="carrito in arrayProductos" :key="carrito.PK_products" >
+                    <tbody v-for="carrito in carrito" :key="carrito.PK_products" >
                         <tr class="col m12 s12 p-0">
                             <td class="col m6 s6">
                                 <div class="col m12 s12 p-0">
@@ -23,14 +23,17 @@
                                     <p class="col m6 s6 m-0">{{carrito.description}}</p>
                                 </div>                                
                             </td>
-                            <td class="col m2 s2">
-                                <h6>1</h6>
+                            <td class="col m2 s2 ">
+                                <select id="select-cantidad" class="col s4 m3 s5 browser-default ">
+                                    <option value="" >{{carrito.cantidad}}</option>
+                                    <option v-for="items in arrayProductos" :key="items.PK_products">{{ items.avaible }}</option>
+                                </select> 
                             </td>
                             <td class="col m2 s2">
-                                <h6>{{carrito.price}}</h6>
+                                <h6>$ {{carrito.price}}</h6>
                             </td>
                             <td class="col m2 s2">
-                                <h6>$11</h6>
+                                <h6></h6>
                             </td>
                         </tr>
                     </tbody>
@@ -53,8 +56,6 @@
         </div>
     </main>
 </template>
-<script src="../carrito.js"></script>
-<script src="../pedido.js"></script>
 <script>
 export default {
     data(){
@@ -62,30 +63,33 @@ export default {
             PK_products:'',
             arrayProductos: [],
             tipoAccion: 0,
-            
+            carrito: [],
+            total: 0,
         }
     },
     methods:{
-        // listarProductos(){
-        //     let m=this;
-        //     var url='/producto';
-
-        //     axios.get(url).then(function (response){
-        //         m.arrayProductos = response.data;
-        //     })
-        //     .catch(function(error){
-        //         console.log(error);
-        //     });
-        // }
+        async listarProductos (id){
+            let m=this;
+            var url= `/productoM/${id}`;
+            return await axios.get(url);
+        },
     },
-    mounted() {
+    async mounted() {
         let carrito = JSON.parse(localStorage.getItem('carrito'));
         if (Array.isArray(carrito)){
-            this.arrayProductos = carrito;
+            this.carrito = carrito;
         }
-        console.log(this.arrayProductos);
-        
-        // this.listarProductos();
+        this.carrito = await Promise.all(this.carrito.map(async (producto) => {
+            var productoActualizado = await this.listarProductos(producto.SKU);
+            productoActualizado = productoActualizado.data[0];
+            producto.avaible = productoActualizado.avaible;
+            producto.price = productoActualizado.price;
+            producto.name = productoActualizado.name;
+            producto.image = productoActualizado.image;
+            return producto;
+        }));
+        console.log(this.carrito);
+
     }
 }
 </script>

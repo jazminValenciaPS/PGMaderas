@@ -11,13 +11,14 @@
 |
 */
 
-
 Route::group(['middleware'=>['guest']],function(){
     Route::get('/login','Auth\LoginController@showLoginForm');
     Route::get('/iniciar-sesion','Auth\LoginClientController@showLoginForm');
 
 });
 
+
+Route::post('/iniciar-sesion','Auth\LoginClientController@login');
 
 
 Route::get('/', function () {
@@ -53,7 +54,7 @@ Route::get('/registro', function () {
     return view('tienda.pagina.Registro');
 })->name('registro');
 
-Auth::routes();
+// Auth::routes();
 
 
 Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
@@ -115,11 +116,6 @@ Route::group(['middleware'=>['auth']],function(){
     
 
     // });
-
-   
-
-
-
 
 });
 
