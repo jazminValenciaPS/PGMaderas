@@ -52,6 +52,7 @@ export default {
             cantidad:0,
             listaproductos: [],
             carrito:[],
+            total:0
         }
     }, 
     methods:{
@@ -90,7 +91,7 @@ export default {
         agregarCarrito(producto){
             let productosLS;
             let cantidad = this.cantidad;
-            console.log(producto,"producto");
+            let total = this.total;
             let coincidencia = this.carrito.find((productoLS) => productoLS.PK_products === producto.PK_products);
             if(coincidencia){
                 Swal.fire({
@@ -103,9 +104,9 @@ export default {
                 return;
             }
             producto.cantidad = cantidad;
+            producto.total = total;
             this.carrito.push(producto);
             localStorage.setItem('carrito', JSON.stringify(this.carrito));
-            console.log(this.carrito,"carrito en agregar");
         },
         obtenerProductosLocalStorage(){
             let productoLS;

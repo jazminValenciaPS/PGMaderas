@@ -7717,6 +7717,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7724,7 +7728,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       arrayProductos: [],
       tipoAccion: 0,
       carrito: [],
-      total: 0
+      total: 0,
+      cantidad: 1
     };
   },
   methods: {
@@ -7752,6 +7757,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    EliminarDeCarrito: function EliminarDeCarrito(PK_products) {
+      var productosLS = this.carrito; //Obtenemos el arreglo de productos
+
+      console.log(productosLS, "productosLS"); // Comparar el id del producto borrado con LS
+
+      productosLS.forEach(function (productoLS, index) {
+        if (productoLS.PK_products === PK_products) {
+          productosLS.splice(index, 1);
+        }
+      }); //Añadimos el arreglo actual al LS
+
+      localStorage.setItem('carrito', JSON.stringify(productosLS));
     }
   },
   mounted: function mounted() {
@@ -7804,7 +7822,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 4:
               _this2.carrito = _context3.sent;
-              console.log(_this2.carrito);
+              console.log(_this2.carrito, "carrito");
 
             case 6:
             case "end":
@@ -8336,7 +8354,7 @@ __webpack_require__.r(__webpack_exports__);
     listarDatos: function listarDatos() {
       var m = this;
       m.informacion = 1;
-      var id = 8;
+      var id = 7;
       var url = '/user/cliented/' + id;
       axios.get(url).then(function (response) {
         m.arrayDatos = response.data;
@@ -8537,7 +8555,8 @@ __webpack_require__.r(__webpack_exports__);
       tipoAccion: 0,
       cantidad: 0,
       listaproductos: [],
-      carrito: []
+      carrito: [],
+      total: 0
     };
   },
   methods: {
@@ -8570,7 +8589,7 @@ __webpack_require__.r(__webpack_exports__);
     agregarCarrito: function agregarCarrito(producto) {
       var productosLS;
       var cantidad = this.cantidad;
-      console.log(producto, "producto");
+      var total = this.total;
       var coincidencia = this.carrito.find(function (productoLS) {
         return productoLS.PK_products === producto.PK_products;
       });
@@ -8587,9 +8606,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       producto.cantidad = cantidad;
+      producto.total = total;
       this.carrito.push(producto);
       localStorage.setItem('carrito', JSON.stringify(this.carrito));
-      console.log(this.carrito, "carrito en agregar");
     },
     obtenerProductosLocalStorage: function obtenerProductosLocalStorage() {
       var productoLS; //Comprobar si hay algo en LS
@@ -35000,7 +35019,7 @@ var render = function() {
             _vm._l(_vm.carrito, function(carrito) {
               return _c("tbody", { key: carrito.PK_products }, [
                 _c("tr", { staticClass: "col m12 s12 p-0" }, [
-                  _c("td", { staticClass: "col m6 s6" }, [
+                  _c("td", { staticClass: "col m4 s6" }, [
                     _c("div", { staticClass: "col m12 s12 p-0" }, [
                       _c(
                         "a",
@@ -35027,17 +35046,40 @@ var render = function() {
                     _c(
                       "select",
                       {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.cantidad,
+                            expression: "cantidad"
+                          }
+                        ],
                         staticClass: "col s4 m3 s5 browser-default ",
-                        attrs: { id: "select-cantidad" }
+                        attrs: { id: "select-cantidad" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.cantidad = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
                       },
                       [
-                        _c("option", { attrs: { value: "" } }, [
-                          _vm._v(_vm._s(carrito.cantidad))
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v(_vm._s(_vm.cantidad))
                         ]),
                         _vm._v(" "),
-                        _vm._l(_vm.arrayProductos, function(items) {
-                          return _c("option", { key: items.PK_products }, [
-                            _vm._v(_vm._s(items.avaible))
+                        _vm._l(carrito.avaible, function(items) {
+                          return _c("option", { key: items.index }, [
+                            _vm._v(_vm._s(items))
                           ])
                         })
                       ],
@@ -35049,7 +35091,29 @@ var render = function() {
                     _c("h6", [_vm._v("$ " + _vm._s(carrito.price))])
                   ]),
                   _vm._v(" "),
-                  _vm._m(1, true)
+                  _c("td", { staticClass: "col m2 s2" }, [
+                    _c("h6", [
+                      _vm._v(
+                        "$" +
+                          _vm._s((carrito.total = carrito.price * _vm.cantidad))
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "col m2 s21" }, [
+                    _c(
+                      "i",
+                      {
+                        staticClass: "material-icons color-text",
+                        on: {
+                          click: function($event) {
+                            return _vm.EliminarDeCarrito(carrito.PK_products)
+                          }
+                        }
+                      },
+                      [_vm._v("highlight_off")]
+                    )
+                  ])
                 ])
               ])
             })
@@ -35058,7 +35122,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._m(2)
+      _vm._m(1)
     ])
   ])
 }
@@ -35069,21 +35133,17 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", { staticClass: "col m12 s12 p-0" }, [
-        _c("th", { staticClass: "col m6 s6" }, [_vm._v("Producto")]),
+        _c("th", { staticClass: "col m4 s6" }, [_vm._v("Producto")]),
         _vm._v(" "),
         _c("th", { staticClass: "col m2 s2" }, [_vm._v("Cantidad")]),
         _vm._v(" "),
         _c("th", { staticClass: "col m2 s2" }, [_vm._v("Precio Unitario")]),
         _vm._v(" "),
-        _c("th", { staticClass: "col m2 s2" }, [_vm._v("Precio Final")])
+        _c("th", { staticClass: "col m2 s2" }, [_vm._v("Precio Final")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "col m2 s2" }, [_vm._v("Eliminar")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "col m2 s2" }, [_c("h6")])
   },
   function() {
     var _vm = this

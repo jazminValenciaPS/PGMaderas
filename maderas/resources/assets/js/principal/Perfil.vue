@@ -260,7 +260,7 @@ export default {
               
              m.informacion= 1;
 
-            var id = 8;
+            var id = 7;
             var url='/user/cliented/'+id;
 
             axios.get(url).then(function (response){

@@ -30,11 +30,6 @@
                    <b>
                         En PG Maderas y Triplay, siempre podrás encontrar una pieza pensada para que materialices tus ideas en madera.
                     </b>
-
-
- 
-                    <!-- A la fecha GRUPO PEGA es conformado por diferentes razones sociales, dedicados fundamentalmente a la producción de Madera Aserrada de Pino y a la Distribución al mayoreo y medio mayoreo de todo tipo de tablero de Madera.
-                    Desde triplay, MDF, HDF, Aglomerados, melaminas, OSB, Laminados de alta presión, Chapas de Madera, enchapados en MDF y Aglomerados; así como la distribución de diferentes especies de Madera Sólida, tales como Encino Rojo, Encino Blanco, Maple, Nogal, Poplar, Alder, Caoba, Cedro, Tzalám, Parota, etc. -->
             </div>
         </div>
 
