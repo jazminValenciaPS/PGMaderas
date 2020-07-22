@@ -54,6 +54,10 @@ Route::get('/registro', function () {
     return view('tienda.pagina.Registro');
 })->name('registro');
 
+Route::get('/Ordenar', function () {
+    return view('tienda.pagina.Orden');
+})->name('Ordenar');
+
 // Auth::routes();
 
 
@@ -127,9 +131,11 @@ Route::get('/productoM/{id}', 'ProductController@mostrarProducto')->name('produc
 
 Route::get('/user/cliented/{id}','UserController@clientData');
 Route::post('/user/registrarC','UserController@registroCliente');
-
+Route::post('/cliente/actualizar','UserController@updateClient');
+Route::post('/client/passwordUpdate','UserController@passwordUpdate');
 
 Route::get('/categoriaV','CategorieController@listar');
 
 Route::post('contact','MessagesController@store');
+
 

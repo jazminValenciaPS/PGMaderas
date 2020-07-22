@@ -13,12 +13,14 @@ class LoginClientController extends Controller
 
     public function showLoginForm(){
         if(c::check()){
-            return redirect('/consola');
+            //return view('tienda.pagina.Perfil');
+            return 'Tu sesión ha sido iniciada con éxito';
+
         }
         return view('auth.loginC');
     }
 
-    protected $redirectTo = '/Perfil';
+    protected $redirectTo = 'Tu sesión ha sido iniciada con éxito Melissa';
 
     public function login(Request $request){
 
@@ -33,8 +35,10 @@ class LoginClientController extends Controller
         if (Auth::attempt(['email' => $request->email,'password' => $request->password])){
         // ,'password' => $request->password])
             // Auth::loginUsingId(Auth::user()->userTablePrimaryKey);
-            return 'Tu sesión ha sido iniciada con éxito';
-            // redirect('/Perfil');
+            return 'Tu sesión ha sido iniciada con éxito!!!';
+            //redirect('/Perfil');
+            // return view('tienda.pagina.Perfil');
+
         }
 
         return back()

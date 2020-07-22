@@ -20,7 +20,7 @@ class CreatePersonsTable extends Migration
             $table->string('phone',20);
             $table->date('birth_date');
             $table->unsignedTinyInteger('gender')->default(0);
-            
+            $table->string('RFC',20)->nullable();
             $table->timestamps();
         });
     }

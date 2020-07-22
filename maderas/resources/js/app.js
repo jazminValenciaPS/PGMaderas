@@ -22,8 +22,7 @@ import contacto from '../assets/js/principal/Contacto.vue';
 import carrito from '../assets/js/principal/Carrito.vue';
 import producto from '../assets/js/principal/Producto.vue';
 import registro from '../assets/js/principal/Registro.vue';
-
-
+import orden from '../assets/js/principal/Ordenar.vue';
 
 
 window.Vue = require('vue');
@@ -49,13 +48,7 @@ Vue.component('contacto',contacto);
 Vue.component('carrito',carrito);
 Vue.component('producto',producto);
 Vue.component('registro',registro);
-
-
-
-
-
-
-
+Vue.component('orden',orden);
 
 // const app = new Vue({
 //     el: '#app',

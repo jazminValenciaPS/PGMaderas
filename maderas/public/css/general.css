@@ -86,7 +86,6 @@ main {
     
 }
 .container-contacto{
-    /* border: 1px solid red; */
     display: grid;
     grid-gap:10px;
     grid-template-columns: 1fr 1fr;
@@ -141,9 +140,76 @@ main {
   }
 
 #select-cantidad{
-    width: 50%;
+    width: 100%;
 }
 
+.hero-container-main{
+    border: 1px solid #419142;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "title resumen"
+                         "entrega resumen"
+                         "tienda carrito"
+                         "pago carrito"
+                         "botonP .";
+    grid-gap: 10px;
+    padding: 10px
+}
+
+.container-main-order{
+    display: flex;
+    grid-area:title;
+    align-items: center;
+}
+
+.container-main-order img{
+    width: 10%;
+    height: 10%;
+    margin: 0 10px;
+}
+
+.container-resumen-order{
+    grid-area: resumen;
+    border: 1px solid red;
+}
+
+.container-resumen-order .container-resumen-order-title {
+    border: 1px solid;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.container-metodo-entrega{
+    grid-area: entrega;
+}
+
+.container-metodo-entrega form{
+    display: flex;
+}
+
+.container-metodo-tienda{
+    grid-area: tienda;
+}
+
+.container-metodo-pago{
+    grid-area: pago;
+}
+
+.container-metodo-pago form{
+    display: flex;
+}
+
+.container-metodo-button{
+    grid-area: botonP;
+    justify-content: center; 
+    display: flex;
+}
+
+.container-carrito{
+    grid-area: carrito;
+}
   
 @media screen and (max-width: 768px) {
     .container-contacto{

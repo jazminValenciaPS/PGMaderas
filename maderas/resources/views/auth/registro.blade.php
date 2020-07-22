@@ -2,7 +2,7 @@
 @section('registro')
 <main>
         <br>
-        <h4 class="mt-0 color-main">Registro de Usuario</h4>
+        <h4 class="mt-0 color-main">Registro de Usuario m</h4>
         
         <!-- Container -->
         <div class="row">

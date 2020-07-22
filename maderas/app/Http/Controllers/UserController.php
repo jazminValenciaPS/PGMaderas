@@ -85,6 +85,7 @@ class UserController extends Controller
     }
 
     public function clientData(Request $request){
+        if (!$request->ajax()) return redirect('/iniciar-sesion');
 
         $id = $request->id;
         // printf($id);
@@ -93,9 +94,14 @@ class UserController extends Controller
         ->join('roles', 'roles.PK_roles', '=', 'users.id_role')
         ->join('persons', 'persons.PK_persons', '=', 'users.id_person')
         ->join('addresses', 'addresses.id_user', '=', 'users.id')
-        ->select('persons.PK_persons','users.id','persons.first_name','persons.last_name','persons.phone',
-        'persons.birth_date','persons.gender','users.email','users.status',
-        'addresses.street','addresses.suburb','addresses.city','addresses.state','addresses.postal_code','addresses.reference','roles.PK_roles')
+        // ->select('persons.PK_persons','users.id','persons.first_name','persons.last_name','persons.phone',
+        // 'persons.birth_date','persons.gender','users.email','users.status')
+        // ,'addresses.street','addresses.suburb',
+        // 'addresses.city','addresses.state','addresses.postal_code','addresses.reference','roles.PK_roles')
+        // ->where('roles.PK_roles', '=', '3')
+        ->select('users.id','users.email','users.status','persons.PK_persons','users.id','persons.first_name','persons.last_name',
+        'persons.phone','persons.birth_date','persons.gender','persons.RFC','addresses.street','addresses.suburb',
+        'addresses.city','addresses.state','addresses.postal_code','addresses.reference','addresses.outdoorNumber','addresses.PK_addresses')
         ->where('roles.PK_roles', '=', '3')
         ->where('users.id','=',$id)
         ->get();
@@ -195,6 +201,54 @@ class UserController extends Controller
         $address->status = '1';
 
         $address->save();
+    }
+
+    public function updateClient(Request $request){
+        if (!$request->ajax()) return redirect('/inicio-sesion');
+
+        $PK_persons = $request->PK_persons;
+        printf($PK_persons);
+
+    
+        $person = Person::findOrFail($PK_persons);
+
+        $person->first_name = $request->first_name;
+        $person->last_name = $request->last_name;
+        $person->gender = $request->gender;
+        $person->birth_date = $request->birth_date;
+        $person->phone = $request->phone;
+
+        if($request->RFC != ""){
+            $person->RFC = $request->RFC;
+
+        }else{
+            $person->RFC = "";
+
+        }
+
+
+        $person->save();
+
+        $PK_adresses = $request->PK_addresses; 
+
+        $address = Addresse::findOrFail($PK_adresses);
+
+        $address->street=$request->street;
+        $address->city=$request->city;
+        $address->state=$request->state;
+        $address->postal_code=$request->postal_code;
+        $address->suburb=$request->suburb;
+        $address->outdoorNumber=$request->outdoorNumber;
+
+        $address->reference=$request->reference;
+      
+        
+        $address->save();
+
+    }
+
+    public function passwordUpdate(Request $request){
+
     }
 
 

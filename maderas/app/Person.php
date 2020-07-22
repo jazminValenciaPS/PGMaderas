@@ -9,5 +9,5 @@ class Person extends Model
     protected $table = 'persons';
     
     protected $primaryKey = 'PK_persons';
-    protected $fillable =['first_name','last_name','phone','birth_date','gender'];
+    protected $fillable =['first_name','last_name','phone','birth_date','gender','RFC'];
 }

@@ -52,7 +52,7 @@ export default {
             cantidad:0,
             listaproductos: [],
             carrito:[],
-            total:0
+            precioFinal:0,
         }
     }, 
     methods:{
@@ -89,9 +89,9 @@ export default {
                  m.$emit("mostrar-producto",objeto);
         },
         agregarCarrito(producto){
-            let productosLS;
             let cantidad = this.cantidad;
-            let total = this.total;
+            let precioFinal = this.precioFinal;
+
             let coincidencia = this.carrito.find((productoLS) => productoLS.PK_products === producto.PK_products);
             if(coincidencia){
                 Swal.fire({
@@ -104,20 +104,11 @@ export default {
                 return;
             }
             producto.cantidad = cantidad;
-            producto.total = total;
+            producto.precioFinal = precioFinal;
+
             this.carrito.push(producto);
             localStorage.setItem('carrito', JSON.stringify(this.carrito));
-        },
-        obtenerProductosLocalStorage(){
-            let productoLS;
-            //Comprobar si hay algo en LS
-            if(localStorage.getItem('carrito') === null){
-                productoLS = [];
-            }
-            else {
-                productoLS = JSON.parse(localStorage.getItem('carrito'));
-            }
-            this.carrito = productoLS;
+            console.log(this.carrito, 'agregarCarrito');
         },
         crearCarrito(){
             this.carrito = JSON.parse(localStorage.getItem('carrito'));
@@ -134,7 +125,6 @@ export default {
         this.listarProductos();
         this.listarCategorias();
         this.crearCarrito();
-        this.obtenerProductosLocalStorage();
     }
 
 }
