@@ -51,7 +51,7 @@
                     </div>
                     <div class="button-container form formmodal-footer">
                         <button class="button-type" type="button" v-if="tipoAccion==1"  @click="nuevaCategoria()">Guardar</button>
-                        <button class="button-type" type="button" v-if="tipoAccion==2" @click="actualizarCategoria(id_categorias)">Actualizar</button>
+                        <button class="button-type" type="button" v-if="tipoAccion==2" @click="actualizarCategoria(PK_categories)">Actualizar</button>
                         <button class="button-type" type="button" @click="cerrarModal()">Cerrar</button>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                         <th>Desactivar/Activar</th>
                     </tr>
                 </thead>
-                <tbody  v-for="categoria in arrayCategoria" :key="categoria.idCategoria">
+                <tbody  v-for="categoria in arrayCategoria" :key="categoria.PK_categories">
                     <tr>
                         <td v-text="categoria.name"></td> 
                         <td class="hide-on-small-only"  v-text="categoria.description"></td>
@@ -80,7 +80,7 @@
                         <td class="hide-on-small-only"  v-if="categoria.status == 1">Activado</td>
                         <td class="hide-on-small-only"  v-if="categoria.status == 0">Desactivado</td>
                         <td>
-                            <i class="material-icons color-text " @click="abrirModal('Categoria','actualizar',categoria,categoria.PK_categories)">create</i>
+                            <i class="material-icons color-text " @click="abrirModal('categorias','actualizar',categoria,categoria.PK_categories)">create</i>
                         </td>
                         <td class="desactivarActivar">
                             <a href="#!" class="secondary-content" v-if="categoria.status == 1">
@@ -103,6 +103,7 @@
 </template>
 <script>
 // import categorias from './Categorias.vue'
+import Swal from 'sweetalert2';
 
 export default {
     data() {
@@ -137,7 +138,7 @@ export default {
                 console.log(error);
             });
         },
-        abrirModal(modelo,accion, data = [],id){
+        abrirModal(modelo,accion, data = [],PK_categories){
             let m=this;
             switch(modelo){
                 case "categorias":{
@@ -164,13 +165,13 @@ export default {
                     }
                 }
             }
-        },
+        }, 
         nuevaCategoria(){
             if (this.validarCategoria()){
                 return;
             }
             let me = this;
-
+ 
             let formData = new FormData();
 
             formData.append('file', me.file);
@@ -233,6 +234,73 @@ export default {
             this.tipoAccion = 0;
             this.errorCategoria = 0;
             this.errorMostrarMsjCategoria = [];
+        },
+        actualizarCategoria(PK_categories){
+
+                let me = this;
+                console.log("estoy entrando a categoria actualizar",me.name);
+
+                console.log("descripcion",me.description);
+
+                let formData = new FormData();
+                formData.append('PK_categories',PK_categories);
+                formData.append('name', me.name);
+                formData.append('description',me.description);
+                formData.append('file', me.file);
+
+                //Registramos la informacion
+                axios.put('/categoria/actualizar',formData,{
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(function (response) {
+                    me.listarCategoria();
+                    me.cerrarModal();
+                    me.limpiar();                    
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });      
+        },
+        desactivarCategoria(PK_categories){
+            let me = this;
+
+            Swal.fire({
+            title: '¿Está seguro de desactivar esta Categoria?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar!',
+            cancelButtonText: 'Cancelar',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false,
+            reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+
+                    console.log('id de categoria es:', PK_categories);
+                    axios.put('/categoria/desactivar',{
+                        'PK_categories': PK_categories
+                    }).then(function (response) {
+                        me.listarCategoria();
+                        Swal.fire(
+                            'Desactivado!',
+                            'La categoria ha sido desactivado con éxito.',
+                            'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });                    
+                } else if(
+                        // Read more about handling dismissals
+                        result.dismiss === Swal.DismissReason.cancel
+                    ){
+                        me.listarCategoria();
+                    }
+            })
         },
 
     },

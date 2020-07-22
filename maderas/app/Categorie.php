@@ -8,7 +8,7 @@ class Categorie extends Model
 {
     protected $table = 'categories';
     
-    protected $primarykey = "PK_categories";
+    protected $primaryKey = 'PK_categories';
     protected $fillable =['name','description','image','status'];
 
 }

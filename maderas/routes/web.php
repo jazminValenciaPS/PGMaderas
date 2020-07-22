@@ -25,6 +25,7 @@ Route::put('/categoria/desactivar','CategorieController@desactivar');
 
 
 Route::get('/subcategoria','SubcategoriesController@index');
+<<<<<<< HEAD
 Route::post('/subcategoria/registrar','SubcategoriesController@store');
 Route::put('/subcategoria/actualizar','SubcategoriesController@update');
 Route::put('/subcategoria/activar','CategorieCSubcategoriesControllerontroller@activar');
@@ -32,5 +33,7 @@ Route::put('/subcategoria/desactivar','SubcategoriesController@desactivar');
 
 
 
+=======
+>>>>>>> d5ce3836e9700c5a31e995cc797176ec26ebdf59
 
 
