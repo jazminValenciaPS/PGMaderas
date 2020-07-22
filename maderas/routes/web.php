@@ -16,11 +16,19 @@ Route::get('/', function () {
 })->name('consola');
 
 Route::get('/logout','Auth\LoginController@logout')->name('logout');
+
 Route::get('/categoria','CategorieController@index');
 Route::post('/categoria/registrar','CategorieController@store');
 Route::put('/categoria/actualizar','CategorieController@update');
 Route::put('/categoria/activar','CategorieController@activar');
 Route::put('/categoria/desactivar','CategorieController@desactivar');
+
+
+Route::get('/subcategoria','SubcategoriesController@index');
+Route::post('/subcategoria/registrar','SubcategoriesController@store');
+Route::put('/subcategoria/actualizar','SubcategoriesController@update');
+Route::put('/subcategoria/activar','CategorieCSubcategoriesControllerontroller@activar');
+Route::put('/subcategoria/desactivar','SubcategoriesController@desactivar');
 
 
 

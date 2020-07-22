@@ -25,8 +25,8 @@ class CreateAddressesTable extends Migration
             $table->unsignedTinyInteger('is_default')->default(0);
             $table->unsignedTinyInteger('status')->default(1);
 
+            $table->foreign('idCate')->references('idCategoria')->on('categorias');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            
             $table->timestamps();
         });
     }
