@@ -1,13 +1,10 @@
 <template>
-
-<main>
+    <main>
         <br>
         <h4 class="mt-0 color-main">Registro de Usuario</h4>
-        
         <!-- Container -->
         <div class="row">
             <!-- Sign In -->
-
             <div class="col m6 s12 p-0">
                 <p>¿No tienes cuenta?<br>Crea una cuenta facilmente obteniendo estos beneficios especiales:</p>
                 <p>
@@ -46,7 +43,7 @@
 
             <!-- Sign Up -->
 
-             <div class="col m6 s12 p-0">
+            <div class="col m6 s12 p-0">
                 <div class="input-field col m12 s12 mb-0">
                     <input id="firstname" v-model="first_name" type="text" required>
                     <label for="firstname">Nombre(s)</label>
@@ -56,20 +53,18 @@
                     <label for="lastname">Apellido(s)</label>
                 </div>
                 <div class="input-field col m12 s12 mb-0">
-                                <input type="date" class="datepicker" v-model="birth_date" placeholder="Fecha de nacimiento" >
-
-                     <div class="input-field col s6">                          
-                                <select name="LeaveType" class="browser-default" v-model="gender">
-                                    <option value="0" disabled selected>Selecciona el genero</option>
-                                    <option value="1">Masculino</option>
-                                    <option value="2">Femenino</option>
-                                </select> 
+                    <input type="date" class="datepicker" v-model="birth_date" placeholder="Fecha de nacimiento" >
+                    <div class="input-field col s6">                          
+                        <select name="LeaveType" class="browser-default" v-model="gender">
+                            <option value="0" disabled selected>Selecciona el genero</option>
+                            <option value="1">Masculino</option>
+                            <option value="2">Femenino</option>
+                        </select> 
                     </div>
                     <div class="input-field col m6 s12 mb-0">
-                    <input id="suburb" type="text" v-model="suburb" required>
-                    <label for="suburb">Colonia</label>
-                </div>
-                        
+                        <input id="suburb" type="text" v-model="suburb" required>
+                        <label for="suburb">Colonia</label>
+                    </div>   
                 </div>
                 <div class="input-field col m6 s12 mb-0">
                     <input id="state" type="text" v-model="state" required>
@@ -95,10 +90,6 @@
                     <input id="rfc" type="text" required>
                     <label for="rfc">RFC</label>
                 </div>
-                <!-- <div class="input-field col m6 s12 mb-0">
-                    <input id="int_number" type="text" required>
-                    <label for="int_number">Nº Interior</label>
-                </div> -->
                 <div class="input-field col m12 s12 mb-0">
                     <textarea id="references" class="materialize-textarea" v-model="reference"></textarea>
                     <label for="references">Referencias</label>
@@ -120,26 +111,21 @@
                     <label for="pasword">Contraseña</label>
                 </div>
                 <div v-show="errorCliente" class="form-group row div-error">
-                            <div class="text-center text-error">
-                                <div v-for="error in errorMostrarMsjCliente" :key="error" v-text="error">
-                                </div>
-                            </div>
+                    <div class="text-center text-error">
+                        <div v-for="error in errorMostrarMsjCliente" :key="error" v-text="error">
                         </div>
+                    </div>
+                </div>
                 <div class="input-field col m12 s12 mb-0">
                     <input id="pasword_repeat" type="password" v-model="passwordRepeat" required>
                     <label for="pasword_repeat">Repetir Contraseña</label>
                 </div>
                 <div class="col m12 s12">
                     <button type="submit" @click="registroUsuario()" class="btn bg-main mt-2 mb-2">Registrarme</button>
-
-                    <!-- <a class="btn bg-main mt-2 mb-2" href="#">Registrarme</a> -->
                     <a class="btn green lighten-2 mt-2 mb-2" href="/iniciar-sesion">Cancelar</a>
                 </div>
             </div>
-
         </div>
-        
-
     </main>
 </template>
 <script>
@@ -165,18 +151,18 @@
           reference:'',
           errorCliente : 0,
           errorMostrarMsjCliente : [],
-
-
         }
     },
     methods:{
         registroUsuario(){
-              if (this.validarCliente()){
-                return;
-            }
             let me = this;
             let formData = new FormData();
-        
+            let url = '/user/registrarC';
+            
+            if (this.validarCliente()){
+                return;
+            }
+            
             formData.append('first_name', me.first_name); 
             formData.append('last_name', me.last_name);   
             formData.append('phone', me.phone);    
@@ -193,10 +179,8 @@
             formData.append('email', me.email);
             formData.append('password', me.password);
             // formData.append('RFC', me.RFC);
-
             
             // Registramos la informacion
-            let url = '/user/registrarC';
             axios.post(url, formData,{
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -211,27 +195,18 @@
             });
         },
         validarCliente(){
-             this.errorCliente = 0;
+            this.errorCliente = 0;
             this.errorMostrarMsjCliente = [];
-
-                if (this.email != this.emailRepeat) this.errorMostrarMsjCliente.push("Los correos tienen que ser iguales");
-                if (this.password != this.passwordRepeat) this.errorMostrarMsjCliente.push("La contraseña tiene que ser la misma");
-            
-
-
-                if(isNaN(this.phone))this.errorMostrarMsjCliente.push("El teléfono debe ser numérico.");
-
-
-                if (this.errorMostrarMsjCliente.length) this.errorCliente = 1;
-                return this.errorCliente;
-
+            if (this.email != this.emailRepeat) this.errorMostrarMsjCliente.push("Los correos tienen que ser iguales");
+            if (this.password != this.passwordRepeat) this.errorMostrarMsjCliente.push("La contraseña tiene que ser la misma");
+            if(isNaN(this.phone))this.errorMostrarMsjCliente.push("El teléfono debe ser numérico.");
+            if (this.errorMostrarMsjCliente.length) this.errorCliente = 1;
+            return this.errorCliente;
         }
 
     },
     mounted() {
-            console.log("Component mounted");
-            this.gender=0;
-
+        this.gender=0;
     }
  }
 </script>

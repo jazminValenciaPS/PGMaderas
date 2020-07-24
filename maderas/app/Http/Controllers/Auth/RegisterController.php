@@ -51,7 +51,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/iniciar-sesion';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.

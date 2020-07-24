@@ -77,81 +77,79 @@
                 </div>
             </div>  
             <!-- MODAL FIN -->
-         <div class="col s12 m12 gl6"> 
+            <div class="col s12 m12 gl6"> 
 
-            <div class="row">
-                <div class="form-group center">
-                    <div class="col s6">
-                        <div class="input-group">
-                            <select name="LeaveType" class="browser-default" v-model="criterio">
-                                 <option value="" disabled selected>Selecciona con que buscar</option>
-                                 <option value="name">Nombre</option>
-                                 <option value="SKU">SKU</option>
-                             </select>                         
-                            <input type="text" v-model="buscar" @keyup.enter="listarProductos(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
-                            <button type="submit" @click="listarProductos(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                <div class="row">
+                    <div class="form-group center">
+                        <div class="col s6">
+                            <div class="input-group">
+                                <select name="LeaveType" class="browser-default" v-model="criterio">
+                                    <option value="" disabled selected>Selecciona con que buscar</option>
+                                    <option value="name">Nombre</option>
+                                    <option value="SKU">SKU</option>
+                                </select>                         
+                                <input type="text" v-model="buscar" @keyup.enter="listarProductos(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                                <button type="submit" @click="listarProductos(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <table class=" tabla centered">
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Nombre</th>
+                            <th class="hide-on-small-only">Categoria</th>
+                            <th class="hide-on-small-only">Descripcion</th>
+                            <th class="hide-on-small-only">Imagen</th>
+                            <th class="hide-on-small-only">Precio</th>
+                            <th class="hide-on-small-only">Status</th>
+                            <th>Editar</th>
+                            <th>Desactivar/Activar</th>
+                        </tr>
+                    </thead>
+                    <tbody  v-for="producto in arrayProductos" :key="producto.PK_products">
+                        <tr>
+                            <td v-text="producto.SKU"></td> 
+                            <td v-text="producto.name"></td> 
+                            <td class="hide-on-small-only"  v-text="producto.subcategoria"></td>
+                            <td class="hide-on-small-only"  v-text="producto.description"></td>
+                            <td class="hide-on-small-only"><img :src="'img/'+producto.image" class="tImagen square"></td>
+                            <td class="hide-on-small-only"  v-text="producto.price"></td>
+                            <td class="hide-on-small-only"  v-if="producto.status == 1">Activado</td>
+                            <td class="hide-on-small-only"  v-if="producto.status == 0">Desactivado</td>
+                            <td>
+                                <i class="material-icons color-text " @click="abrirModal('producto','actualizar',producto,producto.PK_products)">create</i>
+                            </td>
+                            <td class="desactivarActivar">
+                                <a href="#!" class="secondary-content" v-if="producto.status == 1">
+                                    <i class="switch">
+                                        <label><input type="checkbox" checked="checked" name="status" v-model="producto.status" @click="desactivarProducto(producto.PK_products)"><span class="lever"></span></label>
+                                    </i>
+                                </a>
+                                <a href="#!" class="secondary-content" v-if="producto.status == 0">
+                                    <i class="switch">
+                                        <label><input type="checkbox"  name="status" v-model="producto.status" @click="activarProducto(producto.PK_products)"><span class="lever"></span></label>
+                                    </i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul class="pagination">
+                    <li  v-if="pagination.current_page > 1">
+                        <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
+                        <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
+                    </li>
+                    <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                        <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a  href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
+                    </li>
+                </ul>
             </div>
-            <table class=" tabla centered">
-                <thead>
-                    <tr>
-                        <th>SKU</th>
-                        <th>Nombre</th>
-                        <th class="hide-on-small-only">Categoria</th>
-                        <th class="hide-on-small-only">Descripcion</th>
-                        <th class="hide-on-small-only">Imagen</th>
-                        <th class="hide-on-small-only">Precio</th>
-                        <th class="hide-on-small-only">Status</th>
-                        <th>Editar</th>
-                        <th>Desactivar/Activar</th>
-                    </tr>
-                </thead>
-                <tbody  v-for="producto in arrayProductos" :key="producto.PK_products">
-                    <tr>
-                        <td v-text="producto.SKU"></td> 
-                        <td v-text="producto.name"></td> 
-                        <td class="hide-on-small-only"  v-text="producto.subcategoria"></td>
-                        <td class="hide-on-small-only"  v-text="producto.description"></td>
-                        <td class="hide-on-small-only"><img :src="'img/'+producto.image" class="tImagen square"></td>
-                        <td class="hide-on-small-only"  v-text="producto.price"></td>
-                        <td class="hide-on-small-only"  v-if="producto.status == 1">Activado</td>
-                        <td class="hide-on-small-only"  v-if="producto.status == 0">Desactivado</td>
-                        <td>
-                            <i class="material-icons color-text " @click="abrirModal('producto','actualizar',producto,producto.PK_products)">create</i>
-                        </td>
-                        <td class="desactivarActivar">
-                            <a href="#!" class="secondary-content" v-if="producto.status == 1">
-                                <i class="switch">
-                                    <label><input type="checkbox" checked="checked" name="status" v-model="producto.status" @click="desactivarProducto(producto.PK_products)"><span class="lever"></span></label>
-                                </i>
-                            </a>
-                            <a href="#!" class="secondary-content" v-if="producto.status == 0">
-                                <i class="switch">
-                                    <label><input type="checkbox"  name="status" v-model="producto.status" @click="activarProducto(producto.PK_products)"><span class="lever"></span></label>
-                                </i>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-                    <ul class="pagination">
-                        <li  v-if="pagination.current_page > 1">
-                                    <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
-
-                             <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
-                        </li>
-                         <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                             <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
-                         </li>
-                         <li v-if="pagination.current_page < pagination.last_page">
-                              <a  href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
-                         </li>
-                     </ul>
         </div>
-        </div>
-
     </main>
 </template>
 <script>

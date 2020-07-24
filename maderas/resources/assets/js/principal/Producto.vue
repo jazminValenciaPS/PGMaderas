@@ -1,5 +1,5 @@
 <template>
-      <main>
+    <main>
         <div class="row">
             <!-- Container -->
             <div v-for="producto in arrayProducto" :key="producto.PK_products">
@@ -7,7 +7,6 @@
                 <div class="col m6 s12">
                     <img class="materialboxed" width="100%" :src="'img/'+producto.image">
                 </div>
-
                 <!-- Products -->
                 <div  class="col m6 s12">
                     <div class="col m12 s12" >
@@ -17,17 +16,16 @@
                         <p>{{producto.description}}</p>
                         <h6 class="mt-2"><span class="color-main">{{producto.avaible}}</span> Disponibles para compra en línea</h6>
                     </div>
-                    <div class="col m8 s12 row mt-2" >
-                        <select class="col m3 s5 browser-default">
-                            <option value="" disabled selected>Disponibilidad del producto</option>
-                            <option v-for="items in producto.avaible" :key="items.index">{{ items }}</option>
+                    <div class="col m8 s12 row mt-2" v-for="carrito in carrito" :key="carrito.PK_products" >
+                        <select class="col m3 s5 browser-default" v-if="carrito.PK_products == producto.PK_products" v-model="carrito.cantidad">
+                            <option value="" disabled selected >Disponibilidad del producto</option>
+                            <option v-for="items in carrito.avaible" :key="items.index">{{ items }}</option>
                         </select> 
-                        <a class="col m8 s6 btn bg-main ml-1"   v-show="producto.avaible > 0">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
+                        <a class="col m8 s6 btn bg-main ml-1" v-if="carrito.PK_products == producto.PK_products"  @click="actualizarCantidad(carrito)" v-show="producto.avaible > 0">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
                     </div>
                 </div>
             </div>
         </div>
-
     </main>
 </template>
 <script>
@@ -39,6 +37,8 @@ export default {
         return{
             arrayProducto: [],
             idproduct:'',
+            carrito:[],
+            cantidad:0,
             contenido: 0,
         
         }
@@ -54,23 +54,10 @@ export default {
                 console.log(error);
             });
         },
-        addToCard(idproduct){
-            let m=this;
-
-            let formData = new FormData();
-            formData.append('PK_products',m.idproduct);
-            formData.append('avaible', m.contenido);
-
-            axios.post('/producto/disponibilidad',formData,{
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            
-            })
-            .catch(function(error){
-                console.log(error);
-            });
-        }
+       actualizarCantidad(carrito){
+            localStorage.setItem('carrito', JSON.stringify(this.carrito));
+            console.log(this.carrito,"carrito guardar");
+        },
     },
      async mounted() {
             let m=this;
@@ -79,6 +66,15 @@ export default {
             const product = urlParams.get('id');      
             let id = (product !== null && product !== '' && product !== undefined)? product : "";
             m.listarProducto(id);
+
+            
+            let carrito = JSON.parse(localStorage.getItem('carrito'));
+            if (Array.isArray(carrito)){
+                m.carrito = carrito;
+            }
+
+            console.log(this.carrito, "carrito");
+
         }
 }
 </script>

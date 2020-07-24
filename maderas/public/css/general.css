@@ -34,10 +34,19 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
 .collection a { display: block; padding: 5px 0px 5px 20px; }
 
 /* Materialize + Custom */
-#Productos .card { overflow: visible; -webkit-box-shadow: none !important; box-shadow: none !important; }
+#Productos .card 
+{
+     overflow: visible;
+     -webkit-box-shadow: none !important; 
+     box-shadow: none !important;  
+}
 #Productos .card .card-content { padding: 10px 20px; }
 #Productos .card .card-action { border: none !important; }
 #Productos .card .card-image img { padding: 20px !important; }
+
+.pagination li.active {
+    background-color: #419141 !important;
+}
 
 
 /* Custom */
@@ -103,7 +112,6 @@ main {
     justify-items: center;
     align-content: center;
     font-size: 20px;
-
 }
 
 .map-contaider{
@@ -134,11 +142,20 @@ main {
     justify-content: center;
 
 }
-.pImagen{
-    width: 200px;
-    height: 300px;
-  }
+/* .pImagen{
+    width: 100% !important;
+        height: 100% !important;
+  } */
 
+.pImagen-carrito{
+    width: 120px !important;
+    height:70px !important;
+}
+
+  .pImagen{
+    width: 200px !important;
+    height: 200px !important;
+  }
 #select-cantidad{
     width: 100%;
 }
@@ -171,14 +188,23 @@ main {
 
 .container-resumen-order{
     grid-area: resumen;
-    border: 1px solid red;
+    
 }
 
-.container-resumen-order .container-resumen-order-title {
-    border: 1px solid;
+.container-resumen-order .title {
+    /* border: 1px solid; */
     margin: 0;
     display: flex;
     justify-content: center;
+}
+
+.order-content{
+    margin: 5%;  
+}
+
+.order-content .pading{
+    /* border:1px solid */
+    padding: 10px;
 }
 
 .container-metodo-entrega{
@@ -210,8 +236,74 @@ main {
 .container-carrito{
     grid-area: carrito;
 }
-  
-@media screen and (max-width: 768px) {
+
+.container-carrito .title{
+    /* border: 1px solid; */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.contenedor-carrito-pro{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+
+.collection-items{
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-carrito .image-item{
+    width: 113.797px;
+    height: 62.125px ;
+}
+
+.content-carrito{
+    height: 100px;
+}
+
+@media (max-width: 958px){
+
+    .pImagen-carrito{
+        width: 120px;
+        height: 70px;
+    }
+    .contenedor-carrito{
+        margin: 10%
+    }
+
+    table.responsive-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        display: grid;
+        position: relative;
+    }
+    .content-carrito{
+        height: 0px;
+    }
+}
+
+@media screen and (max-width: 507px) {
+    .pImagen-carrito{
+        width: 100%;
+        height: 100%;
+    }
+    
+    .contorno{
+        border-bottom: 1px solid #7e7b7b;
+    }
+
+    #listaproductos{
+        border-bottom: 1px solid #777474;
+    }
+
     .container-contacto{
     grid-template-columns: 1fr ;
     grid-template-areas: "title"
@@ -220,4 +312,64 @@ main {
                             "sucursales"
                             "form";
     }
+
+    .hero-container-main{
+        border: 1px solid #419142;
+        border-radius: 10px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: "title"
+                             "entrega"
+                             "tienda "
+                             "pago"
+                             "botonP "
+                             "resumen"
+                             "carrito";
+        grid-gap: 10px;
+        padding: 10px
+    }
+
+    .hero-container-main{
+        margin-top: 10%;
+    }
+
+    .pImagen{
+        width: 183px !important;
+        height: 183px !important;
+      }
+
+    .tamaImagen{
+        width: 65%;
+        margin-left: 5px;
+        margin-right: 0px;
+        float: left;
+        box-sizing: border-box;
+        padding: 0 .75rem;
+        min-height: 1px;
+        
+    }
+
+    .tamaLetras{
+        width: 25%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+        float: left;
+        min-height: 1px;
+        font-size: 9px;
+    
+    }
 }
+
+@media (max-width:350px){
+    .section_sucursal {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .contenedor-carrito {
+        margin: 15%;
+    }
+}
+
+

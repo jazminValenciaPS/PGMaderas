@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="contenedor-carrito">
         <h4 class="mt-0 color-main">Carrito de Compra</h4>
         <!-- Container -->
         <div class="row" id="carrito">
@@ -9,41 +9,40 @@
                     <thead>
                         <tr class="col m12 s12 p-0">
                             <th class="col m4 s6">Producto</th>
-                            <th class="col m2 s2">Cantidad</th>
-                            <th class="col m2 s2">Precio Unitario</th>
+                            <th class="col m2 s2 hide-on-small-only hide-on-med-only">Cantidad</th>
+                            <th class="col m2 s2 hide-on-small-only">Precio Unitario</th>
                             <th class="col m2 s2">Precio Final</th>
-                            <th class="col m2 s2">Eliminar</th>
+                            <th class="col m2 s2 hide-on-small-only">Eliminar</th>
                         </tr>
                     </thead>
             
                     <tbody v-for="carrito in carrito" :key="carrito.PK_products" >
                         <tr class="col m12 s12 p-0">
                             <td class="col m4 s6">
-                                <div class="col m12 s12 p-0">
-                                    <a :href="'/Ver-Producto?id='+carrito.PK_products"><img :src="'img/'+carrito.image" class="pImagen"></a>
-                                    <p class="col m6 s6 m-0">{{carrito.description}}</p>
+                                <div class="col m12 p-0">
+                                    <img :src="'img/'+carrito.image" class="pImagen-carrito">
+                                    <p class="col m6 s6 m-0 hide-on-small-only hide-on-med-only" >{{carrito.description}}</p>
                                 </div>                                
                             </td>
-                            <td class="col m2 s2 ">
+                            <td class="col m2 s2 hide-on-small-only hide-on-med-only">
                                 <select id="select-cantidad" class="col s4 m3 s5 browser-default " @change="calcularTotal(carrito)" v-model="carrito.cantidad">
                                     <option disabled value="">{{cantidad}}</option>
                                     <option v-for="items in carrito.avaible" :key="items.index">{{ items }}</option>
                                 </select> 
                             </td>
-                            <td class="col m2 s2">
+                            <td class="col m2 s2 hide-on-small-only">
                                 <h6>$ {{carrito.price}}</h6>
                             </td>
-                            <td class="col m2 s2">
+                            <td class="col m2 s6">
                                 <h6>${{carrito.precioFinal = carrito.price * carrito.cantidad}}</h6>
                             </td>
                             <td class="col m2 s21">
-                                <i class="material-icons color-text" @click="eliminarDeCarrito(carrito.PK_products)">highlight_off</i>
+                                <i class="material-icons color-text hide-on-small-only" @click="eliminarDeCarrito(carrito.PK_products)">highlight_off</i>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
             <!-- Summary -->
             <div class="col m4 s12 center">
                 <ul class="collection with-header m-0">
@@ -55,6 +54,8 @@
                 </ul>
                 <a class="btn bg-main mt-2" :href="'/Ordenar'" >Pagar<i class="material-icons left m-0">attach_money</i></a>
             </div>
+        </div>
+        <div class="content-carrito">
         </div>
     </main>
 </template>

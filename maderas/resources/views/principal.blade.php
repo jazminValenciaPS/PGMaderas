@@ -44,6 +44,9 @@
     <script src="https://unpkg.com/vueperslides"></script>
 
     <script>
+        $(document).ready(function(){
+          $('.modal').modal();
+        });
 
       $(function(){
         $('.datepicker').pickadate({

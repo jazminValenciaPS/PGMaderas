@@ -24,7 +24,6 @@
                 </p>
                 <a class="btn bg-main mt-2" href="#">Registrarme<i class="material-icons left">person_add</i></a>
             </div>
-
             <!-- Sign Up -->
             <div class="col m6 s12 p-0">
                 <h4 class="mt-0 color-main">Iniciar Sesión</h4>
@@ -43,7 +42,5 @@
                 </div>
             </div>
         </div>
-        
-
     </main>
 </template>

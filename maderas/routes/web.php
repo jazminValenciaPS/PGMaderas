@@ -12,11 +12,12 @@
 */
 
 Route::group(['middleware'=>['guest']],function(){
-    Route::get('/login','Auth\LoginController@showLoginForm');
+    Route::get('/login','Auth\LoginController@showLoginForm')->name('login');
     Route::get('/iniciar-sesion','Auth\LoginClientController@showLoginForm');
 
 });
 
+// Route::post('/login','Auth\LoginController@showLoginForm');
 
 Route::post('/iniciar-sesion','Auth\LoginClientController@login');
 
@@ -58,7 +59,7 @@ Route::get('/Ordenar', function () {
     return view('tienda.pagina.Orden');
 })->name('Ordenar');
 
-// Auth::routes();
+Auth::routes();
 
 
 Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');

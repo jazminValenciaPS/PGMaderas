@@ -19,22 +19,34 @@
             </div>
 
             <!-- Products -->
-            <div id="listaproductos">
+            <div  id="listaproductos">
                 <div class="col m9 s12" id="Productos">
-                    <div v-for="producto in arrayProductos" :key="producto.PK_products" class="card sticky-action col m4 s12" v-show="producto.avaible > 0">
-                        <div class="card-image waves-effect waves-block waves-light">
+                    <div v-for="producto in arrayProductos" :key="producto.PK_products" class="card sticky-action col m4 s12 contorno" v-show="producto.avaible > 0">
+                        <div class="card-image waves-effect waves-block waves-light tamaImagen ">
                             <a :href="'/Ver-Producto?id='+producto.PK_products"> <img :src="'img/'+producto.image" class="pImagen"> </a>
                         </div>
-                        <div class="card-content">
+                        <div class="card-content tamaLetras ">
+                            <br>
                             <span class="card-title grey-text text-darken-4">{{producto.name}}</span>
                             <p>SKU: {{producto.SKU}}</p>
                             <h6>${{producto.price}}</h6>
                         </div>
-                        <div class="card-action ">
-                            <a class="btn bg-main agregar-carrito" v-on:click="cantidad = 1"  @click="agregarCarrito(producto)" >Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
+                        <div class="card-action">
+                            <a class="btn bg-main agregar-carrito hide-on-small-only" v-on:click="cantidad = 1"  @click="agregarCarrito(producto)" >Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
                         </div> 
                     </div>
                 </div>
+                <ul class="pagination center">
+                    <li  v-if="pagination.current_page > 1">
+                        <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
+                    </li>
+                    <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                        <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a  href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </main>
@@ -53,16 +65,30 @@ export default {
             listaproductos: [],
             carrito:[],
             precioFinal:0,
+            pagination : 
+            {
+                'total' : 0,
+                'current_page' : 0,
+                'per_page' : 0,
+                'last_page' : 0,
+                'from' : 0,
+                'to' : 0,
+            },
+            offset : 3,
+            criterio : 'SKU',
+            buscar:''
         }
     }, 
     methods:{
-        listarProductos(){
+        listarProductos(page,buscar,criterio){
             let m=this;
-            var url='/productoL';
+            var url='/productoL?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
 
             axios.get(url).then(function (response){
-                m.arrayProductos = response.data;
-
+                var respuesta= response.data;
+                m.pagination= respuesta.pagination;
+                m.arrayProductos = respuesta.producto.data;
+            
             })
             .catch(function(error){
                 console.log(error);
@@ -81,12 +107,12 @@ export default {
 
         },
          VerProducto(menu,id){
-                let m=this;
-                var objeto = {
-                    valorMenu: menu,
-                    valorId: id
-                }
-                 m.$emit("mostrar-producto",objeto);
+            let m=this;
+            var objeto = {
+                valorMenu: menu,
+                valorId: id
+            }
+            m.$emit("mostrar-producto",objeto);
         },
         agregarCarrito(producto){
             let cantidad = this.cantidad;
@@ -108,7 +134,6 @@ export default {
 
             this.carrito.push(producto);
             localStorage.setItem('carrito', JSON.stringify(this.carrito));
-            console.log(this.carrito, 'agregarCarrito');
         },
         crearCarrito(){
             this.carrito = JSON.parse(localStorage.getItem('carrito'));
@@ -117,12 +142,46 @@ export default {
                 this.carrito = [];
             }
 
-          
-            console.log(this.carrito,"crear carrito")
-        }
+        },
+        cambiarPagina(page,buscar,criterio){
+           let me = this;
+            //Actualiza la página actual
+            me.pagination.current_page = page;
+            //Envia la petición para visualizar la data de esa página
+            me.listarProductos(page,buscar,criterio);
+        },
+    },
+    computed:{
+         isActived: function(){
+                return this.pagination.current_page;
+            },
+            //Calcula los elementos de la paginación
+            pagesNumber: function() {
+                if(!this.pagination.to) {
+                    return [];
+                }
+                
+                var from = this.pagination.current_page - this.offset; 
+                if(from < 1) {
+                    from = 1;
+                }
+
+                var to = from + (this.offset * 2); 
+                if(to >= this.pagination.last_page){
+                    to = this.pagination.last_page;
+                }  
+
+                var pagesArray = [];
+                while(from <= to) {
+                    pagesArray.push(from);
+                    from++;
+                }
+                return pagesArray;             
+
+            }
     },
     mounted() {
-        this.listarProductos();
+        this.listarProductos(1,this.buscar,this.criterio);
         this.listarCategorias();
         this.crearCarrito();
     }

@@ -136,3 +136,11 @@ footer{
 .text-error{
   color:red;
 }
+
+
+@media screen and (max-width: 768px) {
+  .pImagen{
+    width: 183px;
+    height: 183px;
+  }
+}

@@ -53,16 +53,60 @@ class ProductController extends Controller
         ];
     }
 
-    public function listarProductos(){
+    public function listarProductos(Request $request){
 
-        return  $producto = DB::table('products')
-        ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
-        ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
-        ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price','products.avaible', 'products.status','subcategories.PK_subcategories',
-        'subcategories.name as subcategoria','products_images.image')
-        ->distinct()
-        ->get();
+        // return  $producto = DB::table('products')
+        // ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
+        // ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+        // ->select('products.PK_products','products.SKU','products.name','products.description',
+        // 'products.price','products.avaible', 'products.status','subcategories.PK_subcategories',
+        // 'subcategories.name as subcategoria','products_images.image')
+        // ->distinct()
+        // ->where('products.status','=','1')
+        // ->get();
+
+
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        
+        if ($buscar==''){
+
+            $producto = DB::table('products')
+            ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
+            ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+            ->select('products.PK_products','products.SKU','products.name','products.description',
+            'products.price','products.avaible', 'products.status','subcategories.PK_subcategories',
+            'subcategories.name as subcategoria','products_images.image')
+            ->distinct()
+            ->where('products.status','=','1')
+            ->orderBy('products.PK_products', 'desc')->paginate(6);
+
+        }
+        else{
+            $producto = DB::table('products')
+            ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
+            ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+            ->select('products.PK_products','products.SKU','products.name','products.description',
+            'products.price','products.avaible', 'products.status','subcategories.PK_subcategories',
+            'subcategories.name as subcategoria','products_images.image')
+            ->distinct()
+            ->where('products.status','=','1')
+            ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('products.PK_products', 'desc')->paginate(6);
+        }
+        
+
+        return [
+            'pagination' => [
+                'total'        => $producto->total(),
+                'current_page' => $producto->currentPage(),
+                'per_page'     => $producto->perPage(),
+                'last_page'    => $producto->lastPage(),
+                'from'         => $producto->firstItem(),
+                'to'           => $producto->lastItem(),
+            ],
+            'producto' => $producto
+        ];
 
     }
 

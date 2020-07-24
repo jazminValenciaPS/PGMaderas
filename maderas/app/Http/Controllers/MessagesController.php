@@ -19,6 +19,7 @@ class MessagesController extends Controller
        Mail::to('angelvalencia9811@gmail.com')->send(new MessageRecieved($message));
 
         // return new MessageRecieved($message);
-       return 'Mensaje enviado';
+    //    return 'Mensaje enviado';
+       return redirect("/Contacto");
     }
 }

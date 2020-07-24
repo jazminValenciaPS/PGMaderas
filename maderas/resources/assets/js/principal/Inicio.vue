@@ -1,15 +1,11 @@
 <template>
-
     <main>
-        <!-- <div class="row"> -->
         <!-- carrusel con vue -->
-            <vueper-slides autoplay>
-                <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" :image="'img/'+slider.image" />
-            </vueper-slides>
-
+        <vueper-slides autoplay>
+            <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" :image="'img/'+slider.image" />
+        </vueper-slides>
         <!-- Card Services -->
         <h3 class="color-main center" >¡Nuestros Servicios!</h3>
-
         <div class="row" id="services-main">
             <div class="col s12 m4">
                 <div class="card">
@@ -65,14 +61,11 @@
                 </div>
             </div>
         </div>
-        <!-- </div> -->
-
     </main>
 </template>
 <script>
 import { VueperSlides, VueperSlide } from 'vueperslides';
 import 'vueperslides/dist/vueperslides.css';
-
 
     export default {
         components: { VueperSlides, VueperSlide },
@@ -86,7 +79,6 @@ import 'vueperslides/dist/vueperslides.css';
             methods:{
               listarSliders(){
                 let m=this;
-
 
                 axios.get('/slider').then(function (response){
                     m.arraySliders = response.data;
@@ -102,6 +94,4 @@ import 'vueperslides/dist/vueperslides.css';
             this.listarSliders();
         }
      }
-
-
  </script>
