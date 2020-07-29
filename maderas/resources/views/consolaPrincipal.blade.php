@@ -3,7 +3,6 @@
   <head>
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      
       <meta name="csrf-token" content="{{ csrf_token()  }}">
       <meta name="viewport" content="width=device-width, initial-scale=1">  
       <link href="https://unpkg.com/vueperslides/dist/vueperslides.css" rel="stylesheet">
@@ -38,16 +37,6 @@
       <!-- Termina contenido principal -->
 
     </div>
-
-    <!-- <footer class=" ">
-      
-        <div class="container brown-text">
-          <p class="white-text"> © 2020 Copyright</p>
-        <a class="brown-text right" href="#!"></a>
-        </div>
-
-    </footer> -->
-    
   </body>
 
 
@@ -58,10 +47,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-<!--
-  <script src="https://unpkg.com/vue"></script>
-<script src="https://unpkg.com/vueperslides"></script> -->
-
 <script>
   $(document).ready(function() {
     $('input#input_text, textarea#textarea2').characterCounter();
@@ -78,13 +63,6 @@
 </script>
 
 <script>
-
-  // document.addEventListener('DOMContentLoaded', function() {
-  //     var elems = document.querySelectorAll('.datepicker');
-  //     var instances = M.Datepicker.init(elems);
-  //   });
-
-
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems, {closeOnClick: true});

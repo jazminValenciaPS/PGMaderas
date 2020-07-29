@@ -86,7 +86,14 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/categoria/activar','CategorieController@activar');
         Route::put('/categoria/desactivar','CategorieController@desactivar');
         Route::get('/categoriaV','CategorieController@listar');
-    
+
+
+        Route::get('/categoriaProducto','CategoriesProductsController@index');
+        Route::post('/categoriaProducto/registrar','CategoriesProductsController@store');
+        Route::post('/categoriaProducto/actualizar','CategoriesProductsController@update');
+        Route::put('/categoriaProducto/activar','CategoriesProductsController@activar');
+        Route::put('/categoriaProducto/desactivar','CategoriesProductsController@desactivar');
+        Route::get('/categoriaProductoV','CategoriesProductsController@listar');
     
     
         Route::get('/subcategoria','SubcategoriesController@index');
@@ -94,7 +101,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/subcategoria/actualizar','SubcategoriesController@update');
         Route::put('/subcategoria/activar','SubcategoriesController@activar');
         Route::put('/subcategoria/desactivar','SubcategoriesController@desactivar');
-    
+        Route::get('/subcategoriaV','SubcategoriesController@listar');
     
         Route::get('/producto','ProductController@index');
         Route::post('/producto/registrar','ProductController@store');

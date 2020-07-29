@@ -9,10 +9,10 @@ class Product extends Model
     protected $table = 'products';
     
     protected $primaryKey = 'PK_products';
-    protected $fillable =['SKU','id_subcategory','name','description','price','avaible','status'];
+    protected $fillable =['SKU','id_products_categories','name','description','price','avaible','status'];
 
-    public function Categories()
+    public function productsCategories()
     {
-        return $this->belongsTo('App\Subcategorie', 'id_subcategory', 'PK_subcategories');
+        return $this->belongsTo('App\ProductCategories', 'id_products_categories', 'PK_products_categories');
     }
 }

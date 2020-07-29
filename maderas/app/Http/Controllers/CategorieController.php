@@ -13,9 +13,6 @@ class CategorieController extends Controller
     
     public function index(Request $request)
     {
-        // $categorias = Categorie::all();
-        // return $categorias;
-
         $buscar = $request->buscar;
         $criterio = $request->criterio;
         

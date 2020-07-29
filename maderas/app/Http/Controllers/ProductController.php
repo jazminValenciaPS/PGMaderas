@@ -18,22 +18,22 @@ class ProductController extends Controller
         
         if ($buscar==''){
             $producto = DB::table('products')
-        ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
+        ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
         ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
         ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price','products.avaible', 'products.status','subcategories.PK_subcategories',
-        'subcategories.name as subcategoria','products_images.image')
+        'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+        'products_categories.name as productscategories','products_images.image')
         ->distinct()
         ->orderBy('products.PK_products', 'desc')->paginate(3);
 
         }
         else{
             $producto = DB::table('products')
-        ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
+        ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
         ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
         ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price','products.avaible', 'products.status','subcategories.PK_subcategories',
-        'subcategories.name as subcategoria','products_images.image')
+        'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+        'products_categories.name as productscategories','products_images.image')
         ->distinct()
         ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
         ->orderBy('products.PK_products', 'desc')->paginate(3);
@@ -54,29 +54,17 @@ class ProductController extends Controller
     }
 
     public function listarProductos(Request $request){
-
-        // return  $producto = DB::table('products')
-        // ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
-        // ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
-        // ->select('products.PK_products','products.SKU','products.name','products.description',
-        // 'products.price','products.avaible', 'products.status','subcategories.PK_subcategories',
-        // 'subcategories.name as subcategoria','products_images.image')
-        // ->distinct()
-        // ->where('products.status','=','1')
-        // ->get();
-
-
         $buscar = $request->buscar;
         $criterio = $request->criterio;
         
         if ($buscar==''){
 
             $producto = DB::table('products')
-            ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
+            ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
             ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
             ->select('products.PK_products','products.SKU','products.name','products.description',
-            'products.price','products.avaible', 'products.status','subcategories.PK_subcategories',
-            'subcategories.name as subcategoria','products_images.image')
+            'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+            'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.status','=','1')
             ->orderBy('products.PK_products', 'desc')->paginate(6);
@@ -84,11 +72,11 @@ class ProductController extends Controller
         }
         else{
             $producto = DB::table('products')
-            ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products.id_subcategory')
+            ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
             ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
             ->select('products.PK_products','products.SKU','products.name','products.description',
-            'products.price','products.avaible', 'products.status','subcategories.PK_subcategories',
-            'subcategories.name as subcategoria','products_images.image')
+            'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+            'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.status','=','1')
             ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
@@ -134,7 +122,7 @@ class ProductController extends Controller
      
 
         $producto->SKU = $request->SKU;
-        $producto->id_subcategory = $request->id_subcategory;
+        $producto->id_products_categories = $request->id_products_categories;
         $producto->name = $request->name;
         $producto->description = $request->description;
         $producto->price = $request->price;
@@ -166,10 +154,8 @@ class ProductController extends Controller
 
         $producto = Product::findOrFail($id);
 
-     
-
         $producto->SKU = $request->SKU;
-        $producto->id_subcategory = $request->id_subcategory;
+        $producto->id_products_categories = $request->id_products_categories;
         $producto->name = $request->name;
         $producto->description = $request->description;
         $producto->price = $request->price;
@@ -179,8 +165,6 @@ class ProductController extends Controller
         $producto->save();
 
         $imagenP = ProductImage::findOrFail($id);
-
-
 
         $imagen = Peticion::file('file');
         $extension = $imagen -> guessExtension();

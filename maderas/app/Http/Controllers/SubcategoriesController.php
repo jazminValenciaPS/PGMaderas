@@ -21,6 +21,10 @@ class SubcategoriesController extends Controller
         ->get();
     }
 
+    public function listar(){
+        $subcategorias = SubCategorie::all();
+        return $subcategorias;
+    }
 
  
     public function store(Request $request)

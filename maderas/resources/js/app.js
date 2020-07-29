@@ -10,10 +10,11 @@ import empleados from '../assets/js/contents/Empleados.vue';
 import clientes from '../assets/js/contents/Clientes.vue';
 import envios from '../assets/js/contents/Envios.vue';
 import contraseñas from '../assets/js/contents/CambioContraseña.vue';
+import categoriasprod from '../assets/js/contents/CategoriasP.vue';
 
 // ecommerce
 import inicios from '../assets/js/principal/Inicio.vue';
-import quien from '../assets/js/principal/QuienesSomos.vue';
+import nosotros from '../assets/js/principal/Nosotros.vue';
 import pedido from '../assets/js/principal/Pedidos.vue';
 import cuentas from '../assets/js/principal/Cuenta.vue';
 import productost from '../assets/js/principal/Productos.vue';
@@ -36,10 +37,11 @@ Vue.component('empleado', empleados);
 Vue.component('cliente', clientes);
 Vue.component('envio', envios);
 Vue.component('contraseña', contraseñas);
+Vue.component('categoriap', categoriasprod);
 
 // ecommerce
 Vue.component('inicio', inicios);
-Vue.component('quienes',quien);
+Vue.component('nosotros',nosotros);
 Vue.component('pedidos',pedido);
 Vue.component('cuenta',cuentas);
 Vue.component('productost',productost);

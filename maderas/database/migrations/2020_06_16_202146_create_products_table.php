@@ -16,14 +16,15 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('PK_products');
             $table->string('SKU',50);
-            $table->unsignedBigInteger('id_subcategory')->unsigned();
+            $table->unsignedBigInteger('id_products_categories')->unsigned();
             $table->string('name',50);
             $table->string('description',5000)->nullable();
             $table->decimal('price',16, 2);
             $table->unsignedTinyInteger('avaible')->default(1);
             $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
-            $table->foreign('id_subcategory')->references('PK_subcategories')->on('subcategories')->unsigned();
+
+            $table->foreign('id_products_categories')->references('PK_products_categories')->on('products_categories')->onDelete('cascade');
         });
     }
 

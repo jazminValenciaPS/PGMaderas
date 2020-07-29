@@ -1,10 +1,10 @@
 <template>
     <main>
-        <!-- <div class="main_section fadeIn">
+         <div class="main_section fadeIn">
             <h1>¿Quiénes Somos?</h1>
-        </div> -->
+        </div>
 
-        <!-- <div class="hero">
+        <div class="hero">
             <div class="content">
                     En PG Maderas y Triplay creemos en la cultura del esfuerzo y de la excelencia.
                     <p>
@@ -31,9 +31,9 @@
                         En PG Maderas y Triplay, siempre podrás encontrar una pieza pensada para que materialices tus ideas en madera.
                     </b>
             </div>
-        </div> -->
+        </div>
 
-        <!-- <div class="section_sucursales">
+        <div class="section_sucursales">
             <h2 class="section_title">Sucursales</h2>
             <div class="section_sucursal">
                 <div class="section_sucursal_content">
@@ -55,6 +55,13 @@
                     <p>Maderas y Puertas Gavilán Suc. Cuernavaca</p>
                 </div>
             </div>
-        </div> -->
+        </div>
     </main>
 </template>
+<script>
+export default {
+     mounted() {
+            console.log("Component mounted");
+        }
+}
+</script>

@@ -26,15 +26,12 @@
                             <input id="nombre" type="text" v-model="name" placeholder="Nombre del producto"  class="validate" >
                             <!-- <label  for="nombre">Nombre</label> -->
                             <br>  
-                            <select name="LeaveType" class="browser-default" v-model="id_subcategory">
-                                <option value="" disabled selected >Selecciona la Subcategoría</option>
-                                <option v-for="sub in arraySubcategorias" :value="sub.PK_subcategories"  :key="sub.PK_subcategories" >{{ sub.name }}</option>
-                            </select> 
-                            <!-- input para la descripción del producto-->
+                            <select name="LeaveType" class="browser-default" v-model="id_products_categories">
+                                <option value="" disabled selected >Selecciona la categoría de producto</option>
+                                <option v-for="cate in arrayCategoriaProducto" :value="cate.PK_products_categories"  :key="cate.PK_products_categories" >{{ cate.name }}</option>
+                            </select>
                             <input id="descripcion" type="text" v-model="description" placeholder="Descripción" class="validate">
-                            <!-- <label  for="descripcion"></label> -->
                             <br> 
-                            <!-- input para la imagen del producto --> 
                             <div class="col s10 center">
                                 <div class="file-field input-field">
                                     <div class="btn button-image">
@@ -112,7 +109,7 @@
                         <tr>
                             <td v-text="producto.SKU"></td> 
                             <td v-text="producto.name"></td> 
-                            <td class="hide-on-small-only"  v-text="producto.subcategoria"></td>
+                            <td class="hide-on-small-only"  v-text="producto.productscategories"></td>
                             <td class="hide-on-small-only"  v-text="producto.description"></td>
                             <td class="hide-on-small-only"><img :src="'img/'+producto.image" class="tImagen square"></td>
                             <td class="hide-on-small-only"  v-text="producto.price"></td>
@@ -158,7 +155,7 @@ export default {
     data(){
         return{
             PK_products:'',
-            id_subcategory: '',
+            id_products_categories: '',
             SKU:'',
             name: '',
             subcategoria: '',
@@ -169,7 +166,7 @@ export default {
             avaible:'',
             contenido: 1000,
             arrayProductos: [],
-            arraySubcategorias: [],
+            arrayCategoriaProducto: [],
             tituloModal : 'Registrar Productos' ,
             modal: 0,
             SKU: '',
@@ -267,7 +264,7 @@ export default {
                             m.avaible =data['avaible'];
                             m.description=data['description'];
                             m.price = data['price']
-                            m.id_subcategory= data['PK_subcategories'];
+                            m.id_products_categories= data['PK_products_categories'];
                             m.tituloModal = 'Actualizar producto';
                         }
                     }
@@ -284,7 +281,7 @@ export default {
 
             formData.append('file', me.file);
             formData.append('name', me.name);
-            formData.append('id_subcategory', me.id_subcategory);
+            formData.append('id_products_categories', me.id_products_categories);
             formData.append('description', me.description);
             formData.append('price', me.price);
             formData.append('SKU', me.SKU);
@@ -317,7 +314,7 @@ export default {
                 formData.append('PK_products',PK_products);
                 formData.append('file', me.file);
                 formData.append('name', me.name);
-                formData.append('id_subcategory', me.id_subcategory);
+                formData.append('id_products_categories', me.id_products_categories);
                 formData.append('description', me.description);
                 formData.append('price', me.price);
                 formData.append('SKU', me.SKU);
@@ -368,10 +365,10 @@ export default {
             let me=this;
             me.listado=2;
             //Obtener los datos del ingreso de sub categorias
-            var url= '/subcategoria';
+            var url= '/categoriaProductoV';
             axios.get(url).then(function (response) {
-                var arraySubcategorias= response.data;
-                me.arraySubcategorias = arraySubcategorias.map(object => ({PK_subcategories: object.PK_subcategories, name: object.name})); 
+                var arrayCategoriaProducto= response.data;
+                me.arrayCategoriaProducto = arrayCategoriaProducto.map(object => ({PK_products_categories: object.PK_products_categories, name: object.name})); 
             })
             .catch(function (error) {
                 console.log(error);
@@ -384,7 +381,7 @@ export default {
             this.description = '';
             this.image = '';
             this.SKU='';
-            this.id_subcategory = '';
+            this.id_products_categories = '';
             this.tipoAccion = 0;
             this.errorProducto = 0;
             this.errorMostrarMsjProducto = [];
@@ -399,7 +396,7 @@ export default {
                 if (!this.price) this.errorMostrarMsjProducto.push("Se tiene que ingresar precio.");
                 if (!this.SKU) this.errorMostrarMsjProducto.push("El SKU no puede estar vacío.");
                 if (!this.avaible) this.errorMostrarMsjProducto.push("Seleccione la disponibilidad del producto.");
-                if (!this.id_subcategory) this.errorMostrarMsjProducto.push("Seleccione una subcategoría");
+                if (!this.id_products_categories) this.errorMostrarMsjProducto.push("Seleccione una categoria de producto");
                 if(isNaN(this.price))this.errorMostrarMsjProducto.push("El precio del producto debe ser numérico.");
 
 

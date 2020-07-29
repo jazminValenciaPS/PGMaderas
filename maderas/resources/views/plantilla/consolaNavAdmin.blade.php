@@ -12,6 +12,7 @@
     <ul class="right hide-on-med-and-down nav_options">
       <li @click="menu=0"><a href="#">Categorias</a></li>
       <li @click="menu=1"><a href="#">SubCategorias</a></li>
+      <li @click="menu=8"><a href="#">Categorias Productos</a></li>
       <li @click="menu=2"><a href="#">Productos</a></li>
       <li @click="menu=3"><a href="#">Sliders</a></li>
       <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Usuarios<i class="material-icons right">arrow_drop_down</i></a></li>
