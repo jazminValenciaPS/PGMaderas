@@ -21,33 +21,18 @@
     <meta charset="UTF-8"/>
    </head>
   
-   <body class="login" >
+  <body class="login" >
+      <div id="app" class="padre">
+
+        <!-- Container -->
+        <!-- Sign In -->
+        @include('plantilla.navEcommerce')
 
 
-   <div id="app" class="padre">
-
-
-<!-- Container -->
-    <!-- Sign In -->
-    @include('plantilla.navEcommerce')
-
-
-    @yield('loginC')
-
-
-    </div>
-    @include('plantilla.footerPrincipal')
-
-
-
-</div>
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  
-   
-   <!-- <script src="//code.jquery.com/jquery-latest.js"></script> -->
+        @yield('loginC')
+      </div>
+      @include('plantilla.footerPrincipal')
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
    <script src="./js/plantilla.js"></script>
    <script src="./js/app.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -55,6 +40,12 @@
    <script src="https://unpkg.com/vueperslides"></script>
 
    <script>
+      function store(){
+          var inputEmail= document.getElementById("email");
+          console.log(inputEmail);
+          localStorage.setItem("email", inputEmail.value);
+      }
+   
        $(function(){
         $('.datepicker').pickadate({
             monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -84,11 +75,7 @@
            };
            var elem = document.querySelector('.carousel');
            var instances = M.Carousel.init(elem, options);
-           // M.Carousel.init(elem, {
-              
-           // });
 
-         
            previous = () => {
                M.Carousel.getInstance(elem).prev();
            }

@@ -8,24 +8,24 @@
                 <table id="lista-carrito" class="responsive-table centered">
                     <thead>
                         <tr class="col m12 s12 p-0">
-                            <th class="col m4 s6">Producto</th>
-                            <th class="col m2 s2 hide-on-small-only hide-on-med-only">Cantidad</th>
-                            <th class="col m2 s2 hide-on-small-only">Precio Unitario</th>
-                            <th class="col m2 s2">Precio Final</th>
-                            <th class="col m2 s2 hide-on-small-only">Eliminar</th>
+                            <th class="col m4 s4">Producto</th>
+                            <th class="col m2 s5 hide-on-med-only">Cantidad</th>
+                            <th class="col m2 hide-on-small-only">Precio Unitario</th>
+                            <th class="col m2 s3">Precio Final</th>
+                            <th class="col m2 hide-on-small-only">Eliminar</th>
                         </tr>
                     </thead>
             
                     <tbody v-for="carrito in carrito" :key="carrito.PK_products" >
                         <tr class="col m12 s12 p-0">
-                            <td class="col m4 s6">
-                                <div class="col m12 p-0">
+                            <td class="col m4 s4">
+                                <div class="col m12 s4 p-0">
                                     <img :src="'img/'+carrito.image" class="pImagen-carrito">
-                                    <p class="col m6 s6 m-0 hide-on-small-only hide-on-med-only" >{{carrito.description}}</p>
+                                    <p class="col m6 m-0 hide-on-small-only hide-on-med-only" >{{carrito.description}}</p>
                                 </div>                                
                             </td>
-                            <td class="col m2 s2 hide-on-small-only hide-on-med-only">
-                                <select id="select-cantidad" class="col s4 m3 s5 browser-default " @change="calcularTotal(carrito)" v-model="carrito.cantidad">
+                            <td class="col m2 s5">
+                                <select id="select-cantidad" class="col s4 m3 s3 browser-default " @change="calcularTotal(carrito)" v-model="carrito.cantidad">
                                     <option disabled value="">{{cantidad}}</option>
                                     <option v-for="items in carrito.avaible" :key="items.index">{{ items }}</option>
                                 </select> 
@@ -33,10 +33,10 @@
                             <td class="col m2 s2 hide-on-small-only">
                                 <h6>$ {{carrito.price}}</h6>
                             </td>
-                            <td class="col m2 s6">
+                            <td class="col m2 s3">
                                 <h6>${{carrito.precioFinal = carrito.price * carrito.cantidad}}</h6>
                             </td>
-                            <td class="col m2 s21">
+                            <td class="col m2">
                                 <i class="material-icons color-text hide-on-small-only" @click="eliminarDeCarrito(carrito.PK_products)">highlight_off</i>
                             </td>
                         </tr>

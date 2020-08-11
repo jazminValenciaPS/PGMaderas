@@ -1,6 +1,6 @@
 <template>
     <main>
-           <!-- modal -->
+        <!-- modal -->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-primary modal-lg " role="document">
                 <div class = "container" style="margin-bottom: 10px;">
@@ -61,7 +61,7 @@
                 <img src="img/LOGO PG.png" alt="">
                 <h5>Completa tu orden</h5>
             </section>
-            <section class="container-resumen-order">
+            <section class="container-resumen-order" style="z-index:0">
                 <h5 class="title" style="margin-bottom: 5px;">Resumen</h5>
                     <ul class="collection">
                         <li class="collection-items">
@@ -72,7 +72,7 @@
                         </li> 
                     </ul>
             </section>
-            <section class="container-metodo-entrega">
+            <section class="container-metodo-entrega" style="z-index:0">
                 <h6>Metodo de entrega</h6>
                  <form action="#">
                     <p>
@@ -83,13 +83,13 @@
                     </p>
                     <p>
                     <label>
-                        <input name="group1" v-model="entrega" value="2"  type="radio" checked />
+                        <input name="group1" v-model="entrega" value="2"  type="radio" />
                         <span><i class="material-icons left m-0">directions_walk</i>Recoger en tienda</span>
                     </label>
                     </p>
                 </form>
             </section>
-            <section class="container-metodo-tienda">
+            <section class="container-metodo-tienda" style="z-index:1" >
                 <h6>informacion en tienda</h6>
                     <div class="informacion-tienda-select">
                         <select v-model="tienda">
@@ -100,31 +100,8 @@
                             <label>Materialize Select</label>
                         </select> 
                     </div>
-                   <div class="informacion-tienda-Datos">
-                       <h6>Datos personales:</h6>
-                        <form>
-                            <div class="row">
-                                <div class="input-field">
-                                <input id="first_name" v-model="nombre"  name="nombre" type="text" class="validate">
-                                <label for="nombre">Nombre</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field">
-                                <input id="first_name" v-model="apellido"  name="apellido" type="text" class="validate">
-                                <label for="apellido">apellido</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field">
-                                <input id="first_name" v-model="telefono"  name="telefono" type="tel" class="validate">
-                                <label for="telefono">Telefono</label>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
             </section>
-            <section class="container-metodo-pago">
+            <section class="container-metodo-pago" style="z-index:0">
                 <h6>Metodo de pago</h6>
                   <form action="#">
                     <p>
@@ -141,7 +118,7 @@
                     </p>
                 </form>
             </section>
-            <section class="container-carrito">
+            <section class="container-carrito" style="z-index:0">
                 <h5 class="title">Carrito de Compra</h5>
                 <ul class="collection" v-for="carrito in carrito" :key="carrito.PK_products">
                     <li class="collection-items">
@@ -154,18 +131,19 @@
                     </li>
                 </ul>
             </section>
-            <section class="container-metodo-button">
-                <a class="waves-effect bg-main waves-light btn aling"><i class="material-icons right">attach_money</i>Ir a pagar</a>
+            <section class="container-metodo-button" style="z-index:0">
+                <a class="waves-effect bg-main waves-light btn aling" @click="guardarOrden()"><i class="material-icons right">attach_money</i>Ir a pagar</a>
             </section>
         </div>
-
-     
     </main>
 </template>
 <script>
+import Swal from 'sweetalert2';
+
 export default {
     data(){
         return{
+            usuario:'',
             idUsers:'',
             PK_products:'',
             arrayProductos: [],
@@ -193,7 +171,7 @@ export default {
         }
     },
     methods:{
-        async listarProductos (id){
+        async listarProductos(id){
             let m=this;
             var url= `/productoM/${id}`;
             return await axios.get(url);
@@ -201,6 +179,7 @@ export default {
          calcularTotal(carrito){
             var total = this.total;
             var subtotal = this.subtotal;
+           
             for(let i = 0; i < this.carrito.length; i++){
                 let element = Number(this.carrito[i].price * this.carrito[i].cantidad);
                 total = total + element; 
@@ -209,9 +188,9 @@ export default {
             subtotal = parseFloat(total).toFixed(2);
             this.carrito.total = total;
             this.carrito.subtotal = subtotal;
-
+            this.subtotal = subtotal;
+            this.total = total;
             localStorage.setItem('carrito', JSON.stringify(this.carrito));
-            console.log(this.carrito,"carrito guardar");
         },
         abrirModal(modelo,accion, data = [],){
             let m=this;
@@ -229,10 +208,38 @@ export default {
                 }
             }
         },
-        guardarTarjeta(){
-            if(validarDatos){
+        guardarOrden(){
+            let me = this;
 
-            }
+            let formData = new FormData();
+            // if(me.pago == 1){
+                formData.append('id_type', me.entrega);
+                formData.append('subtotal', me.subtotal);
+                formData.append('total', me.total);
+                formData.append('id_payment', me.pago);
+                formData.append('correo', me.usuario);
+            // }else{
+            //     formData.append('id_type', me.entrega);
+            //     formData.append('subtotal', me.subtotal);
+            //     formData.append('total', me.total);
+            //     formData.append('id_payment', me.pago);
+            //     formData.append('card', me.numTarjeta);
+            //     formData.append('id_payment', me.pago);
+            // }
+       
+            let url = '/order/registrar';
+            axios.post(url, formData,{
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    
+                }
+            })
+            .then(function (response) {
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+           
         },
         cerrarModal(){
             this.modal = 0;
@@ -243,23 +250,13 @@ export default {
         validarDatos(){
             this.errorCliente = 0;
             this.errorMostrarMsjCliente = [];
+            if (!this.nombrePropietario) this.errorMostrarMsjCliente.push("El nombre no puede estar vacío.");
+            if (!this.apellidoPropietario) this.errorMostrarMsjCliente.push("El apellido no puede estar vacío.");
+            if (isNaN(this.numTarjeta)) this.errorMostrarMsjCliente.push("El numero de tarjeta debe de ser numerico.");
+            if (isNaN(this.codSegu)) this.errorMostrarMsjCliente.push("El codigo de seguridad debe de ser numerico.");
 
-                if (!this.first_name) this.errorMostrarMsjCliente.push("El nombre no puede estar vacío.");
-                if (!this.last_name) this.errorMostrarMsjCliente.push("El apellido no puede estar vacío.");
-                if (!this.numTarjeta) this.errorMostrarMsjCliente.push("Se tiene que ingresar un número de teléfono.");
-                if (!this.fechaExp) this.errorMostrarMsjCliente.push("Seleccione la fecha de nacimiento.");
-                if (!this.gender) this.errorMostrarMsjCliente.push("Seleccione el género .");
-                if (!this.city) this.errorMostrarMsjCliente.push("Ingrese la ciudad.");
-                if (!this.state) this.errorMostrarMsjCliente.push("Ingrese el estado.");
-                if (!this.street) this.errorMostrarMsjCliente.push("Ingrese la calle.");
-                if (!this.state) this.errorMostrarMsjCliente.push("Ingrese el estado.");
-                if (!this.postal_code) this.errorMostrarMsjCliente.push("Ingrese el código postal.");
-                if (!this.suburb) this.errorMostrarMsjCliente.push("Ingrese la colonia .");
-                if(isNaN(this.phone))this.errorMostrarMsjCliente.push("El teléfono debe ser numérico.");
-
-
-                if (this.errorMostrarMsjCliente.length) this.errorCliente = 1;
-                return this.errorCliente;
+            if (this.errorMostrarMsjCliente.length) this.errorCliente = 1;
+            return this.errorCliente;
         },
     },
     async mounted() {
@@ -277,7 +274,8 @@ export default {
             return producto;
         }));
         this.calcularTotal(carrito);
-       
+        console.log(carrito);
+        this.usuario = localStorage.getItem('email');
     }
 }
 </script>

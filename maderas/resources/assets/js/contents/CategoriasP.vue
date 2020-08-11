@@ -9,7 +9,7 @@
                     Agregar Categorias para productos
                 </button>
             </div>
-        </div>
+        <!-- modal inicio -->
 
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-primary modal-lg " role="document">
@@ -54,11 +54,10 @@
                 </div>
             </div>
         </div>  
-        <!-- modal inicio -->
 
          <!-- tabla inicio -->
         <div class="col s12 m12 gl6"> 
-            <div class="row center">
+            <div class="row ">
                 <div class="form-group center">
                     <div class="col s6">
                         <div class="input-group">
@@ -107,6 +106,8 @@
                     </tr>
                 </tbody>
              </table>
+             <!-- tabla final -->
+           
             <ul class="pagination">
                 <li  v-if="pagination.current_page > 1">
                     <a href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
@@ -119,7 +120,7 @@
                 </li>
             </ul>
         </div>
-        <!-- tabla final -->
+        </div>
     </main>
 </template>
 <script>
@@ -192,10 +193,15 @@ export default {
             }
     },
     methods:{
-        listarCategoria(){
+        listarCategoria(page,buscar,criterio){
             let m=this;
-            axios.get('/categoriaProducto').then(function (response){
-                m.arrayCategoriaP = response.data;
+            var url = '/categoriaProducto?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+
+            axios.get(url).then(function (response){
+                var respuesta= response.data;
+                m.pagination= respuesta.pagination;
+                m.arrayCategoriaP = respuesta.categoriasProduc.data;
+
                 m.status = response.status.data;
                 if(status == true){
                     status = 1
@@ -369,7 +375,7 @@ export default {
                 }
             })
             .then(function (response) {
-                me.listarCategoria();
+                me.listarCategoria(1,'','name');
                 me.cerrarModal();
                 me.limpiar();
             })
@@ -398,7 +404,7 @@ export default {
         },
     },
     mounted() {
-        this.listarCategoria();
+        this.listarCategoria(1,this.buscar,this.criterio);
         this.verSelects();
     }
 }

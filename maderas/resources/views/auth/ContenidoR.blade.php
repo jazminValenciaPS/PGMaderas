@@ -17,26 +17,20 @@
 
   <body>
 
-    @include('plantilla.navEcommerce')
-   
-
-
+      @include('plantilla.navEcommerce')
+  
       @yield('registro')
-    
 
-     <!-- Footer -->
+      <!-- Footer -->
 
-    @include('plantilla.footerPrincipal')
-
-
-          
+      @include('plantilla.footerPrincipal'    
 
     <!-- Compiled and minified JavaScript -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-        $(function(){
+      $(function(){
         $('.datepicker').pickadate({
             monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
@@ -51,15 +45,15 @@
             labelMonthPrev: 'Mes anterior',
             labelMonthSelect: 'Selecciona un mes',
             labelYearSelect: 'Selecciona un año',
-            });
+        });
       });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            M.Sidenav.init(document.querySelectorAll('.sidenav'), {});
-            M.Materialbox.init(document.querySelectorAll('.materialboxed'), {});
-            M.FormSelect.init(document.querySelectorAll('select'), {});
-            M.Datepicker.init(document.querySelectorAll('.datepicker'), {});
-        });
+      document.addEventListener('DOMContentLoaded', () => {
+          M.Sidenav.init(document.querySelectorAll('.sidenav'), {});
+          M.Materialbox.init(document.querySelectorAll('.materialboxed'), {});
+          M.FormSelect.init(document.querySelectorAll('select'), {});
+          M.Datepicker.init(document.querySelectorAll('.datepicker'), {});
+      });
     </script>
   </body>
 </html>

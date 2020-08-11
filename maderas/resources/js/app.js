@@ -24,6 +24,11 @@ import carrito from '../assets/js/principal/Carrito.vue';
 import producto from '../assets/js/principal/Producto.vue';
 import registro from '../assets/js/principal/Registro.vue';
 import orden from '../assets/js/principal/Ordenar.vue';
+import categoriasp from '../assets/js/principal/CategoriasP.vue';
+import contra from '../assets/js/principal/Contra.vue';
+
+import navmenus from '../assets/js/principal/Menu.vue';
+
 
 
 window.Vue = require('vue');
@@ -51,13 +56,9 @@ Vue.component('carrito',carrito);
 Vue.component('producto',producto);
 Vue.component('registro',registro);
 Vue.component('orden',orden);
-
-// const app = new Vue({
-//     el: '#app',
-//     data: {
-//         menu: 0
-//       },
-// });
+Vue.component('categoriasp',categoriasp);
+Vue.component('contra',contra);
+Vue.component('navmenu',navmenus);
 
 
 const app = new Vue({

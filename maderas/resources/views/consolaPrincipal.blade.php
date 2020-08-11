@@ -29,9 +29,10 @@
   </style>
   <body>
     <div id="app">
-    
-      @include('plantilla.consolaNavAdmin')   
+    @include('plantilla.consolaNavAdmin')   
 
+
+  
       <!-- Contenido principal -->
       @yield('consola')
       <!-- Termina contenido principal -->
@@ -72,8 +73,6 @@
   var elems = document.querySelectorAll('.modal');
   var instances = M.Modal.init(elems);
  });
-
-  //     // Or with jQuery
 
 </script> 
 

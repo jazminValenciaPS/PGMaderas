@@ -18,7 +18,8 @@
 
   <body>
     <div id="app">
-      @include('plantilla.navEcommerce')
+   
+    @include('plantilla.navEcommerce')
 
       <!-- Contenido principal -->
       @yield('ecommerce')

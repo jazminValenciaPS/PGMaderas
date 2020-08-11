@@ -9,10 +9,10 @@
                     Agregar Subcategorías
                 </button>
             </div>
-        <!--Inicio del modal-->
+             <!--Inicio del modal-->
 
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-lg " role="document">
+             <div class="modal-dialog modal-primary modal-lg " role="document">
                 <div class = "container">
                     <br>
                     <div class="center">
@@ -63,9 +63,25 @@
                     </div>
                 </div>
             </div>
-        </div>  
 
         <!-- Mostrar datos -->
+         <div class="col s12 m12 gl6"> 
+
+                <div class="row">
+                    <div class="form-group center">
+                        <div class="col s6">
+                            <div class="input-group">
+                                <select name="LeaveType" class="browser-default" v-model="criterio">
+                                    <option value="" disabled selected>Selecciona con que buscar</option>
+                                    <option value="name">Nombre</option>
+                                    <option value="SKU">SKU</option>
+                                </select>                         
+                                <input type="text" v-model="buscar" @keyup.enter="listarSubcategoria(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                                <button type="submit" @click="listarSubcategoria(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         <table class="tabla centered">
             <thead>
                 <tr>
@@ -104,6 +120,22 @@
             </tr>
             </tbody>
         </table>
+         <ul class="pagination">
+            <li  v-if="pagination.current_page > 1">
+                <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
+                <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
+            </li>
+            <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+            </li>
+            <li v-if="pagination.current_page < pagination.last_page">
+                <a  href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
+            </li>
+        </ul>
+        </div>  
+
+        </div>
+
     </main>
 </template>
 <script>
@@ -133,14 +165,58 @@ export default {
             cambio : 0,
             tipoAccion: 0,
             errorSubcategoria : 0,
-            errorMostrarMsjSubcategoria : []
+            errorMostrarMsjSubcategoria : [],
+             pagination : {
+                    'total' : 0,
+                    'current_page' : 0,
+                    'per_page' : 0,
+                    'last_page' : 0,
+                    'from' : 0,
+                    'to' : 0,
+                },
+            criterio : 'name',
+            buscar:''
         }
     },
+    computed:{
+         isActived: function(){
+                return this.pagination.current_page;
+            },
+            //Calcula los elementos de la paginación
+            pagesNumber: function() {
+                if(!this.pagination.to) {
+                    return [];
+                }
+                
+                var from = this.pagination.current_page - this.offset; 
+                if(from < 1) {
+                    from = 1;
+                }
+
+                var to = from + (this.offset * 2); 
+                if(to >= this.pagination.last_page){
+                    to = this.pagination.last_page;
+                }  
+
+                var pagesArray = [];
+                while(from <= to) {
+                    pagesArray.push(from);
+                    from++;
+                }
+                return pagesArray;             
+
+            }
+    },
     methods:{
-        listarSubcategoria(){
+        listarSubcategoria(page,buscar,criterio){
             let m=this;
-            axios.get('/subcategoria').then(function (response){
-                m.arraySubcategoria = response.data;
+            var url='/subcategoria?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+
+            axios.get(url).then(function (response){
+                var respuesta= response.data;
+                m.pagination= respuesta.pagination;
+                m.arraySubcategoria = respuesta.subcategorias.data;
+
                 m.status = response.status.data;
                 if(status == true){
                     status = 1
@@ -177,6 +253,13 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                 });
+        },
+         cambiarPagina(page,buscar,criterio){
+           let me = this;
+            //Actualiza la página actual
+            me.pagination.current_page = page;
+            //Envia la petición para visualizar la data de esa página
+            me.listarSubcategoria(page,buscar,criterio);
         },
         cerrarModal(){
             this.modal = 0;
@@ -267,7 +350,7 @@ export default {
                 }
             })
             .then(function (response) {
-                me.listarSubcategoria();
+                me.listarSubcategoria(1,'','name');
                 me.cerrarModal();
                 me.limpiar();
             })
@@ -295,7 +378,7 @@ export default {
                     }
                 })
                 .then(function (response) {
-                    me.listarSubcategoria();
+                    me.listarSubcategoria(1,'','name');
                     me.cerrarModal();
                     me.limpiar();                    
                 })
@@ -324,7 +407,7 @@ export default {
                     axios.put('/subcategoria/desactivar',{
                         'PK_subcategories': PK_subcategories
                     }).then(function (response) {
-                        me.listarSubcategoria();
+                        me.listarSubcategoria(1,'','name');
                         Swal.fire(
                             'Desactivado!',
                             'La subcategoría ha sido desactivada con éxito.',
@@ -337,7 +420,7 @@ export default {
                         // Read more about handling dismissals
                         result.dismiss === Swal.DismissReason.cancel
                     ){
-                        me.listarSubcategoria();
+                        me.listarSubcategoria(1,'','name');
                     }
             })
         },
@@ -392,7 +475,7 @@ export default {
         },
     },
     mounted() {
-        this.listarSubcategoria();
+        this.listarSubcategoria(1,this.buscar,this.criterio);
         this.verSelects();
     }
 }

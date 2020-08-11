@@ -42,9 +42,17 @@ Route::get('/Ver-Producto', function () {
     return view('tienda.pagina.Producto');
 })->name('producto');
 
+Route::get('/Ver-Categoria-Producto', function () {
+    return view('tienda.pagina.Productos');
+})->name('CategoriaProducto');
+
 Route::get('/Carrito', function () {
     return view('tienda.pagina.Carrito');
 })->name('carrito');
+
+Route::get('/Contra', function () {
+    return view('tienda.pagina.contra');
+})->name('contra');
 
 Route::get('/Perfil', function () {
     return view('tienda.pagina.Perfil');
@@ -59,11 +67,18 @@ Route::get('/Ordenar', function () {
     return view('tienda.pagina.Orden');
 })->name('Ordenar');
 
-Auth::routes();
+Route::get('/Categorias', function () {
+    return view('tienda.pagina.Categorias');
+})->name('Categorias');
 
+
+
+Auth::routes();
 
 Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('registrar','Auth\RegisterController@register')->name('registrar');
+Route::post('/order/registrar','OrderController@store');
+
 
 
 Route::group(['middleware'=>['auth']],function(){
@@ -77,8 +92,10 @@ Route::group(['middleware'=>['auth']],function(){
     // })->name('perfil');
 
     // Route::group(['middleware'=>['Administrador']],function() {
-        Route::post('/password/actualizar','PasswordController@update');
         Route::get('/logout','Auth\LoginController@logout')->name('logout');
+
+        Route::post('/salir','Auth\LoginClientController@logout')->name('salir');
+
 
         Route::get('/categoria','CategorieController@index');
         Route::post('/categoria/registrar','CategorieController@store');
@@ -87,7 +104,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/categoria/desactivar','CategorieController@desactivar');
         Route::get('/categoriaV','CategorieController@listar');
 
-
         Route::get('/categoriaProducto','CategoriesProductsController@index');
         Route::post('/categoriaProducto/registrar','CategoriesProductsController@store');
         Route::post('/categoriaProducto/actualizar','CategoriesProductsController@update');
@@ -95,20 +111,17 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/categoriaProducto/desactivar','CategoriesProductsController@desactivar');
         Route::get('/categoriaProductoV','CategoriesProductsController@listar');
     
-    
         Route::get('/subcategoria','SubcategoriesController@index');
         Route::post('/subcategoria/registrar','SubcategoriesController@store');
         Route::post('/subcategoria/actualizar','SubcategoriesController@update');
         Route::put('/subcategoria/activar','SubcategoriesController@activar');
         Route::put('/subcategoria/desactivar','SubcategoriesController@desactivar');
-        Route::get('/subcategoriaV','SubcategoriesController@listar');
     
         Route::get('/producto','ProductController@index');
         Route::post('/producto/registrar','ProductController@store');
         Route::post('/producto/actualizar','ProductController@update');
         Route::put('/producto/activar','ProductController@activar');
         Route::put('/producto/desactivar','ProductController@desactivar');
-    
     
         Route::get('/slider','SliderController@index');
         Route::post('/slider/registrar','SliderController@store');
@@ -125,8 +138,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/rol','RolController@index');
     
         Route::get('/order','OrderController@index');
-    
-
     // });
 
 });
@@ -136,8 +147,9 @@ Route::get('/slider','SliderController@index');
 Route::get('/productoL','ProductController@listarProductos');
 
 Route::get('/productoM/{id}', 'ProductController@mostrarProducto')->name('productos');
+Route::get('/categoriasProductos/{id}', 'ProductController@mostrarProducto')->name('categoriaproductos');
 
-Route::get('/user/cliented/{id}','UserController@clientData');
+Route::get('/user/cliented/{correo}','UserController@clientData');
 Route::post('/user/registrarC','UserController@registroCliente');
 Route::post('/cliente/actualizar','UserController@updateClient');
 Route::post('/client/passwordUpdate','UserController@passwordUpdate');
@@ -145,5 +157,10 @@ Route::post('/client/passwordUpdate','UserController@passwordUpdate');
 Route::get('/categoriaV','CategorieController@listar');
 
 Route::post('contact','MessagesController@store');
+
+Route::get('/submenu','SubcategoriesController@menuInicio');
+Route::get('/subcategoriaV','SubcategoriesController@listar');
+Route::post('/password/actualizar','PasswordController@update');
+
 
 

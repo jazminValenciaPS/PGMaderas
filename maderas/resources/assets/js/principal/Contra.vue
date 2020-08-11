@@ -1,12 +1,14 @@
 <template>
 
-    <div class="row contraseñas">
+    <div class="row ">
+        <div class="">
+
         <br>
         <br>
             <h3 class="center">Cambio de contraseña</h3>  
             <br>
-        <div class="col s12 m12 l12 ">
-                <div class="input-field">
+        <div class="col s10 m6 l6 centrar" >
+                <div class="input-field center">
                     <i class="material-icons prefix">email</i>
                     <input id="correo" type="text" v-model="email" class="validate" >
                     <label  for="correo">Correo</label>
@@ -29,10 +31,11 @@
                     </div>
                 </div>
         <br>
-        <div class="center">
-            <a class="waves-effect btn color" @click="limpiar()">Limpiar</a>
-            <a class="waves-effect btn color" @click="nuevaContra()">Actualizar</a>
+        <div class="center" >
+            <a class="waves-effect btn color" style="z-index:0" href="/iniciar-sesion">Regresar</a>
+            <a class="waves-effect btn color" style="z-index:0" @click="nuevaContra()">Actualizar</a>
 
+        </div>
         </div>
         </div>
        
@@ -53,15 +56,7 @@ import Swal from 'sweetalert2';
             }
         },
         methods: {
-            limpiar() {
-                let me = this;
-                me.email='';
-                me.password = '';
-                me.passwordConfirm = '';
-                me.status = true;
-                me.errorContra = 0;
-                me.errorMostrarMsjContra = [];
-            },
+           
             nuevaContra() {
                 if (this.validarContra()){
                     return;
@@ -121,6 +116,10 @@ import Swal from 'sweetalert2';
                 if (this.errorMostrarMsjContra.length) this.errorContra = 1;
 
                 return this.errorContra;
+            },
+            limpiar(){
+                this.password= "";
+                this.passwordConfirm="";
             }
         },mounted(){
           

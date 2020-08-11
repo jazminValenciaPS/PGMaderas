@@ -20,13 +20,16 @@
             <div class="col m3 s12">
                 <ul class="collection">
                     <li class="collection-item">
-                        <h6>Datos Personales</h6>
-                        <a  @click="listarDatos()">Información Personal</a>
+                        <h6>Configuración</h6>
+                        <a  @click="listarDatos(email)">Datos personales</a>
                         <a @click="listarTarjetas()" >Mis Tarjetas</a>
                         <a  @click="informacion=5">Cambiar Contraseña</a>
                     </li>
                     <li class="collection-item">
                         <h6><a @click="listarPedidos()" >Mis Pedidos</a></h6>
+                    </li>
+                    <li class="collection-item">
+                       <h6> <a href="#" @click.prevent="logout">Cerrar sesión</a></h6>
                     </li>
                 </ul>
             </div>
@@ -247,6 +250,7 @@
 <script>
 import Swal from 'sweetalert2';
 
+
 export default {
     data() {
         return {
@@ -278,16 +282,18 @@ export default {
             errorMostrarMsjCliente : [],
             errorContra:0,
             errorMostrarMsjContra:[],
-            datos:[]
+            datos:[],
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+             
+
 
 
         }
     },
     methods:{
-        listarDatos(){
+        listarDatos(correo){
             let m=this;
-            var id = 10;
-            var url='/user/cliented/'+id;
+            var url='/user/cliented/'+correo;
             m.informacion= 1;
             
             axios.get(url).then(function (response){
@@ -297,6 +303,10 @@ export default {
             .catch(function(error){
                 console.log(error);
             });
+
+              
+  
+      
         },
         editarDatos(datos = []){
             let m=this;
@@ -397,6 +407,7 @@ export default {
             if (this.validarContra()){
                 return;
             }
+
             
             Swal.fire({
             title: '¿Está seguro de actualizar la contraseña?',
@@ -453,9 +464,24 @@ export default {
             let m=this;
              m.informacion= 4;
         },
+        logout(){
+               axios.post('salir').then(response => {
+                  if (response.status === 302 || 401) {
+                      window.location.href = '/iniciar-sesion';
+                  }
+                  else {
+                    // throw error and go to catch block
+                  }
+                }).catch(error => {
+
+              });
+            },
     },
     mounted() {
-        this.listarDatos()
+        var correo = localStorage.getItem("email");
+        let me = this;
+        me.email=correo;
+        this.listarDatos(correo);
     }
 }
 </script>

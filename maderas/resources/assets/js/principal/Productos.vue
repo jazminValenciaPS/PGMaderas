@@ -5,7 +5,7 @@
             <div class="col m3 s12">
                 <ul class="collection">
                     <li class="collection-item">
-                        <h6>Categorías</h6>
+                        <h6>Categorías de productos</h6>
                         <a v-for="cate in arrayCategorias" :key="cate.PK_categories" value="">{{cate.name}}</a>
                     </li>
                     <li class="collection-item">
@@ -19,11 +19,11 @@
             </div>
 
             <!-- Products -->
-            <div  id="listaproductos">
+            <div  id="listaproductos" >
                 <div class="col m9 s12" id="Productos">
-                    <div v-for="producto in arrayProductos" :key="producto.PK_products" class="card sticky-action col m4 s12 contorno" v-show="producto.avaible > 0">
-                        <div class="card-image waves-effect waves-block waves-light tamaImagen ">
-                            <a :href="'/Ver-Producto?id='+producto.PK_products"> <img :src="'img/'+producto.image" class="pImagen"> </a>
+                    <div style="z-index:0" v-for="producto in arrayProductos" :key="producto.PK_products" class="card sticky-action col m4 s12 contorno" v-show="producto.avaible > 0">
+                        <div class="card-image waves-effect waves-block waves-light tamaImagen " >
+                            <a :href="'/Ver-Producto?id='+producto.PK_products"> <img :src="'img/'+producto.image" class="pImagen" > </a>
                         </div>
                         <div class="card-content tamaLetras ">
                             <br>
@@ -94,17 +94,15 @@ export default {
                 console.log(error);
             });
         },
-        listarCategorias(){
+        listarCat(){
             let m=this;
-            var url='/categoriaV';
-
-            axios.get(url).then(function (response){
+            axios.get('/categoriaProductoV').then(function (response){
                 m.arrayCategorias = response.data;
+            
             })
             .catch(function(error){
                 console.log(error);
             });
-
         },
          VerProducto(menu,id){
             let m=this;
@@ -182,8 +180,8 @@ export default {
     },
     mounted() {
         this.listarProductos(1,this.buscar,this.criterio);
-        this.listarCategorias();
         this.crearCarrito();
+        this.listarCat();
     }
 
 }

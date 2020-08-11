@@ -1,7 +1,7 @@
 <template>
     <main>
         <!-- carrusel con vue -->
-        <vueper-slides autoplay>
+        <vueper-slides autoplay class="sliders-inicio">
             <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" :image="'img/'+slider.image" />
         </vueper-slides>
         <!-- Card Services -->

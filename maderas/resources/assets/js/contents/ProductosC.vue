@@ -75,7 +75,6 @@
             </div>  
             <!-- MODAL FIN -->
             <div class="col s12 m12 gl6"> 
-
                 <div class="row">
                     <div class="form-group center">
                         <div class="col s6">
@@ -173,7 +172,7 @@ export default {
             tipoAccion: 0,
             errorProducto : 0,
             errorMostrarMsjProducto : [],
-                pagination : {
+             pagination : {
                     'total' : 0,
                     'current_page' : 0,
                     'per_page' : 0,

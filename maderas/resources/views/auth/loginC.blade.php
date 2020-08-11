@@ -34,7 +34,7 @@
         <h4 class="mt-0 color-main">Iniciar Sesión</h4>
         <!-- <div class="input-field col m7 s12"> -->
         <div class="input-field col m7 s12 {{ $errors->has('email' ? 'has-error' : '' ) }}">
-            <input  value="{{old('email')}}"  name="email" id="email" type="text" class="validate" autofocus required>
+            <input  value="{{old('email')}}"  name="email" id="email" type="email" class="validate" autofocus required>
             <label for="email">Correo</label>
             {!! $errors->first('email','<span class="help-block">:message</span>') !!}
         </div>
@@ -46,10 +46,11 @@
 
         </div>
         <div class="col m12 s12">
-            <button type="submit" class="btn bg-main mt-2 mb-2">Iniciar Sesión</button>
-
+            <a href="/Contra">¿Olvidó su contraseña?</a>
             <br>
-            <a href="#">¿Olvido su contraseña?</a>
+
+            <button type="submit" onclick="store()" class="btn bg-main mt-2 mb-2">Iniciar Sesión</button>
+
         </div>
     </div>
   </form>

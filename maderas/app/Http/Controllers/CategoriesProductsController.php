@@ -14,33 +14,32 @@ class CategoriesProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cateProduc = ProductCategories::all();
-        return $cateProduc;
-        // $buscar = $request->buscar;
-        // $criterio = $request->criterio;
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
         
-        // if ($buscar==''){
-        //     $categoriasProduc = ProductCategories::orderBy('PK_products_categories', 'desc')->paginate(3);
+        if ($buscar==''){
+            $categoriasProduc = ProductCategories::orderBy('PK_products_categories', 'desc')
+            ->paginate(3);
+        }
+        else{
+            $categoriasProduc = ProductCategories::where($criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('PK_products_categories', 'desc')
+            ->paginate(3);
+        }
 
-       
-        // }
-        // else{
-        //     $categoriasProduc = ProductCategories::where($criterio, 'like', '%'. $buscar . '%')->orderBy('PK_products_categories', 'desc')->paginate(3);
-        // }
-
-        // return [
-        //     'pagination' => [
-        //         'total'        => $categoriasProduc->total(),
-        //         'current_page' => $categoriasProduc->currentPage(),
-        //         'per_page'     => $categoriasProduc->perPage(),
-        //         'last_page'    => $categoriasProduc->lastPage(),
-        //         'from'         => $categoriasProduc->firstItem(),
-        //         'to'           => $categoriasProduc->lastItem(),
-        //     ],
-        //     'categorias' => $categoriasProduc
-        // ];
+        return [
+            'pagination' => [
+                'total'        => $categoriasProduc->total(),
+                'current_page' => $categoriasProduc->currentPage(),
+                'per_page'     => $categoriasProduc->perPage(),
+                'last_page'    => $categoriasProduc->lastPage(),
+                'from'         => $categoriasProduc->firstItem(),
+                'to'           => $categoriasProduc->lastItem(),
+            ],
+            'categoriasProduc' => $categoriasProduc
+        ];
     }
 
     public function listar(){
@@ -73,8 +72,6 @@ class CategoriesProductsController extends Controller
         $categoriasProduc->status = '1';
         $categoriasProduc->save();
     }
-
-  
 
     public function update(Request $request)
     {
@@ -114,5 +111,15 @@ class CategoriesProductsController extends Controller
         $categoriasProduc = ProductCategories::findOrFail($id);
         $categoriasProduc->status = '1';
         $categoriasProduc->save();
+    }
+
+    public function mostrarCategorias(Request $request){
+        $id = $request->id;
+
+
+        return  $categoriasProduc = DB::table('products_categories')
+        ->select('name','id_subcategories','image','PK_products_categories')
+        ->where('id_subcategories','=',$id)
+        ->get();
     }
 }

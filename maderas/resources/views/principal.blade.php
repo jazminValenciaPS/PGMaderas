@@ -20,6 +20,7 @@
     <div id="app">
 
     @include('plantilla.navEcommerce')
+ 
 
     <!-- Contenido principal -->
     @yield('ecommerce')
@@ -71,11 +72,6 @@
             };
             var elem = document.querySelector('.carousel');
             var instances = M.Carousel.init(elem, options);
-            // M.Carousel.init(elem, {
-               
-            // });
-
-          
             previous = () => {
                 M.Carousel.getInstance(elem).prev();
             }
@@ -84,8 +80,8 @@
             }
         });
   
-    </script>
-  </body>
-
+        
    
+   </script>
+  </body>
 </html>

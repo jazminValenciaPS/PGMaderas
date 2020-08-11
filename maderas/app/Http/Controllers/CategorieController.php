@@ -24,9 +24,6 @@ class CategorieController extends Controller
         else{
             $categorias = Categorie::where($criterio, 'like', '%'. $buscar . '%')->orderBy('PK_categories', 'desc')->paginate(3);
         }
-
-
-
         return [
             'pagination' => [
                 'total'        => $categorias->total(),

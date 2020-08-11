@@ -15,7 +15,7 @@ class LoginClientController extends Controller
         if(c::check()){
             //return view('tienda.pagina.Perfil');
             // return 'Tu sesión ha sido iniciada con éxito';
-            redirect('perfil');
+            redirect('/perfil');
 
 
         }
@@ -43,7 +43,7 @@ class LoginClientController extends Controller
         // ,'password' => $request->password])
             // Auth::loginUsingId(Auth::user()->userTablePrimaryKey);
             // return 'Tu sesión ha sido iniciada con éxito!!!';
-            redirect('perfil');
+            redirect('/perfil');
             // return view('tienda.pagina.Perfil');
 
         }
@@ -65,7 +65,7 @@ class LoginClientController extends Controller
     public function logout(Request $request){
      Auth::logout();
         $request->session()->invalidate();
-        return redirect('/Perfil');
+        return redirect('/iniciar-sesion');
     } 
 
     public function username(){
