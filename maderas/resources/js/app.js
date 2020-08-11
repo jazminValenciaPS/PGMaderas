@@ -65,13 +65,19 @@ const app = new Vue({
   el: '#app',
   data :{
       menu: 0,
-      idProducto: 0
+      idProducto: 0,
+      idCateP:0
   },
   methods:{
     mostrarProducto(objeto){
-          let m = this;
+       let m = this;
        m.menu = objeto.valorMenu;
        m.idProducto = objeto.valorId;
+      },
+      verCategoriaProducto(){
+        let m = this;
+        m.menu = objeto.valorMenu;
+        m.idCateP = objeto.valorCateId;
       }
   }
 });

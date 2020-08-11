@@ -57,21 +57,20 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        print("store");
         if (!$request->ajax()) return redirect('/administrador');
 
-        $img = Peticion::file('file');
+        // $img = Peticion::file('file');
         
-        $extension = $img->guessExtension();
-        $date = date('d-m-Y_h-i-s-ms-a');
-        $prefijo = 'Image';
-        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
-        $img->move('img', $nombreImagen);
+        // $extension = $img->guessExtension();
+        // $date = date('d-m-Y_h-i-s-ms-a');
+        // $prefijo = 'Image';
+        // $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        // $img->move('img', $nombreImagen);
 
         $categoria = new Categorie();
         $categoria->name = $request->name;
         $categoria->description = $request->description;
-        $categoria->image = $nombreImagen;
+        // $categoria->image = $nombreImagen;
         $categoria->status = '1';
         $categoria->save();
     }
@@ -81,20 +80,19 @@ class CategorieController extends Controller
     public function update(Request $request)
     {
         $id = $request->PK_categories;
-        print_r($id);
         $categorias = Categorie::findOrFail($id);
 
-        $imagen = Peticion::file('file');
-        $extension = $imagen -> guessExtension();
-        $date = date('d-m-Y_h-i-s-ms-a');
-        $prefijo = 'Image';
-        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
-        $imagen->move('img', $nombreImagen);
-        File::delete('img/' . $categorias->Imagen);
+        // $imagen = Peticion::file('file');
+        // $extension = $imagen -> guessExtension();
+        // $date = date('d-m-Y_h-i-s-ms-a');
+        // $prefijo = 'Image';
+        // $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        // $imagen->move('img', $nombreImagen);
+        // File::delete('img/' . $categorias->Imagen);
 
         $categorias->name = $request->name;
         $categorias->description = $request->description;
-        $categorias->image = $nombreImagen;
+        // $categorias->image = $nombreImagen;
         $categorias->status = '1';
         $categorias->save();
 

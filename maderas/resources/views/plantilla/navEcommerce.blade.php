@@ -46,7 +46,7 @@
                         <div class="header">
                             <h5>Productos</h5>
                         </div>
-                      <navmenu></navmenu>
+                      <navmenu :categoriaid="idCateP" @ver-categoria-producto="verCategoriaProducto"></navmenu>
                     </div>
                 </li>
                 <li><a class="waves-effect waves-light color-main" href="/Contacto">Contacto</a></li>

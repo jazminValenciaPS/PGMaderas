@@ -24,7 +24,7 @@
                     <div class="form-group row">
                         <input id="nombre" type="text" v-model="name" placeholder="Nombre Categoria"  class="validate" >
                         <br>
-                        <div class="col s10 center">
+                        <!-- <div class="col s10 center">
                             <div class="file-field input-field">
                                 <div class="btn button-image">
                                     <span>Imagen</span>
@@ -34,7 +34,7 @@
                                     <input class="file-path validate" type="text">
                                 </div>
                             </div>
-                        </div> 
+                        </div>  -->
                         <select name="LeaveType" class="browser-default" v-model="id_subcategories">
                             <option value="" disabled selected>Selecciona la subcategoria</option>
                             <option v-for="subcate in arraySubcategoria" :value="subcate.PK_subcategories"  :key="subcate.PK_subcategories">{{ subcate.name }}</option>
@@ -76,7 +76,7 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th class="hide-on-small-only">Imagen</th>
+                        <!-- <th class="hide-on-small-only">Imagen</th> -->
                         <th class="hide-on-small-only">Status</th>
                         <th>Editar</th>
                         <th>Desactivar/Activar</th>
@@ -85,7 +85,7 @@
                 <tbody  v-for="categoria in arrayCategoriaP" :key="categoria.PK_products_categories">
                     <tr>
                         <td v-text="categoria.name"></td> 
-                        <td class="hide-on-small-only" ><img :src="'img/'+categoria.image" class="tImagen square"></td>
+                        <!-- <td class="hide-on-small-only" ><img :src="'img/'+categoria.image" class="tImagen square"></td> -->
                         <td class="hide-on-small-only"  v-if="categoria.status == 1">Activado</td>
                         <td class="hide-on-small-only"  v-if="categoria.status == 0">Desactivado</td>
                         <td>
@@ -221,7 +221,7 @@ export default {
                         case 'registrar':{
                             m.modal = 1;
                             m.name = '';
-                            m.image= 'Selecciona imagen';
+                            // m.image= 'Selecciona imagen';
                             m.tipoAccion = 1;
                             m.tituloModal = 'Registrar categoría producto';
                             break;
@@ -231,7 +231,7 @@ export default {
                             m.id_subcategories=data['id_subcategories'];
                             m.PK_products_categories = data['PK_products_categories'];
                             m.tipoAccion = 2;
-                            m.image=data['image'];
+                            // m.image=data['image'];
                             m.name=data['name'];
                             m.tituloModal = 'Actualizar categoría producto';
                         }
@@ -363,7 +363,7 @@ export default {
  
             let formData = new FormData();
 
-            formData.append('file', me.file);
+            // formData.append('file', me.file);
             formData.append('id_subcategories', me.id_subcategories);
             formData.append('name', me.name);
             
@@ -387,7 +387,7 @@ export default {
             this.modal = 0;
             this.tituloModal = '';
             this.name = '';
-            this.image = '';
+            // this.image = '';
             this.tipoAccion = 0;
             this.errorCategoriaP = 0;
             this.errorMostrarMsjCategoriaP = [];
@@ -396,12 +396,43 @@ export default {
             this.errorCategoriaP = 0;
             this.errorMostrarMsjCategoriaP = [];
 
-            if (!this.file ) this.errorMostrarMsjCategoriaP.push("Se tiene que ingresar una imagen.");
+            // if (!this.file ) this.errorMostrarMsjCategoriaP.push("Se tiene que ingresar una imagen.");
             if (!this.name) this.errorMostrarMsjCategoriaP.push("El nombre de la subcategoría no puede estar vacío.");
             if (!this.id_subcategories) this.errorMostrarMsjProducto.push("Seleccione una subcategoría");
             if (this.errorMostrarMsjCategoriaP.length) this.errorCategoriaP = 1;
             return this.errorCategoriaP;
         },
+         cambiarPagina(page,buscar,criterio){
+           let me = this;
+            //Actualiza la página actual
+            me.pagination.current_page = page;
+            //Envia la petición para visualizar la data de esa página
+            me.listarCategoria(page,buscar,criterio);
+        },
+        actualizarCategoria(PK_products_categories){
+            let me = this;
+
+            let formData =  new FormData();
+            // formData.append('file', me.file);
+            formData.append('PK_products_categories',PK_products_categories);
+             formData.append('id_subcategories', me.id_subcategories);
+            formData.append('name', me.name);
+
+            //Registramos la informacion
+            axios.post('/categoriaProducto/actualizar',formData,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(function (response) {
+                me.listarProductos(1,'','name');
+                me.cerrarModal();
+                me.limpiar();                    
+            })
+            .catch(function (error) {
+                console.log(error);
+            });      
+        }
     },
     mounted() {
         this.listarCategoria(1,this.buscar,this.criterio);
@@ -410,23 +441,11 @@ export default {
 }
 </script>
 <style>
-    .modal-content{
-        width: 100% !important;
-        position: absolute !important;
-        height: 600px;
-    }
+   
     .mostrar{
         display: list-item !important;
         opacity: 1 !important;
         position: absolute !important;
         z-index: 100;
-    }
-    .centrado{
-        height:560px;
-        margin-left: 20%;
-        margin-right: 30%;
-    }
-    .espacioButton{
-        margin-left: 10px !important;
     }
 </style>

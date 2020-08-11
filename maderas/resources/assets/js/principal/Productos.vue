@@ -5,7 +5,7 @@
             <div class="col m3 s12">
                 <ul class="collection">
                     <li class="collection-item">
-                        <h6>Categorías de productos</h6>
+                        <h6>Categorías</h6>
                         <a v-for="cate in arrayCategorias" :key="cate.PK_categories" value="">{{cate.name}}</a>
                     </li>
                     <li class="collection-item">
@@ -94,9 +94,9 @@ export default {
                 console.log(error);
             });
         },
-        listarCat(){
+        listarCat(id){
             let m=this;
-            axios.get('/categoriaProductoV').then(function (response){
+            axios.get('/categoriaProductoL?id='+id).then(function (response){
                 m.arrayCategorias = response.data;
             
             })
@@ -179,9 +179,18 @@ export default {
             }
     },
     mounted() {
+        let m=this;
+        const queryString = window.location.search;      
+        const urlParams = new URLSearchParams(queryString);        
+        const product = urlParams.get('id');
+        console.log("hola");
+
+        console.log(product);
+        let id = (product !== null && product !== '' && product !== undefined)? product : "";
+         m.listarCat(id);
         this.listarProductos(1,this.buscar,this.criterio);
         this.crearCarrito();
-        this.listarCat();
+        // this.listarCat();
     }
 
 }

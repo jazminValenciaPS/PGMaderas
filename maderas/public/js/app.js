@@ -5307,8 +5307,8 @@ __webpack_require__.r(__webpack_exports__);
                 {
                   m.modal = 1;
                   m.name = '';
-                  m.descripcion = '';
-                  m.image = 'Selecciona imagen';
+                  m.descripcion = ''; // m.image= 'Selecciona imagen';
+
                   m.tipoAccion = 1;
                   m.tituloModal = 'Registrar categoría';
                   break;
@@ -5318,8 +5318,8 @@ __webpack_require__.r(__webpack_exports__);
                 {
                   m.modal = 2;
                   m.PK_categories = data['PK_categories'];
-                  m.tipoAccion = 2;
-                  m.image = data['image'];
+                  m.tipoAccion = 2; // m.image=data['image'];
+
                   m.name = data['name'];
                   m.description = data['description'];
                   m.tituloModal = 'Actualizar categoría';
@@ -5334,8 +5334,8 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       var me = this;
-      var formData = new FormData();
-      formData.append('file', me.file);
+      var formData = new FormData(); // formData.append('file', me.file);
+
       formData.append('PK_categories', me.PK_categories);
       formData.append('name', me.name);
       formData.append('description', me.description); // Registramos la informacion
@@ -5382,8 +5382,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     validarCategoria: function validarCategoria() {
       this.errorCategoria = 0;
-      this.errorMostrarMsjCategoria = [];
-      if (!this.file) this.errorMostrarMsjCategoria.push("Se tiene que ingresar una imagen.");
+      this.errorMostrarMsjCategoria = []; // if (!this.file ) this.errorMostrarMsjCategoria.push("Se tiene que ingresar una imagen.");
+
       if (!this.name) this.errorMostrarMsjCategoria.push("El nombre de la subcategoría no puede estar vacío.");
       if (!this.description) this.errorMostrarMsjCategoria.push("La descripción de la subcategoría no puede estar vacío.");
       if (this.errorMostrarMsjCategoria.length) this.errorCategoria = 1;
@@ -5408,8 +5408,8 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       formData.append('PK_categories', PK_categories);
       formData.append('name', me.name);
-      formData.append('description', me.description);
-      formData.append('file', me.file); //Registramos la informacion
+      formData.append('description', me.description); // formData.append('file', me.file);
+      //Registramos la informacion
 
       axios.post('/categoria/actualizar', formData, {
         headers: {
@@ -5727,8 +5727,8 @@ document.addEventListener('DOMContentLoaded', function () {
               case 'registrar':
                 {
                   m.modal = 1;
-                  m.name = '';
-                  m.image = 'Selecciona imagen';
+                  m.name = ''; // m.image= 'Selecciona imagen';
+
                   m.tipoAccion = 1;
                   m.tituloModal = 'Registrar categoría producto';
                   break;
@@ -5739,8 +5739,8 @@ document.addEventListener('DOMContentLoaded', function () {
                   m.modal = 2;
                   m.id_subcategories = data['id_subcategories'];
                   m.PK_products_categories = data['PK_products_categories'];
-                  m.tipoAccion = 2;
-                  m.image = data['image'];
+                  m.tipoAccion = 2; // m.image=data['image'];
+
                   m.name = data['name'];
                   m.tituloModal = 'Actualizar categoría producto';
                 }
@@ -5858,8 +5858,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       var me = this;
-      var formData = new FormData();
-      formData.append('file', me.file);
+      var formData = new FormData(); // formData.append('file', me.file);
+
       formData.append('id_subcategories', me.id_subcategories);
       formData.append('name', me.name); // Registramos la informacion
 
@@ -5879,20 +5879,47 @@ document.addEventListener('DOMContentLoaded', function () {
     cerrarModal: function cerrarModal() {
       this.modal = 0;
       this.tituloModal = '';
-      this.name = '';
-      this.image = '';
+      this.name = ''; // this.image = '';
+
       this.tipoAccion = 0;
       this.errorCategoriaP = 0;
       this.errorMostrarMsjCategoriaP = [];
     },
     validarCategoria: function validarCategoria() {
       this.errorCategoriaP = 0;
-      this.errorMostrarMsjCategoriaP = [];
-      if (!this.file) this.errorMostrarMsjCategoriaP.push("Se tiene que ingresar una imagen.");
+      this.errorMostrarMsjCategoriaP = []; // if (!this.file ) this.errorMostrarMsjCategoriaP.push("Se tiene que ingresar una imagen.");
+
       if (!this.name) this.errorMostrarMsjCategoriaP.push("El nombre de la subcategoría no puede estar vacío.");
       if (!this.id_subcategories) this.errorMostrarMsjProducto.push("Seleccione una subcategoría");
       if (this.errorMostrarMsjCategoriaP.length) this.errorCategoriaP = 1;
       return this.errorCategoriaP;
+    },
+    cambiarPagina: function cambiarPagina(page, buscar, criterio) {
+      var me = this; //Actualiza la página actual
+
+      me.pagination.current_page = page; //Envia la petición para visualizar la data de esa página
+
+      me.listarCategoria(page, buscar, criterio);
+    },
+    actualizarCategoria: function actualizarCategoria(PK_products_categories) {
+      var me = this;
+      var formData = new FormData(); // formData.append('file', me.file);
+
+      formData.append('PK_products_categories', PK_products_categories);
+      formData.append('id_subcategories', me.id_subcategories);
+      formData.append('name', me.name); //Registramos la informacion
+
+      axios.post('/categoriaProducto/actualizar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        me.listarProductos(1, '', 'name');
+        me.cerrarModal();
+        me.limpiar();
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   mounted: function mounted() {
@@ -7986,8 +8013,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 {
                   m.modal = 1;
                   m.name = '';
-                  m.descripcion = '';
-                  m.image = 'Selecciona imagen';
+                  m.descripcion = ''; // m.image= 'Selecciona imagen';
+
                   m.tipoAccion = 1;
                   m.tituloModal = 'Registrar subcategoría';
                   break;
@@ -7998,8 +8025,8 @@ document.addEventListener('DOMContentLoaded', function () {
                   m.modal = 2;
                   m.PK_subcategories = data['PK_subcategories'];
                   m.id_category = data['id_category'];
-                  m.tipoAccion = 2;
-                  m.image = data['image'];
+                  m.tipoAccion = 2; // m.image=data['image'];
+
                   m.name = data['name'];
                   m.description = data['description'];
                   m.tituloModal = 'Actualizar subcategoría';
@@ -8014,8 +8041,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       var me = this;
-      var formData = new FormData();
-      formData.append('file', me.file);
+      var formData = new FormData(); // formData.append('file', me.file);
+
       formData.append('id_category', me.id_category);
       formData.append('name', me.name);
       formData.append('description', me.description); // Registramos la informacion
@@ -8043,8 +8070,8 @@ document.addEventListener('DOMContentLoaded', function () {
       formData.append('PK_subcategories', PK_subcategories);
       formData.append('id_category', me.id_category);
       formData.append('name', me.name);
-      formData.append('description', me.description);
-      formData.append('file', me.file); //Registramos la informacion
+      formData.append('description', me.description); // formData.append('file', me.file);
+      //Registramos la informacion
 
       axios.post('/subcategoria/actualizar', formData, {
         headers: {
@@ -8120,8 +8147,8 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     validarSubcategoria: function validarSubcategoria() {
       this.errorSubcategoria = 0;
-      this.errorMostrarMsjSubcategoria = [];
-      if (!this.file) this.errorMostrarMsjSubcategoria.push("Se tiene que ingresar una imagen.");
+      this.errorMostrarMsjSubcategoria = []; // if (!this.file ) this.errorMostrarMsjSubcategoria.push("Se tiene que ingresar una imagen.");
+
       if (!this.name) this.errorMostrarMsjSubcategoria.push("El nombre de la subcategoría no puede estar vacío.");
       if (!this.description) this.errorMostrarMsjSubcategoria.push("La descripción de la subcategoría no puede estar vacío.");
       if (this.errorMostrarMsjSubcategoria.length) this.errorSubcategoria = 1;
@@ -8842,6 +8869,14 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    verCategoriaProducto: function verCategoriaProducto(menu, id) {
+      var m = this;
+      var objeto = {
+        valorMenu: menu,
+        valorCateId: id
+      };
+      m.$emit("listar-productos", objeto);
     }
   },
   mounted: function mounted() {
@@ -9088,6 +9123,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -9167,7 +9219,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 {
                   m.modal = 1;
                   m.tipoAccion = 1;
-                  m.tituloModal = 'Registrar tarjeta';
+                  m.tituloModal = 'Tarjetas';
                   break;
                 }
             }
@@ -9958,9 +10010,9 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    listarCat: function listarCat() {
+    listarCat: function listarCat(id) {
       var m = this;
-      axios.get('/categoriaProductoV').then(function (response) {
+      axios.get('/categoriaProductoL?id=' + id).then(function (response) {
         m.arrayCategorias = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -10045,9 +10097,16 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    var m = this;
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var product = urlParams.get('id');
+    console.log("hola");
+    console.log(product);
+    var id = product !== null && product !== '' && product !== undefined ? product : "";
+    m.listarCat(id);
     this.listarProductos(1, this.buscar, this.criterio);
-    this.crearCarrito();
-    this.listarCat();
+    this.crearCarrito(); // this.listarCat();
   }
 });
 
@@ -10300,7 +10359,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n    height: 600px;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n.centrado{\n    height:560px;\n    margin-left: 20%;\n    margin-right: 30%;\n}\n.espacioButton{\n    margin-left: 10px !important;\n}\n", ""]);
+exports.push([module.i, "\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n", ""]);
 
 // exports
 
@@ -10319,7 +10378,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n    height: 600px;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n.centrado{\n    height:560px;\n    margin-left: 20%;\n    margin-right: 30%;\n}\n.espacioButton{\n    margin-left: 10px !important;\n}\n", ""]);
+exports.push([module.i, "\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n", ""]);
 
 // exports
 
@@ -10376,7 +10435,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width: 80% !important;\n    position: absolute !important;\n    height: 800px;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n.centrado{\n    height:760px;\n    margin-left: 20%;\n    margin-right: 30%;\n}\n.espacioButton{\n    margin-left: 10px !important;\n}\n", ""]);
+exports.push([module.i, "\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n", ""]);
 
 // exports
 
@@ -10414,7 +10473,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n    height: 600px;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n.centrado{\n    height:560px;\n    margin-left: 20%;\n    margin-right: 30%;\n}\n.espacioButton{\n    margin-left: 10px !important;\n}\n", ""]);
+exports.push([module.i, "\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n", ""]);
 
 // exports
 
@@ -10433,7 +10492,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n    height: 600px;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n.centrado{\n    height:560px;\n    margin-left: 20%;\n    margin-right: 30%;\n}\n.espacioButton{\n    margin-left: 10px !important;\n}\n", ""]);
+exports.push([module.i, "\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    z-index: 100;\n}\n.bottom-modal{\n    margin-bottom: 5%;\n}\n", ""]);
 
 // exports
 
@@ -33096,32 +33155,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _c("div", { staticClass: "col s10 center" }, [
-                  _c("div", { staticClass: "file-field input-field" }, [
-                    _c("div", { staticClass: "btn button-image" }, [
-                      _c("span", [_vm._v("Imagen")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        ref: "filea",
-                        staticClass: "categoriaAlta",
-                        attrs: {
-                          id: "file",
-                          type: "file",
-                          "data-vv-scope": "new"
-                        },
-                        on: {
-                          change: function($event) {
-                            return _vm.seleccionarImagen(1)
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(1)
-                  ])
-                ])
+                _c("br")
               ]),
               _vm._v(" "),
               _c(
@@ -33313,7 +33347,7 @@ var render = function() {
         "table",
         { staticClass: "tabla centered" },
         [
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
           _vm._l(_vm.arrayCategoria, function(categoria) {
             return _c("tbody", { key: categoria.PK_categories }, [
@@ -33324,13 +33358,6 @@ var render = function() {
                   staticClass: "hide-on-small-only",
                   domProps: { textContent: _vm._s(categoria.description) }
                 }),
-                _vm._v(" "),
-                _c("td", { staticClass: "hide-on-small-only" }, [
-                  _c("img", {
-                    staticClass: "tImagen square",
-                    attrs: { src: "img/" + categoria.image }
-                  })
-                ]),
                 _vm._v(" "),
                 categoria.status == 1
                   ? _c("td", { staticClass: "hide-on-small-only" }, [
@@ -33605,17 +33632,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "file-path-wrapper" }, [
-      _c("input", {
-        staticClass: "file-path validate",
-        attrs: { type: "text" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("Nombre")]),
@@ -33623,8 +33639,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "hide-on-small-only" }, [
           _vm._v("Descripcion")
         ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Imagen")]),
         _vm._v(" "),
         _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Status")]),
         _vm._v(" "),
@@ -33747,31 +33761,6 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("br"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col s10 center" }, [
-                    _c("div", { staticClass: "file-field input-field" }, [
-                      _c("div", { staticClass: "btn button-image" }, [
-                        _c("span", [_vm._v("Imagen")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          ref: "filea",
-                          staticClass: "categoriaAlta",
-                          attrs: {
-                            id: "file",
-                            type: "file",
-                            "data-vv-scope": "new"
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.seleccionarImagen(1)
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ])
-                  ]),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -34011,7 +34000,7 @@ var render = function() {
           "table",
           { staticClass: "tabla centered" },
           [
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _vm._l(_vm.arrayCategoriaP, function(categoria) {
               return _c("tbody", { key: categoria.PK_products_categories }, [
@@ -34019,13 +34008,6 @@ var render = function() {
                   _c("td", {
                     domProps: { textContent: _vm._s(categoria.name) }
                   }),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "hide-on-small-only" }, [
-                    _c("img", {
-                      staticClass: "tImagen square",
-                      attrs: { src: "img/" + categoria.image }
-                    })
-                  ]),
                   _vm._v(" "),
                   categoria.status == 1
                     ? _c("td", { staticClass: "hide-on-small-only" }, [
@@ -34301,22 +34283,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "file-path-wrapper" }, [
-      _c("input", {
-        staticClass: "file-path validate",
-        attrs: { type: "text" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("Nombre")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Imagen")]),
         _vm._v(" "),
         _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Status")]),
         _vm._v(" "),
@@ -36756,31 +36725,6 @@ var render = function() {
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col s10 center" }, [
-                    _c("div", { staticClass: "file-field input-field" }, [
-                      _c("div", { staticClass: "btn button-image" }, [
-                        _c("span", [_vm._v("Imagen")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          ref: "filea",
-                          staticClass: "categoriaAlta",
-                          attrs: {
-                            id: "file",
-                            type: "file",
-                            "data-vv-scope": "new"
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.seleccionarImagen(1)
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ])
-                  ]),
-                  _vm._v(" "),
                   _c(
                     "select",
                     {
@@ -37027,7 +36971,7 @@ var render = function() {
           "table",
           { staticClass: "tabla centered" },
           [
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _vm._l(_vm.arraySubcategoria, function(subcategoria) {
               return _c("tbody", { key: subcategoria.PK_subcategories }, [
@@ -37045,13 +36989,6 @@ var render = function() {
                     staticClass: "hide-on-small-only",
                     domProps: { textContent: _vm._s(subcategoria.description) }
                   }),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "hide-on-small-only" }, [
-                    _c("img", {
-                      staticClass: "tImagen square",
-                      attrs: { src: "img/" + subcategoria.image }
-                    })
-                  ]),
                   _vm._v(" "),
                   subcategoria.status == 1
                     ? _c("td", { staticClass: "hide-on-small-only" }, [
@@ -37327,17 +37264,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "file-path-wrapper" }, [
-      _c("input", {
-        staticClass: "file-path validate",
-        attrs: { type: "text" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("Nombre")]),
@@ -37347,8 +37273,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "hide-on-small-only" }, [
           _vm._v("Descripcion")
         ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Imagen")]),
         _vm._v(" "),
         _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Status")]),
         _vm._v(" "),
@@ -38652,7 +38576,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "modal-dialog modal-primary modal-lg ",
+            staticClass: "modal-dialog modal-primary modal-lg bottom-modal",
             attrs: { role: "document" }
           },
           [
@@ -38672,193 +38596,221 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", [
-                  _c("form", [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "input-field col s12 m6" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.numTarjeta,
-                              expression: "numTarjeta"
-                            }
-                          ],
-                          staticClass: "validate",
-                          attrs: {
-                            id: "numTarjeta",
-                            name: "nombre",
-                            type: "text"
-                          },
-                          domProps: { value: _vm.numTarjeta },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.numTarjeta = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("label", { attrs: { for: "numTarjeta" } }, [
-                          _vm._v("Numero de Tarjeta")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col s6" }, [
-                        _c("label", { attrs: { for: "fechaExp" } }, [
-                          _vm._v("Fecha de expiracion")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.fechaExp,
-                              expression: "fechaExp"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "month",
-                            name: "fecha",
-                            id: "fechaExp",
-                            value: "mes-año"
-                          },
-                          domProps: { value: _vm.fechaExp },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.fechaExp = $event.target.value
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "input-field col s12 m6" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.codSegu,
-                              expression: "codSegu"
-                            }
-                          ],
-                          attrs: {
-                            id: "input_text",
-                            type: "text",
-                            "data-length": "3"
-                          },
-                          domProps: { value: _vm.codSegu },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.codSegu = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("label", { attrs: { for: "input_text" } }, [
-                          _vm._v("Codigo de seguridad")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "input-field col s12 m6" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.nombrePropietario,
-                              expression: "nombrePropietario"
-                            }
-                          ],
-                          staticClass: "validate",
-                          attrs: { id: "first_name", type: "text" },
-                          domProps: { value: _vm.nombrePropietario },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.nombrePropietario = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("label", { attrs: { for: "first_name" } }, [
-                          _vm._v("Nombre(s)")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "input-field col s12 m6" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.apellidoPropietario,
-                              expression: "apellidoPropietario"
-                            }
-                          ],
-                          staticClass: "validate",
-                          attrs: { id: "last_name", type: "text" },
-                          domProps: { value: _vm.apellidoPropietario },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.apellidoPropietario = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("label", { attrs: { for: "last_name" } }, [
-                          _vm._v("Apellidos")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
+                  _c("ul", { staticClass: "collapsible" }, [
                     _vm._m(0),
                     _vm._v(" "),
-                    _c("div", { staticClass: "card-action center" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn bg-main",
-                          on: {
-                            click: function($event) {
-                              return _vm.guardarTarjeta()
-                            }
-                          }
-                        },
-                        [_vm._v("Guardar")]
-                      ),
+                    _c("li", [
+                      _vm._m(1),
                       _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn bg-main ",
-                          on: {
-                            click: function($event) {
-                              return _vm.cerrarModal()
-                            }
-                          }
-                        },
-                        [_vm._v("Cerrar")]
-                      )
+                      _c("div", { staticClass: "collapsible-body" }, [
+                        _c("form", [
+                          _c("div", { staticClass: "row" }, [
+                            _c(
+                              "div",
+                              { staticClass: "input-field col s12 m6" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.numTarjeta,
+                                      expression: "numTarjeta"
+                                    }
+                                  ],
+                                  staticClass: "validate",
+                                  attrs: {
+                                    id: "numTarjeta",
+                                    name: "nombre",
+                                    type: "text"
+                                  },
+                                  domProps: { value: _vm.numTarjeta },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.numTarjeta = $event.target.value
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("label", { attrs: { for: "numTarjeta" } }, [
+                                  _vm._v("Numero de Tarjeta")
+                                ])
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col s6" }, [
+                              _c("label", { attrs: { for: "fechaExp" } }, [
+                                _vm._v("Fecha de expiracion")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.fechaExp,
+                                    expression: "fechaExp"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "month",
+                                  name: "fecha",
+                                  id: "fechaExp",
+                                  value: "mes-año"
+                                },
+                                domProps: { value: _vm.fechaExp },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.fechaExp = $event.target.value
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "input-field col s12 m6" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.codSegu,
+                                      expression: "codSegu"
+                                    }
+                                  ],
+                                  attrs: {
+                                    id: "input_text",
+                                    type: "text",
+                                    "data-length": "3"
+                                  },
+                                  domProps: { value: _vm.codSegu },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.codSegu = $event.target.value
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("label", { attrs: { for: "input_text" } }, [
+                                  _vm._v("Codigo de seguridad")
+                                ])
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c(
+                              "div",
+                              { staticClass: "input-field col s12 m6" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.nombrePropietario,
+                                      expression: "nombrePropietario"
+                                    }
+                                  ],
+                                  staticClass: "validate",
+                                  attrs: { id: "first_name", type: "text" },
+                                  domProps: { value: _vm.nombrePropietario },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.nombrePropietario =
+                                        $event.target.value
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("label", { attrs: { for: "first_name" } }, [
+                                  _vm._v("Nombre(s)")
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "input-field col s12 m6" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.apellidoPropietario,
+                                      expression: "apellidoPropietario"
+                                    }
+                                  ],
+                                  staticClass: "validate",
+                                  attrs: { id: "last_name", type: "text" },
+                                  domProps: { value: _vm.apellidoPropietario },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.apellidoPropietario =
+                                        $event.target.value
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("label", { attrs: { for: "last_name" } }, [
+                                  _vm._v("Apellidos")
+                                ])
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "card-action center" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn bg-main",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.guardarTarjeta()
+                                  }
+                                }
+                              },
+                              [_vm._v("Guardar")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn bg-main ",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.cerrarModal()
+                                  }
+                                }
+                              },
+                              [_vm._v("Cerrar")]
+                            )
+                          ])
+                        ])
+                      ])
                     ])
                   ])
                 ])
@@ -38870,7 +38822,7 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "hero-container-main" }, [
-      _vm._m(1),
+      _vm._m(3),
       _vm._v(" "),
       _c(
         "section",
@@ -38929,7 +38881,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(4)
               ])
             ]),
             _vm._v(" "),
@@ -38953,7 +38905,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(5)
               ])
             ])
           ])
@@ -39094,7 +39046,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(6)
               ])
             ])
           ])
@@ -39169,6 +39121,34 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("div", { staticClass: "collapsible-header" }, [
+        _c("i", { staticClass: "material-icons" }, [_vm._v("credit_card")]),
+        _vm._v(
+          "\n                                Mis tarjetas\n                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "collapsible-body" }, [
+        _c("p", [_vm._v("No tienes tarjetas registradas")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "collapsible-header" }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("library_add")]),
+      _vm._v(
+        "\n                                Registrar una nueva tarjeta\n                            "
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "switch" }, [
         _c("label", { attrs: { for: "last_name" } }, [
@@ -39177,13 +39157,13 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("label", [
           _vm._v(
-            "\n                                Si\n                                "
+            "\n                                            Si\n                                            "
           ),
           _c("input", { attrs: { type: "checkbox" } }),
           _vm._v(" "),
           _c("span", { staticClass: "lever" }),
           _vm._v(
-            "\n                                No\n                                "
+            "\n                                            No\n                                            "
           )
         ])
       ])
@@ -40608,7 +40588,7 @@ var render = function() {
             "li",
             { staticClass: "collection-item" },
             [
-              _c("h6", [_vm._v("Categorías de productos")]),
+              _c("h6", [_vm._v("Categorías")]),
               _vm._v(" "),
               _vm._l(_vm.arrayCategorias, function(cate) {
                 return _c(
@@ -61499,13 +61479,19 @@ var app = new Vue({
   el: '#app',
   data: {
     menu: 0,
-    idProducto: 0
+    idProducto: 0,
+    idCateP: 0
   },
   methods: {
     mostrarProducto: function mostrarProducto(objeto) {
       var m = this;
       m.menu = objeto.valorMenu;
       m.idProducto = objeto.valorId;
+    },
+    verCategoriaProducto: function verCategoriaProducto() {
+      var m = this;
+      m.menu = objeto.valorMenu;
+      m.idCateP = objeto.valorCateId;
     }
   }
 });

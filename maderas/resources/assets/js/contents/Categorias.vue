@@ -31,7 +31,7 @@
                         <!-- <label  for="descripcion"></label> -->
                         <br> 
                         <!-- input para la imagen del producto --> 
-                        <div class="col s10 center">
+                        <!-- <div class="col s10 center">
                             <div class="file-field input-field">
                                 <div class="btn button-image">
                                     <span>Imagen</span>
@@ -41,7 +41,7 @@
                                     <input class="file-path validate" type="text">
                                 </div>
                             </div>
-                        </div> 
+                        </div>  -->
                     </div> 
                     <div v-show="errorCategoria" class="form-group row div-error">
                         <div class="text-center text-error">
@@ -82,7 +82,7 @@
                     <tr>
                         <th>Nombre</th>
                         <th class="hide-on-small-only">Descripcion</th>
-                        <th class="hide-on-small-only">Imagen</th>
+                        <!-- <th class="hide-on-small-only">Imagen</th> -->
                         <th class="hide-on-small-only">Status</th>
                         <th>Editar</th>
                         <th>Desactivar/Activar</th>
@@ -92,7 +92,7 @@
                     <tr>
                         <td v-text="categoria.name"></td> 
                         <td class="hide-on-small-only"  v-text="categoria.description"></td>
-                        <td class="hide-on-small-only" ><img :src="'img/'+categoria.image" class="tImagen square"></td>
+                        <!-- <td class="hide-on-small-only" ><img :src="'img/'+categoria.image" class="tImagen square"></td> -->
                         <td class="hide-on-small-only"  v-if="categoria.status == 1">Activado</td>
                         <td class="hide-on-small-only"  v-if="categoria.status == 0">Desactivado</td>
                         <td>
@@ -113,19 +113,19 @@
                     </tr>
                 </tbody>
              </table>
-                   <ul class="pagination">
-                        <li  v-if="pagination.current_page > 1">
-                                    <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
+            <ul class="pagination">
+                <li  v-if="pagination.current_page > 1">
+                            <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
 
-                             <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
-                        </li>
-                         <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                             <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
-                         </li>
-                         <li v-if="pagination.current_page < pagination.last_page">
-                              <a  href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
-                         </li>
-                     </ul>
+                        <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
+                </li>
+                <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                    <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                </li>
+                <li v-if="pagination.current_page < pagination.last_page">
+                    <a  href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
+                </li>
+             </ul>
         </div>
         <!-- tabla final -->
     </main>
@@ -229,7 +229,7 @@ export default {
                             m.modal = 1;
                             m.name = '';
                             m.descripcion = '';
-                            m.image= 'Selecciona imagen';
+                            // m.image= 'Selecciona imagen';
                             m.tipoAccion = 1;
                             m.tituloModal = 'Registrar categoría';
                             break;
@@ -239,7 +239,7 @@ export default {
                             m.modal = 2;
                             m.PK_categories = data['PK_categories'];
                             m.tipoAccion = 2;
-                            m.image=data['image'];
+                            // m.image=data['image'];
                             m.name=data['name'];
                             m.description=data['description'];
                             m.tituloModal = 'Actualizar categoría';
@@ -256,7 +256,7 @@ export default {
  
             let formData = new FormData();
 
-            formData.append('file', me.file);
+            // formData.append('file', me.file);
             formData.append('PK_categories', me.PK_categories);
             formData.append('name', me.name);
             formData.append('description', me.description);
@@ -308,7 +308,7 @@ export default {
             this.errorCategoria = 0;
             this.errorMostrarMsjCategoria = [];
 
-            if (!this.file ) this.errorMostrarMsjCategoria.push("Se tiene que ingresar una imagen.");
+            // if (!this.file ) this.errorMostrarMsjCategoria.push("Se tiene que ingresar una imagen.");
             if (!this.name) this.errorMostrarMsjCategoria.push("El nombre de la subcategoría no puede estar vacío.");
             if (!this.description) this.errorMostrarMsjCategoria.push("La descripción de la subcategoría no puede estar vacío.");
 
@@ -334,7 +334,7 @@ export default {
                 formData.append('PK_categories',PK_categories);
                 formData.append('name', me.name);
                 formData.append('description',me.description);
-                formData.append('file', me.file);
+                // formData.append('file', me.file);
 
                 //Registramos la informacion
                 axios.post('/categoria/actualizar',formData,{
@@ -435,23 +435,10 @@ export default {
 }
 </script>
 <style>
-    .modal-content{
-        width: 100% !important;
-        position: absolute !important;
-        height: 600px;
-    }
     .mostrar{
         display: list-item !important;
         opacity: 1 !important;
         position: absolute !important;
         z-index: 100;
-    }
-    .centrado{
-        height:560px;
-        margin-left: 20%;
-        margin-right: 30%;
-    }
-    .espacioButton{
-        margin-left: 10px !important;
     }
 </style>

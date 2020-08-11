@@ -73,7 +73,7 @@ export default {
         }
     },
     methods:{
-        async listarProductos (id){
+        async listarProductos(id){
             let m=this;
             var url= `/productoM/${id}`;
             return await axios.get(url);

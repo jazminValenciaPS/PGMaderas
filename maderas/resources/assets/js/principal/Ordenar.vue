@@ -2,56 +2,73 @@
     <main>
         <!-- modal -->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-lg " role="document">
+            <div class="modal-dialog modal-primary modal-lg bottom-modal" role="document">
                 <div class = "container" style="margin-bottom: 10px;">
                     <br>
                     <div class="center">
                         <h3 v-text="tituloModal"></h3>
                     </div>
                     <div>
-                       <form>
-                            <div class="row">
-                                <div class="input-field col s12 m6">
-                                <input id="numTarjeta" v-model="numTarjeta"  name="nombre" type="text" class="validate">
-                                <label for="numTarjeta">Numero de Tarjeta</label>
+                        <ul class="collapsible">
+                            <li>
+                                <div class="collapsible-header">
+                                    <i class="material-icons">credit_card</i>
+                                    Mis tarjetas
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s6">
-                                    <label for="fechaExp">Fecha de expiracion</label>
-                                    <input type="month" v-model="fechaExp"  name="fecha" id="fechaExp" class="form-control" value="mes-año">
+                                <div class="collapsible-body"><p>No tienes tarjetas registradas</p></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header">
+                                    <i class="material-icons">library_add</i>
+                                    Registrar una nueva tarjeta
                                 </div>
-                                <div class="input-field col s12 m6">
-                                    <input id="input_text" v-model="codSegu" type="text" data-length="3">
-                                    <label for="input_text">Codigo de seguridad</label>
+                                <div class="collapsible-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="input-field col s12 m6">
+                                            <input id="numTarjeta" v-model="numTarjeta"  name="nombre" type="text" class="validate">
+                                            <label for="numTarjeta">Numero de Tarjeta</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s6">
+                                                <label for="fechaExp">Fecha de expiracion</label>
+                                                <input type="month" v-model="fechaExp"  name="fecha" id="fechaExp" class="form-control" value="mes-año">
+                                            </div>
+                                            <div class="input-field col s12 m6">
+                                                <input id="input_text" v-model="codSegu" type="text" data-length="3">
+                                                <label for="input_text">Codigo de seguridad</label>
+                                            </div>
+                                            </div>
+                                        <div class="row">
+                                            <div class="input-field col s12 m6">
+                                                <input id="first_name" v-model="nombrePropietario" type="text" class="validate">
+                                                <label for="first_name">Nombre(s)</label>
+                                            </div>
+                                            <div class="input-field col s12 m6">
+                                                <input id="last_name" v-model="apellidoPropietario" type="text" class="validate">
+                                                <label for="last_name">Apellidos</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="switch">
+                                                <label for="last_name">¿Desea guardar esta tarjeta para futuras compras?</label>
+                                                <label>
+                                                Si
+                                                <input type="checkbox">
+                                                <span class="lever"></span>
+                                                No
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="card-action center">
+                                            <a class="btn bg-main" @click="guardarTarjeta()">Guardar</a>
+                                            <a class="btn bg-main " @click="cerrarModal()">Cerrar</a>
+                                        </div> 
+                                    </form>
                                 </div>
-                                </div>
-                            <div class="row">
-                                <div class="input-field col s12 m6">
-                                    <input id="first_name" v-model="nombrePropietario" type="text" class="validate">
-                                    <label for="first_name">Nombre(s)</label>
-                                </div>
-                                <div class="input-field col s12 m6">
-                                    <input id="last_name" v-model="apellidoPropietario" type="text" class="validate">
-                                    <label for="last_name">Apellidos</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="switch">
-                                    <label for="last_name">¿Desea guardar esta tarjeta para futuras compras?</label>
-                                    <label>
-                                    Si
-                                    <input type="checkbox">
-                                    <span class="lever"></span>
-                                    No
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="card-action center">
-                                <a class="btn bg-main" @click="guardarTarjeta()">Guardar</a>
-                                <a class="btn bg-main " @click="cerrarModal()">Cerrar</a>
-                            </div> 
-                        </form>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -200,7 +217,7 @@ export default {
                         case 'registrar':{
                             m.modal = 1;
                             m.tipoAccion = 1;
-                            m.tituloModal = 'Registrar tarjeta';
+                            m.tituloModal = 'Tarjetas';
                             break;
 
                         }
@@ -281,23 +298,13 @@ export default {
 </script>
 
 <style>
-    .modal-content{
-        width: 100% !important;
-        position: absolute !important;
-        height: 600px;
-    }
     .mostrar{
         display: list-item !important;
         opacity: 1 !important;
         position: absolute !important;
         z-index: 100;
     }
-    .centrado{
-        height:560px;
-        margin-left: 20%;
-        margin-right: 30%;
-    }
-    .espacioButton{
-        margin-left: 10px !important;
+    .bottom-modal{
+        margin-bottom: 5%;
     }
 </style>

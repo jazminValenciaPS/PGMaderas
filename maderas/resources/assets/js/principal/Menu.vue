@@ -26,6 +26,14 @@ export default {
                 console.log(error);
             });
         },
+         verCategoriaProducto(menu,id){
+            let m=this;
+            var objeto = {
+                valorMenu: menu,
+                valorCateId: id
+            }
+            m.$emit("listar-productos",objeto);
+        },
     },
     mounted(){
         this.listarMenu();

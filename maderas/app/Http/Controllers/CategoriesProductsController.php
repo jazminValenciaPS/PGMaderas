@@ -47,6 +47,14 @@ class CategoriesProductsController extends Controller
         return $categoriasProduc;
     }
 
+    public function listarCateP(Request $request){
+        $id = $request->id;
+        $categoriasProduc = ProductCategories::all()
+        ->where('id_subcategories','=',$id)
+        ->where('status','=','1');
+        return $categoriasProduc;
+    }
+
     public function listarCate(){
         $categoriasProduc = ProductCategories::all()->where('status','=','1');
         return $categoriasProduc;
@@ -54,21 +62,20 @@ class CategoriesProductsController extends Controller
 
     public function store(Request $request)
     {
-        print("store");
         if (!$request->ajax()) return redirect('/administrador');
 
-        $img = Peticion::file('file');
+        // $img = Peticion::file('file');
         
-        $extension = $img->guessExtension();
-        $date = date('d-m-Y_h-i-s-ms-a');
-        $prefijo = 'Image';
-        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
-        $img->move('img', $nombreImagen);
+        // $extension = $img->guessExtension();
+        // $date = date('d-m-Y_h-i-s-ms-a');
+        // $prefijo = 'Image';
+        // $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        // $img->move('img', $nombreImagen);
 
         $categoriasProduc = new ProductCategories();
         $categoriasProduc->name = $request->name;
         $categoriasProduc->id_subcategories = $request->id_subcategories;
-        $categoriasProduc->image = $nombreImagen;
+        // $categoriasProduc->image = $nombreImagen;
         $categoriasProduc->status = '1';
         $categoriasProduc->save();
     }
@@ -76,20 +83,19 @@ class CategoriesProductsController extends Controller
     public function update(Request $request)
     {
         $id = $request->PK_products_categories;
-        print_r($id);
         $categoriasProduc = ProductCategories::findOrFail($id);
 
-        $imagen = Peticion::file('file');
-        $extension = $imagen -> guessExtension();
-        $date = date('d-m-Y_h-i-s-ms-a');
-        $prefijo = 'Image';
-        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
-        $imagen->move('img', $nombreImagen);
-        File::delete('img/' . $categorias->Imagen);
+        // $imagen = Peticion::file('file');
+        // $extension = $imagen -> guessExtension();
+        // $date = date('d-m-Y_h-i-s-ms-a');
+        // $prefijo = 'Image';
+        // $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        // $imagen->move('img', $nombreImagen);
+        // File::delete('img/' . $categorias->Imagen);
 
         $categoriasProduc->name = $request->name;
         $categoriasProduc->id_subcategories = $request->id_subcategories;
-        $categoriasProduc->image = $nombreImagen;
+        // $categoriasProduc->image = $nombreImagen;
         $categoriasProduc->status = '1';
         $categoriasProduc->save();
 

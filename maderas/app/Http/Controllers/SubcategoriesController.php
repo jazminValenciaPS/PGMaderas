@@ -64,17 +64,17 @@ class SubcategoriesController extends Controller
 
         $img = Peticion::file('file');
         
-        $extension = $img->guessExtension();
-        $date = date('d-m-Y_h-i-s-ms-a');
-        $prefijo = 'Image';
-        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
-        $img->move('img', $nombreImagen);
+        // $extension = $img->guessExtension();
+        // $date = date('d-m-Y_h-i-s-ms-a');
+        // $prefijo = 'Image';
+        // $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        // $img->move('img', $nombreImagen);
 
         $subcategorias = new SubCategorie();
         $subcategorias->id_category = $request->id_category;
         $subcategorias->name = $request->name;
         $subcategorias->description = $request->description;
-        $subcategorias->image = $nombreImagen;
+        // $subcategorias->image = $nombreImagen;
         $subcategorias->status = '1';
         $subcategorias->save();
     }
@@ -88,19 +88,19 @@ class SubcategoriesController extends Controller
 
         $subcategorias = SubCategorie::findOrFail($id);
 
-        $imagen = Peticion::file('file');
-        $extension = $imagen -> guessExtension();
-        $date = date('d-m-Y_h-i-s-ms-a');
-        $prefijo = 'Image';
-        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
-        $imagen->move('img', $nombreImagen);
-        File::delete('img/' . $subcategorias->Imagen);
+        // $imagen = Peticion::file('file');
+        // $extension = $imagen -> guessExtension();
+        // $date = date('d-m-Y_h-i-s-ms-a');
+        // $prefijo = 'Image';
+        // $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        // $imagen->move('img', $nombreImagen);
+        // File::delete('img/' . $subcategorias->Imagen);
 
 
         $subcategorias->id_category = $request->id_category;
         $subcategorias->name = $request->name;
         $subcategorias->description = $request->description;
-        $subcategorias->image = $nombreImagen;
+        // $subcategorias->image = $nombreImagen;
         $subcategorias->status = '1';
         $subcategorias->save();
     }

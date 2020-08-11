@@ -486,24 +486,11 @@ export default {
 }
 </script>
 <style>
-    .modal-content{
-        width: 80% !important;
-        position: absolute !important;
-        height: 800px;
-    }
     .mostrar{
         display: list-item !important;
         opacity: 1 !important;
         position: absolute !important;
         z-index: 100;
-    }
-    .centrado{
-        height:760px;
-        margin-left: 20%;
-        margin-right: 30%;
-    }
-    .espacioButton{
-        margin-left: 10px !important;
     }
 </style>
 

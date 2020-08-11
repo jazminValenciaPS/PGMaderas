@@ -145,6 +145,8 @@ Route::group(['middleware'=>['auth']],function(){
 
 Route::get('/slider','SliderController@index');
 Route::get('/productoL','ProductController@listarProductos');
+Route::get('/categoriaProductoL','CategoriesProductsController@listarCateP');
+
 
 Route::get('/productoM/{id}', 'ProductController@mostrarProducto')->name('productos');
 Route::get('/categoriasProductos/{id}', 'ProductController@mostrarProducto')->name('categoriaproductos');

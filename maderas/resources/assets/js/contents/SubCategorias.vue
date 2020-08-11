@@ -31,7 +31,7 @@
                         <!-- <label  for="descripcion"></label> -->
                         <br> 
                         <!-- input para la imagen de la subcategoria --> 
-                        <div class="col s10 center">
+                        <!-- <div class="col s10 center">
                             <div class="file-field input-field">
                                 <div class="btn button-image">
                                     <span>Imagen</span>
@@ -41,7 +41,7 @@
                                     <input class="file-path validate" type="text">
                                 </div>
                             </div>
-                        </div> 
+                        </div>  -->
                         <select name="LeaveType" class="browser-default" v-model="id_category">
                             <option value="" disabled selected>Selecciona la categoría</option>
                             <option v-for="cate in arrayCategoria" :value="cate.PK_categories"  :key="cate.PK_categories">{{ cate.name }}</option>
@@ -88,7 +88,7 @@
                     <th>Nombre</th>
                     <th class="hide-on-small-only">Categoria</th>
                     <th class="hide-on-small-only">Descripcion</th>
-                    <th class="hide-on-small-only">Imagen</th>
+                    <!-- <th class="hide-on-small-only">Imagen</th> -->
                     <th class="hide-on-small-only">Status</th>
                     <th>Editar</th>
                     <th>Desactivar/Activar</th>
@@ -99,7 +99,7 @@
                 <td v-text="subcategoria.name"></td> 
                 <td class="hide-on-small-only"  v-text="subcategoria.categoria"></td>
                     <td class="hide-on-small-only"  v-text="subcategoria.description"></td>
-                    <td class="hide-on-small-only"><img :src="'img/'+subcategoria.image" class="tImagen square"></td>
+                    <!-- <td class="hide-on-small-only"><img :src="'img/'+subcategoria.image" class="tImagen square"></td> -->
                 <td class="hide-on-small-only"  v-if="subcategoria.status == 1">Activado</td>
                 <td class="hide-on-small-only"  v-if="subcategoria.status == 0">Desactivado</td>
                 <td>
@@ -308,7 +308,7 @@ export default {
                             m.modal = 1;
                             m.name = '';
                             m.descripcion = '';
-                            m.image= 'Selecciona imagen';
+                            // m.image= 'Selecciona imagen';
                             m.tipoAccion = 1;
                             m.tituloModal = 'Registrar subcategoría';
                             break;
@@ -319,7 +319,7 @@ export default {
                             m.PK_subcategories=data['PK_subcategories'];
                             m.id_category = data['id_category'];
                             m.tipoAccion = 2;
-                            m.image=data['image'];
+                            // m.image=data['image'];
                             m.name=data['name'];
                             m.description=data['description'];
                             m.tituloModal = 'Actualizar subcategoría';
@@ -336,7 +336,7 @@ export default {
 
             let formData = new FormData();
 
-            formData.append('file', me.file);
+            // formData.append('file', me.file);
             formData.append('id_category', me.id_category);
             formData.append('name', me.name);
             formData.append('description', me.description);
@@ -369,7 +369,7 @@ export default {
                 formData.append('id_category', me.id_category);
                 formData.append('name', me.name);
                 formData.append('description',me.description);
-                formData.append('file', me.file);
+                // formData.append('file', me.file);
 
                 //Registramos la informacion
                 axios.post('/subcategoria/actualizar',formData,{
@@ -467,7 +467,7 @@ export default {
             this.errorSubcategoria = 0;
             this.errorMostrarMsjSubcategoria = [];
 
-                if (!this.file ) this.errorMostrarMsjSubcategoria.push("Se tiene que ingresar una imagen.");
+                // if (!this.file ) this.errorMostrarMsjSubcategoria.push("Se tiene que ingresar una imagen.");
                 if (!this.name) this.errorMostrarMsjSubcategoria.push("El nombre de la subcategoría no puede estar vacío.");
                 if (!this.description) this.errorMostrarMsjSubcategoria.push("La descripción de la subcategoría no puede estar vacío.");
                 if (this.errorMostrarMsjSubcategoria.length) this.errorSubcategoria = 1;
@@ -481,23 +481,10 @@ export default {
 }
 </script>
 <style>
-    .modal-content{
-        width: 100% !important;
-        position: absolute !important;
-        height: 600px;
-    }
     .mostrar{
         display: list-item !important;
         opacity: 1 !important;
         position: absolute !important;
         z-index: 100;
-    }
-    .centrado{
-        height:560px;
-        margin-left: 20%;
-        margin-right: 30%;
-    }
-    .espacioButton{
-        margin-left: 10px !important;
     }
 </style>
