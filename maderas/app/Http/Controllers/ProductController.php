@@ -56,17 +56,23 @@ class ProductController extends Controller
     public function listarProductos(Request $request){
         $buscar = $request->buscar;
         $criterio = $request->criterio;
+        $idSubCat = $request->id;
+        // print("hola $idSubCat");
+
+        //Te fijaste?
         
         if ($buscar==''){
 
             $producto = DB::table('products')
             ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
+            ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products_categories.id_subcategories')
             ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
             ->select('products.PK_products','products.SKU','products.name','products.description',
             'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
             'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.status','=','1')
+            ->where('subcategories.PK_subcategories','=',$idSubCat)
             ->orderBy('products.PK_products', 'desc')->paginate(6);
 
         }
@@ -118,8 +124,6 @@ class ProductController extends Controller
 
         $producto = new Product();
         $imagen = new ProductImage();
-
-     
 
         $producto->SKU = $request->SKU;
         $producto->id_products_categories = $request->id_products_categories;

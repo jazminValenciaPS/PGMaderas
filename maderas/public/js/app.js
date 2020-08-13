@@ -8281,8 +8281,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     eliminarDeCarrito: function eliminarDeCarrito(PK_products) {
       var productosLS = this.carrito; //Obtenemos el arreglo de productos
-
-      console.log(productosLS, "productosLS"); // Comparar el id del producto borrado con LS
+      // Comparar el id del producto borrado con LS
 
       productosLS.forEach(function (productoLS, index) {
         if (productoLS.PK_products === PK_products) {
@@ -8291,6 +8290,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }); //Añadimos el arreglo actual al LS
 
       localStorage.setItem('carrito', JSON.stringify(productosLS));
+      this.calcularTotal(this.carrito);
     },
     calcularTotal: function calcularTotal(carrito) {
       var total = this.total;
@@ -8305,7 +8305,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.carrito.total = total;
       this.carrito.subtotal = subtotal;
       localStorage.setItem('carrito', JSON.stringify(this.carrito));
-      console.log(this.carrito, "carrito guardar");
     }
   },
   mounted: function mounted() {
@@ -8332,7 +8331,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       switch (_context2.prev = _context2.next) {
                         case 0:
                           _context2.next = 2;
-                          return _this2.listarProductos(producto.SKU);
+                          return _this2.listarProductos(producto.PK_products);
 
                         case 2:
                           productoActualizado = _context2.sent;
@@ -8358,11 +8357,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 4:
               _this2.carrito = _context3.sent;
-              console.log(_this2.carrito, "carrito");
 
               _this2.calcularTotal(_this2.carrito);
 
-            case 7:
+            case 6:
             case "end":
               return _context3.stop();
           }
@@ -9140,6 +9138,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -9293,7 +9305,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                       switch (_context2.prev = _context2.next) {
                         case 0:
                           _context2.next = 2;
-                          return _this2.listarProductos(producto.SKU);
+                          return _this2.listarProductos(producto.PK_products);
 
                         case 2:
                           productoActualizado = _context2.sent;
@@ -9811,6 +9823,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -9847,6 +9861,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     productoid: Number
@@ -9856,7 +9871,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       arrayProducto: [],
       idproduct: '',
       carrito: [],
-      cantidad: 0,
+      cantidad: 1,
+      precioFinal: 0,
       contenido: 0
     };
   },
@@ -9869,9 +9885,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         console.log(error);
       });
     },
-    actualizarCantidad: function actualizarCantidad(carrito) {
-      localStorage.setItem('carrito', JSON.stringify(this.carrito));
-      console.log(this.carrito, "carrito guardar");
+    actualizarCantidad: function actualizarCantidad(producto) {
+      var cantidad = this.cantidad;
+      var precioFinal = this.precioFinal;
+      var coincidencia = this.carrito.find(function (productoLS) {
+        return productoLS.PK_products === producto.PK_products;
+      });
+
+      if (coincidencia) {
+        var productosLS = this.carrito; //Obtenemos el arreglo de productos
+        // Comparar el id del producto borrado con LS
+
+        productosLS.forEach(function (productoLS, index) {
+          if (productoLS.PK_products === producto.PK_products) {
+            productosLS.splice(index, 1);
+          }
+        }); //Añadimos el arreglo actual al LS
+
+        localStorage.setItem('carrito', JSON.stringify(productosLS));
+        this.carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(this.carrito));
+        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+          icon: 'success',
+          type: 'info',
+          title: 'Cantidad de productos seleccionada modificada!',
+          text: 'El producto se agrego al carrito',
+          showConfirmButton: false,
+          timer: 1000
+        });
+      } else {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+          icon: 'success',
+          type: 'info',
+          title: 'Agregado al carrito!',
+          text: 'El producto se agrego al carrito',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        producto.cantidad = cantidad;
+        producto.precioFinal = precioFinal;
+        this.carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(this.carrito));
+        return;
+      }
     }
   },
   mounted: function mounted() {
@@ -9999,9 +10055,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    listarProductos: function listarProductos(page, buscar, criterio) {
+    listarProductos: function listarProductos(page, buscar, criterio, id) {
       var m = this;
-      var url = '/productoL?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+      var url = '/productoL?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&id=' + id;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         m.pagination = respuesta.pagination;
@@ -10035,19 +10091,28 @@ __webpack_require__.r(__webpack_exports__);
 
       if (coincidencia) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-          type: 'info',
+          icon: 'info',
           title: 'Ooops!',
           text: 'El producto ya está en el carrito',
           showConfirmButton: false,
           timer: 1000
         });
         return;
+      } else {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          icon: 'success',
+          type: 'info',
+          title: 'Agregado al carrito!',
+          text: 'El producto se agrego al carrito',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        producto.cantidad = cantidad;
+        producto.precioFinal = precioFinal;
+        this.carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(this.carrito));
+        return;
       }
-
-      producto.cantidad = cantidad;
-      producto.precioFinal = precioFinal;
-      this.carrito.push(producto);
-      localStorage.setItem('carrito', JSON.stringify(this.carrito));
     },
     crearCarrito: function crearCarrito() {
       this.carrito = JSON.parse(localStorage.getItem('carrito'));
@@ -10101,11 +10166,9 @@ __webpack_require__.r(__webpack_exports__);
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
     var product = urlParams.get('id');
-    console.log("hola");
-    console.log(product);
     var id = product !== null && product !== '' && product !== undefined ? product : "";
     m.listarCat(id);
-    this.listarProductos(1, this.buscar, this.criterio);
+    this.listarProductos(1, this.buscar, this.criterio, id);
     this.crearCarrito(); // this.listarCat();
   }
 });
@@ -38908,17 +38971,8 @@ var render = function() {
                 _vm._m(5)
               ])
             ])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "section",
-        {
-          staticClass: "container-metodo-tienda",
-          staticStyle: { "z-index": "1" }
-        },
-        [
+          ]),
+          _vm._v(" "),
           _c("h6", [_vm._v("informacion en tienda")]),
           _vm._v(" "),
           _c("div", { staticClass: "informacion-tienda-select" }, [
@@ -38969,6 +39023,26 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("label", [_vm._v("Materialize Select")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "container-metodo-button" }, [
+            _c(
+              "a",
+              {
+                staticClass: "waves-effect bg-main waves-light btn aling ",
+                on: {
+                  click: function($event) {
+                    return _vm.guardarOrden()
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "material-icons right" }, [
+                  _vm._v("attach_money")
+                ]),
+                _vm._v("Ir a pagar")
               ]
             )
           ])
@@ -39085,33 +39159,6 @@ var render = function() {
           })
         ],
         2
-      ),
-      _vm._v(" "),
-      _c(
-        "section",
-        {
-          staticClass: "container-metodo-button",
-          staticStyle: { "z-index": "0" }
-        },
-        [
-          _c(
-            "a",
-            {
-              staticClass: "waves-effect bg-main waves-light btn aling",
-              on: {
-                click: function($event) {
-                  return _vm.guardarOrden()
-                }
-              }
-            },
-            [
-              _c("i", { staticClass: "material-icons right" }, [
-                _vm._v("attach_money")
-              ]),
-              _vm._v("Ir a pagar")
-            ]
-          )
-        ]
       )
     ])
   ])
@@ -40436,122 +40483,100 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col m6 s12" },
-            [
-              _c("div", { staticClass: "col m12 s12" }, [
-                _c("h4", [_vm._v(_vm._s(producto.name))]),
-                _vm._v(" "),
-                _c("p", [_vm._v("SKU: " + _vm._s(producto.SKU))]),
-                _vm._v(" "),
-                _c("h5", [_vm._v("$" + _vm._s(producto.price))]),
-                _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(producto.description))]),
-                _vm._v(" "),
-                _c("h6", { staticClass: "mt-2" }, [
-                  _c("span", { staticClass: "color-main" }, [
-                    _vm._v(_vm._s(producto.avaible))
-                  ]),
-                  _vm._v(" Disponibles para compra en línea")
-                ])
-              ]),
+          _c("div", { staticClass: "col m6 s12" }, [
+            _c("div", { staticClass: "col m12 s12" }, [
+              _c("h4", [_vm._v(_vm._s(producto.name))]),
               _vm._v(" "),
-              _vm._l(_vm.carrito, function(carrito) {
-                return _c(
-                  "div",
-                  {
-                    key: carrito.PK_products,
-                    staticClass: "col m8 s12 row mt-2"
-                  },
-                  [
-                    carrito.PK_products == producto.PK_products
-                      ? _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: carrito.cantidad,
-                                expression: "carrito.cantidad"
-                              }
-                            ],
-                            staticClass: "col m3 s5 browser-default",
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  carrito,
-                                  "cantidad",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              {
-                                attrs: { value: "", disabled: "", selected: "" }
-                              },
-                              [_vm._v("Disponibilidad del producto")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(carrito.avaible, function(items) {
-                              return _c("option", { key: items.index }, [
-                                _vm._v(_vm._s(items))
-                              ])
-                            })
-                          ],
-                          2
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    carrito.PK_products == producto.PK_products
-                      ? _c(
-                          "a",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: producto.avaible > 0,
-                                expression: "producto.avaible > 0"
-                              }
-                            ],
-                            staticClass: "col m8 s6 btn bg-main ml-1",
-                            on: {
-                              click: function($event) {
-                                return _vm.actualizarCantidad(carrito)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v("Agregar a Carrito"),
-                            _c(
-                              "i",
-                              { staticClass: "material-icons left m-0" },
-                              [_vm._v("add_shopping_cart")]
-                            )
-                          ]
-                        )
-                      : _vm._e()
-                  ]
-                )
-              })
-            ],
-            2
-          )
+              _c("p", [_vm._v("SKU: " + _vm._s(producto.SKU))]),
+              _vm._v(" "),
+              _c("h5", [_vm._v("$" + _vm._s(producto.price))]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(producto.description))]),
+              _vm._v(" "),
+              _c("h6", { staticClass: "mt-2" }, [
+                _c("span", { staticClass: "color-main" }, [
+                  _vm._v(_vm._s(producto.avaible))
+                ]),
+                _vm._v(" Disponibles para compra en línea")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col m8 s12 row mt-2" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: producto.cantidad,
+                      expression: "producto.cantidad"
+                    }
+                  ],
+                  staticClass: "col m3 s5 browser-default",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        producto,
+                        "cantidad",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    { attrs: { value: "", disabled: "", selected: "" } },
+                    [_vm._v("Disponibilidad del producto")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(producto.avaible, function(items) {
+                    return _c("option", { key: items.index }, [
+                      _vm._v(_vm._s(items))
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: producto.avaible > 0,
+                      expression: "producto.avaible > 0"
+                    }
+                  ],
+                  staticClass: "col m8 s6 btn bg-main ml-1",
+                  on: {
+                    click: function($event) {
+                      return _vm.actualizarCantidad(producto)
+                    }
+                  }
+                },
+                [
+                  _vm._v("Agregar al carrito"),
+                  _c("i", { staticClass: "material-icons left m-0" }, [
+                    _vm._v("add_shopping_cart")
+                  ])
+                ]
+              )
+            ])
+          ])
         ])
       }),
       0
@@ -40601,7 +40626,38 @@ var render = function() {
             2
           ),
           _vm._v(" "),
-          _vm._m(0)
+          _c("li", { staticClass: "collection-item" }, [
+            _c("h6", [_vm._v("Filtro de búsqueda:")]),
+            _vm._v(" "),
+            _c("h6", [_vm._v("Precio")]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.listarProductos(1, 99, _vm.price)
+                  }
+                }
+              },
+              [_vm._v("Menos de $99")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                attrs: { href: "#!" },
+                on: {
+                  click: function($event) {
+                    return _vm.listarProductos(1, 99, _vm.price)
+                  }
+                }
+              },
+              [_vm._v("Entre $100 y $299")]
+            ),
+            _vm._v(" "),
+            _c("a", { attrs: { href: "#!" } }, [_vm._v("Entre $300 y $500")])
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -40776,24 +40832,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "collection-item" }, [
-      _c("h6", [_vm._v("Filtro de búsqueda:")]),
-      _vm._v(" "),
-      _c("h6", [_vm._v("Precio")]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "#!" } }, [_vm._v("Menos de $99")]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "#!" } }, [_vm._v("Entre $100 y $299")]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "#!" } }, [_vm._v("Entre $300 y $500")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

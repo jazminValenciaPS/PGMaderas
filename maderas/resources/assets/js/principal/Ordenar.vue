@@ -105,8 +105,22 @@
                     </label>
                     </p>
                 </form>
+                <h6>informacion en tienda</h6>
+                <div class="informacion-tienda-select">
+                    <select v-model="tienda">
+                        <option value="" disabled selected>Seleccione su tienda</option>
+                        <option value="1">Matriz Culiacán</option>
+                        <option value="2">Sucursal Zapata</option>
+                        <option value="3">Sucursal Monterrey</option>
+                        <label>Materialize Select</label>
+                    </select> 
+                </div>
+                <div class="container-metodo-button">
+                    <a class="waves-effect bg-main waves-light btn aling " @click="guardarOrden()"><i class="material-icons right">attach_money</i>Ir a pagar</a>
+                </div>
+                
             </section>
-            <section class="container-metodo-tienda" style="z-index:1" >
+            <!-- <section class="container-metodo-tienda" style="z-index:1" >
                 <h6>informacion en tienda</h6>
                     <div class="informacion-tienda-select">
                         <select v-model="tienda">
@@ -117,7 +131,7 @@
                             <label>Materialize Select</label>
                         </select> 
                     </div>
-            </section>
+            </section> -->
             <section class="container-metodo-pago" style="z-index:0">
                 <h6>Metodo de pago</h6>
                   <form action="#">
@@ -148,9 +162,9 @@
                     </li>
                 </ul>
             </section>
-            <section class="container-metodo-button" style="z-index:0">
+            <!-- <section class="container-metodo-button" style="z-index:0">
                 <a class="waves-effect bg-main waves-light btn aling" @click="guardarOrden()"><i class="material-icons right">attach_money</i>Ir a pagar</a>
-            </section>
+            </section> -->
         </div>
     </main>
 </template>
@@ -282,7 +296,7 @@ export default {
             this.carrito = carrito;
         }
         this.carrito = await Promise.all(this.carrito.map(async (producto) => {
-            var productoActualizado = await this.listarProductos(producto.SKU);
+            var productoActualizado = await this.listarProductos(producto.PK_products);
             productoActualizado = productoActualizado.data[0];
             producto.avaible = productoActualizado.avaible;
             producto.price = productoActualizado.price;

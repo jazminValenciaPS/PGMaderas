@@ -11,8 +11,8 @@
                     <li class="collection-item">
                         <h6>Filtro de búsqueda:</h6>
                         <h6>Precio</h6>
-                        <a href="#!">Menos de $99</a>
-                        <a href="#!">Entre $100 y $299</a>
+                        <a  @click="listarProductos(1,99,price)">Menos de $99</a>
+                        <a @click="listarProductos(1,99,price)" href="#!">Entre $100 y $299</a>
                         <a href="#!" >Entre $300 y $500</a>
                     </li>
                 </ul>
@@ -80,9 +80,9 @@ export default {
         }
     }, 
     methods:{
-        listarProductos(page,buscar,criterio){
+        listarProductos(page,buscar,criterio,id){
             let m=this;
-            var url='/productoL?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+            var url='/productoL?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio +'&id='+id;
 
             axios.get(url).then(function (response){
                 var respuesta= response.data;
@@ -104,7 +104,7 @@ export default {
                 console.log(error);
             });
         },
-         VerProducto(menu,id){
+        VerProducto(menu,id){
             let m=this;
             var objeto = {
                 valorMenu: menu,
@@ -119,7 +119,7 @@ export default {
             let coincidencia = this.carrito.find((productoLS) => productoLS.PK_products === producto.PK_products);
             if(coincidencia){
                 Swal.fire({
-                    type: 'info',
+                    icon: 'info',
                     title: 'Ooops!',
                     text: 'El producto ya está en el carrito',
                     showConfirmButton: false,
@@ -127,11 +127,24 @@ export default {
                 });
                 return;
             }
-            producto.cantidad = cantidad;
-            producto.precioFinal = precioFinal;
+            else{
+                Swal.fire({
+                    icon: 'success',
+                    type: 'info',
+                    title: 'Agregado al carrito!',
+                    text: 'El producto se agrego al carrito',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                
+                producto.cantidad = cantidad;
+                producto.precioFinal = precioFinal;
 
-            this.carrito.push(producto);
-            localStorage.setItem('carrito', JSON.stringify(this.carrito));
+                this.carrito.push(producto);
+                localStorage.setItem('carrito', JSON.stringify(this.carrito));
+                return;
+            }
+           
         },
         crearCarrito(){
             this.carrito = JSON.parse(localStorage.getItem('carrito'));
@@ -183,12 +196,10 @@ export default {
         const queryString = window.location.search;      
         const urlParams = new URLSearchParams(queryString);        
         const product = urlParams.get('id');
-        console.log("hola");
 
-        console.log(product);
         let id = (product !== null && product !== '' && product !== undefined)? product : "";
          m.listarCat(id);
-        this.listarProductos(1,this.buscar,this.criterio);
+        this.listarProductos(1,this.buscar,this.criterio,id);
         this.crearCarrito();
         // this.listarCat();
     }

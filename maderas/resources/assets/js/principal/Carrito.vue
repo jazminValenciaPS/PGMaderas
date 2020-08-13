@@ -81,7 +81,6 @@ export default {
         eliminarDeCarrito(PK_products){
             let productosLS = this.carrito;
             //Obtenemos el arreglo de productos
-            console.log(productosLS,"productosLS");
             
             // Comparar el id del producto borrado con LS
             productosLS.forEach(function(productoLS, index){
@@ -89,9 +88,9 @@ export default {
                     productosLS.splice(index, 1);
                 }
             });
-
             //Añadimos el arreglo actual al LS
             localStorage.setItem('carrito', JSON.stringify(productosLS));
+            this.calcularTotal(this.carrito);
         },
        calcularTotal(carrito){
             var total = this.total;
@@ -106,7 +105,6 @@ export default {
             this.carrito.subtotal = subtotal;
 
             localStorage.setItem('carrito', JSON.stringify(this.carrito));
-            console.log(this.carrito,"carrito guardar");
         },
 
     },
@@ -116,7 +114,7 @@ export default {
             this.carrito = carrito;
         }
         this.carrito = await Promise.all(this.carrito.map(async (producto) => {
-            var productoActualizado = await this.listarProductos(producto.SKU);
+            var productoActualizado = await this.listarProductos(producto.PK_products);
             productoActualizado = productoActualizado.data[0];
             producto.avaible = productoActualizado.avaible;
             producto.price = productoActualizado.price;
@@ -124,7 +122,6 @@ export default {
             producto.image = productoActualizado.image;
             return producto;
         }));
-        console.log(this.carrito, "carrito");
         this.calcularTotal(this.carrito);
     }
 }

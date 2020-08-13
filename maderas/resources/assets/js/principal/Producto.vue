@@ -16,12 +16,12 @@
                         <p>{{producto.description}}</p>
                         <h6 class="mt-2"><span class="color-main">{{producto.avaible}}</span> Disponibles para compra en línea</h6>
                     </div>
-                    <div class="col m8 s12 row mt-2" v-for="carrito in carrito" :key="carrito.PK_products" >
-                        <select class="col m3 s5 browser-default" v-if="carrito.PK_products == producto.PK_products" v-model="carrito.cantidad">
+                    <div class="col m8 s12 row mt-2" >
+                        <select class="col m3 s5 browser-default" v-model="producto.cantidad" >
                             <option value="" disabled selected >Disponibilidad del producto</option>
-                            <option v-for="items in carrito.avaible" :key="items.index">{{ items }}</option>
+                            <option v-for="items in producto.avaible" :key="items.index">{{ items }}</option>
                         </select> 
-                        <a class="col m8 s6 btn bg-main ml-1" v-if="carrito.PK_products == producto.PK_products"  @click="actualizarCantidad(carrito)" v-show="producto.avaible > 0">Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
+                         <a class="col m8 s6 btn bg-main ml-1" @click="actualizarCantidad(producto)" v-show="producto.avaible > 0">Agregar al carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
                     </div>
                 </div>
             </div>
@@ -29,6 +29,7 @@
     </main>
 </template>
 <script>
+import Swal from 'sweetalert2';
 export default {
      props:{
             productoid: Number
@@ -38,7 +39,8 @@ export default {
             arrayProducto: [],
             idproduct:'',
             carrito:[],
-            cantidad:0,
+            cantidad:1,
+            precioFinal: 0,
             contenido: 0,
         
         }
@@ -54,10 +56,55 @@ export default {
                 console.log(error);
             });
         },
-       actualizarCantidad(carrito){
-            localStorage.setItem('carrito', JSON.stringify(this.carrito));
-            console.log(this.carrito,"carrito guardar");
+       actualizarCantidad(producto){
+            let cantidad = this.cantidad;
+            let precioFinal = this.precioFinal;
+
+            let coincidencia = this.carrito.find((productoLS) => productoLS.PK_products === producto.PK_products);
+            if(coincidencia){
+                let productosLS = this.carrito;
+                //Obtenemos el arreglo de productos
+                
+                // Comparar el id del producto borrado con LS
+                productosLS.forEach(function(productoLS, index){
+                    if(productoLS.PK_products === producto.PK_products){
+                        productosLS.splice(index, 1);
+                    }
+                });
+                //Añadimos el arreglo actual al LS
+                localStorage.setItem('carrito', JSON.stringify(productosLS));
+
+                this.carrito.push(producto);
+                localStorage.setItem('carrito', JSON.stringify(this.carrito));
+                 Swal.fire({
+                    icon: 'success',
+                    type: 'info',
+                    title: 'Cantidad de productos seleccionada modificada!',
+                    text: 'El producto se agrego al carrito',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+
+            }
+            else{
+                Swal.fire({
+                    icon: 'success',
+                    type: 'info',
+                    title: 'Agregado al carrito!',
+                    text: 'El producto se agrego al carrito',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                
+                producto.cantidad = cantidad;
+                producto.precioFinal = precioFinal;
+
+                this.carrito.push(producto);
+                localStorage.setItem('carrito', JSON.stringify(this.carrito));
+                return;
+            }   
         },
+    
     },
      async mounted() {
             let m=this;
