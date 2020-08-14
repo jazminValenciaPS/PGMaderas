@@ -17,12 +17,12 @@ class CategorieController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $categorias = Categorie::orderBy('PK_categories', 'desc')->paginate(3);
+            $categorias = Categorie::orderBy('PK_categories', 'desc')->paginate(6);
 
        
         }
         else{
-            $categorias = Categorie::where($criterio, 'like', '%'. $buscar . '%')->orderBy('PK_categories', 'desc')->paginate(3);
+            $categorias = Categorie::where($criterio, 'like', '%'. $buscar . '%')->orderBy('PK_categories', 'desc')->paginate(6);
         }
         return [
             'pagination' => [

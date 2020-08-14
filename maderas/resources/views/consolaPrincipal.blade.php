@@ -29,11 +29,24 @@
   </style>
   <body>
     <div id="app">
-    @include('plantilla.consolaNavAdmin')   
 
 
   
+      @if(Auth::check())
+        @if(Auth::user()->id_role == 4)
+          @include('plantilla.consolaNavMarketing') 
+        @elseif(Auth::user()->id_role == 2)  
+          @include('plantilla.consolaNavAdmin')
+        @elseif(Auth::user()->id_role == 5)
+          @include('plantilla.consolaNavAlmacenero')
+          @else
+        @endif 
+
+      @endif
+
+
       <!-- Contenido principal -->
+
       @yield('consola')
       <!-- Termina contenido principal -->
 

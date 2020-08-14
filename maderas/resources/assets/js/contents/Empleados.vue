@@ -4,11 +4,7 @@
             <div class=" title">
                 <h5>Empleados</h5>
             </div>
-            <div class="right form ">
-                <button type="summit" data-target="modal1" class="modal-trigger" @click="abrirModal('empleados','registrar')">
-                    Agregar empleados
-                </button>
-            </div>
+           
 
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg " role="document">
@@ -35,8 +31,11 @@
                             <input id="email" type="text" v-model="email" placeholder="Email" class="validate">
                             </div>
                             
-                            <div class="input-field col s12">                           
+                            <div class="input-field col s6">                           
                                 <input type="date" class="datepicker" v-model="birth_date" placeholder="Fecha de nacimiento" >
+                            </div>
+                                <div class="input-field col s6">                           
+                                <input type="password" class="text" v-model="password" placeholder="Contraseña" >
                             </div>
                           
                             <div class="input-field col s6">                          
@@ -104,21 +103,37 @@
 
 
           <div class="row">
+              <br>
                 <div class="form-group center">
-                    <div class="col s6">
-                        <div class="input-group">
+                    <div class="col l12 buscarC">
+                            <div class="input-field col s2">
+
                             <select name="LeaveType" class="browser-default" v-model="criterio">
                                  <option value="" disabled selected>Selecciona con que buscar</option>
                                  <option value="email">Email</option>
                                  <!-- <option value="SKU">SKU</option> -->
-                             </select>                         
+                             </select>   
+                        </div>
+                            
+                            <div class="input-field col s4">
+
                             <input type="text" v-model="buscar" @keyup.enter="listarEmpleado(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                        </div>
+                           
+                            <div class="input-field col s3">
+                            
                             <button type="submit" @click="listarEmpleado(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+                         <div class=" form input-field col s3">
+                            <button type="summit" data-target="modal1" class="modal-trigger" @click="abrirModal('empleados','registrar')">
+                                Agregar empleados
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="tabla centered">
+            <br>
+            <table class="tabla centered highlight">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -368,7 +383,7 @@ export default {
             formData.append('id_role', me.id_role);
             formData.append('email', me.email);
             // formData.append('email_verified_at', me.email_verified_at);
-            // formData.append('password', me.password);
+            formData.append('password', me.password);
             
             // Registramos la informacion
             let url = '/user/registrar';

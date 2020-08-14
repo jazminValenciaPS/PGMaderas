@@ -318,6 +318,8 @@ nav div ul li a {
     grid-row: repeat(5,200px);
     grid-gap: 5px;
   }
+
+
 @media (max-width: 958px){
   
 

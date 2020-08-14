@@ -4,11 +4,7 @@
             <div class=" title">
                 <h5>Categorías de productos</h5>
             </div>
-            <div class="right form ">
-                <button type="summit"  data-target="modal1" class="modal-trigger" @click="abrirModal('categoriasP','registrar')">
-                    Agregar Categorias para productos
-                </button>
-            </div>
+          
         <!-- modal inicio -->
 
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
@@ -18,9 +14,10 @@
                     <div class="center">
                         <h3 v-text="tituloModal"></h3>
                     </div>
-                    <div class="col s12 center">
+                    <!-- Imagen -->
+                    <!-- <div class="col s12 center">
                         <img v-if="tipoAccion==2" :src="'img/'+image"  class="tImagen imagenEdit" alt="">
-                    </div>
+                    </div> -->
                     <div class="form-group row">
                         <input id="nombre" type="text" v-model="name" placeholder="Nombre Categoria"  class="validate" >
                         <br>
@@ -58,21 +55,34 @@
          <!-- tabla inicio -->
         <div class="col s12 m12 gl6"> 
             <div class="row ">
+                <br>
                 <div class="form-group center">
-                    <div class="col s6">
-                        <div class="input-group">
+                    <div class="col l12 buscarC">
+                        <div class="input-field col s2">
                             <select name="LeaveType" class="browser-default" v-model="criterio">
                                 <option value="" disabled selected>Selecciona con que buscar</option>
                                 <option value="name">Nombre</option>
                             </select> 
+                         </div>
+                        <div class="input-field col s4">
+
                             <input type="text" v-model="buscar" @keyup.enter="listarCategoria(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                         </div>
+                        
+                        <div class="input-field col s3">
+                            
                             <button type="submit" @click="listarCategoria(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                        </div>
+                         </div>
+                          <div class=" form  input-field col s3 ">
+                            <button type="summit"  data-target="modal1" class="modal-trigger" @click="abrirModal('categoriasP','registrar')">
+                                Agregar Categorias para productos
+                            </button>
+                         </div>
                     </div>
                 </div>
             </div>
-             
-            <table class="tabla centered">
+             <br>
+            <table class="tabla centered highlight">
                 <thead>
                     <tr>
                         <th>Nombre</th>

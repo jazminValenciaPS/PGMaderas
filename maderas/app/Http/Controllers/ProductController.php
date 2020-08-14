@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Product;
 use App\ProductImage;
+use App\PGBranches;
+use App\Stock;
 use Request as Peticion;
 use File;
 use Illuminate\Support\Facades\DB;
@@ -57,9 +59,6 @@ class ProductController extends Controller
         $buscar = $request->buscar;
         $criterio = $request->criterio;
         $idSubCat = $request->id;
-        // print("hola $idSubCat");
-
-        //Te fijaste?
         
         if ($buscar==''){
 
@@ -148,7 +147,26 @@ class ProductController extends Controller
         $imagen ->image = $nombreImagen;
 
         $imagen->save();
+        
+        $sucursal = DB::table('_p_g_branches')
+        ->select('PK_PG_branches as idBranches')
+        ->get();
+
+        $sucursal = $sucursal->toArray();
+        var_dump($sucursal);
+
+        foreach($sucursal as $branches){
+            var_dump($branches);
+            // $stock = new Stock();
+            // $stock->id_product = $idProduc;
+            // $stock->id_d_PG_branches = $branches;
+            // $stock->available = 0;
+            // $stock->status = 0;
+            // $stock->save();
+        }
+       
     }
+
 
     public function update(Request $request)
     {

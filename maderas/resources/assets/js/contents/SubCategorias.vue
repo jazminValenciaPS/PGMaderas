@@ -4,13 +4,7 @@
             <div class=" title">
                 <h5>Subcategorías</h5>
             </div>
-            <div class="right form ">
-                <button type="summit"  data-target="modal1" class="modal-trigger" @click="abrirModal('subcategorias','registrar')">
-                    Agregar Subcategorías
-                </button>
-            </div>
              <!--Inicio del modal-->
-
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
              <div class="modal-dialog modal-primary modal-lg " role="document">
                 <div class = "container">
@@ -18,15 +12,13 @@
                     <div class="center">
                         <h3 v-text="tituloModal"></h3>
                     </div>
-                    <div class="col s12 center">
+                    <!-- Imagen -->
+                    <!-- <div class="col s12 center">
                         <img v-if="tipoAccion==2" :src="'img/'+image"  class="tImagen" alt="">
-                    </div>
+                    </div> -->
                     <div class="form-group row">
-                        <!-- input para el nombre de la subCategoria --> 
                         <input id="name" type="text" v-model="name" placeholder="Nombre de la subcategoría"  class="validate" >
-                        <!-- <label  for="nombre">Nombre</label> -->
                         <br>  
-                        <!-- input para la descripción de la subcategoria-->
                         <input id="description" type="text" v-model="description" placeholder="Descripcion" class="validate">
                         <!-- <label  for="descripcion"></label> -->
                         <br> 
@@ -64,78 +56,88 @@
                 </div>
             </div>
 
-        <!-- Mostrar datos -->
-         <div class="col s12 m12 gl6"> 
-
+            <!-- Mostrar datos -->
+            <div class="col s12 m12 gl6"> 
                 <div class="row">
+                    <br>
                     <div class="form-group center">
-                        <div class="col s6">
-                            <div class="input-group">
+                        <div class="col l12 s12 buscarC">
+                                <div class="input-field col s2">
                                 <select name="LeaveType" class="browser-default" v-model="criterio">
                                     <option value="" disabled selected>Selecciona con que buscar</option>
                                     <option value="name">Nombre</option>
-                                    <option value="SKU">SKU</option>
-                                </select>                         
-                                <input type="text" v-model="buscar" @keyup.enter="listarSubcategoria(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                                    <option value="description">Descripción</option>
+                                </select>  
+                                </div>
+
+                                <div class="input-field col s4">
+                                    <input type="text" v-model="buscar" @keyup.enter="listarSubcategoria(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                                </div>
+                                <div class="input-field col s3">
+                                
                                 <button type="submit" @click="listarSubcategoria(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                            </div>
+                                <div class=" form input-field col s3">
+                                <button type="summit"  data-target="modal1" class="modal-trigger" @click="abrirModal('subcategorias','registrar')">
+                                    Agregar Subcategorías
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-        <table class="tabla centered">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th class="hide-on-small-only">Categoria</th>
-                    <th class="hide-on-small-only">Descripcion</th>
-                    <!-- <th class="hide-on-small-only">Imagen</th> -->
-                    <th class="hide-on-small-only">Status</th>
-                    <th>Editar</th>
-                    <th>Desactivar/Activar</th>
-                </tr>
-            </thead>
-            <tbody  v-for="subcategoria in arraySubcategoria" :key="subcategoria.PK_subcategories">
-            <tr>
-                <td v-text="subcategoria.name"></td> 
-                <td class="hide-on-small-only"  v-text="subcategoria.categoria"></td>
-                    <td class="hide-on-small-only"  v-text="subcategoria.description"></td>
-                    <!-- <td class="hide-on-small-only"><img :src="'img/'+subcategoria.image" class="tImagen square"></td> -->
-                <td class="hide-on-small-only"  v-if="subcategoria.status == 1">Activado</td>
-                <td class="hide-on-small-only"  v-if="subcategoria.status == 0">Desactivado</td>
-                <td>
-                    <i class="material-icons color-text " @click="abrirModal('subcategorias','actualizar',subcategoria,subcategoria.PK_subcategories)">create</i>
-                </td>
-                <td class="desactivarActivar">
-                    <a href="#!" class="secondary-content" v-if="subcategoria.status == 1">
-                        <i class="switch">
-                            <label><input type="checkbox" checked="checked" name="status" v-model="subcategoria.status" @click="desactivarSubcategoria(subcategoria.PK_subcategories)"><span class="lever"></span></label>
-                        </i>
-                    </a>
-                    <a href="#!" class="secondary-content" v-if="subcategoria.status == 0">
-                        <i class="switch">
-                            <label><input type="checkbox"  name="status" v-model="subcategoria.status" @click="activarSubcategoria(subcategoria.PK_subcategories)"><span class="lever"></span></label>
-                        </i>
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-         <ul class="pagination">
-            <li  v-if="pagination.current_page > 1">
-                <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
-                <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
-            </li>
-            <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
-            </li>
-            <li v-if="pagination.current_page < pagination.last_page">
-                <a  href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
-            </li>
-        </ul>
-        </div>  
-
+                <br>
+                <table class="tabla centered highlight">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th class="hide-on-small-only">Categoria</th>
+                            <th class="hide-on-small-only">Descripcion</th>
+                            <!-- <th class="hide-on-small-only">Imagen</th> -->
+                            <th class="hide-on-small-only">Status</th>
+                            <th>Editar</th>
+                            <th>Desactivar/Activar</th>
+                        </tr>
+                    </thead>
+                    <tbody  v-for="subcategoria in arraySubcategoria" :key="subcategoria.PK_subcategories">
+                        <tr>
+                            <td v-text="subcategoria.name"></td> 
+                            <td class="hide-on-small-only"  v-text="subcategoria.categoria"></td>
+                                <td class="hide-on-small-only"  v-text="subcategoria.description"></td>
+                                <!-- <td class="hide-on-small-only"><img :src="'img/'+subcategoria.image" class="tImagen square"></td> -->
+                            <td class="hide-on-small-only"  v-if="subcategoria.status == 1">Activado</td>
+                            <td class="hide-on-small-only"  v-if="subcategoria.status == 0">Desactivado</td>
+                            <td>
+                                <i class="material-icons color-text " @click="abrirModal('subcategorias','actualizar',subcategoria,subcategoria.PK_subcategories)">create</i>
+                            </td>
+                            <td class="desactivarActivar">
+                                <a href="#!" class="secondary-content" v-if="subcategoria.status == 1">
+                                    <i class="switch">
+                                        <label><input type="checkbox" checked="checked" name="status" v-model="subcategoria.status" @click="desactivarSubcategoria(subcategoria.PK_subcategories)"><span class="lever"></span></label>
+                                    </i>
+                                </a>
+                                <a href="#!" class="secondary-content" v-if="subcategoria.status == 0">
+                                    <i class="switch">
+                                        <label><input type="checkbox"  name="status" v-model="subcategoria.status" @click="activarSubcategoria(subcategoria.PK_subcategories)"><span class="lever"></span></label>
+                                    </i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul class="pagination">
+                    <li  v-if="pagination.current_page > 1">
+                        <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
+                        <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
+                    </li>
+                    <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                        <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a  href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
+                    </li>
+                </ul>
+            </div>  
         </div>
-
     </main>
 </template>
 <script>

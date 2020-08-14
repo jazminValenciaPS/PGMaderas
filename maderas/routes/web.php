@@ -82,6 +82,9 @@ Route::post('/order/registrar','OrderController@store');
 
 
 Route::group(['middleware'=>['auth']],function(){
+    Route::get('/logout','Auth\LoginController@logout')->name('logout');
+
+    Route::post('/salir','Auth\LoginClientController@logout')->name('salir');
 
     Route::get('/consola', function () {
         return view('contenido/consola');
@@ -91,10 +94,8 @@ Route::group(['middleware'=>['auth']],function(){
     //     return view('tienda.pagina.Perfil');
     // })->name('perfil');
 
-    // Route::group(['middleware'=>['Administrador']],function() {
-        Route::get('/logout','Auth\LoginController@logout')->name('logout');
+    Route::group(['middleware'=>['Administrador']],function() {
 
-        Route::post('/salir','Auth\LoginClientController@logout')->name('salir');
 
 
         Route::get('/categoria','CategorieController@index');
@@ -138,7 +139,25 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/rol','RolController@index');
     
         Route::get('/order','OrderController@index');
-    // });
+    });
+    Route::group(['middleware'=>['Marketing']],function() {
+
+        Route::get('/slider','SliderController@index');
+        Route::post('/slider/registrar','SliderController@store');
+        Route::post('/slider/actualizar','SliderController@update');
+        Route::put('/slider/activar','SliderController@activar');
+        Route::put('/slider/desactivar','SliderController@desactivar');
+
+        Route::get('/logout','Auth\LoginController@logout')->name('logout');
+
+        Route::post('/salir','Auth\LoginClientController@logout')->name('salir');
+
+        Route::post('/password/actualizar','PasswordController@update');
+
+
+    });
+
+
 
 });
 

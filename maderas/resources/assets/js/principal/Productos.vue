@@ -5,8 +5,8 @@
             <div class="col m3 s12">
                 <ul class="collection">
                     <li class="collection-item">
-                        <h6>Categorías</h6>
-                        <a v-for="cate in arrayCategorias" :key="cate.PK_categories" value="">{{cate.name}}</a>
+                       <h6>Categorías</h6>
+                        <a v-for="cate in arrayCategorias" :key="cate.PK_categories" value="" @click="productosCate()">{{cate.name}}</a>
                     </li>
                     <li class="collection-item">
                         <h6>Filtro de búsqueda:</h6>

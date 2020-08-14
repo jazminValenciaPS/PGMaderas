@@ -14,7 +14,7 @@ class User extends Authenticatable
     protected $primaryKey = 'id';
    
     protected $fillable = [
-        'id_person','id_rol','email', 'password','id_branch','status',
+        'id_person','id_role','email', 'password','id_branch','status',
     ];
 
     public function person()
@@ -24,7 +24,7 @@ class User extends Authenticatable
 
     public function rol()
     {
-        return $this->belongsTo('App\Rol', 'id_rol', 'PK_roles');
+        return $this->belongsTo('App\Rol', 'id_role', 'PK_roles');
     }
 
     /**

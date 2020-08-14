@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
 /* variables */
 :root{
   --green-color: #419141 ;
@@ -19,13 +21,14 @@ nav{
   justify-content: space-between;
   /* aling alinea hacia el centro vertical los elementos */
   align-items: center;
+  font-family: 'Roboto';
 }
 footer{
   background-color: black;
 }
 .navImg{
   /* border: 1px solid red; */
-  max-width: 252px;
+  max-width: 200px;
 
 }
 .fadeInDown{

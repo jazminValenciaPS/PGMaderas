@@ -5208,6 +5208,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import categorias from './Categorias.vue'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5502,6 +5511,16 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6429,6 +6448,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var currYear = new Date().getFullYear();
 $('.datepicker').datepicker({
@@ -6629,8 +6663,8 @@ $('.datepicker').datepicker({
 
       formData.append('id_role', me.id_role);
       formData.append('email', me.email); // formData.append('email_verified_at', me.email_verified_at);
-      // formData.append('password', me.password);
-      // Registramos la informacion
+
+      formData.append('password', me.password); // Registramos la informacion
 
       var url = '/user/registrar';
       axios.post(url, formData, {
@@ -6875,6 +6909,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7450,6 +7494,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7696,6 +7742,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -33106,25 +33154,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "row hero" }, [
-    _c("div", { staticClass: "col s12 m12 gl6" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "right form " }, [
-        _c(
-          "button",
-          {
-            staticClass: "modal-trigger",
-            attrs: { type: "summit", "data-target": "modal1" },
-            on: {
-              click: function($event) {
-                return _vm.abrirModal("categorias", "registrar")
-              }
-            }
-          },
-          [_vm._v("\n                Agregar Categorias\n            ")]
-        )
-      ])
-    ]),
+    _vm._m(0),
     _vm._v(" "),
     _c(
       "div",
@@ -33152,15 +33182,6 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "center" }, [
                 _c("h3", { domProps: { textContent: _vm._s(_vm.tituloModal) } })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col s12 center" }, [
-                _vm.tipoAccion == 2
-                  ? _c("img", {
-                      staticClass: "tImagen imagenEdit",
-                      attrs: { src: "img/" + _vm.image, alt: "" }
-                    })
-                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
@@ -33308,9 +33329,11 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "col s12 m12 gl6" }, [
       _c("div", { staticClass: "row center" }, [
+        _c("br"),
+        _vm._v(" "),
         _c("div", { staticClass: "form-group center" }, [
-          _c("div", { staticClass: "col s6" }, [
-            _c("div", { staticClass: "input-group" }, [
+          _c("div", { staticClass: "col l12 s12 buscarC" }, [
+            _c("div", { staticClass: "input-field col s2" }, [
               _c(
                 "select",
                 {
@@ -33355,8 +33378,10 @@ var render = function() {
                     _vm._v("Descripción")
                   ])
                 ]
-              ),
-              _vm._v(" "),
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-field col s4" }, [
               _c("input", {
                 directives: [
                   {
@@ -33386,12 +33411,14 @@ var render = function() {
                     _vm.buscar = $event.target.value
                   }
                 }
-              }),
-              _vm._v(" "),
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form  input-field col s3" }, [
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-primary",
+                  staticClass: "modal-trigger",
                   attrs: { type: "submit" },
                   on: {
                     click: function($event) {
@@ -33401,14 +33428,36 @@ var render = function() {
                 },
                 [_c("i", { staticClass: "fa fa-search" }), _vm._v(" Buscar")]
               )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form input-field col s3" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "modal-trigger",
+                  attrs: { type: "summit", "data-target": "modal1" },
+                  on: {
+                    click: function($event) {
+                      return _vm.abrirModal("categorias", "registrar")
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                            Agregar Categorias\n                        "
+                  )
+                ]
+              )
             ])
           ])
         ])
       ]),
       _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c(
         "table",
-        { staticClass: "tabla centered" },
+        { staticClass: "tabla centered highlight" },
         [
           _vm._m(1),
           _vm._v(" "),
@@ -33438,7 +33487,7 @@ var render = function() {
                   _c(
                     "i",
                     {
-                      staticClass: "material-icons color-text ",
+                      staticClass: "material-icons text-black",
                       on: {
                         click: function($event) {
                           return _vm.abrirModal(
@@ -33687,8 +33736,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: " title" }, [
-      _c("h5", [_vm._v("Categorías")])
+    return _c("div", { staticClass: "col s12 m12 gl6" }, [
+      _c("div", { staticClass: " title" }, [_c("h5", [_vm._v("Categorías")])])
     ])
   },
   function() {
@@ -33737,26 +33786,6 @@ var render = function() {
     _c("div", { staticClass: "col s12 m12 gl6" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "right form " }, [
-        _c(
-          "button",
-          {
-            staticClass: "modal-trigger",
-            attrs: { type: "summit", "data-target": "modal1" },
-            on: {
-              click: function($event) {
-                return _vm.abrirModal("categoriasP", "registrar")
-              }
-            }
-          },
-          [
-            _vm._v(
-              "\n                Agregar Categorias para productos\n            "
-            )
-          ]
-        )
-      ]),
-      _vm._v(" "),
       _c(
         "div",
         {
@@ -33785,15 +33814,6 @@ var render = function() {
                   _c("h3", {
                     domProps: { textContent: _vm._s(_vm.tituloModal) }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col s12 center" }, [
-                  _vm.tipoAccion == 2
-                    ? _c("img", {
-                        staticClass: "tImagen imagenEdit",
-                        attrs: { src: "img/" + _vm.image, alt: "" }
-                      })
-                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row" }, [
@@ -33965,9 +33985,11 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col s12 m12 gl6" }, [
         _c("div", { staticClass: "row " }, [
+          _c("br"),
+          _vm._v(" "),
           _c("div", { staticClass: "form-group center" }, [
-            _c("div", { staticClass: "col s6" }, [
-              _c("div", { staticClass: "input-group" }, [
+            _c("div", { staticClass: "col l12 buscarC" }, [
+              _c("div", { staticClass: "input-field col s2" }, [
                 _c(
                   "select",
                   {
@@ -34008,8 +34030,10 @@ var render = function() {
                       _vm._v("Nombre")
                     ])
                   ]
-                ),
-                _vm._v(" "),
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-field col s4" }, [
                 _c("input", {
                   directives: [
                     {
@@ -34039,8 +34063,10 @@ var render = function() {
                       _vm.buscar = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-field col s3" }, [
                 _c(
                   "button",
                   {
@@ -34054,14 +34080,36 @@ var render = function() {
                   },
                   [_c("i", { staticClass: "fa fa-search" }), _vm._v(" Buscar")]
                 )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: " form  input-field col s3 " }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "modal-trigger",
+                    attrs: { type: "summit", "data-target": "modal1" },
+                    on: {
+                      click: function($event) {
+                        return _vm.abrirModal("categoriasP", "registrar")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Agregar Categorias para productos\n                        "
+                    )
+                  ]
+                )
               ])
             ])
           ])
         ]),
         _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
         _c(
           "table",
-          { staticClass: "tabla centered" },
+          { staticClass: "tabla centered highlight" },
           [
             _vm._m(1),
             _vm._v(" "),
@@ -34386,7 +34434,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "table",
-        { staticClass: "tabla centered" },
+        { staticClass: "tabla centered highlight" },
         [
           _vm._m(1),
           _vm._v(" "),
@@ -34515,22 +34563,6 @@ var render = function() {
   return _c("main", { staticClass: "row hero" }, [
     _c("div", { staticClass: "col s12 m12 gl6" }, [
       _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "right form " }, [
-        _c(
-          "button",
-          {
-            staticClass: "modal-trigger",
-            attrs: { type: "summit", "data-target": "modal1" },
-            on: {
-              click: function($event) {
-                return _vm.abrirModal("empleados", "registrar")
-              }
-            }
-          },
-          [_vm._v("\n                Agregar empleados\n            ")]
-        )
-      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -34675,7 +34707,7 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "input-field col s12" }, [
+                  _c("div", { staticClass: "input-field col s6" }, [
                     _c("input", {
                       directives: [
                         {
@@ -34697,6 +34729,30 @@ var render = function() {
                             return
                           }
                           _vm.birth_date = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-field col s6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.password,
+                          expression: "password"
+                        }
+                      ],
+                      staticClass: "text",
+                      attrs: { type: "password", placeholder: "Contraseña" },
+                      domProps: { value: _vm.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.password = $event.target.value
                         }
                       }
                     })
@@ -34889,9 +34945,11 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
+        _c("br"),
+        _vm._v(" "),
         _c("div", { staticClass: "form-group center" }, [
-          _c("div", { staticClass: "col s6" }, [
-            _c("div", { staticClass: "input-group" }, [
+          _c("div", { staticClass: "col l12 buscarC" }, [
+            _c("div", { staticClass: "input-field col s2" }, [
               _c(
                 "select",
                 {
@@ -34930,8 +34988,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("option", { attrs: { value: "email" } }, [_vm._v("Email")])
                 ]
-              ),
-              _vm._v(" "),
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-field col s4" }, [
               _c("input", {
                 directives: [
                   {
@@ -34961,8 +35021,10 @@ var render = function() {
                     _vm.buscar = $event.target.value
                   }
                 }
-              }),
-              _vm._v(" "),
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-field col s3" }, [
               _c(
                 "button",
                 {
@@ -34976,14 +35038,36 @@ var render = function() {
                 },
                 [_c("i", { staticClass: "fa fa-search" }), _vm._v(" Buscar")]
               )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: " form input-field col s3" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "modal-trigger",
+                  attrs: { type: "summit", "data-target": "modal1" },
+                  on: {
+                    click: function($event) {
+                      return _vm.abrirModal("empleados", "registrar")
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                            Agregar empleados\n                        "
+                  )
+                ]
+              )
             ])
           ])
         ])
       ]),
       _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c(
         "table",
-        { staticClass: "tabla centered" },
+        { staticClass: "tabla centered highlight" },
         [
           _vm._m(1),
           _vm._v(" "),
@@ -35332,22 +35416,6 @@ var render = function() {
   return _c("main", { staticClass: "row hero" }, [
     _c("div", { staticClass: "col s12 m12 gl6" }, [
       _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "right form " }, [
-        _c(
-          "button",
-          {
-            staticClass: "modal-trigger",
-            attrs: { type: "summit", "data-target": "modal1" },
-            on: {
-              click: function($event) {
-                return _vm.abrirModal("producto", "registrar")
-              }
-            }
-          },
-          [_vm._v("\n                Agregar Productos\n            ")]
-        )
-      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -35714,9 +35782,11 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col s12 m12 gl6" }, [
         _c("div", { staticClass: "row" }, [
+          _c("br"),
+          _vm._v(" "),
           _c("div", { staticClass: "form-group center" }, [
-            _c("div", { staticClass: "col s6" }, [
-              _c("div", { staticClass: "input-group" }, [
+            _c("div", { staticClass: "col l12 buscarC" }, [
+              _c("div", { staticClass: "input-field col s2" }, [
                 _c(
                   "select",
                   {
@@ -35759,8 +35829,10 @@ var render = function() {
                     _vm._v(" "),
                     _c("option", { attrs: { value: "SKU" } }, [_vm._v("SKU")])
                   ]
-                ),
-                _vm._v(" "),
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-field col s4" }, [
                 _c("input", {
                   directives: [
                     {
@@ -35790,8 +35862,10 @@ var render = function() {
                       _vm.buscar = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-field col s3" }, [
                 _c(
                   "button",
                   {
@@ -35805,14 +35879,36 @@ var render = function() {
                   },
                   [_c("i", { staticClass: "fa fa-search" }), _vm._v(" Buscar")]
                 )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: " form input-field col s3" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "modal-trigger",
+                    attrs: { type: "summit", "data-target": "modal1" },
+                    on: {
+                      click: function($event) {
+                        return _vm.abrirModal("producto", "registrar")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Agregar Productos\n                            "
+                    )
+                  ]
+                )
               ])
             ])
           ])
         ]),
         _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
         _c(
           "table",
-          { staticClass: " tabla centered" },
+          { staticClass: " tabla centered highlight" },
           [
             _vm._m(2),
             _vm._v(" "),
@@ -36200,6 +36296,8 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -36406,6 +36504,8 @@ var render = function() {
           )
         ]
       ),
+      _vm._v(" "),
+      _c("br"),
       _vm._v(" "),
       _c(
         "table",
@@ -36676,22 +36776,6 @@ var render = function() {
     _c("div", { staticClass: "col s12 m12 gl6" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "right form " }, [
-        _c(
-          "button",
-          {
-            staticClass: "modal-trigger",
-            attrs: { type: "summit", "data-target": "modal1" },
-            on: {
-              click: function($event) {
-                return _vm.abrirModal("subcategorias", "registrar")
-              }
-            }
-          },
-          [_vm._v("\n                Agregar Subcategorías\n            ")]
-        )
-      ]),
-      _vm._v(" "),
       _c(
         "div",
         {
@@ -36720,15 +36804,6 @@ var render = function() {
                   _c("h3", {
                     domProps: { textContent: _vm._s(_vm.tituloModal) }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col s12 center" }, [
-                  _vm.tipoAccion == 2
-                    ? _c("img", {
-                        staticClass: "tImagen",
-                        attrs: { src: "img/" + _vm.image, alt: "" }
-                      })
-                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row" }, [
@@ -36930,9 +37005,11 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col s12 m12 gl6" }, [
         _c("div", { staticClass: "row" }, [
+          _c("br"),
+          _vm._v(" "),
           _c("div", { staticClass: "form-group center" }, [
-            _c("div", { staticClass: "col s6" }, [
-              _c("div", { staticClass: "input-group" }, [
+            _c("div", { staticClass: "col l12 s12 buscarC" }, [
+              _c("div", { staticClass: "input-field col s2" }, [
                 _c(
                   "select",
                   {
@@ -36973,10 +37050,14 @@ var render = function() {
                       _vm._v("Nombre")
                     ]),
                     _vm._v(" "),
-                    _c("option", { attrs: { value: "SKU" } }, [_vm._v("SKU")])
+                    _c("option", { attrs: { value: "description" } }, [
+                      _vm._v("Descripción")
+                    ])
                   ]
-                ),
-                _vm._v(" "),
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-field col s4" }, [
                 _c("input", {
                   directives: [
                     {
@@ -37006,8 +37087,10 @@ var render = function() {
                       _vm.buscar = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-field col s3" }, [
                 _c(
                   "button",
                   {
@@ -37025,14 +37108,36 @@ var render = function() {
                   },
                   [_c("i", { staticClass: "fa fa-search" }), _vm._v(" Buscar")]
                 )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: " form input-field col s3" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "modal-trigger",
+                    attrs: { type: "summit", "data-target": "modal1" },
+                    on: {
+                      click: function($event) {
+                        return _vm.abrirModal("subcategorias", "registrar")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Agregar Subcategorías\n                            "
+                    )
+                  ]
+                )
               ])
             ])
           ])
         ]),
         _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
         _c(
           "table",
-          { staticClass: "tabla centered" },
+          { staticClass: "tabla centered highlight" },
           [
             _vm._m(1),
             _vm._v(" "),
@@ -40618,7 +40723,15 @@ var render = function() {
               _vm._l(_vm.arrayCategorias, function(cate) {
                 return _c(
                   "a",
-                  { key: cate.PK_categories, attrs: { value: "" } },
+                  {
+                    key: cate.PK_categories,
+                    attrs: { value: "" },
+                    on: {
+                      click: function($event) {
+                        return _vm.productosCate()
+                      }
+                    }
+                  },
                   [_vm._v(_vm._s(cate.name))]
                 )
               })

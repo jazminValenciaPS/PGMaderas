@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class UserController extends Controller
 {
     
@@ -26,6 +27,10 @@ class UserController extends Controller
             ->where('users.status', '=', '1')
             ->where('roles.PK_roles', '=', '1')
             ->orWhere('roles.PK_roles', '=', '2')
+            ->orWhere('roles.PK_roles', '=', '4')
+            ->orWhere('roles.PK_roles', '=', '5')
+
+
             ->distinct()
             ->orderBy('users.id', 'desc')->paginate(5);
         }
@@ -97,6 +102,7 @@ class UserController extends Controller
         $person->gender = $request->gender;
         $person->birth_date = $request->birth_date;
         $person->phone = $request->phone;
+
         $person->save();
        
 
@@ -107,6 +113,8 @@ class UserController extends Controller
         $user->status = '1';
         $user->join_ate = now();
         $user->id_branch = '1';
+        $user->password = Hash::make($request->password);
+
         
         $user->save();
 
@@ -201,11 +209,6 @@ class UserController extends Controller
 
     }
 
-    public function passwordUpdate(Request $request){
-
-    }
-
-
     public function update(Request $request){
         if (!$request->ajax()) return redirect('/administrador');
 
@@ -220,6 +223,7 @@ class UserController extends Controller
         $person->birth_date = $request->birth_date;
         $person->phone = $request->phone;
 
+
         $person->save();
        
 
@@ -231,6 +235,8 @@ class UserController extends Controller
         $user->id_role = $request->id_role;
         $user->status = '1';
         $user->id_branch = '1';
+        $user->password = Hash::make($request->password);
+
         
         $user->save();
     }

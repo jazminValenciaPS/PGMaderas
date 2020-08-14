@@ -4,7 +4,7 @@
             <div class=" title" style="padding-bottom: 2%;">
                 <h5>Clientes</h5>
             </div>
-            <table class="tabla centered">
+            <table class="tabla centered highlight">
                 <thead>
                     <tr>
                         <th>Nombre</th>

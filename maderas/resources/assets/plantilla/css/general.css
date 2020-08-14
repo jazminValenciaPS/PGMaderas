@@ -46,3 +46,12 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
 #services-main { padding: 0px 10%; }
 main { padding: 10px 30px; }
 
+.buscarC{
+    border: 1px  #419142 solid;
+ 
+
+}
+table thead {
+    color: #fff;
+    background-color: #424242;
+  }

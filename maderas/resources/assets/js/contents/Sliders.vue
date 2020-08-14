@@ -9,6 +9,7 @@
                     Agregar Sliders
                 </button>
             </div>
+            <br>
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg " role="document">
                     <div class = "container">
@@ -58,6 +59,7 @@
         <!-- modal inicio -->
 
             <!-- table -->
+            <br>
             <table class="tabla centered">
                 <thead>
                     <tr>
