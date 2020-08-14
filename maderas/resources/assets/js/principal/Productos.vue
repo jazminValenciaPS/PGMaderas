@@ -1,3 +1,4 @@
+
 <template>
      <main>
         <div class="row">
@@ -6,13 +7,13 @@
                 <ul class="collection">
                     <li class="collection-item">
                        <h6>Categorías</h6>
-                        <a v-for="cate in arrayCategorias" :key="cate.PK_categories" value="" @click="productosCate()">{{cate.name}}</a>
+                        <a v-for="cate in arrayCategorias" :key="cate.PK_categories" value="" @click="productosCate(1,buscar,criterio,cate.PK_products_categories)"  href="#">{{cate.name}}</a>
                     </li>
                     <li class="collection-item">
                         <h6>Filtro de búsqueda:</h6>
                         <h6>Precio</h6>
-                        <a  @click="listarProductos(1,99,price)">Menos de $99</a>
-                        <a @click="listarProductos(1,99,price)" href="#!">Entre $100 y $299</a>
+                        <a  @click="listarProductos(1,buscar,criterio)">Menos de $99</a>
+                        <a @click="listarProductos(1,buscar,criterio)" href="#!">Entre $100 y $299</a>
                         <a href="#!" >Entre $300 y $500</a>
                     </li>
                 </ul>
@@ -36,6 +37,8 @@
                         </div> 
                     </div>
                 </div>
+                <br>
+                <hr class="col l12">
                 <ul class="pagination center">
                     <li  v-if="pagination.current_page > 1">
                         <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
@@ -76,13 +79,14 @@ export default {
             },
             offset : 3,
             criterio : 'SKU',
-            buscar:''
+            buscar:'',
+            idSubcat:''
         }
     }, 
     methods:{
-        listarProductos(page,buscar,criterio,id){
+        listarProductos(page,buscar,criterio){
             let m=this;
-            var url='/productoL?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio +'&id='+id;
+            var url='/productoL?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio +'&id='+m.idSubcat;
 
             axios.get(url).then(function (response){
                 var respuesta= response.data;
@@ -96,7 +100,8 @@ export default {
         },
         listarCat(id){
             let m=this;
-            axios.get('/categoriaProductoL?id='+id).then(function (response){
+            axios.get('/categoriaProductoL?id=' + id).then(function (response){
+                
                 m.arrayCategorias = response.data;
             
             })
@@ -111,6 +116,23 @@ export default {
                 valorId: id
             }
             m.$emit("mostrar-producto",objeto);
+        },
+        productosCate(page,buscar,criterio,id){
+            let m=this;
+            console.log("id categoriaP");
+
+            console.log(id);
+            var url='/productoCategoria?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio +'&id='+id;
+
+            axios.get(url).then(function (response){
+                var respuesta= response.data;
+                m.pagination= respuesta.pagination;
+                m.arrayProductos = respuesta.producto.data;
+            
+            })
+            .catch(function(error){
+                console.log(error);
+            });
         },
         agregarCarrito(producto){
             let cantidad = this.cantidad;
@@ -198,8 +220,9 @@ export default {
         const product = urlParams.get('id');
 
         let id = (product !== null && product !== '' && product !== undefined)? product : "";
+        m.idSubcat= id;
          m.listarCat(id);
-        this.listarProductos(1,this.buscar,this.criterio,id);
+        this.listarProductos(1,this.buscar,this.criterio);
         this.crearCarrito();
         // this.listarCat();
     }

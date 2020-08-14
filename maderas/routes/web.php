@@ -169,6 +169,9 @@ Route::get('/categoriaProductoL','CategoriesProductsController@listarCateP');
 
 Route::get('/productoM/{id}', 'ProductController@mostrarProducto')->name('productos');
 Route::get('/categoriasProductos/{id}', 'ProductController@mostrarProducto')->name('categoriaproductos');
+Route::get('/productoCategoria', 'ProductController@productosCategoria');
+
+
 
 Route::get('/user/cliented/{correo}','UserController@clientData');
 Route::post('/user/registrarC','UserController@registroCliente');

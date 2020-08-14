@@ -116,6 +116,53 @@ class ProductController extends Controller
         ->where('products.status','=','1')
         ->get();
     }
+
+    public function productosCategoria(Request $request){
+
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        $idCatPro = $request->id;
+        
+        if ($buscar==''){
+
+            $producto = DB::table('products')
+            ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
+            ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+            ->select('products.PK_products','products.SKU','products.name','products.description',
+            'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+            'products_categories.name as productscategories','products_images.image')
+            ->distinct()
+            ->where('products.status','=','1')
+            ->where('products_categories.PK_products_categories','=',$idCatPro)
+            ->orderBy('products.PK_products', 'desc')->paginate(6);
+
+        }
+        else{
+            $producto = DB::table('products')
+            ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
+            ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+            ->select('products.PK_products','products.SKU','products.name','products.description',
+            'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+            'products_categories.name as productscategories','products_images.image')
+            ->distinct()
+            ->where('products.status','=','1')
+            ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('products.PK_products', 'desc')->paginate(6);
+        }
+        
+
+        return [
+            'pagination' => [
+                'total'        => $producto->total(),
+                'current_page' => $producto->currentPage(),
+                'per_page'     => $producto->perPage(),
+                'last_page'    => $producto->lastPage(),
+                'from'         => $producto->firstItem(),
+                'to'           => $producto->lastItem(),
+            ],
+            'producto' => $producto
+        ];
+    }
   
     public function store(Request $request)
     {
@@ -129,7 +176,7 @@ class ProductController extends Controller
         $producto->name = $request->name;
         $producto->description = $request->description;
         $producto->price = $request->price;
-        $producto->avaible = $request->avaible;
+        //$producto->avaible = $request->avaible;
         $producto->status = '1';
         $producto->save();
 
@@ -157,12 +204,12 @@ class ProductController extends Controller
 
         foreach($sucursal as $branches){
             var_dump($branches);
-            // $stock = new Stock();
-            // $stock->id_product = $idProduc;
-            // $stock->id_d_PG_branches = $branches;
-            // $stock->available = 0;
-            // $stock->status = 0;
-            // $stock->save();
+            $stock = new Stock();
+            $stock->id_product = $idProduc;
+            $stock->id_PG_branches = $branches->idBranches;
+            $stock->avaible = 0;
+            $stock->status = 0;
+            $stock->save();
         }
        
     }

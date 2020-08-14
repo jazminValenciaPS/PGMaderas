@@ -5,7 +5,7 @@
             <a @click="menu=0" href="/" class="brand-logo"><img src="img/logo-nav.png" width="260px" /></a>
             <ul class="right hide-on-med-and-down">
                
-                <li class="input-field col m4 s5 browser-default">
+                <li class="input-field col m5 s6 browser-default">
                 <i class="material-icons prefix color-main ">location_on</i>
 
                     <select class="select-tienda-index">
@@ -18,14 +18,19 @@
                     </select>  
                 </li>
                
-                <li>
+                <li class="col m7 s6">
                     <div class="input-field">
                         <input id="search" type="search" required placeholder="Buscar" />
                         <label class="label-icon" for="search"><i class="material-icons color-main">search</i></label>
                         <i class="material-icons">close</i>
                     </div>
                 </li>
-                <li ><a class="waves-effect waves-light" href="/iniciar-sesion"><i class="material-icons color-main">person</i></a></li>
+                <li class="col m8 s7">
+                    <a id = "user" class="waves-effect waves-light " href="/iniciar-sesion">
+                        <i class="material-icons color-main">person</i>
+                    </a>
+                </li>
+               <li class="linea "></li>
                 <li ><a class="waves-effect waves-light" href="/Carrito"><i class="material-icons color-main">shopping_cart</i></a></li>
 
             </ul>
@@ -72,3 +77,12 @@
         </ul>
     </nav>
 </header>
+
+<script>
+    var email = localStorage.getItem('email');
+    if (email) {
+        var userHtml = document.getElementById('user');
+        userHtml.innerHTML = email;
+    }
+
+</script>

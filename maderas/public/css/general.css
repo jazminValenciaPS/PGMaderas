@@ -319,7 +319,15 @@ nav div ul li a {
     grid-gap: 5px;
   }
 
+  .linea{
+    border-right: 1px #419142 solid;
+    height: 32px;
+    margin-top: 3%;
+}
 
+.alinear{
+    align-items: center !important;
+}
 @media (max-width: 958px){
   
 

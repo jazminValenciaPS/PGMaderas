@@ -10077,6 +10077,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -10099,13 +10102,14 @@ __webpack_require__.r(__webpack_exports__);
       },
       offset: 3,
       criterio: 'SKU',
-      buscar: ''
+      buscar: '',
+      idSubcat: ''
     };
   },
   methods: {
-    listarProductos: function listarProductos(page, buscar, criterio, id) {
+    listarProductos: function listarProductos(page, buscar, criterio) {
       var m = this;
-      var url = '/productoL?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&id=' + id;
+      var url = '/productoL?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&id=' + m.idSubcat;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         m.pagination = respuesta.pagination;
@@ -10129,6 +10133,19 @@ __webpack_require__.r(__webpack_exports__);
         valorId: id
       };
       m.$emit("mostrar-producto", objeto);
+    },
+    productosCate: function productosCate(page, buscar, criterio, id) {
+      var m = this;
+      console.log("id categoriaP");
+      console.log(id);
+      var url = '/productoCategoria?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&id=' + id;
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        m.pagination = respuesta.pagination;
+        m.arrayProductos = respuesta.producto.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
     agregarCarrito: function agregarCarrito(producto) {
       var cantidad = this.cantidad;
@@ -10215,8 +10232,9 @@ __webpack_require__.r(__webpack_exports__);
     var urlParams = new URLSearchParams(queryString);
     var product = urlParams.get('id');
     var id = product !== null && product !== '' && product !== undefined ? product : "";
+    m.idSubcat = id;
     m.listarCat(id);
-    this.listarProductos(1, this.buscar, this.criterio, id);
+    this.listarProductos(1, this.buscar, this.criterio);
     this.crearCarrito(); // this.listarCat();
   }
 });
@@ -33488,6 +33506,7 @@ var render = function() {
                     "i",
                     {
                       staticClass: "material-icons text-black",
+                      staticStyle: { cursor: "pointer" },
                       on: {
                         click: function($event) {
                           return _vm.abrirModal(
@@ -38577,7 +38596,7 @@ var render = function() {
       _vm._l(_vm.categorias, function(cat, index) {
         return _c(
           "div",
-          { key: index, staticClass: "col m3 s3 " },
+          { key: index, staticClass: "col m2 s2 " },
           [
             _c("h6", { staticClass: "title" }, [_vm._v(_vm._s(cat.categoria))]),
             _vm._v(" "),
@@ -38586,7 +38605,7 @@ var render = function() {
                 "a",
                 {
                   key: otroindex,
-                  staticStyle: { color: "gray" },
+                  staticStyle: { color: "gray", "font-size": "14px" },
                   attrs: {
                     href: "/Ver-Categoria-Producto?id=" + subcat.idSubcategories
                   }
@@ -40725,10 +40744,15 @@ var render = function() {
                   "a",
                   {
                     key: cate.PK_categories,
-                    attrs: { value: "" },
+                    attrs: { value: "", href: "#" },
                     on: {
                       click: function($event) {
-                        return _vm.productosCate()
+                        return _vm.productosCate(
+                          1,
+                          _vm.buscar,
+                          _vm.criterio,
+                          cate.PK_products_categories
+                        )
                       }
                     }
                   },
@@ -40749,7 +40773,7 @@ var render = function() {
               {
                 on: {
                   click: function($event) {
-                    return _vm.listarProductos(1, 99, _vm.price)
+                    return _vm.listarProductos(1, _vm.buscar, _vm.criterio)
                   }
                 }
               },
@@ -40762,7 +40786,7 @@ var render = function() {
                 attrs: { href: "#!" },
                 on: {
                   click: function($event) {
-                    return _vm.listarProductos(1, 99, _vm.price)
+                    return _vm.listarProductos(1, _vm.buscar, _vm.criterio)
                   }
                 }
               },
@@ -40863,6 +40887,10 @@ var render = function() {
           }),
           0
         ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("hr", { staticClass: "col l12" }),
         _vm._v(" "),
         _c(
           "ul",

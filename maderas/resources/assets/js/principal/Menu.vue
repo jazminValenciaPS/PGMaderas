@@ -1,9 +1,9 @@
 <template>
     <main>
         <div class="row" >
-            <div class="col m3 s3 "  v-for="(cat, index) in categorias" :key="index">
+            <div class="col m2 s2 "  v-for="(cat, index) in categorias" :key="index">
                 <h6 class="title">{{cat.categoria}}</h6>
-                <a style="color: gray" v-for="(subcat, otroindex) in cat.subcategories" :key="otroindex" :href="'/Ver-Categoria-Producto?id='+subcat.idSubcategories"> {{subcat.subcategoria }}</a>
+                <a style="color: gray; font-size: 14px;" v-for="(subcat, otroindex) in cat.subcategories" :key="otroindex" :href="'/Ver-Categoria-Producto?id='+subcat.idSubcategories"> {{subcat.subcategoria }}</a>
             </div>
         </div>
     </main>
