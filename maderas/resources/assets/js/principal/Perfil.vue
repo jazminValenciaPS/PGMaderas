@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="main-index">
         <nav class="espace-top white">
             <div class="nav-wrapper">
                 <div class="col s12">
@@ -167,7 +167,7 @@
                 <div class="text-right mb-2">
                     <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
                 </div>
-                <ul class="collection">
+                <!-- <ul class="collection">
                     <li class="collection-item">
                         <div>
                             XXXX-XXXX-XXXX-1234
@@ -182,12 +182,14 @@
                             <a href="#!" class="secondary-content"><i class="material-icons yellow-text shadow">edit</i></a>
                         </div>
                     </li>
-                </ul>
+                </ul> -->
+
+                <h6 class="center">Aún no tienes tarjetas registradas :(</h6>
             </div>
 
             <!-- Orders Details -->
             <div class="col m9 s12" v-if="informacion==4">
-                <table>
+                <!-- <table>
                     <tbody>
                         <tr class="border">
                             <td>#123456789</td>
@@ -213,7 +215,8 @@
                         </tr>
                         
                     </tbody>
-                </table>
+                </table> -->
+                <h6 class="center">Aún no tienes pedidos realizados :(</h6>
             </div>
             <!-- Cambiar contraseña -->                
             <div class="col m9 s12" v-if="informacion==5">
@@ -459,6 +462,17 @@ export default {
             let m=this;
             m.informacion= 3;
 
+             var url='/user/cliented/'+correo;
+            m.informacion= 1;
+            
+            axios.get(url).then(function (response){
+                 m.arrayDatos= response.data;
+               
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+
         },
         listarPedidos(){
             let m=this;
@@ -467,6 +481,7 @@ export default {
         logout(){
                axios.post('salir').then(response => {
                   if (response.status === 302 || 401) {
+                      localStorage.removeItem("email");
                       window.location.href = '/iniciar-sesion';
                   }
                   else {

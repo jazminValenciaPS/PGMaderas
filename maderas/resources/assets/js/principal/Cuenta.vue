@@ -1,5 +1,5 @@
 <template>
-      <main>
+      <main  class="main-index">
         <!-- Container -->
         <div class="row">
             <!-- Sign In -->

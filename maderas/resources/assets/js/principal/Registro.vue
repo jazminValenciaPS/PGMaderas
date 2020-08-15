@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="main-index">
         <br>
         <h4 class="mt-0 color-main">Registro de Usuario</h4>
         <!-- Container -->

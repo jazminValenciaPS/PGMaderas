@@ -37,6 +37,7 @@
                                 <h6>${{carrito.precioFinal = carrito.price * carrito.cantidad}}</h6>
                             </td>
                             <td class="col m2">
+                                
                                 <i class="material-icons color-text hide-on-small-only" @click="eliminarDeCarrito(carrito.PK_products)">highlight_off</i>
                             </td>
                         </tr>
@@ -52,7 +53,7 @@
                         <h5>total: ${{carrito.total}}</h5>
                     </li>
                 </ul>
-                <a class="btn bg-main mt-2" :href="'/Ordenar'" >Pagar<i class="material-icons left m-0">attach_money</i></a>
+                <!-- Validar si está logueado -->
             </div>
         </div>
         <div class="content-carrito">

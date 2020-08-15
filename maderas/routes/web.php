@@ -153,12 +153,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/salir','Auth\LoginClientController@logout')->name('salir');
 
         Route::post('/password/actualizar','PasswordController@update');
-
-
     });
-
-
-
 });
 
 
@@ -168,6 +163,9 @@ Route::get('/categoriaProductoL','CategoriesProductsController@listarCateP');
 
 
 Route::get('/productoM/{id}', 'ProductController@mostrarProducto')->name('productos');
+Route::get('/productosNuevos', 'ProductController@productosNuevos');
+
+
 Route::get('/categoriasProductos/{id}', 'ProductController@mostrarProducto')->name('categoriaproductos');
 Route::get('/productoCategoria', 'ProductController@productosCategoria');
 

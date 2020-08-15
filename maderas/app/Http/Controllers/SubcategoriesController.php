@@ -25,7 +25,7 @@ class SubcategoriesController extends Controller
         ,'subcategories.image','subcategories.status','categories.name as categoria','subcategories.id_category')
         ->distinct()
         ->orderBy('PK_subcategories', 'desc')
-        ->paginate(3);
+        ->paginate(6);
         }
         else{
         $subcategorias = DB::table('subcategories')
@@ -35,9 +35,10 @@ class SubcategoriesController extends Controller
         ->distinct()
         ->where('subcategories.'.$criterio, 'like', '%'. $buscar . '%')
         ->orderBy('PK_subcategories', 'desc')
-        ->paginate(3);
+        ->paginate(6);
 
         }
+
 
         return [
             'pagination' => [

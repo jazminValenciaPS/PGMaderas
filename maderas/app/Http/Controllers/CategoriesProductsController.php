@@ -21,12 +21,12 @@ class CategoriesProductsController extends Controller
         
         if ($buscar==''){
             $categoriasProduc = ProductCategories::orderBy('PK_products_categories', 'desc')
-            ->paginate(3);
+            ->paginate(6);
         }
         else{
             $categoriasProduc = ProductCategories::where($criterio, 'like', '%'. $buscar . '%')
             ->orderBy('PK_products_categories', 'desc')
-            ->paginate(3);
+            ->paginate(6);
         }
 
         return [

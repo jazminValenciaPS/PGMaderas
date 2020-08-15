@@ -1,6 +1,6 @@
 
 <template>
-     <main>
+     <main  class="main-index">
         <div class="row">
             <!-- Filters -->
             <div class="col m3 s12">
@@ -135,37 +135,38 @@ export default {
             });
         },
         agregarCarrito(producto){
-            let cantidad = this.cantidad;
-            let precioFinal = this.precioFinal;
+            console.log(producto,"producto");
+            // let cantidad = this.cantidad;
+            // let precioFinal = this.precioFinal;
 
-            let coincidencia = this.carrito.find((productoLS) => productoLS.PK_products === producto.PK_products);
-            if(coincidencia){
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Ooops!',
-                    text: 'El producto ya está en el carrito',
-                    showConfirmButton: false,
-                    timer: 1000
-                });
-                return;
-            }
-            else{
-                Swal.fire({
-                    icon: 'success',
-                    type: 'info',
-                    title: 'Agregado al carrito!',
-                    text: 'El producto se agrego al carrito',
-                    showConfirmButton: false,
-                    timer: 1000
-                });
+            // let coincidencia = this.carrito.find((productoLS) => productoLS.PK_products === producto.PK_products);
+            // if(coincidencia){
+            //     Swal.fire({
+            //         icon: 'info',
+            //         title: 'Ooops!',
+            //         text: 'El producto ya está en el carrito',
+            //         showConfirmButton: false,
+            //         timer: 1000
+            //     });
+            //     return;
+            // }
+            // else{
+            //     Swal.fire({
+            //         icon: 'success',
+            //         type: 'info',
+            //         input: 'number',
+            //         title: 'Agregado al carrito!',
+            //         text: 'El producto se agrego al carrito',
+            //         showConfirmButton: false,
+            //     });
                 
-                producto.cantidad = cantidad;
-                producto.precioFinal = precioFinal;
+            //     producto.cantidad = cantidad;
+            //     producto.precioFinal = precioFinal;
 
-                this.carrito.push(producto);
-                localStorage.setItem('carrito', JSON.stringify(this.carrito));
-                return;
-            }
+            //     this.carrito.push(producto);
+            //     localStorage.setItem('carrito', JSON.stringify(this.carrito));
+            //     return;
+            // }
            
         },
         crearCarrito(){

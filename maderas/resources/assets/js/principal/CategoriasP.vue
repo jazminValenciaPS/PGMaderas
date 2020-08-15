@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="main-index">
         <div class="row">
             <div class="col m3 s12">
                 <ul class="collection">

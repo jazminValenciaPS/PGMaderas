@@ -1,5 +1,5 @@
 <template>
-    <main> 
+    <main class="main-index">
         <section class="container-contacto">
             <p class="title-contacto bold">Contáctanos</p>
             <section class="map-contaider">

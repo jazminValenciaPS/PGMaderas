@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main  class="main-index">
          <div class="main_section fadeIn">
             <h1>¿Quiénes Somos?</h1>
         </div>

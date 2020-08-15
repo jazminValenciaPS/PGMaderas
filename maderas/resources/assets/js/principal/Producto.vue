@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="main-index">
         <div class="row">
             <!-- Container -->
             <div v-for="producto in arrayProducto" :key="producto.PK_products">

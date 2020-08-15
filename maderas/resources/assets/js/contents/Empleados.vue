@@ -79,10 +79,6 @@
                             <input id="reference" type="text" v-model="reference" placeholder="Referencia" class="validate">
                             </div>
                             -->
-
-                         
-                          
-
                         <div v-show="errorEmpleado" class="form-group row div-error">
                             <div class="text-center text-error">
                                 <div v-for="error in errorMostrarMsjEmpleado" :key="error" v-text="error">
@@ -154,10 +150,10 @@
                         <td class="hide-on-small-only"  v-if="user.status == 1">Activado</td>
                         <td class="hide-on-small-only"  v-if="user.status == 0">Desactivado</td>
                         <td>
-                            <i class="material-icons color-text " @click="abrirModal('empleados','actualizar',user,user.id)">create</i>
+                            <i class="material-icons color-text pointer" @click="abrirModal('empleados','actualizar',user,user.id)">create</i>
                         </td>
                         <td>
-                            <i class="material-icons color-text " @click="eliminarEmpleado(user.id)">delete</i>
+                            <i class="material-icons color-text pointer" @click="eliminarEmpleado(user.id)">delete</i>
 
                         </td>
 

@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="main-index">
         <h3 class="color-main center" >¡Nuestros Servicios!</h3>
         <div class="row" id="services-main">
             <div class="col s12 m4">

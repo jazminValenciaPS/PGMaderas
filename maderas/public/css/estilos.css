@@ -140,6 +140,9 @@ footer{
   color:red;
 }
 
+.pointer{
+  cursor: pointer;
+}
 
 @media screen and (max-width: 768px) {
   .pImagen{

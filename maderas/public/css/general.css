@@ -33,6 +33,10 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
 .breadcrumb:last-child { padding-right: 20px !important; }
 .collection a { display: block; padding: 5px 0px 5px 20px; }
 
+/* input[type=search]:not(.browser-default){
+    margin: 0 20px 18px 0 !important;
+} */
+
 /* Materialize + Custom */
 #Productos .card 
 {
@@ -47,21 +51,68 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
 .pagination li.active {
     background-color: #419141 !important;
 }
+/* nav inicio principal */
 
+.nav-principal-inicio{
+    background-color: white;
+    align-content: center;
+    justify-content: center;
+    
+}
+
+.buscador-carrito{
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* search */
+
+#input-search-nav{
+    align-self: end; 
+    border-bottom: 1px transparent;
+    height: 39px;
+}
+
+.main-input-container{
+    width: 340px;
+    border-radius: 100px;
+    border: 1px solid #419142;
+    margin-top: 1%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* Custom */
 .nav-2 { position: absolute; }
 .espace-top { margin-top: 65px; }
 #services-main { padding: 0px 10%; }
-main { 
-    margin: 5%;
-    padding: 10px 30px; 
+ main{ 
+    margin-top: 5%;
+} 
+.main-index{ 
+    padding: 10px 30px;
 }
 
-.select-tienda-index{
+.letraTN{
+    font-size: 19px ;
+    padding: 0 30px;
+
+}
+.container-img-select{
+    /* border: 1px solid red; */
+    position: absolute;
+    display: flex;
+    height: inherit;
+}
+/* .select-tienda-index{
   position: absolute !important; 
 
-}
+} */
+
 .main_section{
     text-align: center;
 }
@@ -321,16 +372,36 @@ nav div ul li a {
 
   .linea{
     border-right: 1px #419142 solid;
-    height: 32px;
-    margin-top: 3%;
+    height: 30px;
+    margin-top: 3px !important;
 }
 
+.numeros{
+padding-bottom : 20px !important;
+border: 1px #419142 solid;
+background-color:#419142 ;
+color: #ffff;
+font-size: 25px;
+}
 .alinear{
     align-items: center !important;
 }
+
+.carousel-control {
+    padding-top:10%;
+    width:5%;
+  }
+
+.producN{
+
+    margin-left: 15% !important;
+}
 @media (max-width: 958px){
   
+    .producN{
 
+        margin-left: auto !important;
+    }
     .pImagen-carrito{
         width: 120px;
         height: 70px;
@@ -351,7 +422,36 @@ nav div ul li a {
     }
 }
 
-
+.linea {
+    font: 33px sans-serif;
+    margin-top: 30px;
+    text-align: center;
+  }
+  h3.linea {
+    position: relative;
+    z-index: 1;
+  }
+ h3.linea:before {
+    border-top: 2px solid #122b41;
+    content: "";
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 95%;
+    z-index: -1;
+  }
+  h3.linea span {
+  
+    background: #fff;
+    padding: 0 15px;
+    color: #419142;
+  }
+  h3.linea span {
+  font-family: 'Yellowtail', serif, system-ui;
+  }
 @media screen and (max-width: 507px) {
     .centrar{
         margin-left: 0% !important;

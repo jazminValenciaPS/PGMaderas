@@ -107,7 +107,7 @@
                             <td class="hide-on-small-only"  v-if="subcategoria.status == 1">Activado</td>
                             <td class="hide-on-small-only"  v-if="subcategoria.status == 0">Desactivado</td>
                             <td>
-                                <i class="material-icons color-text " @click="abrirModal('subcategorias','actualizar',subcategoria,subcategoria.PK_subcategories)">create</i>
+                                <i class="material-icons color-text pointer" @click="abrirModal('subcategorias','actualizar',subcategoria,subcategoria.PK_subcategories)">create</i>
                             </td>
                             <td class="desactivarActivar">
                                 <a href="#!" class="secondary-content" v-if="subcategoria.status == 1">
@@ -124,18 +124,17 @@
                         </tr>
                     </tbody>
                 </table>
-                <ul class="pagination">
-                    <li  v-if="pagination.current_page > 1">
-                        <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
-                        <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
-                    </li>
-                    <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                        <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
-                    </li>
-                    <li v-if="pagination.current_page < pagination.last_page">
-                        <a  href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
-                    </li>
-                </ul>
+                 <ul class="pagination">
+                <li  v-if="pagination.current_page > 1">
+                    <a href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
+                </li>
+                <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                    <a href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                </li>
+                <li v-if="pagination.current_page < pagination.last_page">
+                    <a href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
+                </li>
+            </ul>
             </div>  
         </div>
     </main>
@@ -168,47 +167,19 @@ export default {
             tipoAccion: 0,
             errorSubcategoria : 0,
             errorMostrarMsjSubcategoria : [],
-             pagination : {
-                    'total' : 0,
-                    'current_page' : 0,
-                    'per_page' : 0,
-                    'last_page' : 0,
-                    'from' : 0,
-                    'to' : 0,
-                },
+            pagination : {
+                'total' : 0,
+                'current_page' : 0,
+                'per_page' : 0,
+                'last_page' : 0,
+                'from' : 0,
+                'to' : 0,
+            },
             criterio : 'name',
             buscar:''
         }
     },
-    computed:{
-         isActived: function(){
-                return this.pagination.current_page;
-            },
-            //Calcula los elementos de la paginación
-            pagesNumber: function() {
-                if(!this.pagination.to) {
-                    return [];
-                }
-                
-                var from = this.pagination.current_page - this.offset; 
-                if(from < 1) {
-                    from = 1;
-                }
-
-                var to = from + (this.offset * 2); 
-                if(to >= this.pagination.last_page){
-                    to = this.pagination.last_page;
-                }  
-
-                var pagesArray = [];
-                while(from <= to) {
-                    pagesArray.push(from);
-                    from++;
-                }
-                return pagesArray;             
-
-            }
-    },
+     
     methods:{
         listarSubcategoria(page,buscar,criterio){
             let m=this;
@@ -256,7 +227,7 @@ export default {
                     console.log(error);
                 });
         },
-         cambiarPagina(page,buscar,criterio){
+        cambiarPagina(page,buscar,criterio){
            let me = this;
             //Actualiza la página actual
             me.pagination.current_page = page;
@@ -475,6 +446,35 @@ export default {
                 if (this.errorMostrarMsjSubcategoria.length) this.errorSubcategoria = 1;
                 return this.errorSubcategoria;
         },
+    },
+     computed:{
+         isActived: function(){
+                return this.pagination.current_page;
+            },
+            //Calcula los elementos de la paginación
+            pagesNumber: function() {
+                if(!this.pagination.to) {
+                    return [];
+                }
+                
+                var from = this.pagination.current_page - this.offset; 
+                if(from < 1) {
+                    from = 1;
+                }
+
+                var to = from + (this.offset * 2); 
+                if(to >= this.pagination.last_page){
+                    to = this.pagination.last_page;
+                }  
+
+                var pagesArray = [];
+                while(from <= to) {
+                    pagesArray.push(from);
+                    from++;
+                }
+                return pagesArray;             
+
+            }
     },
     mounted() {
         this.listarSubcategoria(1,this.buscar,this.criterio);

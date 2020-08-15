@@ -79,7 +79,7 @@
                         <td class="hide-on-small-only"  v-if="slider.status == 1">Activado</td>
                         <td class="hide-on-small-only"  v-if="slider.status == 0">Desactivado</td>
                         <td>
-                            <i class="material-icons color-text " @click="abrirModal('sliders','actualizar',slider,slider.PK_slider)">create</i>
+                            <i class="material-icons color-text pointer" @click="abrirModal('sliders','actualizar',slider,slider.PK_slider)">create</i>
                         </td>
                         <td class="desactivarActivar">
                             <a href="#!" class="secondary-content" v-if="slider.status == 1">

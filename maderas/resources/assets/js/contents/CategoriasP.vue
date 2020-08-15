@@ -99,7 +99,7 @@
                         <td class="hide-on-small-only"  v-if="categoria.status == 1">Activado</td>
                         <td class="hide-on-small-only"  v-if="categoria.status == 0">Desactivado</td>
                         <td>
-                            <i class="material-icons color-text " @click="abrirModal('categoriasP','actualizar',categoria,categoria.PK_products_categories)">create</i>
+                            <i class="material-icons color-text pointer" @click="abrirModal('categoriasP','actualizar',categoria,categoria.PK_products_categories)">create</i>
                         </td>
                         <td class="desactivarActivar">
                             <a href="#!" class="secondary-content" v-if="categoria.status == 1">

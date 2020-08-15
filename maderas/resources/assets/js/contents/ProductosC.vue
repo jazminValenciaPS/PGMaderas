@@ -48,12 +48,11 @@
                                 </div>
                                 </div>
                             </div>
-                            <!-- $ <input id="avaible" type="text"  v-model="price"   class="validate" > -->
-                  
+                
                             <select name="LeaveType" class="browser-default" v-model="avaible">
                                 <option value="" disabled selected>Disponibilidad del producto</option>
                                 <option v-for="items in contenido" :key="items.index">{{ items }}</option>
-                            </select> 
+                            </select>  
                         </div> 
                         <div v-show="errorProducto" class="form-group row div-error">
                             <div class="text-center text-error">
@@ -125,7 +124,7 @@
                             <td class="hide-on-small-only"  v-if="producto.status == 1">Activado</td>
                             <td class="hide-on-small-only"  v-if="producto.status == 0">Desactivado</td>
                             <td>
-                                <i class="material-icons color-text " @click="abrirModal('producto','actualizar',producto,producto.PK_products)">create</i>
+                                <i class="material-icons color-text pointer" @click="abrirModal('producto','actualizar',producto,producto.PK_products)">create</i>
                             </td>
                             <td class="desactivarActivar">
                                 <a href="#!" class="secondary-content" v-if="producto.status == 1">

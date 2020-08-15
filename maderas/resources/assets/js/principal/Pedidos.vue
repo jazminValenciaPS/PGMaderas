@@ -1,5 +1,5 @@
 <template>
-     <main>
+     <main  class="main-index">
         <h4 class="mt-0 color-main center">Pedidos</h4>
         <!-- Container -->
         <div class="row">

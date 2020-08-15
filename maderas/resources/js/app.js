@@ -28,7 +28,7 @@ import categoriasp from '../assets/js/principal/CategoriasP.vue';
 import contra from '../assets/js/principal/Contra.vue';
 
 import navmenus from '../assets/js/principal/Menu.vue';
-
+import navUsers from '../assets/js/principal/User.vue';
 
 
 window.Vue = require('vue');
@@ -59,7 +59,7 @@ Vue.component('orden',orden);
 Vue.component('categoriasp',categoriasp);
 Vue.component('contra',contra);
 Vue.component('navmenu',navmenus);
-
+Vue.component('navuser',navUsers);
 
 const app = new Vue({
   el: '#app',

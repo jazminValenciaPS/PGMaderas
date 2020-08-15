@@ -7256,7 +7256,7 @@ body.keyboard-focused .select-dropdown.dropdown-content li:focus {
 }
 
 .prefix ~ .select-wrapper {
-  margin-left: 3rem;
+  margin-left: 0rem;
   width: 92%;
   width: calc(100% - 3rem);
 }

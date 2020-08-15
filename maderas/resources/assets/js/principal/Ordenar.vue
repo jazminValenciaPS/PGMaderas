@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main  class="main-index">
         <!-- modal -->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-primary modal-lg bottom-modal" role="document">
