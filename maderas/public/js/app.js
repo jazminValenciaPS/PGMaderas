@@ -8542,6 +8542,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -8551,7 +8553,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       carrito: [],
       cantidad: 1,
       total: 0,
-      subtotal: 0
+      subtotal: 0,
+      user: false
     };
   },
   methods: {
@@ -8592,6 +8595,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       localStorage.setItem('carrito', JSON.stringify(productosLS));
       this.calcularTotal(this.carrito);
+      console.log(this.carrito);
     },
     calcularTotal: function calcularTotal(carrito) {
       var total = this.total;
@@ -9133,6 +9137,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -9151,7 +9158,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     listarSliders: function listarSliders() {
       var m = this;
-      axios.get('/slider').then(function (response) {
+      axios.get('/slider/carrusel').then(function (response) {
         m.arraySliders = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -10465,7 +10472,7 @@ __webpack_require__.r(__webpack_exports__);
         input: 'range',
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
-        confirmButtonColor: '#419142',
+        confirmButtonColor: '#424191',
         cancelButtonColor: '#c13737',
         confirmButtonText: 'Agregar',
         inputAttributes: {
@@ -38510,7 +38517,18 @@ var render = function() {
               _c("h5", [_vm._v("total: $" + _vm._s(_vm.carrito.total))])
             ]
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "btn bg-main mt-2", attrs: { href: "/Ordenar" } },
+          [
+            _vm._v("Pagar"),
+            _c("i", { staticClass: "material-icons left m-0" }, [
+              _vm._v("attach_money")
+            ])
+          ]
+        )
       ])
     ]),
     _vm._v(" "),
@@ -39380,28 +39398,24 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row center" }, [
-      _c(
-        "ul",
-        { staticClass: "col l12 numeros", staticStyle: { display: "flex" } },
-        [
-          _c("li", [_vm._v("Puedes encontrarnos en:")]),
-          _vm._v(" "),
-          _c("li", [
-            _c("i", { staticClass: "Medium material-icons" }, [_vm._v("call")]),
-            _vm._v("Matriz Culiacán 7490021")
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("i", { staticClass: "Medium material-icons" }, [_vm._v("call")]),
-            _vm._v("Sucursal Zapata 7662020")
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("i", { staticClass: "Medium material-icons" }, [_vm._v("call")]),
-            _vm._v("Sucursal Monterrey 8147373452")
-          ])
-        ]
-      )
+      _c("ul", { staticClass: "col l12 numeros center-align" }, [
+        _c("li", [_vm._v("Puedes encontrarnos en:")]),
+        _vm._v(" "),
+        _c("li", [
+          _c("i", { staticClass: "Medium material-icons" }, [_vm._v("call")]),
+          _vm._v("Matriz Culiacán 7490021")
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("i", { staticClass: "Medium material-icons" }, [_vm._v("call")]),
+          _vm._v("Sucursal Zapata 7662020")
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("i", { staticClass: "Medium material-icons" }, [_vm._v("call")]),
+          _vm._v("Sucursal Monterrey 8147373452")
+        ])
+      ])
     ])
   },
   function() {

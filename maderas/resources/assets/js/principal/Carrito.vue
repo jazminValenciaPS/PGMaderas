@@ -51,10 +51,12 @@
                         <h5>total: ${{carrito.total}}</h5>
                     </li>
                 </ul>
+                <a class="btn bg-main mt-2" :href="'/Ordenar'" >Pagar<i class="material-icons left m-0">attach_money</i></a>
                 <!-- Validar si está logueado -->
             </div>
         </div>
         <div class="content-carrito">
+
         </div>
     </main>
 </template>
@@ -69,6 +71,7 @@ export default {
             cantidad:1,
             total:0,
             subtotal:0,
+            user:false,
         }
     },
     methods:{
@@ -90,6 +93,7 @@ export default {
             //Añadimos el arreglo actual al LS
             localStorage.setItem('carrito', JSON.stringify(productosLS));
             this.calcularTotal(this.carrito);
+            console.log(this.carrito);
         },
        calcularTotal(carrito){
             var total = this.total;
@@ -122,6 +126,7 @@ export default {
             return producto;
         }));
         this.calcularTotal(this.carrito);
+        
     }
 }
 </script>

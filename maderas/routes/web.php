@@ -160,7 +160,7 @@ Route::group(['middleware'=>['auth']],function(){
 });
 
 
-Route::get('/slider','SliderController@index');
+Route::get('/slider/carrusel','SliderController@mostrar');
 Route::get('/productoL','ProductController@listarProductos');
 Route::get('/categoriaProductoL','CategoriesProductsController@listarCateP');
 

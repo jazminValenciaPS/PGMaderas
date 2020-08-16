@@ -147,7 +147,7 @@ export default {
             input: 'range',
             showCancelButton: true,
             cancelButtonText:'Cancelar',
-            confirmButtonColor: '#419142',
+            confirmButtonColor: '#424191',
             cancelButtonColor: '#c13737',
             confirmButtonText: 'Agregar',
             inputAttributes: {

@@ -20,6 +20,12 @@ class SliderController extends Controller
         return $slider;
     }
 
+    public function mostrar()
+    {
+        $slider = Slider::where('status','=','1')->get();
+        return $slider;
+    }
+
    
     public function store(Request $request)
     {

@@ -6,7 +6,7 @@
             <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" :image="'img/'+slider.image" />
         </vueper-slides>
         <div class="row center">
-            <ul class="col l12 numeros" style="display: flex;">
+            <ul class="col l12 numeros center-align" >
                 <li>Puedes encontrarnos en:</li>
                 <li><i class="Medium material-icons">call</i>Matriz Culiacán 7490021</li>
                 <li><i class="Medium material-icons">call</i>Sucursal Zapata 7662020</li>
@@ -91,6 +91,9 @@
             </div>
             
         </div>
+
+
+    
     </main>
 </template>
 <script>
@@ -113,7 +116,7 @@ import 'vueperslides/dist/vueperslides.css';
               listarSliders(){
                 let m=this;
 
-                axios.get('/slider').then(function (response){
+                axios.get('/slider/carrusel').then(function (response){
                     m.arraySliders = response.data;
                   
                  })

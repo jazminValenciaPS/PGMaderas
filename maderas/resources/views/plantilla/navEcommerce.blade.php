@@ -32,10 +32,10 @@
                 <i class="material-icons color-main">menu</i>
             </a>
             <ul class="left hide-on-med-and-down">
-                <li><a class=" letraTN waves-effect waves-light color-main" href="/">Inicio</a></li>
-                <li><a class=" letraTN waves-effect waves-light color-main" href="/Quienes-Somos">¿Quiénes Somos?</a></li>
+                <li><a class=" letraTN waves-effect waves-light color-main" href="/"><i class="Large material-icons color-main" style="padding:0 3px;">home</i>Inicio</a></li>
+                <li><a class=" letraTN waves-effect waves-light color-main" href="/Quienes-Somos"><i class="material-icons color-main" style="padding:0 3px;">info_outline</i>¿Quiénes Somos?</a></li>
                 <li class="dropdown">
-                    <a class="letraTN waves-effect waves-light color-main dropbtn" href="#">Catalogo</a>
+                    <a class="letraTN waves-effect waves-light color-main dropbtn" href="#"><i class="material-icons color-main" style="padding:0 3px;">collections_bookmark</i>Catalogo</a>
                     <div class="dropdown-content-custom titulo">
                         <div class="header">
                             <h5>Productos</h5>
@@ -43,7 +43,7 @@
                       <navmenu :categoriaid="idCateP" @ver-categoria-producto="verCategoriaProducto"></navmenu>
                     </div>
                 </li>
-                <li><a class=" letraTN waves-effect waves-light color-main" href="/Contacto">Contacto</a></li>
+                <li><a class=" letraTN waves-effect waves-light color-main" href="/Contacto"><i class="material-icons color-main" style="padding:0 3px;">message</i>Contacto</a></li>
             </ul>
         </div>
     

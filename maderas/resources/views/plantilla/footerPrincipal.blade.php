@@ -9,11 +9,7 @@
             <h5 class="white-text">Enlaces</h5>
             <ul>
                 <li>
-                    <a>
-                    <i class="fa fa-facebook-official" aria-hidden="true"></i>fb
-                    </a>
-          
-
+                   <img src="img/iconFacebook.png" alt="">         
                 </li>
                 <li><a class="grey-text text-lighten-3" href="#!">Instagram</a></li>
                 <li><a class="grey-text text-lighten-3" href="#!">Youtube</a></li>            
