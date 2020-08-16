@@ -8,7 +8,7 @@ class Stock extends Model
 {
     protected $table = 'stock';
     
-    protected $primaryKey = 'PK_subcategories';
+    protected $primaryKey = 'PK_stock';
     protected $fillable =['id_PG_branches','id_product','avaible','status'];
 
     public function PGbranches()

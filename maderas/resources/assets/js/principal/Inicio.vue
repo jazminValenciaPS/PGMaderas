@@ -6,9 +6,12 @@
             <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" :image="'img/'+slider.image" />
         </vueper-slides>
         <div class="row center">
-            <div class="col l12 numeros">
-                Llámanos: Matriz Culiacán 7490021 / Sucursal Zapata 7662020 / Sucursal Monterrey 8147373452
-             </div>
+            <ul class="col l12 numeros" style="display: flex;">
+                <li>Puedes encontrarnos en:</li>
+                <li><i class="Medium material-icons">call</i>Matriz Culiacán 7490021</li>
+                <li><i class="Medium material-icons">call</i>Sucursal Zapata 7662020</li>
+                <li><i class="Medium material-icons">call</i>Sucursal Monterrey 8147373452</li>
+            </ul>
         </div>
         <!-- Card Services -->
         <h3 class="color-main center" >¡Nuestros Servicios!</h3>

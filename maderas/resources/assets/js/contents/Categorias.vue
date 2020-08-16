@@ -70,11 +70,9 @@
                             </select> 
                             </div>
                         <div class="input-field col s4">
-                        
                             <input type="text" v-model="buscar" @keyup.enter="listarCategoria(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
-                            </div>
+                        </div>
                         <div class="form  input-field col s3">
-                            
                             <button type="submit" @click="listarCategoria(1,buscar,criterio)" class="modal-trigger"><i class="fa fa-search"></i> Buscar</button>
                         </div>
                             <div class="form input-field col s3">

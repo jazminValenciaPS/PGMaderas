@@ -11,6 +11,7 @@ import clientes from '../assets/js/contents/Clientes.vue';
 import envios from '../assets/js/contents/Envios.vue';
 import contraseñas from '../assets/js/contents/CambioContraseña.vue';
 import categoriasprod from '../assets/js/contents/CategoriasP.vue';
+import stocks from '../assets/js/contents/Stock.vue';
 
 // ecommerce
 import inicios from '../assets/js/principal/Inicio.vue';
@@ -28,8 +29,8 @@ import categoriasp from '../assets/js/principal/CategoriasP.vue';
 import contra from '../assets/js/principal/Contra.vue';
 
 import navmenus from '../assets/js/principal/Menu.vue';
-import navUsers from '../assets/js/principal/User.vue';
-
+import navusers from '../assets/js/principal/User.vue';
+import navsucursales from '../assets/js/principal/Sucursales.vue';
 
 window.Vue = require('vue');
 
@@ -43,7 +44,7 @@ Vue.component('cliente', clientes);
 Vue.component('envio', envios);
 Vue.component('contraseña', contraseñas);
 Vue.component('categoriap', categoriasprod);
-
+Vue.component('stock', stocks);
 // ecommerce
 Vue.component('inicio', inicios);
 Vue.component('nosotros',nosotros);
@@ -59,7 +60,8 @@ Vue.component('orden',orden);
 Vue.component('categoriasp',categoriasp);
 Vue.component('contra',contra);
 Vue.component('navmenu',navmenus);
-Vue.component('navuser',navUsers);
+Vue.component('navuser',navusers);
+Vue.component('navsucursal',navsucursales);
 
 const app = new Vue({
   el: '#app',

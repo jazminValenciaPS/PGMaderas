@@ -21,12 +21,11 @@ export default {
         let m=this;
         axios.get(url).then(function (response){
                 m.categorias= response.data;
-            })
-            .catch(function(error){
+        }).catch(function(error){
                 console.log(error);
             });
         },
-         verCategoriaProducto(menu,id){
+        verCategoriaProducto(menu,id){
             let m=this;
             var objeto = {
                 valorMenu: menu,

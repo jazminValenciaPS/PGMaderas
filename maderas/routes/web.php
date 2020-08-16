@@ -139,6 +139,9 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/rol','RolController@index');
     
         Route::get('/order','OrderController@index');
+
+        Route::get('/stock','StockController@index');
+        Route::post('/stock/actualizar','StockController@update');
     });
     Route::group(['middleware'=>['Marketing']],function() {
 
@@ -184,5 +187,6 @@ Route::get('/submenu','SubcategoriesController@menuInicio');
 Route::get('/subcategoriaV','SubcategoriesController@listar');
 Route::post('/password/actualizar','PasswordController@update');
 
+Route::get('/branches','PGBranchesController@index');
 
 

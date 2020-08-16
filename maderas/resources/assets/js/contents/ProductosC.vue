@@ -24,7 +24,7 @@
                             <br>  
                             <select name="LeaveType" class="browser-default" v-model="id_products_categories">
                                 <option value="" disabled selected >Selecciona la categoría de producto</option>
-                                <option v-for="cate in arrayCategoriaProducto" :value="cate.PK_products_categories"  :key="cate.PK_products_categories" >{{ cate.name }}</option>
+                                <option v-for="cate in arrayCategoriaProducto" :value="cate.PK_products_categories" :key="cate.PK_products_categories" >{{ cate.name }}</option>
                             </select>
                             <input id="descripcion" type="text" v-model="description" placeholder="Descripción" class="validate">
                             <br> 
@@ -48,11 +48,6 @@
                                 </div>
                                 </div>
                             </div>
-                
-                            <select name="LeaveType" class="browser-default" v-model="avaible">
-                                <option value="" disabled selected>Disponibilidad del producto</option>
-                                <option v-for="items in contenido" :key="items.index">{{ items }}</option>
-                            </select>  
                         </div> 
                         <div v-show="errorProducto" class="form-group row div-error">
                             <div class="text-center text-error">
@@ -171,8 +166,6 @@ export default {
             image: '',
             price: '',
             status: true,
-            avaible:'',
-            contenido: 1000,
             arrayProductos: [],
             arrayCategoriaProducto: [],
             tituloModal : 'Registrar Productos' ,
@@ -256,7 +249,7 @@ export default {
                             m.description = '';
                             m.price = '',
                             m.image= 'Selecciona imagen';
-                            m.avaible = '';
+                            // m.avaible = '';
                             m.tipoAccion = 1;
                             m.tituloModal = 'Registrar producto';
                             break;
@@ -269,7 +262,7 @@ export default {
                             m.image=data['image'];
                             m.name=data['name'];
                             m.SKU=data['SKU'];
-                            m.avaible =data['avaible'];
+                            // m.avaible =data['avaible'];
                             m.description=data['description'];
                             m.price = data['price']
                             m.id_products_categories= data['PK_products_categories'];
@@ -293,7 +286,7 @@ export default {
             formData.append('description', me.description);
             formData.append('price', me.price);
             formData.append('SKU', me.SKU);
-            formData.append('avaible', me.avaible);
+            // formData.append('avaible', me.avaible);
             
             // Registramos la informacion
             let url = '/producto/registrar';
@@ -326,7 +319,7 @@ export default {
                 formData.append('description', me.description);
                 formData.append('price', me.price);
                 formData.append('SKU', me.SKU);
-                formData.append('avaible', me.avaible);
+                // formData.append('avaible', me.avaible);
 
                 //Registramos la informacion
                 axios.post('/producto/actualizar',formData,{
@@ -403,7 +396,7 @@ export default {
                 if (!this.description) this.errorMostrarMsjProducto.push("La descripción de la subcategoría no puede estar vacío.");
                 if (!this.price) this.errorMostrarMsjProducto.push("Se tiene que ingresar precio.");
                 if (!this.SKU) this.errorMostrarMsjProducto.push("El SKU no puede estar vacío.");
-                if (!this.avaible) this.errorMostrarMsjProducto.push("Seleccione la disponibilidad del producto.");
+                // if (!this.avaible) this.errorMostrarMsjProducto.push("Seleccione la disponibilidad del producto.");
                 if (!this.id_products_categories) this.errorMostrarMsjProducto.push("Seleccione una categoria de producto");
                 if(isNaN(this.price))this.errorMostrarMsjProducto.push("El precio del producto debe ser numérico.");
 

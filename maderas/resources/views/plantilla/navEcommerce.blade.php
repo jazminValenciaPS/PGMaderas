@@ -4,13 +4,7 @@
         <div class="nav-wrapper">
             <div class="left container-img-select">
                 <a @click="menu=0" href="/"><img src="img/logo-nav.png" width="260px" /></a>
-                <select class="select-tienda-index" style="margin-left: 0px; padding: 0;">
-                    <option value="" disabled >Seleccione su tienda</option>
-                    <option value="1" selected="true">Matriz Culiacán</option>
-                    <option value="2">Sucursal Zapata</option>
-                    <option value="3">Sucursal Monterrey</option>
-                    <label>Materialize Select</label>
-                </select> 
+                <navsucursal></navsucursal>
                 <i class="material-icons prefix color-main ">location_on</i>
             </div>
                 <ul class="right hide-on-med-and-down buscador-carrito" >
@@ -72,5 +66,4 @@
             <li ><a class="waves-effect waves-light color-main" href="/Contacto"><i class="material-icons color-main">message</i>Contacto</a></li>
         </ul>
     </nav>
-   
 </header>

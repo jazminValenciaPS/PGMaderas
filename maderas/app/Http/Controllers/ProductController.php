@@ -23,7 +23,7 @@ class ProductController extends Controller
         ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
         ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
         ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+        'products.price', 'products.status','products_categories.PK_products_categories',
         'products_categories.name as productscategories','products_images.image')
         ->distinct()
         ->orderBy('products.PK_products', 'desc')->paginate(3);
@@ -34,7 +34,7 @@ class ProductController extends Controller
         ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
         ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
         ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+        'products.price', 'products.status','products_categories.PK_products_categories',
         'products_categories.name as productscategories','products_images.image')
         ->distinct()
         ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
@@ -63,11 +63,12 @@ class ProductController extends Controller
         if ($buscar==''){
 
             $producto = DB::table('products')
+            ->join('stock','stock.id_product','=','products.PK_products')
             ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
             ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products_categories.id_subcategories')
             ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
             ->select('products.PK_products','products.SKU','products.name','products.description',
-            'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+            'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
             'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.status','=','1')
@@ -77,10 +78,11 @@ class ProductController extends Controller
         }
         else{
             $producto = DB::table('products')
+            -join('stock','stock.id_product','=','products.PK_products')
             ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
             ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
             ->select('products.PK_products','products.SKU','products.name','products.description',
-            'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+            'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
             'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.status','=','1')
@@ -109,9 +111,10 @@ class ProductController extends Controller
 
 
         return  $producto = DB::table('products')
+        -join('stock','stock.id_product','=','products.PK_products')
         ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
         ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price','products.avaible', 'products.status','products_images.image')
+        'products.price','stock.avaible', 'products.status','products_images.image')
         ->where('products.PK_products','=',$id)
         ->where('products.status','=','1')
         ->get();
@@ -121,13 +124,16 @@ class ProductController extends Controller
 
         return  $producto = DB::table('products')
         ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+        ->join('stock','stock.id_product','=','products.PK_products')
         ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price','products.avaible', 'products.status','products_images.image')
+        'products.price','stock.avaible', 'products.status','products_images.image')
         ->where('products.status','=','1')
         ->take(6)
         ->orderBy('products.PK_products', 'desc')       
         ->get();
     }
+
+
 
     public function productosCategoria(Request $request){
 
@@ -138,10 +144,11 @@ class ProductController extends Controller
         if ($buscar==''){
 
             $producto = DB::table('products')
+            ->join('stock','stock.id_product','=','products.PK_products')
             ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
             ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
             ->select('products.PK_products','products.SKU','products.name','products.description',
-            'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+            'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
             'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.status','=','1')
@@ -151,10 +158,11 @@ class ProductController extends Controller
         }
         else{
             $producto = DB::table('products')
+            ->join('stock','stock.id_product','=','products.PK_products')
             ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
             ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
             ->select('products.PK_products','products.SKU','products.name','products.description',
-            'products.price','products.avaible', 'products.status','products_categories.PK_products_categories',
+            'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
             'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.status','=','1')
@@ -188,7 +196,7 @@ class ProductController extends Controller
         $producto->name = $request->name;
         $producto->description = $request->description;
         $producto->price = $request->price;
-        $producto->avaible = $request->avaible;
+        // $producto->avaible = $request->avaible;
         $producto->status = '1';
         $producto->save();
 
@@ -240,7 +248,7 @@ class ProductController extends Controller
         $producto->name = $request->name;
         $producto->description = $request->description;
         $producto->price = $request->price;
-        $producto->avaible = $request->avaible;
+        // $producto->avaible = $request->avaible;
         $producto->status = '1';
 
         $producto->save();

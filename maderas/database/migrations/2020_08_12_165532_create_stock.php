@@ -17,7 +17,7 @@ class CreateStock extends Migration
             $table->bigIncrements('PK_stock');
             $table->unsignedBigInteger('id_PG_branches')->unsigned();
             $table->unsignedBigInteger('id_product')->unsigned();
-            $table->unsignedTinyInteger('avaible')->default(1);
+            $table->bigInteger('avaible')->default(1);
             $table->unsignedTinyInteger('status')->default(0);
             $table->timestamps();
 

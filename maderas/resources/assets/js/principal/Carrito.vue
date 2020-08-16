@@ -1,5 +1,5 @@
 <template>
-    <main class="contenedor-carrito">
+    <main class="main-index">
         <h4 class="mt-0 color-main">Carrito de Compra</h4>
         <!-- Container -->
         <div class="row" id="carrito">
@@ -15,7 +15,6 @@
                             <th class="col m2 hide-on-small-only">Eliminar</th>
                         </tr>
                     </thead>
-            
                     <tbody v-for="carrito in carrito" :key="carrito.PK_products" >
                         <tr class="col m12 s12 p-0">
                             <td class="col m4 s4">
@@ -37,8 +36,7 @@
                                 <h6>${{carrito.precioFinal = carrito.price * carrito.cantidad}}</h6>
                             </td>
                             <td class="col m2">
-                                
-                                <i class="material-icons color-text hide-on-small-only" @click="eliminarDeCarrito(carrito.PK_products)">highlight_off</i>
+                                <i class="material-icons color-text hide-on-small-only" style="color: red;" @click="eliminarDeCarrito(carrito.PK_products)">highlight_off</i>
                             </td>
                         </tr>
                     </tbody>

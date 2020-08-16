@@ -27,4 +27,7 @@
     <template v-if="menu==8">
         <categoriap></categoriap>
     </template>
+    <template v-if="menu==9">
+        <stock></stock>
+    </template>
 @endsection
