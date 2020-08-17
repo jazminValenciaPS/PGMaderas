@@ -40,6 +40,16 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
     margin: 0 20px 18px 0 !important;
 } */
 
+/* footer */
+.icons-footer{
+    width: 25px;
+    height: 25px;
+  }
+.icons-content-footer{
+    justify-content: center;
+    align-content: center;
+    display: flex;
+}  
 /* Materialize + Custom */
 #Productos .card 
 {

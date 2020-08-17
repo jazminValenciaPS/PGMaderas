@@ -9137,9 +9137,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -39358,36 +39355,43 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("div", { staticClass: "row producN" }, [
-        _c(
-          "div",
-          { staticClass: "col l10 s10" },
-          [
-            _c(
-              "vueper-slides",
-              {
-                staticClass: "no-shadow",
-                attrs: {
-                  "visible-slides": 3,
-                  "slide-multiple": "",
-                  gap: 3,
-                  "slide-ratio": 1 / 4,
-                  "dragging-distance": 200,
-                  breakpoints: { 800: { visibleSlides: 2, slideMultiple: 2 } }
-                }
-              },
-              _vm._l(_vm.arrayProductos, function(product) {
-                return _c("vueper-slide", {
-                  key: product.PK_products,
-                  attrs: { image: "img/" + product.image }
-                })
-              }),
-              1
-            )
-          ],
-          1
-        )
-      ])
+      _c(
+        "div",
+        {
+          staticClass: "row producN",
+          staticStyle: { "background-color": "#ececea", "margin-bottom": "0px" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "col l10 s10" },
+            [
+              _c(
+                "vueper-slides",
+                {
+                  staticClass: "no-shadow",
+                  attrs: {
+                    "visible-slides": 3,
+                    "slide-multiple": "",
+                    gap: 3,
+                    "slide-ratio": 1 / 4,
+                    "dragging-distance": 200,
+                    breakpoints: { 800: { visibleSlides: 2, slideMultiple: 2 } }
+                  }
+                },
+                _vm._l(_vm.arrayProductos, function(product) {
+                  return _c("vueper-slide", {
+                    key: product.PK_products,
+                    attrs: { image: "img/" + product.image }
+                  })
+                }),
+                1
+              )
+            ],
+            1
+          )
+        ]
+      )
     ],
     1
   )
@@ -39399,7 +39403,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row center" }, [
       _c("ul", { staticClass: "col l12 numeros center-align" }, [
-        _c("li", [_vm._v("Puedes encontrarnos en:")]),
+        _c("li", [_vm._v("Puedes contactarnos en:")]),
         _vm._v(" "),
         _c("li", [
           _c("i", { staticClass: "Medium material-icons" }, [_vm._v("call")]),
@@ -39426,14 +39430,9 @@ var staticRenderFns = [
       _c("div", { staticClass: "col s12 m4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
-            _c("img", {
-              attrs: {
-                src:
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU"
-              }
-            }),
+            _c("img", { attrs: { src: "img/servicio1.jpg" } }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [_vm._v("Servicio")])
+            _c("span", { staticClass: "card-title" }, [_vm._v("Enbisagrado")])
           ])
         ])
       ]),
@@ -39441,14 +39440,11 @@ var staticRenderFns = [
       _c("div", { staticClass: "col s12 m4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
-            _c("img", {
-              attrs: {
-                src:
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU"
-              }
-            }),
+            _c("img", { attrs: { src: "img/servicio2.jpg" } }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [_vm._v("Servicio")])
+            _c("span", { staticClass: "card-title" }, [
+              _vm._v("Enchapado de cantos")
+            ])
           ])
         ])
       ]),
@@ -39456,14 +39452,11 @@ var staticRenderFns = [
       _c("div", { staticClass: "col s12 m4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
-            _c("img", {
-              attrs: {
-                src:
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU"
-              }
-            }),
+            _c("img", { attrs: { src: "img/servicio3.jpg" } }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [_vm._v("Servicio")])
+            _c("span", { staticClass: "card-title" }, [
+              _vm._v("Corte de tableros")
+            ])
           ])
         ])
       ]),
@@ -39471,14 +39464,11 @@ var staticRenderFns = [
       _c("div", { staticClass: "col s12 m4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
-            _c("img", {
-              attrs: {
-                src:
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU"
-              }
-            }),
+            _c("img", { attrs: { src: "img/servicio4.jpg" } }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [_vm._v("Servicio")])
+            _c("span", { staticClass: "card-title" }, [
+              _vm._v("Corte de cubiertas")
+            ])
           ])
         ])
       ]),
@@ -39486,14 +39476,11 @@ var staticRenderFns = [
       _c("div", { staticClass: "col s12 m4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
-            _c("img", {
-              attrs: {
-                src:
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU"
-              }
-            }),
+            _c("img", { attrs: { src: "img/servicio5.jpg" } }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [_vm._v("Servicio")])
+            _c("span", { staticClass: "card-title" }, [
+              _vm._v("Corte de maderas")
+            ])
           ])
         ])
       ]),
@@ -39501,14 +39488,11 @@ var staticRenderFns = [
       _c("div", { staticClass: "col s12 m4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
-            _c("img", {
-              attrs: {
-                src:
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU"
-              }
-            }),
+            _c("img", { attrs: { src: "img/servicio5.jpg" } }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [_vm._v("Servicio")])
+            _c("span", { staticClass: "card-title" }, [
+              _vm._v("Cepillado de madera")
+            ])
           ])
         ])
       ])

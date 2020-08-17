@@ -8,11 +8,21 @@
         <div class="col l4 offset-l2 s12">
             <h5 class="white-text">Enlaces</h5>
             <ul>
-                <li>
-                   <img src="img/iconFacebook.png" alt="">         
+                <li style="display:flex; margin-bottom: 3px;" >
+                    <a class="icons-content-footer" href="https://www.facebook.com/pgmaderasytriplay" target = "_blank">
+                        <img class="icons-footer" src="img/facebook-blanco.png"  class="white-text ">
+                    </a>        
                 </li>
-                <li><a class="grey-text text-lighten-3" href="#!">Instagram</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Youtube</a></li>            
+                <li style="display:flex" >
+                    <a class="icons-content-footer" href="https://www.instagram.com/pgmaderas/" target = "_blank">
+                        <img class="icons-footer"  src="img/instagram-blanco.png" alt="">                       
+                    </a>         
+                </li>
+                <li style="display:flex">
+                    <a class="icons-content-footer" href="https://www.youtube.com/"  target = "_blank" >
+                        <img class="icons-footer"  src="img/youtube-blanco.png" alt="">
+                    </a>
+                </li>            
             </ul>
         </div>
         </div>

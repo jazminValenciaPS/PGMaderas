@@ -7,7 +7,7 @@
         </vueper-slides>
         <div class="row center">
             <ul class="col l12 numeros center-align" >
-                <li>Puedes encontrarnos en:</li>
+                <li>Puedes contactarnos en:</li>
                 <li><i class="Medium material-icons">call</i>Matriz Culiacán 7490021</li>
                 <li><i class="Medium material-icons">call</i>Sucursal Zapata 7662020</li>
                 <li><i class="Medium material-icons">call</i>Sucursal Monterrey 8147373452</li>
@@ -19,8 +19,8 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
-                        <span class="card-title">Servicio</span>
+                        <img src="img/servicio1.jpg">
+                        <span class="card-title">Enbisagrado</span>
                     </div>
                 </div>
             </div>
@@ -28,8 +28,8 @@
             <div class="col s12 m4" >
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
-                        <span class="card-title">Servicio</span>
+                        <img src="img/servicio2.jpg">
+                        <span class="card-title">Enchapado de cantos</span>
                     </div>
                 </div>
             </div>
@@ -37,8 +37,8 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
-                        <span class="card-title">Servicio</span>
+                        <img src="img/servicio3.jpg">
+                        <span class="card-title">Corte de tableros</span>
                     </div>
                 </div>
             </div>
@@ -46,8 +46,8 @@
              <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
-                        <span class="card-title">Servicio</span>
+                        <img src="img/servicio4.jpg">
+                        <span class="card-title">Corte de cubiertas</span>
                     </div>
                 </div>
             </div>
@@ -55,8 +55,8 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
-                        <span class="card-title">Servicio</span>
+                        <img src="img/servicio5.jpg">
+                        <span class="card-title">Corte de maderas</span>
                     </div>
                 </div>
             </div>
@@ -64,8 +64,8 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyDCoenYIZUQudpbqVCy2M8SUi3eSXf17RDw&usqp=CAU">
-                        <span class="card-title">Servicio</span>
+                        <img src="img/servicio5.jpg">
+                        <span class="card-title">Cepillado de madera</span>
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
 
         <h3 class="color-main center linea" ><span>Nuevos Productos!!</span></h3>
         <br>
-        <div class="row producN">
+        <div class="row producN" style="background-color: #ececea;margin-bottom: 0px;">
             <div class="col l10 s10">
                 <vueper-slides
                 class="no-shadow"
@@ -91,9 +91,6 @@
             </div>
             
         </div>
-
-
-    
     </main>
 </template>
 <script>

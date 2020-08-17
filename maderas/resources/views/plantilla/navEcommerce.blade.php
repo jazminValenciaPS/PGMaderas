@@ -3,7 +3,7 @@
     <nav class="nav-principal-inicio">
         <div class="nav-wrapper">
             <div class="left container-img-select">
-                <a @click="menu=0" href="/"><img src="img/logo-nav.png" width="260px" /></a>
+                <a @click="menu=0" href="/"><img src="img/logo-nav.png" width="260px"/></a>
                 <navsucursal></navsucursal>
                 <i class="material-icons prefix color-main ">location_on</i>
             </div>
