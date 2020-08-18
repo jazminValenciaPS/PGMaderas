@@ -9,13 +9,7 @@
             </div>
                 <ul class="right hide-on-med-and-down buscador-carrito" >
                     <li class="col m7 s6" >
-                        <section class="main-input">
-                            <div class="main-input-container">
-                                <i class="material-icons color-main" >search</i>
-                                <input id="input-search-nav" type="search" required placeholder="Buscar" class=" letraTN">
-                                <a class="main-icon" href=""></a>
-                            </div> 
-                        </section>
+                        <buscar></buscar>
                     </li>
                     <li class="col m8 s7">
                         <navuser></navuser>

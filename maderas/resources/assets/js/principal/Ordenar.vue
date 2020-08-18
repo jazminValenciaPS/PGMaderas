@@ -90,7 +90,7 @@
                     </ul>
             </section>
             <section class="container-metodo-entrega" style="z-index:0">
-                <h6>Metodo de entrega</h6>
+                <h6>Método de entrega</h6>
                  <form action="#">
                     <p>
                     <label>
@@ -133,7 +133,7 @@
                     </div>
             </section> -->
             <section class="container-metodo-pago" style="z-index:0">
-                <h6>Metodo de pago</h6>
+                <h6>Método de pago</h6>
                   <form action="#">
                     <p>
                     <label>

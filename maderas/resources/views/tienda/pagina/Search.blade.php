@@ -1,7 +1,8 @@
 @extends('tienda.principal')
 @section('ecommerce')
 
-<nosotros></nosotros>
+<searchp><searchp>
+
 
 
 @endsection

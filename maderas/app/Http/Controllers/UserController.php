@@ -209,6 +209,32 @@ class UserController extends Controller
 
     }
 
+    public function info(Request $request){
+        $email = $request->email;
+
+        if($email != null){
+            return $user = DB::table('users')
+        ->join('roles', 'roles.PK_roles', '=', 'users.id_role')
+        ->join('persons', 'persons.PK_persons', '=', 'users.id_person')
+        ->join('addresses', 'addresses.id_user', '=', 'users.id')
+        ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','users.id_branch')
+        ->select('users.id','id_branch')
+        ->where('roles.PK_roles', '=', '3')
+        ->where('users.email','=',$email)
+        ->get();
+
+        }
+
+        
+    }
+
+    public function updateBranch(Request $request){
+        
+    }
+
+
+    
+
     public function update(Request $request){
         if (!$request->ajax()) return redirect('/administrador');
 

@@ -189,4 +189,12 @@ Route::post('/password/actualizar','PasswordController@update');
 
 Route::get('/branches','PGBranchesController@index');
 
+Route::get('/buscar','ProductController@buscar');
+
+Route::get('/user/info','userController@info');
+Route::get('user/update/branch','userController@updateBranch');
+
+
+
+
 

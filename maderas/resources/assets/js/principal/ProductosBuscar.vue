@@ -1,14 +1,9 @@
-
 <template>
      <main  class="main-index">
         <div class="row">
             <!-- Filters -->
             <div class="col m3 s12">
                 <ul class="collection">
-                    <li class="collection-item">
-                       <h6>Categorías</h6>
-                        <a v-for="cate in arrayCategorias" :key="cate.PK_categories" value="" @click="productosCate(1,buscar,criterio,cate.PK_products_categories)"  href="#">{{cate.name}}</a>
-                    </li>
                     <li class="collection-item">
                         <h6>Filtro de búsqueda:</h6>
                         <h6>Precio</h6>
@@ -98,17 +93,7 @@ export default {
                 console.log(error);
             });
         },
-        listarCat(id){
-            let m=this;
-            axios.get('/categoriaProductoL?id=' + id).then(function (response){
-                
-                m.arrayCategorias = response.data;
-            
-            })
-            .catch(function(error){
-                console.log(error);
-            });
-        },
+        
         VerProducto(menu,id){
             let m=this;
             var objeto = {
@@ -195,7 +180,6 @@ export default {
             //Envia la petición para visualizar la data de esa página
             me.listarProductos(page,buscar,criterio);
         },
-        
     },
     computed:{
          isActived: function(){
@@ -234,7 +218,6 @@ export default {
 
         let id = (product !== null && product !== '' && product !== undefined)? product : "";
         m.idSubcat= id;
-        m.listarCat(id);
         this.listarProductos(1,this.buscar,this.criterio);
         this.crearCarrito();
         // this.listarCat();

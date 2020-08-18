@@ -134,9 +134,9 @@ class ProductController extends Controller
         ->select('products.PK_products','products.SKU','products.name','products.description',
         'products.price','stock.avaible', 'products.status','products_images.image')
         ->where('products.status','=','1')
-        ->take(6)
         ->where('_p_g_branches.PK_PG_branches','=','1')
-        ->orderBy('products.PK_products', 'desc')       
+        ->orderBy('products.PK_products', 'desc')
+        ->limit(3)
         ->get();
     }
 
@@ -277,6 +277,63 @@ class ProductController extends Controller
        
     }
 
+    public function buscar(Request $request){
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+
+     
+        if ($buscar==''){
+
+            $producto = DB::table('products')
+            ->join('stock','stock.id_product','=','products.PK_products')
+            ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
+            ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products_categories.id_subcategories')
+            ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+            ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','stock.id_PG_branches')
+            ->select('products.PK_products','products.SKU','products.name','products.description',
+            'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
+            'products_categories.name as productscategories','products_images.image')
+            ->distinct()
+            ->where('products.status','=','1')
+            ->where('_p_g_branches.PK_PG_branches','=','1')
+            ->orderBy('products.PK_products', 'desc')->paginate(6);
+
+        }
+        else{
+            $producto = DB::table('products')
+            -join('stock','stock.id_product','=','products.PK_products')
+            ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
+            ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+            ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','stock.id_PG_branches')
+            ->select('products.PK_products','products.SKU','products.name','products.description',
+            'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
+            'products_categories.name as productscategories','products_images.image')
+            ->distinct()
+            ->where('products.status','=','1')
+            ->where('_p_g_branches.PK_PG_branches','=','1')
+            ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('products.PK_products', 'desc')->paginate(6);
+        }
+        
+
+        return
+        [
+                'pagination' => [
+                    'total'        => $producto->total(),
+                    'current_page' => $producto->currentPage(),
+                    'per_page'     => $producto->perPage(),
+                    'last_page'    => $producto->lastPage(),
+                    'from'         => $producto->firstItem(),
+                    'to'           => $producto->lastItem(),
+                ],
+                'producto' => $producto
+            ];
+
+        
+
+
+
+    }
    
     public function desactivar(Request $request)
     { 

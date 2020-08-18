@@ -51,7 +51,9 @@
                         <h5>total: ${{carrito.total}}</h5>
                     </li>
                 </ul>
-                <a class="btn bg-main mt-2" :href="'/Ordenar'" >Pagar<i class="material-icons left m-0">attach_money</i></a>
+                <a  v-show="email != null" class="btn bg-main mt-2" :href="'/Ordenar'" >Pagar<i class="material-icons left m-0">attach_money</i></a>
+                <a  v-show="email == null" class="btn bg-main mt-2" :href="'/iniciar-sesion'" >Iniciar sesión</a>
+                
                 <!-- Validar si está logueado -->
             </div>
         </div>
@@ -72,6 +74,7 @@ export default {
             total:0,
             subtotal:0,
             user:false,
+            email : localStorage.getItem('email'),
         }
     },
     methods:{
@@ -109,6 +112,13 @@ export default {
 
             localStorage.setItem('carrito', JSON.stringify(this.carrito));
         },
+        User(log){
+            var email = localStorage.getItem('email');
+            if (email) {
+                var userHtml = document.getElementById('user');
+                userHtml.innerHTML = email;
+            }
+        }
 
     },
     async mounted() {
@@ -126,7 +136,8 @@ export default {
             return producto;
         }));
         this.calcularTotal(this.carrito);
-        
+        // this.User();
+        console.log(this.email);
     }
 }
 </script>

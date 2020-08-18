@@ -71,73 +71,450 @@
             </div>
         </div>
 
-        <!-- Nuevos productos -->
-        <br>
-
-        <h3 class="color-main center linea" ><span>Nuevos Productos!!</span></h3>
-        <br>
-        <div class="row producN" style="background-color: #ececea;margin-bottom: 0px;">
-            <div class="col l10 s10">
-                <vueper-slides
-                class="no-shadow"
-                :visible-slides="3"
-                slide-multiple
-                :gap="3"
-                :slide-ratio="1 / 4"
-                :dragging-distance="200"
-                :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
-                <vueper-slide v-for="product in arrayProductos"  :key="product.PK_products" :image="'img/'+product.image"  />
-               </vueper-slides>
+        <div class="row green">
+            <div class="col l4 s4">
+                <div class="row ceter">
+                    <div class="col l12 center">
+                         <h4 class="white-text">
+                            ENTREGAS
+                        </h4>
+                    </div>
+                    <br>
+                    <div class="col l12 center">
+                        <img  src="img/camion.png"  class="iconos">
+                    </div>
+                </div>
+                <p class="white-text center">
+                    Comercializamos y ditribuimos oportunamente nuestros productos. Tenemos la opción de entregarle en nuestras instalaciones o directamente en su domicilio.
+                </p>
             </div>
-            
+             <div class="col l4 s4">
+                <div class="row ceter">
+                    <div class="col l12 center">
+                         <h4 class="white-text">
+                            ASESORIA
+                        </h4>
+                    </div>
+                <br>
+
+                    <div class="col l12 center">
+                        <img  src="img/consejo.png"  class="iconos">
+                    </div>
+                </div>
+                <p class="white-text center">
+                    Contamos con un grupo de vendedores expertos en los productos maderables, dispuestos a asesorarlo en todo momento para que usted cuente con la mejor información para su proceso.
+                </p>
+            </div>
+             <div class="col l4 s4">
+                  <div class="row ceter">
+                    <div class="col l12 center">
+                         <h4 class="white-text">
+                            CALIDAD
+                        </h4>
+                    </div>
+                <br>
+
+                    <div class="col l12 center">
+                        <img  src="img/seguro.png"  class="iconos">
+                    </div>
+                </div>
+                <p class="white-text center">
+                    En PG Maderas, contamos con el producto que usted necesita, para la realización de su proyecto, con la mejor calidad y al mejor precio.
+                </p>
+            </div>
         </div>
-    </main>
+        
+        <h3 class="color-main center">Conoce nuestros nuevos productos!</h3>
+         <section class="section-contianer-new-produc">
+            <div class="row container-card" v-for="product in arrayProductos"  :key="product.PK_products">
+                <div class="col s12 m12 l12" >
+                    <div class="card">
+                        <div class="card-image">
+                            <img :src="'img/'+product.image">
+                        </div>
+                        <div class="card-content">
+                            <span  class="card-title">{{product.name}}</span>
+                            <p>{{product.description}}</p>
+                            <p>$ {{product.price}}</p>
+                        </div>
+                        <div class="card-action">
+                            <a :href="'/Ver-Producto?id='+product.PK_products">Ir a producto </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </section>
+       
+        <div class="center">
+            <h3 class="proveedores "><span>NUESTROS PROVEEDORES</span></h3>
+
+        </div>
+        <div class="container-prob-inicio">
+            <vueper-slides autoplay  class="no-shadow" :visible-slides="3" :breakpoints="{ 800: { visibleSlides: 1, slideMultiple: 2 } }" :slide-ratio="1 / 4" :dragging-distance="70">
+                <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>
+            </vueper-slides>
+        </div>         
+    </main> 
 </template>
+
 <script>
 
-import { VueperSlides, VueperSlide } from 'vueperslides';
-import 'vueperslides/dist/vueperslides.css';
+    import { VueperSlides, VueperSlide } from 'vueperslides';
+    import 'vueperslides/dist/vueperslides.css';
 
     export default {
         components: { VueperSlides, VueperSlide },
-         data(){
+        data(){
             return{
                 img: '',
                 file:'',
                 arraySliders:[],
                 arrayProductos:[],
-
+                slides:[{
+                        image: 'img/Reahu.png'
+                    },
+                    {
+                        image: 'img/Dekken.png'
+                    },
+                    {
+                        image: 'img/Fincsa.png'
+                    },
+                    {
+                        image: 'img/Blum.png'
+                    },
+                    {
+                        image: 'img/Cerrajes.png'
+                    },
+                    {
+                        image: 'img/Fandeli.png'
+                    },
+                    {
+                        image: 'img/Kele.png'
+                    },
+                    {
+                        image: 'img/Canplast.png'
+                    },
+                    {
+                        image: 'img/Spax.png'
+                    },
+                    {
+                        image: 'img/Valresa.png'
+                    },
+                    {
+                        image: 'img/surtimex.png'
+                    },
+                ],
             }
-            },
-            methods:{
-              listarSliders(){
+        },
+        computed: {
+            atEndOfList() {
+            return this.currentOffset <= (this.paginationFactor * -1) * (this.items.length - this.windowSize);
+            }
+        },
+        methods:{
+            listarSliders(){
                 let m=this;
 
                 axios.get('/slider/carrusel').then(function (response){
                     m.arraySliders = response.data;
-                  
-                 })
-                 .catch(function(error){
+                })
+                .catch(function(error){
                     console.log(error);
-                 });
+                });
 
-             },
-             nuevosProductos(){
+            },
+            nuevosProductos(){
                 let m=this;
 
                 axios.get('/productosNuevos').then(function (response){
                     m.arrayProductos = response.data;
-                  
-                 })
-                 .catch(function(error){
+                
+                })
+                .catch(function(error){
                     console.log(error);
-                 });
-             },
+               });
             },
+        },
         mounted() {
             this.listarSliders();
             this.nuevosProductos();
-
         }
      }
  </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
+
+     }
+ </script>
+
