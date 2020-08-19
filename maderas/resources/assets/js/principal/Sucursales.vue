@@ -75,20 +75,14 @@ export default {
                         console.log(err);
                     });
                 }
-            })
-            .catch((err)=>{
-                console.log(err);
-            });
-        }else{
-            console.log("");
-        }
-      }
-    },
+            }
+        },
     mounted(){
         this.listarSucursales();
     },
     updated(){
         M.FormSelect.init(document.querySelectorAll('select'), {});
     },
+}
 }
 </script>

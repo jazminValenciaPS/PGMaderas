@@ -11092,9 +11092,121 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/principal/Sucursales.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/resources/assets/js/principal/Sucursales.vue: Unexpected token (78:13)\n\n\u001b[0m \u001b[90m 76 | \u001b[39m                    })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 77 | \u001b[39m                }\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 | \u001b[39m            })\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 79 | \u001b[39m            \u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m((err)\u001b[33m=>\u001b[39m{\u001b[0m\n\u001b[0m \u001b[90m 80 | \u001b[39m                console\u001b[33m.\u001b[39mlog(err)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 81 | \u001b[39m            })\u001b[33m;\u001b[39m\u001b[0m\n    at Parser._raise (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:746:17)\n    at Parser.raiseWithData (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:739:17)\n    at Parser.raise (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:733:17)\n    at Parser.unexpected (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:8807:16)\n    at Parser.parseExprAtom (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10130:20)\n    at Parser.parseExprSubscripts (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9656:23)\n    at Parser.parseMaybeUnary (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9636:21)\n    at Parser.parseExprOps (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9506:23)\n    at Parser.parseMaybeConditional (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9479:23)\n    at Parser.parseMaybeAssign (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9434:21)\n    at Parser.parseExpression (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9386:23)\n    at Parser.parseStatementContent (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:11285:23)\n    at Parser.parseStatement (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:11156:17)\n    at Parser.parseBlockOrModuleBlockBody (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:11731:25)\n    at Parser.parseBlockBody (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:11717:10)\n    at Parser.parseBlock (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:11701:10)\n    at Parser.parseFunctionBody (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10708:24)\n    at Parser.parseFunctionBodyAndFinish (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10691:10)\n    at Parser.parseMethod (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10653:10)\n    at Parser.parseObjectMethod (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10569:19)\n    at Parser.parseObjPropValue (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10611:23)\n    at Parser.parseObjectMember (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10535:10)\n    at Parser.parseObj (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10448:25)\n    at Parser.parseExprAtom (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10055:28)\n    at Parser.parseExprSubscripts (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9656:23)\n    at Parser.parseMaybeUnary (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9636:21)\n    at Parser.parseExprOps (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9506:23)\n    at Parser.parseMaybeConditional (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9479:23)\n    at Parser.parseMaybeAssign (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9434:21)\n    at Parser.parseObjectProperty (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10586:101)\n    at Parser.parseObjPropValue (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10611:101)\n    at Parser.parseObjectMember (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10535:10)\n    at Parser.parseObj (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10448:25)\n    at Parser.parseExprAtom (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10055:28)\n    at Parser.parseExprSubscripts (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9656:23)\n    at Parser.parseMaybeUnary (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9636:21)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      arraySucursales: [],
+      idBranch: 0
+    };
+  },
+  methods: {
+    listarSucursales: function listarSucursales() {
+      var url = '/branches';
+      var m = this;
+      axios.get(url).then(function (response) {
+        m.arraySucursales = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    selectBranch: function selectBranch() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var me, url;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                me = _this;
+
+                if (!(typeof Storage !== "undefined")) {
+                  _context.next = 8;
+                  break;
+                }
+
+                if (localStorage.getItem("ecommerce-branch") === null) localStorage.setItem("ecommerce-branch", JSON.stringify(1));
+                url = "/user/info";
+                _context.next = 6;
+                return axios.get(url).then(function (result) {
+                  if ([undefined, null, 0, ""].includes(result.data)) {
+                    var LS = JSON.parse(localStorage.getItem("ecommerce-branch"));
+                    me.branch = LS;
+                  } else {
+                    me.branch = result.data.User_Branch_ID;
+                  }
+                })["catch"](function (err) {
+                  console.log(err);
+                });
+
+              case 6:
+                _context.next = 9;
+                break;
+
+              case 8:
+                console.log("Sorry, your browser does not support Web Storage...");
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    setBranch: function setBranch() {
+      var me = this;
+
+      if (typeof Storage !== "undefined") {
+        if (localStorage.getItem("branch") === null) localStorage.setItem("branch", JSON.stringify(1));
+
+        if (![undefined, null, 0, ""].includes(me.branch)) {
+          //Preguntar si hay correo en ls
+          var url = "/user/info";
+          axios.get(url).then(function (result) {
+            if ([undefined, null, 0, ""].includes(result.data)) {
+              localStorage.setItem("branch", JSON.stringify(me.branch));
+              location.reload();
+            } else {
+              var _url = "/user/update/branch";
+              axios.post(_url, {
+                id: me.branch
+              }).then(function (result) {
+                location.reload();
+              });
+            }
+          })["catch"](function (err) {
+            console.log(err);
+          });
+        }
+      }
+    },
+    mounted: function mounted() {
+      this.listarSucursales();
+    },
+    updated: function updated() {
+      M.FormSelect.init(document.querySelectorAll('select'), {});
+    }
+  }
+});
 
 /***/ }),
 
