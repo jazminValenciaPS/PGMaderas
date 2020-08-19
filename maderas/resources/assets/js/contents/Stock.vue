@@ -83,9 +83,11 @@
                         </tr>
                     </tbody>
                 </table>
-                <ul class="pagination">
+             <ul class="pagination">
                 <li  v-if="pagination.current_page > 1">
-                    <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
+                            <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
+
+                        <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
                 </li>
                 <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
                     <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
@@ -112,13 +114,13 @@ export default {
             name:'',
             contenido: 1000,
             arrayProductos:[],
-            pagination : {
-                'total' : 0,
-                'current_page' : 0,
-                'per_page' : 0,
-                'last_page' : 0,
-                'from' : 0,
-                'to' : 0,
+              pagination : {
+                    'total' : 0,
+                    'current_page' : 0,
+                    'per_page' : 0,
+                    'last_page' : 0,
+                    'from' : 0,
+                    'to' : 0,
             },
             offset : 3,
             criterio : 'name',
@@ -226,7 +228,7 @@ export default {
                 }
             })
             .then(function (response) {
-                me.listarCategoria(1,'','name');
+                me.listarProductos(1,'','name');
                 me.cerrarModal();
                 me.limpiar();                    
             })
@@ -247,7 +249,7 @@ export default {
     },
     mounted(){
         this.verSelects();
-        this.listarProductos();
+        this.listarProductos(1,this.buscar,this.criterio);
     }
 }
 </script>

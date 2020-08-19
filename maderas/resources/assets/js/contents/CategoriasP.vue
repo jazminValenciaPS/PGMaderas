@@ -435,7 +435,7 @@ export default {
                 }
             })
             .then(function (response) {
-                me.listarProductos(1,'','name');
+                me.listarCategoria(1,'','name');
                 me.cerrarModal();
                 me.limpiar();                    
             })

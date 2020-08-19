@@ -101,11 +101,11 @@
             <div  class="col m9 s12" v-if="informacion==2">
                 <div class="input-field col m6 s6 mb-0">
                     <input id="firstname" type="text" required v-model="first_name" autofocus>
-                    <label for="firstname">Nombre(s)</label>
+                    <!-- <label for="firstname">Nombre(s)</label> -->
                 </div>
                 <div class="input-field col m6 s6 mb-0">
                     <input id="lastname" type="text" required v-model="last_name" autofocus>
-                    <label for="lastname">Apellido(s)</label>
+                    <!-- <label for="lastname">Apellido(s)</label> -->
                 </div>
                 <div class="input-field col m12 s12 mb-0">
                     <input id="fecha" type="date" class="datepicker col m6 s12" placeholder="Nacimiento" v-model="birth_date">
@@ -119,36 +119,36 @@
                 </div>
                 <div class="input-field col m6 s6 mb-0">
                     <input id="state" type="text" required v-model="state" autofocus>
-                    <label for="state">Estado</label>
+                    <!-- <label for="state">Estado</label> -->
                 </div>
                 <div class="input-field col m6 s6 mb-0">
                     <input id="city" type="text" required v-model="city" autofocus>
-                    <label for="city">Ciudad</label>
+                    <!-- <label for="city">Ciudad</label> -->
                 </div>
                 <div class="input-field col m6 s6 mb-0">
                     <input id="cp" type="text" required v-model="postal_code" autofocus>
-                    <label for="cp">Código Postal</label>
+                    <!-- <label for="cp">Código Postal</label> -->
                 </div>
                 <div class="input-field col m6 s6 mb-0">
                     <input id="street" type="text" required v-model="street" autofocus>
-                    <label for="street">Calle</label>
+                    <!-- <label for="street">Calle</label> -->
                 </div>
                 <div class="input-field col m6 s6 mb-0">
                     <input id="ext_number" type="text" required v-model="outdoorNumber" autofocus>
-                    <label for="ext_number">Nº Exterior</label>
+                    <!-- <label for="ext_number">Nº Exterior</label> -->
                 </div>
                 <div class="input-field col m6 s6 mb-0">
-                    <input id="rfc" type="text" required v-model="RFC" autofocus>
-                    <label for="rfc">RFC</label>
+                    <input id="rfc" type="text" required v-model="RFC" autofocus placeholder="RFC">
+                    <!-- <label for="rfc">RFC</label> -->
                 </div>
                 <div class="input-field col m12 s6 mb-0">
                     <textarea id="references" class="materialize-textarea" v-model="reference" autofocus></textarea>
-                    <label for="references">Referencias</label>
+                    <!-- <label for="references">Referencias</label> -->
                 </div>
             
                 <div class="input-field col m12 s6 mb-0">
                     <input id="phone" type="text" required v-model="phone" autofocus>
-                    <label for="phone">Teléfono/Celular</label>
+                    <!-- <label for="phone">Teléfono/Celular</label> -->
                 </div>
                 <div v-show="errorCliente" class="form-group row div-error">
                     <div class="text-center text-error">

@@ -71,60 +71,60 @@
             </div>
         </div>
 
-        <div class="row green">
+        <div class="row color-cintilla">
             <div class="col l4 s4">
                 <div class="row ceter">
-                    <div class="col l12 center">
-                         <h4 class="white-text">
+                    <div class="col l12 s12 center">
+                         <h4 class="cintilla-text">
                             ENTREGAS
-                        </h4>
+                         </h4>
                     </div>
                     <br>
                     <div class="col l12 center">
-                        <img  src="img/camion.png"  class="iconos">
+                        <img  src="img/enviado.png"  class="iconos">
                     </div>
                 </div>
-                <p class="white-text center">
+                <p class="cintilla-text center">
                     Comercializamos y ditribuimos oportunamente nuestros productos. Tenemos la opción de entregarle en nuestras instalaciones o directamente en su domicilio.
                 </p>
             </div>
              <div class="col l4 s4">
                 <div class="row ceter">
                     <div class="col l12 center">
-                         <h4 class="white-text">
+                         <h4 class="cintilla-text">
                             ASESORIA
                         </h4>
                     </div>
                 <br>
 
                     <div class="col l12 center">
-                        <img  src="img/consejo.png"  class="iconos">
+                        <img  src="img/asignacion.png"  class="iconos">
                     </div>
                 </div>
-                <p class="white-text center">
+                <p class="cintilla-text center">
                     Contamos con un grupo de vendedores expertos en los productos maderables, dispuestos a asesorarlo en todo momento para que usted cuente con la mejor información para su proceso.
                 </p>
             </div>
              <div class="col l4 s4">
                   <div class="row ceter">
                     <div class="col l12 center">
-                         <h4 class="white-text">
+                         <h4 class="cintilla-text">
                             CALIDAD
                         </h4>
                     </div>
                 <br>
 
                     <div class="col l12 center">
-                        <img  src="img/seguro.png"  class="iconos">
+                        <img  src="img/escudo.png"  class="iconos">
                     </div>
                 </div>
-                <p class="white-text center">
+                <p class="cintilla-text center">
                     En PG Maderas, contamos con el producto que usted necesita, para la realización de su proyecto, con la mejor calidad y al mejor precio.
                 </p>
             </div>
         </div>
         
-        <h3 class="color-main center">Conoce nuestros nuevos productos!</h3>
+        <h3 class="color-main center">¡Conoce nuestros productos!</h3>
          <section class="section-contianer-new-produc">
             <div class="row container-card" v-for="product in arrayProductos"  :key="product.PK_products">
                 <div class="col s12 m12 l12" >
@@ -132,13 +132,13 @@
                         <div class="card-image">
                             <img :src="'img/'+product.image">
                         </div>
-                        <div class="card-content">
+                        <div class="card-content" style="height: 150px;">
                             <span  class="card-title">{{product.name}}</span>
                             <p>{{product.description}}</p>
                             <p>$ {{product.price}}</p>
                         </div>
                         <div class="card-action">
-                            <a :href="'/Ver-Producto?id='+product.PK_products">Ir a producto </a>
+                            <a style="color:#419142 !important" :href="'/Ver-Producto?id='+product.PK_products">Ir a producto </a>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
          </section>
        
         <div class="center">
-            <h3 class="proveedores "><span>NUESTROS PROVEEDORES</span></h3>
+            <h3 class="proveedores">NUESTROS PROVEEDORES</h3>
 
         </div>
         <div class="container-prob-inicio">

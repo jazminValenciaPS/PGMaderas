@@ -1,7 +1,7 @@
 <template>
     <main class="main-index">
         <section class="container-contacto">
-            <p class="title-contacto bold">Contáctanos</p>
+            <h6 class="title-contacto bold">Contáctanos</h6>
             <section class="map-contaider">
                 <iframe class="map" :src=urlrsc frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
             </section>

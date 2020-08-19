@@ -1,7 +1,7 @@
 @extends('tienda.principal')
 @section('ecommerce')
 
-<inicio></inicio>
+<inicio :productoid="idProducto" @mostrar-producto="mostrarProducto"></inicio>
 
 
 @endsection

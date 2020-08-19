@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('name',50);
             $table->string('description',5000)->nullable();
             $table->decimal('price',16, 2);
-            // $table->unsignedTinyInteger('avaible')->default(1);
+            $table->unsignedTinyInteger('destacado');
             $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
 

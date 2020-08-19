@@ -8,6 +8,8 @@ use App\Addresse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class UserController extends Controller
@@ -210,9 +212,10 @@ class UserController extends Controller
     }
 
     public function info(Request $request){
-        $email = $request->email;
 
-        if($email != null){
+        $id= Auth::user()->id; 
+
+
             return $user = DB::table('users')
         ->join('roles', 'roles.PK_roles', '=', 'users.id_role')
         ->join('persons', 'persons.PK_persons', '=', 'users.id_person')
@@ -220,16 +223,23 @@ class UserController extends Controller
         ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','users.id_branch')
         ->select('users.id','id_branch')
         ->where('roles.PK_roles', '=', '3')
-        ->where('users.email','=',$email)
+        ->where('users.id','=',$id)
+        ->limit(1)
         ->get();
 
-        }
+        
 
         
     }
 
     public function updateBranch(Request $request){
+        $email = $request->email;
+
+
+        $user = User::findOrFail($email);
         
+
+
     }
 
 

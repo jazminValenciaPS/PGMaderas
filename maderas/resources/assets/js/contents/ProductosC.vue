@@ -104,6 +104,7 @@
                             <th class="hide-on-small-only">Imagen</th>
                             <th class="hide-on-small-only">Precio</th>
                             <th class="hide-on-small-only">Status</th>
+                            <th class="hide-on-small-only">Destacados</th>
                             <th>Editar</th>
                             <th>Desactivar/Activar</th>
                         </tr>
@@ -118,6 +119,18 @@
                             <td class="hide-on-small-only"  v-text="producto.price"></td>
                             <td class="hide-on-small-only"  v-if="producto.status == 1">Activado</td>
                             <td class="hide-on-small-only"  v-if="producto.status == 0">Desactivado</td>
+                            <td class="desactivarActivar">
+                                <a href="#!" class="secondary-content" v-if="producto.destacado == 1">
+                                    <i class="switch">
+                                        <label><input type="checkbox" checked="checked" name="status" v-model="producto.destacado" @click="desactivarProducto(producto.PK_products)"><span class="lever"></span></label>
+                                    </i>
+                                </a>
+                                <a href="#!" class="secondary-content" v-if="producto.destacado == 0">
+                                    <i class="switch">
+                                        <label><input type="checkbox"  name="status" v-model="producto.destacado" @click="activarProducto(producto.PK_products)"><span class="lever"></span></label>
+                                    </i>
+                                </a>
+                            </td>
                             <td>
                                 <i class="material-icons color-text pointer" @click="abrirModal('producto','actualizar',producto,producto.PK_products)">create</i>
                             </td>
@@ -297,9 +310,8 @@ export default {
                 }
             })
             .then(function (response) {
-                me.listarProductos(1,'','name');
                 me.cerrarModal();
-                me.limpiar();
+                me.listarProductos(1,'','name');
             })
             .catch(function (error) {
                 console.log(error);
@@ -328,9 +340,8 @@ export default {
                     }
                 })
                 .then(function (response) {
-                    me.listarProductos(1,'','name');
                     me.cerrarModal();
-                    me.limpiar();                    
+                    me.listarProductos(1,'','name');
                 })
                 .catch(function (error) {
                     console.log(error);

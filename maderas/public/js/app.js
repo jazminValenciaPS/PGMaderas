@@ -5931,7 +5931,7 @@ document.addEventListener('DOMContentLoaded', function () {
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        me.listarProductos(1, '', 'name');
+        me.listarCategoria(1, '', 'name');
         me.cerrarModal();
         me.limpiar();
       })["catch"](function (error) {
@@ -7057,6 +7057,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7196,9 +7209,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        me.listarProductos(1, '', 'name');
         me.cerrarModal();
-        me.limpiar();
+        me.listarProductos(1, '', 'name');
       })["catch"](function (error) {
         console.log(error);
       });
@@ -7224,9 +7236,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        me.listarProductos(1, '', 'name');
         me.cerrarModal();
-        me.limpiar();
+        me.listarProductos(1, '', 'name');
       })["catch"](function (error) {
         console.log(error);
       });
@@ -7828,6 +7839,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _ref;
@@ -7960,7 +7973,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        me.listarCategoria(1, '', 'name');
+        me.listarProductos(1, '', 'name');
         me.cerrarModal();
         me.limpiar();
       })["catch"](function (error) {
@@ -7980,7 +7993,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.verSelects();
-    this.listarProductos();
+    this.listarProductos(1, this.buscar, this.criterio);
   }
 });
 
@@ -11079,131 +11092,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/principal/Sucursales.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      arraySucursales: [],
-      branch: 0,
-      correo: ''
-    };
-  },
-  methods: {
-    listarSucursales: function listarSucursales() {
-      var url = '/branches';
-      var m = this;
-      axios.get(url).then(function (response) {
-        m.arraySucursales = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    selectBranch: function selectBranch() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var me, url;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                me = _this;
-                me.correo = localStorage.getItem("email");
-
-                if (!(typeof Storage !== "undefined")) {
-                  _context.next = 9;
-                  break;
-                }
-
-                if (localStorage.getItem("branch") === null) localStorage.setItem("branch", JSON.stringify(1));
-                url = "/user/info?email=" + me.correo;
-                _context.next = 7;
-                return axios.get(url).then(function (result) {
-                  if ([undefined, null, 0, ""].includes(result.data)) {
-                    var LS = JSON.parse(localStorage.getItem("branch"));
-                    me.branch = LS;
-                  } else {
-                    me.branch = result.data.id_branch;
-                  }
-                })["catch"](function (err) {
-                  console.log(err);
-                });
-
-              case 7:
-                _context.next = 10;
-                break;
-
-              case 9:
-                console.log("Sorry, your browser does not support Web Storage...");
-
-              case 10:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    setBranch: function setBranch() {
-      var m = this;
-      m.correo = localStorage.getItem("email");
-
-      if (typeof Storage !== "undefined") {
-        if (localStorage.getItem("branch") === null) localStorage.setItem("branch", JSON.stringify(1));
-
-        if (![undefined, null, 0, ""], includes(me.branch)) {
-          var url = "/user/info?email=" + me.correo;
-          axios.get(url).then(function (result) {
-            if ([undefined, null, 0, ""].includes(result.data)) {
-              localStorage.setItem("branch", JSON.stringify(me.branch));
-              localStorage.reload();
-            } else {
-              var _url = "user/update/branch";
-              axios.post(_url, {
-                id: m.branch,
-                email: m.correo
-              }).then(function (result) {
-                location.reload();
-              })["catch"](function (err) {
-                console.log(err);
-              });
-            }
-          })["catch"](function (err) {
-            console.log(err);
-          });
-        }
-      } else {
-        console.log("");
-      }
-    }
-  },
-  created: function created() {
-    this.listarSucursales();
-  },
-  beforeMount: function beforeMount() {
-    this.selectBranch();
-  },
-  updated: function updated() {
-    M.FormSelect.init(document.querySelectorAll('select'), {});
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/resources/assets/js/principal/Sucursales.vue: Unexpected token (78:13)\n\n\u001b[0m \u001b[90m 76 | \u001b[39m                    })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 77 | \u001b[39m                }\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 | \u001b[39m            })\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 79 | \u001b[39m            \u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m((err)\u001b[33m=>\u001b[39m{\u001b[0m\n\u001b[0m \u001b[90m 80 | \u001b[39m                console\u001b[33m.\u001b[39mlog(err)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 81 | \u001b[39m            })\u001b[33m;\u001b[39m\u001b[0m\n    at Parser._raise (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:746:17)\n    at Parser.raiseWithData (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:739:17)\n    at Parser.raise (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:733:17)\n    at Parser.unexpected (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:8807:16)\n    at Parser.parseExprAtom (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10130:20)\n    at Parser.parseExprSubscripts (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9656:23)\n    at Parser.parseMaybeUnary (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9636:21)\n    at Parser.parseExprOps (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9506:23)\n    at Parser.parseMaybeConditional (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9479:23)\n    at Parser.parseMaybeAssign (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9434:21)\n    at Parser.parseExpression (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9386:23)\n    at Parser.parseStatementContent (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:11285:23)\n    at Parser.parseStatement (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:11156:17)\n    at Parser.parseBlockOrModuleBlockBody (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:11731:25)\n    at Parser.parseBlockBody (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:11717:10)\n    at Parser.parseBlock (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:11701:10)\n    at Parser.parseFunctionBody (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10708:24)\n    at Parser.parseFunctionBodyAndFinish (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10691:10)\n    at Parser.parseMethod (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10653:10)\n    at Parser.parseObjectMethod (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10569:19)\n    at Parser.parseObjPropValue (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10611:23)\n    at Parser.parseObjectMember (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10535:10)\n    at Parser.parseObj (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10448:25)\n    at Parser.parseExprAtom (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10055:28)\n    at Parser.parseExprSubscripts (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9656:23)\n    at Parser.parseMaybeUnary (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9636:21)\n    at Parser.parseExprOps (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9506:23)\n    at Parser.parseMaybeConditional (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9479:23)\n    at Parser.parseMaybeAssign (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9434:21)\n    at Parser.parseObjectProperty (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10586:101)\n    at Parser.parseObjPropValue (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10611:101)\n    at Parser.parseObjectMember (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10535:10)\n    at Parser.parseObj (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10448:25)\n    at Parser.parseExprAtom (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:10055:28)\n    at Parser.parseExprSubscripts (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9656:23)\n    at Parser.parseMaybeUnary (/Users/jazminvalencia/Desktop/Proyectos/PGMaderas/maderas/node_modules/@babel/parser/lib/index.js:9636:21)");
 
 /***/ }),
 
@@ -36764,6 +36655,148 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
+                  _c("td", { staticClass: "desactivarActivar" }, [
+                    producto.destacado == 1
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "secondary-content",
+                            attrs: { href: "#!" }
+                          },
+                          [
+                            _c("i", { staticClass: "switch" }, [
+                              _c("label", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: producto.destacado,
+                                      expression: "producto.destacado"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "checkbox",
+                                    checked: "checked",
+                                    name: "status"
+                                  },
+                                  domProps: {
+                                    checked: Array.isArray(producto.destacado)
+                                      ? _vm._i(producto.destacado, null) > -1
+                                      : producto.destacado
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.desactivarProducto(
+                                        producto.PK_products
+                                      )
+                                    },
+                                    change: function($event) {
+                                      var $$a = producto.destacado,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = null,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            _vm.$set(
+                                              producto,
+                                              "destacado",
+                                              $$a.concat([$$v])
+                                            )
+                                        } else {
+                                          $$i > -1 &&
+                                            _vm.$set(
+                                              producto,
+                                              "destacado",
+                                              $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1))
+                                            )
+                                        }
+                                      } else {
+                                        _vm.$set(producto, "destacado", $$c)
+                                      }
+                                    }
+                                  }
+                                }),
+                                _c("span", { staticClass: "lever" })
+                              ])
+                            ])
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    producto.destacado == 0
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "secondary-content",
+                            attrs: { href: "#!" }
+                          },
+                          [
+                            _c("i", { staticClass: "switch" }, [
+                              _c("label", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: producto.destacado,
+                                      expression: "producto.destacado"
+                                    }
+                                  ],
+                                  attrs: { type: "checkbox", name: "status" },
+                                  domProps: {
+                                    checked: Array.isArray(producto.destacado)
+                                      ? _vm._i(producto.destacado, null) > -1
+                                      : producto.destacado
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.activarProducto(
+                                        producto.PK_products
+                                      )
+                                    },
+                                    change: function($event) {
+                                      var $$a = producto.destacado,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = null,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            _vm.$set(
+                                              producto,
+                                              "destacado",
+                                              $$a.concat([$$v])
+                                            )
+                                        } else {
+                                          $$i > -1 &&
+                                            _vm.$set(
+                                              producto,
+                                              "destacado",
+                                              $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1))
+                                            )
+                                        }
+                                      } else {
+                                        _vm.$set(producto, "destacado", $$c)
+                                      }
+                                    }
+                                  }
+                                }),
+                                _c("span", { staticClass: "lever" })
+                              ])
+                            ])
+                          ]
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
                   _c("td", [
                     _c(
                       "i",
@@ -37054,6 +37087,8 @@ var staticRenderFns = [
         _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Precio")]),
         _vm._v(" "),
         _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Destacados")]),
         _vm._v(" "),
         _c("th", [_vm._v("Editar")]),
         _vm._v(" "),
@@ -39105,7 +39140,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main-index" }, [
     _c("section", { staticClass: "container-contacto" }, [
-      _c("p", { staticClass: "title-contacto bold" }, [_vm._v("Contáctanos")]),
+      _c("h6", { staticClass: "title-contacto bold" }, [_vm._v("Contáctanos")]),
       _vm._v(" "),
       _c("section", { staticClass: "map-contaider" }, [
         _c("iframe", {
@@ -39771,7 +39806,7 @@ var render = function() {
       _vm._m(2),
       _vm._v(" "),
       _c("h3", { staticClass: "color-main center" }, [
-        _vm._v("Conoce nuestros nuevos productos!")
+        _vm._v("¡Conoce nuestros productos!")
       ]),
       _vm._v(" "),
       _c(
@@ -39788,20 +39823,28 @@ var render = function() {
                     _c("img", { attrs: { src: "img/" + product.image } })
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "card-content" }, [
-                    _c("span", { staticClass: "card-title" }, [
-                      _vm._v(_vm._s(product.name))
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(product.description))]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("$ " + _vm._s(product.price))])
-                  ]),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "card-content",
+                      staticStyle: { height: "150px" }
+                    },
+                    [
+                      _c("span", { staticClass: "card-title" }, [
+                        _vm._v(_vm._s(product.name))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(product.description))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("$ " + _vm._s(product.price))])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("div", { staticClass: "card-action" }, [
                     _c(
                       "a",
                       {
+                        staticStyle: { color: "#419142 !important" },
                         attrs: {
                           href: "/Ver-Producto?id=" + product.PK_products
                         }
@@ -39956,12 +39999,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row green" }, [
+    return _c("div", { staticClass: "row color-cintilla" }, [
       _c("div", { staticClass: "col l4 s4" }, [
         _c("div", { staticClass: "row ceter" }, [
-          _c("div", { staticClass: "col l12 center" }, [
-            _c("h4", { staticClass: "white-text" }, [
-              _vm._v("\n                        ENTREGAS\n                    ")
+          _c("div", { staticClass: "col l12 s12 center" }, [
+            _c("h4", { staticClass: "cintilla-text" }, [
+              _vm._v(
+                "\n                        ENTREGAS\n                     "
+              )
             ])
           ]),
           _vm._v(" "),
@@ -39970,12 +40015,12 @@ var staticRenderFns = [
           _c("div", { staticClass: "col l12 center" }, [
             _c("img", {
               staticClass: "iconos",
-              attrs: { src: "img/camion.png" }
+              attrs: { src: "img/enviado.png" }
             })
           ])
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "white-text center" }, [
+        _c("p", { staticClass: "cintilla-text center" }, [
           _vm._v(
             "\n                Comercializamos y ditribuimos oportunamente nuestros productos. Tenemos la opción de entregarle en nuestras instalaciones o directamente en su domicilio.\n            "
           )
@@ -39985,7 +40030,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "col l4 s4" }, [
         _c("div", { staticClass: "row ceter" }, [
           _c("div", { staticClass: "col l12 center" }, [
-            _c("h4", { staticClass: "white-text" }, [
+            _c("h4", { staticClass: "cintilla-text" }, [
               _vm._v("\n                        ASESORIA\n                    ")
             ])
           ]),
@@ -39995,12 +40040,12 @@ var staticRenderFns = [
           _c("div", { staticClass: "col l12 center" }, [
             _c("img", {
               staticClass: "iconos",
-              attrs: { src: "img/consejo.png" }
+              attrs: { src: "img/asignacion.png" }
             })
           ])
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "white-text center" }, [
+        _c("p", { staticClass: "cintilla-text center" }, [
           _vm._v(
             "\n                Contamos con un grupo de vendedores expertos en los productos maderables, dispuestos a asesorarlo en todo momento para que usted cuente con la mejor información para su proceso.\n            "
           )
@@ -40010,7 +40055,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "col l4 s4" }, [
         _c("div", { staticClass: "row ceter" }, [
           _c("div", { staticClass: "col l12 center" }, [
-            _c("h4", { staticClass: "white-text" }, [
+            _c("h4", { staticClass: "cintilla-text" }, [
               _vm._v("\n                        CALIDAD\n                    ")
             ])
           ]),
@@ -40020,12 +40065,12 @@ var staticRenderFns = [
           _c("div", { staticClass: "col l12 center" }, [
             _c("img", {
               staticClass: "iconos",
-              attrs: { src: "img/seguro.png" }
+              attrs: { src: "img/escudo.png" }
             })
           ])
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "white-text center" }, [
+        _c("p", { staticClass: "cintilla-text center" }, [
           _vm._v(
             "\n                En PG Maderas, contamos con el producto que usted necesita, para la realización de su proyecto, con la mejor calidad y al mejor precio.\n            "
           )
@@ -40038,9 +40083,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "center" }, [
-      _c("h3", { staticClass: "proveedores " }, [
-        _c("span", [_vm._v("NUESTROS PROVEEDORES")])
-      ])
+      _c("h3", { staticClass: "proveedores" }, [_vm._v("NUESTROS PROVEEDORES")])
     ])
   }
 ]
@@ -41437,11 +41480,7 @@ var render = function() {
                       _vm.first_name = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "firstname" } }, [
-                  _vm._v("Nombre(s)")
-                ])
+                })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-field col m6 s6 mb-0" }, [
@@ -41469,11 +41508,7 @@ var render = function() {
                       _vm.last_name = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "lastname" } }, [
-                  _vm._v("Apellido(s)")
-                ])
+                })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-field col m12 s12 mb-0" }, [
@@ -41577,9 +41612,7 @@ var render = function() {
                       _vm.state = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "state" } }, [_vm._v("Estado")])
+                })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-field col m6 s6 mb-0" }, [
@@ -41607,9 +41640,7 @@ var render = function() {
                       _vm.city = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "city" } }, [_vm._v("Ciudad")])
+                })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-field col m6 s6 mb-0" }, [
@@ -41637,9 +41668,7 @@ var render = function() {
                       _vm.postal_code = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "cp" } }, [_vm._v("Código Postal")])
+                })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-field col m6 s6 mb-0" }, [
@@ -41667,9 +41696,7 @@ var render = function() {
                       _vm.street = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "street" } }, [_vm._v("Calle")])
+                })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-field col m6 s6 mb-0" }, [
@@ -41697,11 +41724,7 @@ var render = function() {
                       _vm.outdoorNumber = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "ext_number" } }, [
-                  _vm._v("Nº Exterior")
-                ])
+                })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-field col m6 s6 mb-0" }, [
@@ -41718,7 +41741,8 @@ var render = function() {
                     id: "rfc",
                     type: "text",
                     required: "",
-                    autofocus: ""
+                    autofocus: "",
+                    placeholder: "RFC"
                   },
                   domProps: { value: _vm.RFC },
                   on: {
@@ -41729,9 +41753,7 @@ var render = function() {
                       _vm.RFC = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "rfc" } }, [_vm._v("RFC")])
+                })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-field col m12 s6 mb-0" }, [
@@ -41755,11 +41777,7 @@ var render = function() {
                       _vm.reference = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "references" } }, [
-                  _vm._v("Referencias")
-                ])
+                })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-field col m12 s6 mb-0" }, [
@@ -41787,11 +41805,7 @@ var render = function() {
                       _vm.phone = $event.target.value
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "phone" } }, [
-                  _vm._v("Teléfono/Celular")
-                ])
+                })
               ]),
               _vm._v(" "),
               _c(
@@ -43383,30 +43397,25 @@ var render = function() {
         {
           name: "model",
           rawName: "v-model",
-          value: _vm.branch,
-          expression: "branch"
+          value: _vm.idBranch,
+          expression: "idBranch"
         }
       ],
       staticClass: "select-tienda-index",
       on: {
-        change: [
-          function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.branch = $event.target.multiple
-              ? $$selectedVal
-              : $$selectedVal[0]
-          },
-          function($event) {
-            return _vm.setBranch()
-          }
-        ]
+        change: function($event) {
+          var $$selectedVal = Array.prototype.filter
+            .call($event.target.options, function(o) {
+              return o.selected
+            })
+            .map(function(o) {
+              var val = "_value" in o ? o._value : o.value
+              return val
+            })
+          _vm.idBranch = $event.target.multiple
+            ? $$selectedVal
+            : $$selectedVal[0]
+        }
       }
     },
     [

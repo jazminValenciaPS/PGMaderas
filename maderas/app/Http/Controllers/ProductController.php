@@ -23,10 +23,10 @@ class ProductController extends Controller
         ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
         ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
         ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price', 'products.status','products_categories.PK_products_categories',
+        'products.price', 'products.status','products.destacado','products_categories.PK_products_categories',
         'products_categories.name as productscategories','products_images.image')
         ->distinct()
-        ->orderBy('products.PK_products', 'desc')->paginate(3);
+        ->orderBy('products.PK_products', 'desc')->paginate(5);
 
         }
         else{
@@ -34,11 +34,11 @@ class ProductController extends Controller
         ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
         ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
         ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price', 'products.status','products_categories.PK_products_categories',
+        'products.price', 'products.status','products.destacado','products_categories.PK_products_categories',
         'products_categories.name as productscategories','products_images.image')
         ->distinct()
         ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
-        ->orderBy('products.PK_products', 'desc')->paginate(3);
+        ->orderBy('products.PK_products', 'desc')->paginate(5);
         }
         
 
@@ -136,7 +136,7 @@ class ProductController extends Controller
         ->where('products.status','=','1')
         ->where('_p_g_branches.PK_PG_branches','=','1')
         ->orderBy('products.PK_products', 'desc')
-        ->limit(3)
+        ->limit(9)
         ->get();
     }
 
@@ -203,7 +203,7 @@ class ProductController extends Controller
         $producto->name = $request->name;
         $producto->description = $request->description;
         $producto->price = $request->price;
-        // $producto->avaible = $request->avaible;
+        $producto->destacado = '0';
         $producto->status = '1';
         $producto->save();
 

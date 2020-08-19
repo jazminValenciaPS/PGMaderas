@@ -1,7 +1,7 @@
 <template>
-    <select class="select-tienda-index" v-model="branch" @change="setBranch()">
+    <select class="select-tienda-index" v-model="idBranch">
         <option value="" disabled >Seleccione su tienda</option>
-        <option v-for="sucursal in arraySucursales" :key="sucursal.PK_PG_branches" >{{sucursal.state}}</option>
+        <option v-for="sucursal in arraySucursales" :key="sucursal.PK_PG_branches">{{sucursal.state}}</option>
     </select> 
 </template>
 <script>
@@ -9,8 +9,7 @@ export default {
     data(){
         return{
             arraySucursales:[],
-            branch:0,
-            correo:''
+            idBranch:0,
         }
     },
     methods:{
@@ -26,19 +25,18 @@ export default {
         }, 
         async selectBranch() {
             let me = this;
-            me.correo =localStorage.getItem("email");
             if (typeof(Storage) !== "undefined") {
-                if (localStorage.getItem("branch") === null)
-                    localStorage.setItem("branch", JSON.stringify(1));
+                if (localStorage.getItem("ecommerce-branch") === null)
+                    localStorage.setItem("ecommerce-branch", JSON.stringify(1));
 
-                const url = "/user/info?email="+ me.correo;
+                const url = "/user/info";
                 await axios.get(url).then((result) => {
                     if ([undefined, null, 0, ""].includes(result.data)) {
-                        const LS = JSON.parse(localStorage.getItem("branch"));
+                        const LS = JSON.parse(localStorage.getItem("ecommerce-branch"));
                         me.branch = LS;
                     }
                     else {
-                        me.branch = result.data.id_branch;
+                        me.branch = result.data.User_Branch_ID;
                     }
                 })
                 .catch((err) => {
@@ -49,53 +47,45 @@ export default {
                 console.log("Sorry, your browser does not support Web Storage...");
             }
         },
-        setBranch(){
-            let m = this;
-            m.correo =localStorage.getItem("email");
-
+        setBranch() {
+            let me = this;
             if (typeof(Storage) !== "undefined") {
                 if (localStorage.getItem("branch") === null)
                     localStorage.setItem("branch", JSON.stringify(1));
-                    if(![undefined, null, 0, ""],includes(me.branch)){
-                       const url = "/user/info?email="+ me.correo;
-                        axios.get(url).then((result) => {
-                            if([undefined, null, 0, ""].includes(result.data)){
-                                localStorage.setItem("branch",JSON.stringify(me.branch));
-                                localStorage.reload();
-                            }else{
-                                const url = "user/update/branch";
-                                axios.post(url,{
-                                    id: m.branch,
-                                    email: m.correo
-                                }) 
-                                .then((result) => {
-                                    location.reload();
-                                })
-                                .catch((err) =>{
-                                    console.log(err);
-                                });
 
-                            }
-                        })
-                        .catch((err) =>{
-                            console.log(err);
-                        });
-                    }
-
-            }else{
-                console.log("");
-            }
+                if (![undefined, null, 0, ""].includes(me.branch)) {
+                    //Preguntar si hay correo en ls
+                    const url = "/user/info";
+                    axios.get(url).then((result) => {
+                        if ([undefined, null, 0, ""].includes(result.data)) {
+                            localStorage.setItem("branch", JSON.stringify(me.branch));
+                            location.reload();
+                        }
+                        else {
+                            const url = "/user/update/branch";
+                            axios.post(url, {
+                                id: me.branch
+                            })
+                            .then((result) => {
+                                location.reload();
+                            })
+                        }
+                    })
+                    .catch((err)=>{
+                        console.log(err);
+                    });
+                }
+            })
+            .catch((err)=>{
+                console.log(err);
+            });
+        }else{
+            console.log("");
         }
-
-  
-           
+      }
     },
-    created(){
+    mounted(){
         this.listarSucursales();
-    },
-    beforeMount(){
-        this.selectBranch();
-
     },
     updated(){
         M.FormSelect.init(document.querySelectorAll('select'), {});
