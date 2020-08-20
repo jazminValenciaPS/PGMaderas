@@ -18,6 +18,8 @@ export default {
             let m=this;
             axios.get(url).then(function (response){
                 m.arraySucursales= response.data;
+                console.log("hola");
+                console.log(m.arraySucursales);
             })
             .catch(function(error){
                 console.log(error);

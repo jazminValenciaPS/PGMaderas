@@ -7371,6 +7371,72 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           me.listarProductos(1, '', 'name');
         }
       });
+    },
+    activarDestacados: function activarDestacados(PK_products) {
+      var me = this;
+      var url = '/producto/info/destacado?PK_products=' + PK_products;
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: '¿Está seguro de activar como destacado este producto?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          axios.put('/producto/activarDestacado', {
+            'PK_products': PK_products
+          }).then(function (response) {
+            me.listarProductos(1, '', 'name');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('activado!', 'El Producto ha sido destacado con éxito.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
+          me.listarProductos(1, '', 'name');
+        }
+      });
+    },
+    desactivarDestacados: function desactivarDestacados(PK_products) {
+      var me = this;
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: '¿Está seguro de desactivar como destacado este producto?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          axios.put('/producto/desactivarDestacado', {
+            'PK_products': PK_products
+          }).then(function (response) {
+            me.listarProductos(1, '', 'name');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Desactivado!', 'El producto ha sido desactivado con éxito.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
+          me.listarProductos(1, '', 'name');
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -7839,14 +7905,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _ref;
 
     return _ref = {
-      criterio: 'suburb',
+      criterio: 'street',
       suburb: '',
       street: '',
       city: '',
@@ -7910,7 +7974,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         me.arraySucursales = arraySucursales.map(function (object) {
           return {
             PK_PG_branches: object.PK_PG_branches,
-            suburb: object.suburb
+            street: object.street
           };
         });
       })["catch"](function (error) {
@@ -11123,6 +11187,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var m = this;
       axios.get(url).then(function (response) {
         m.arraySucursales = response.data;
+        console.log("hola");
+        console.log(m.arraySucursales);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -36799,7 +36865,7 @@ var render = function() {
                                   },
                                   on: {
                                     click: function($event) {
-                                      return _vm.desactivarProducto(
+                                      return _vm.desactivarDestacados(
                                         producto.PK_products
                                       )
                                     },
@@ -36867,7 +36933,7 @@ var render = function() {
                                   },
                                   on: {
                                     click: function($event) {
-                                      return _vm.activarProducto(
+                                      return _vm.activarDestacados(
                                         producto.PK_products
                                       )
                                     },
@@ -38008,7 +38074,7 @@ var render = function() {
                       key: sucursal.PK_PG_branches,
                       domProps: { value: sucursal.PK_PG_branches }
                     },
-                    [_vm._v(_vm._s(sucursal.suburb))]
+                    [_vm._v(_vm._s(sucursal.street))]
                   )
                 })
               ],
@@ -39252,7 +39318,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main-index" }, [
     _c("section", { staticClass: "container-contacto" }, [
-      _c("h6", { staticClass: "title-contacto bold" }, [_vm._v("Contáctanos")]),
+      _c("h6", { staticClass: "title-contacto " }, [_vm._v("Contáctanos")]),
       _vm._v(" "),
       _c("section", { staticClass: "map-contaider" }, [
         _c("iframe", {
@@ -63794,15 +63860,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************!*\
   !*** ./resources/assets/js/principal/Sucursales.vue ***!
   \******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Sucursales_vue_vue_type_template_id_a28750fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sucursales.vue?vue&type=template&id=a28750fe& */ "./resources/assets/js/principal/Sucursales.vue?vue&type=template&id=a28750fe&");
 /* harmony import */ var _Sucursales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Sucursales.vue?vue&type=script&lang=js& */ "./resources/assets/js/principal/Sucursales.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Sucursales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Sucursales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -63832,7 +63897,7 @@ component.options.__file = "resources/assets/js/principal/Sucursales.vue"
 /*!*******************************************************************************!*\
   !*** ./resources/assets/js/principal/Sucursales.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

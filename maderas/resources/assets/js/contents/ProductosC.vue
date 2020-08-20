@@ -122,12 +122,12 @@
                             <td class="desactivarActivar">
                                 <a href="#!" class="secondary-content" v-if="producto.destacado == 1">
                                     <i class="switch">
-                                        <label><input type="checkbox" checked="checked" name="status" v-model="producto.destacado" @click="desactivarProducto(producto.PK_products)"><span class="lever"></span></label>
+                                        <label><input type="checkbox" checked="checked" name="status" v-model="producto.destacado" @click="desactivarDestacados(producto.PK_products)"><span class="lever"></span></label>
                                     </i>
                                 </a>
                                 <a href="#!" class="secondary-content" v-if="producto.destacado == 0">
                                     <i class="switch">
-                                        <label><input type="checkbox"  name="status" v-model="producto.destacado" @click="activarProducto(producto.PK_products)"><span class="lever"></span></label>
+                                        <label><input type="checkbox"  name="status" v-model="producto.destacado" @click="activarDestacados(producto.PK_products)"><span class="lever"></span></label>
                                     </i>
                                 </a>
                             </td>
@@ -472,6 +472,93 @@ export default {
             }).then((result) => {
                 if (result.value) {
                     axios.put('/producto/desactivar',{
+                        'PK_products': PK_products
+                    }).then(function (response) {
+                        me.listarProductos(1,'','name');
+                        Swal.fire(
+                            'Desactivado!',
+                            'El producto ha sido desactivado con éxito.',
+                            'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });                    
+                } else if(
+                        // Read more about handling dismissals
+                        result.dismiss === Swal.DismissReason.cancel
+                    ){
+                        me.listarProductos(1,'','name');
+                    }
+            })
+        },
+        activarDestacados(PK_products){
+            let me = this;
+
+            var url='/producto/info/destacado?PK_products='+ PK_products;
+
+            axios.get(url).then(function (response){
+                var respuesta= response.data;
+       
+            
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+
+            Swal.fire({
+            title: '¿Está seguro de activar como destacado este producto?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar!',
+            cancelButtonText: 'Cancelar',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false,
+            reverseButtons: true
+            }).then((result) => {
+            if (result.value) {
+                axios.put('/producto/activarDestacado',{
+                    'PK_products': PK_products
+                }).then(function (response) {
+                    me.listarProductos(1,'','name');
+                    Swal.fire(
+                        'activado!',
+                        'El Producto ha sido destacado con éxito.',
+                        'success'
+                    )
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            
+            } else if (
+                // Read more about handling dismissals
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                        me.listarProductos(1,'','name');                    
+            }
+            }) 
+                
+        },
+        desactivarDestacados(PK_products){
+            let me = this;
+
+            Swal.fire({
+            title: '¿Está seguro de desactivar como destacado este producto?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar!',
+            cancelButtonText: 'Cancelar',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false,
+            reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    axios.put('/producto/desactivarDestacado',{
                         'PK_products': PK_products
                     }).then(function (response) {
                         me.listarProductos(1,'','name');

@@ -123,6 +123,9 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/producto/actualizar','ProductController@update');
         Route::put('/producto/activar','ProductController@activar');
         Route::put('/producto/desactivar','ProductController@desactivar');
+        Route::get('/producto/info/destacado','ProductController@infoDestacado');
+        Route::put('/producto/activarDestacado','ProductController@activarDestacados');
+        Route::put('/producto/desactivarDestacado','ProductController@desactivarDestacados');
     
         Route::get('/slider','SliderController@index');
         Route::post('/slider/registrar','SliderController@store');

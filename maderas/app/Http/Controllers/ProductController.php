@@ -135,6 +135,7 @@ class ProductController extends Controller
         'products.price','stock.avaible', 'products.status','products_images.image')
         ->where('products.status','=','1')
         ->where('_p_g_branches.PK_PG_branches','=','1')
+        ->where('products.destacado','=',1)
         ->orderBy('products.PK_products', 'desc')
         ->limit(9)
         ->get();
@@ -328,11 +329,6 @@ class ProductController extends Controller
                 ],
                 'producto' => $producto
             ];
-
-        
-
-
-
     }
    
     public function desactivar(Request $request)
@@ -351,11 +347,33 @@ class ProductController extends Controller
         $producto->status = '1';
         $producto->save();
     }
+    public function infoDestacado(Request $request){
+        $id = $request->PK_products;
+
+
+    }
 
     public function productsSubtraction(Request $request){
         $id = $request->PK_products;
         $producto = Product::findOrFail($id);
         $producto->avaible= $$request->avaible;
+        $producto->save();
+    }
+
+    public function desactivarDestacados(Request $request)
+    { 
+        $id = $request->PK_products;
+        $producto = Product::findOrFail($id);
+        $producto->destacado = '0';
+        $producto->save();
+    }
+
+   
+    public function activarDestacados(Request $request)
+    {
+        $id = $request->PK_products;
+        $producto = Product::findOrFail($id);
+        $producto->destacado = '1';
         $producto->save();
     }
 

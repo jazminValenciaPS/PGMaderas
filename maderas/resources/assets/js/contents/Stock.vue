@@ -49,10 +49,10 @@
                         <button type="submit" @click="listarProductos(1,buscar,criterio)" class="modal-trigger"><i class="fa fa-search"></i> Buscar</button>
                     </div>
                     <div class="right input-field col s6 m6 g6">
-                                <select name="LeaveType" class="browser-default" v-model="criterio" >
-                                <option value="" disabled  >Selecciona la sucursal</option>
-                                <option v-for="sucursal in arraySucursales" :value="sucursal.PK_PG_branches" :key="sucursal.PK_PG_branches" >{{ sucursal.suburb }}</option>
-                            </select> 
+                        <select name="LeaveType" class="browser-default" v-model="criterio" >
+                            <option value="" disabled >Selecciona la sucursal</option>
+                            <option v-for="sucursal in arraySucursales" :value="sucursal.PK_PG_branches" :key="sucursal.PK_PG_branches" >{{ sucursal.street }}</option>
+                        </select> 
                     </div>
                   
                 </div>
@@ -85,9 +85,7 @@
                 </table>
              <ul class="pagination">
                 <li  v-if="pagination.current_page > 1">
-                            <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
-
-                        <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
+                    <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
                 </li>
                 <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
                     <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
@@ -104,7 +102,7 @@
 export default {
     data(){
         return{
-            criterio : 'suburb',
+            criterio : 'street',
             suburb:'',
             street:'',
             city:'',
@@ -168,7 +166,7 @@ export default {
             var url= '/branches';
             axios.get(url).then(function (response) {
                 var arraySucursales= response.data;
-                me.arraySucursales = arraySucursales.map(object => ({PK_PG_branches: object.PK_PG_branches, suburb: object.suburb})); 
+                me.arraySucursales = arraySucursales.map(object => ({PK_PG_branches: object.PK_PG_branches, street: object.street})); 
             })
             .catch(function (error) {
                 console.log(error);

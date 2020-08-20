@@ -1,7 +1,7 @@
 <template>
     <main class="main-index">
         <section class="container-contacto">
-            <h6 class="title-contacto bold">Contáctanos</h6>
+            <h6 class="title-contacto ">Contáctanos</h6>
             <section class="map-contaider">
                 <iframe class="map" :src=urlrsc frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
             </section>
@@ -95,8 +95,6 @@
         return false;
     });
     export default {
-
-        
         data(){
             return{
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

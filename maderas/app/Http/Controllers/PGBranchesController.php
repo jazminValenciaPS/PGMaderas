@@ -17,6 +17,7 @@ class PGBranchesController extends Controller
         return $branches;
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
