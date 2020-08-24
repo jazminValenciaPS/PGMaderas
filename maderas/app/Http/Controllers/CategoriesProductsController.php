@@ -126,6 +126,7 @@ class CategoriesProductsController extends Controller
         return  $categoriasProduc = DB::table('products_categories')
         ->select('name','id_subcategories','image','PK_products_categories')
         ->where('id_subcategories','=',$id)
+        ->where('status','=','1')
         ->get();
     }
 }

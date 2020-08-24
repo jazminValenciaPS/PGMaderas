@@ -3,7 +3,7 @@
         
         <!-- carrusel con vue -->
         <vueper-slides autoplay class="sliders-inicio">
-            <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" :image="'img/'+slider.image" />
+            <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" alt='imagenes de carrusel de PG Maderas' :image="'img/'+slider.image" />
         </vueper-slides>
         <div class="row center">
             <ul class="col l12 numeros center-align" >
@@ -19,7 +19,7 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="img/servicio1.jpg">
+                        <img alt='imagen de Servicio de Enbisagrado' src="img/servicio1.jpg">
                         <span class="card-title">Enbisagrado</span>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
             <div class="col s12 m4" >
                 <div class="card">
                     <div class="card-image">
-                        <img src="img/servicio2.jpg">
+                        <img alt='imagen de Servicio de Enchapado de cantos' src="img/servicio2.jpg">
                         <span class="card-title">Enchapado de cantos</span>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="img/servicio3.jpg">
+                        <img alt='imagen de Servicio de Corte de tableros' src="img/servicio3.jpg">
                         <span class="card-title">Corte de tableros</span>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
              <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="img/servicio4.jpg">
+                        <img alt='imagen de Servicio de Corte de cubiertas'  src="img/servicio4.jpg">
                         <span class="card-title">Corte de cubiertas</span>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="img/servicio5.jpg">
+                        <img alt='imagen de Servicio de Corte de maderas' src="img/servicio5.jpg">
                         <span class="card-title">Corte de maderas</span>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="img/servicio5.jpg">
+                        <img alt='imagen de Servicio de Cepillado de madera' src="img/servicio5.jpg">
                         <span class="card-title">Cepillado de madera</span>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                     </div>
                     <br>
                     <div class="col l12 center">
-                        <img  src="img/enviado.png"  class="iconos">
+                        <img src="img/enviado.png"  class="iconos">
                     </div>
                 </div>
                 <p class="cintilla-text center">
@@ -130,7 +130,7 @@
                 <div class="col s12 m12 l12" >
                     <div class="card">
                         <div class="card-image">
-                            <img :src="'img/'+product.image">
+                            <img alt='imagen de productos PG Maderas' :src="'img/'+product.image">
                         </div>
                         <div class="card-content" style="height: 150px;">
                             <span  class="card-title">{{product.name}}</span>
@@ -147,11 +147,10 @@
        
         <div class="center">
             <h3 class="proveedores">NUESTROS PROVEEDORES</h3>
-
         </div>
         <div class="container-prob-inicio">
             <vueper-slides autoplay  class="no-shadow" :visible-slides="3" :breakpoints="{ 800: { visibleSlides: 1, slideMultiple: 2 } }" :slide-ratio="1 / 4" :dragging-distance="70">
-                <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>
+                <vueper-slide v-for="(slide, i) in slides" :key="i" alt='imagenes de proveedores de PG Maderas' :image="slide.image"/>
             </vueper-slides>
         </div>         
     </main> 

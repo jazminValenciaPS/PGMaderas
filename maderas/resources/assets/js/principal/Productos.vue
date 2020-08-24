@@ -24,7 +24,7 @@
                 <div class="col m9 s12" id="Productos">
                     <div style="z-index:0" v-for="producto in arrayProductos" :key="producto.PK_products" class="card sticky-action col m4 s12 contorno" v-show="producto.avaible > 0">
                         <div class="card-image waves-effect waves-block waves-light tamaImagen " >
-                            <a :href="'/Ver-Producto?id='+producto.PK_products"> <img :src="'img/'+producto.image" class="pImagen" > </a>
+                            <a :href="'/Ver-Producto?id='+producto.PK_products"> <img :src="'img/'+producto.image" :alt="producto.name" class="pImagen" > </a>
                         </div>
                         <div class="card-content tamaLetras ">
                             <br>
@@ -60,6 +60,7 @@ import Swal from 'sweetalert2';
 export default {
     data(){
         return{
+            branch: 0,
             PK_products:'',
             arrayProductos: [],
             arrayCategorias:[],
@@ -80,13 +81,19 @@ export default {
             offset : 3,
             criterio : 'SKU',
             buscar:'',
-            idSubcat:''
+            idSubcat:'',
+
         }
     }, 
     methods:{
         listarProductos(page,buscar,criterio){
             let m=this;
-            var url='/productoL?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio +'&id='+m.idSubcat;
+            console.log("Entré en listarProductos");
+
+            console.log("id de la branch");
+            console.log(m.branch);
+
+            var url='/productoL?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio +'&id='+m.idSubcat + '&id_branch=' + m.branch;
 
             axios.get(url).then(function (response){
                 var respuesta= response.data;
@@ -97,6 +104,43 @@ export default {
             .catch(function(error){
                 console.log(error);
             });
+            console.log("Salí de listarProductos");
+
+        },
+        async selectBranch() {
+            let me = this;
+            console.log("Entré en selectBranch");
+
+            if (typeof(Storage) !== "undefined") {
+                if (localStorage.getItem("branch") === null)
+                    localStorage.setItem("branch", JSON.stringify(1));
+
+                const url = "/user/info";
+                await axios.get(url).then((result) => {
+                    console.log("selectBranch");
+                    console.log(result.data[0]);
+                    if ([undefined, null, 0, ""].includes(result.data[0])) {
+                        const LS = JSON.parse(localStorage.getItem("branch"));
+                        me.branch = 2;
+                        me.listarProductos(1,this.buscar,this.criterio);
+
+                        console.log("idBranch en selectBranch recién asignado");
+
+                        console.log(me.branch);
+                    }
+                    else {  
+                        me.branch = result.data[0].id_branch;
+                         me.listarProductos(1,this.buscar,this.criterio);
+
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            }
+            else {
+                console.log("Sorry, your browser does not support Web Storage...");
+            }
         },
         listarCat(id){
             let m=this;
@@ -194,8 +238,7 @@ export default {
             me.pagination.current_page = page;
             //Envia la petición para visualizar la data de esa página
             me.listarProductos(page,buscar,criterio);
-        },
-        
+        }, 
     },
     computed:{
          isActived: function(){
@@ -226,6 +269,10 @@ export default {
 
             }
     },
+    beforeMount(){
+        let m= this;
+        m.selectBranch();
+    },
     mounted() {
         let m=this;
         const queryString = window.location.search;      
@@ -235,10 +282,8 @@ export default {
         let id = (product !== null && product !== '' && product !== undefined)? product : "";
         m.idSubcat= id;
         m.listarCat(id);
-        this.listarProductos(1,this.buscar,this.criterio);
         this.crearCarrito();
         // this.listarCat();
-      
     }
 
 }

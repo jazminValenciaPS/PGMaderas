@@ -5,7 +5,7 @@
             <div v-for="producto in arrayProducto" :key="producto.PK_products">
                 <!-- Filters -->
                 <div class="col m6 s12">
-                    <img class="materialboxed" width="100%" :src="'img/'+producto.image">
+                    <img class="materialboxed" width="100%" :alt="producto.name" :src="'img/'+producto.image">
                 </div>
                 <!-- Products -->
                 <div  class="col m6 s12">

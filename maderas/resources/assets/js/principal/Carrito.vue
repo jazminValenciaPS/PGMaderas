@@ -19,7 +19,7 @@
                         <tr class="col m12 s12 p-0">
                             <td class="col m4 s4">
                                 <div class="col m12 s4 p-0">
-                                    <img :src="'img/'+carrito.image" class="pImagen-carrito">
+                                    <img :alt="carrito.name" :src="'img/'+carrito.image" class="pImagen-carrito">
                                     <p class="col m6 m-0 hide-on-small-only hide-on-med-only" >{{carrito.description}}</p>
                                 </div>                                
                             </td>

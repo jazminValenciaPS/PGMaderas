@@ -213,10 +213,12 @@ class UserController extends Controller
 
     public function info(Request $request){
 
-        $id= Auth::user()->id; 
+        if(Auth::user()){
+            $id= Auth::user()->id; 
 
+        
 
-            return $user = DB::table('users')
+        return $user = DB::table('users')
         ->join('roles', 'roles.PK_roles', '=', 'users.id_role')
         ->join('persons', 'persons.PK_persons', '=', 'users.id_person')
         ->join('addresses', 'addresses.id_user', '=', 'users.id')
@@ -224,21 +226,26 @@ class UserController extends Controller
         ->select('users.id','id_branch')
         ->where('roles.PK_roles', '=', '3')
         ->where('users.id','=',$id)
-        ->limit(1)
-        ->get();
+        ->get(1);
 
-        
+        }else{
 
-        
+            return 0;
+        }
+
+          
     }
 
     public function updateBranch(Request $request){
-        $email = $request->email;
 
+        $id = Auth::user()->id;
+        printf("imprimmiento el i");
+        printf($id);
 
-        $user = User::findOrFail($email);
-        
+        $user = User::findOrFail($id);
 
+        $user->id_branch = $request->id;
+        $user->save();
 
     }
 

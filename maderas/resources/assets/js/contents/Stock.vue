@@ -36,7 +36,7 @@
                         </div>
                 </div>
                 <div class="button-container form formmodal-footer">
-                    <button class="button-type" type="button" @click="actualizarStock(PK_stock)">Actualizar</button>
+                    <button class="button-type" type="button" @click="actualizarStock(PK_stock,criterio)">Actualizar</button>
                     <button class="button-type" type="button" @click="cerrarModal()">Cerrar</button>
                 </div>
             </div>
@@ -121,7 +121,7 @@ export default {
                     'to' : 0,
             },
             offset : 3,
-            criterio : 'name',
+            criterio : '',
             buscar:'',
             errorStock : 0,
             errorMostrarMsjStock : [],
@@ -210,7 +210,7 @@ export default {
                 }
             }
         }, 
-        actualizarStock(PK_stock){
+        actualizarStock(PK_stock,criterio){
             if (this.validar()){
                 return;
             }
@@ -226,7 +226,7 @@ export default {
                 }
             })
             .then(function (response) {
-                me.listarProductos(1,'','name');
+                me.listarProductos(1,criterio,'name');
                 me.cerrarModal();
                 me.limpiar();                    
             })

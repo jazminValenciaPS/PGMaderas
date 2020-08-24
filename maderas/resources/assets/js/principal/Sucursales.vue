@@ -1,7 +1,7 @@
 <template>
-    <select class="select-tienda-index" v-model="idBranch">
+    <select class="select-tienda-index" v-model="branch" @change="setBranch()">
         <option value="" disabled >Seleccione su tienda</option>
-        <option v-for="sucursal in arraySucursales" :key="sucursal.PK_PG_branches">{{sucursal.state}}</option>
+        <option v-for="sucursal in arraySucursales" :key="sucursal.PK_PG_branches" :value="sucursal.PK_PG_branches">{{sucursal.state}}</option>
     </select> 
 </template>
 <script>
@@ -9,17 +9,15 @@ export default {
     data(){
         return{
             arraySucursales:[],
-            idBranch:0,
+            branch:0,
+            correo:''
         }
     },
     methods:{
         listarSucursales(){
-            let url = '/branches'
-            let m=this;
-            axios.get(url).then(function (response){
-                m.arraySucursales= response.data;
-                console.log("hola");
-                console.log(m.arraySucursales);
+            let me = this;
+            axios.get('/branches').then(function (response){
+                me.arraySucursales = response.data;
             })
             .catch(function(error){
                 console.log(error);
@@ -28,17 +26,19 @@ export default {
         async selectBranch() {
             let me = this;
             if (typeof(Storage) !== "undefined") {
-                if (localStorage.getItem("ecommerce-branch") === null)
-                    localStorage.setItem("ecommerce-branch", JSON.stringify(1));
+                if (localStorage.getItem("branch") === null)
+                    localStorage.setItem("branch", JSON.stringify(1));
 
                 const url = "/user/info";
                 await axios.get(url).then((result) => {
-                    if ([undefined, null, 0, ""].includes(result.data)) {
-                        const LS = JSON.parse(localStorage.getItem("ecommerce-branch"));
+                    console.log("selectBranch");
+                    console.log(result.data[0]);
+                    if ([undefined, null, 0, ""].includes(result.data[0])) {
+                        const LS = JSON.parse(localStorage.getItem("branch"));
                         me.branch = LS;
                     }
                     else {
-                        me.branch = result.data.User_Branch_ID;
+                        me.branch = result.data[0].id_branch;
                     }
                 })
                 .catch((err) => {
@@ -46,7 +46,7 @@ export default {
                 });
             }
             else {
-                console.log("Sorry, your browser does not support Web Storage...");
+                console.log(",");
             }
         },
         setBranch() {
@@ -56,10 +56,12 @@ export default {
                     localStorage.setItem("branch", JSON.stringify(1));
 
                 if (![undefined, null, 0, ""].includes(me.branch)) {
-                    //Preguntar si hay correo en ls
+                    // Validar si está logueado el cliente
                     const url = "/user/info";
                     axios.get(url).then((result) => {
-                        if ([undefined, null, 0, ""].includes(result.data)) {
+                          console.log("setBranch");
+                          console.log(result.data[0]);
+                        if ([undefined, null, 0, ""].includes(result.data[0])) {
                             localStorage.setItem("branch", JSON.stringify(me.branch));
                             location.reload();
                         }
@@ -77,14 +79,22 @@ export default {
                         console.log(err);
                     });
                 }
+            }else{
+                console.log("Sorry, your browser does not support Web Storage...");
             }
+          }
         },
-    mounted(){
-        this.listarSucursales();
+   
+    created(){
+        console.log("Sucursales");
+         this.listarSucursales();
+    },
+    beforeMount(){
+        let m= this;
+        m.selectBranch();
     },
     updated(){
         M.FormSelect.init(document.querySelectorAll('select'), {});
     },
-}
 }
 </script>

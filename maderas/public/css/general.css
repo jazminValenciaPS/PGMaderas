@@ -199,6 +199,7 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
     justify-items: center;
     align-content: center;
     font-size: 40px;
+    color: #419142;
 }
 
 .map-contaider{
@@ -220,6 +221,7 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
 .container-form{
     grid-area: form;
 }
+
 .title-contactos{
     font-size: 16px;
 }
@@ -234,7 +236,6 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
 .quienesSomos{
     font-size: 18px;
 }
-
 
 .section_sucursales{
     padding: 5%;
@@ -257,11 +258,12 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
     height:70px ;
 }
 
-  .pImagen{
-   z-index:0;
+.pImagen{
+    z-index:0;
     width: 200px ;
     height: 200px;
-  }
+}
+
 #select-cantidad{
     width: 100%;
 }
@@ -315,6 +317,7 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
 .centrar{
   margin-left: 30% !important;
 }
+
 .container-metodo-entrega{
     grid-area: entrega;
 }

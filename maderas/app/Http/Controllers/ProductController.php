@@ -59,6 +59,8 @@ class ProductController extends Controller
         $buscar = $request->buscar;
         $criterio = $request->criterio;
         $idSubCat = $request->id;
+        $id_branch = $request->id_branch;
+
         
         if ($buscar==''){
 
@@ -73,7 +75,7 @@ class ProductController extends Controller
             'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.status','=','1')
-            ->where('_p_g_branches.PK_PG_branches','=','1')
+            ->where('_p_g_branches.PK_PG_branches','=',$id_branch)
             ->where('subcategories.PK_subcategories','=',$idSubCat)
             ->orderBy('products.PK_products', 'desc')->paginate(6);
 
@@ -89,7 +91,7 @@ class ProductController extends Controller
             'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.status','=','1')
-            ->where('_p_g_branches.PK_PG_branches','=','1')
+            ->where('_p_g_branches.PK_PG_branches','=',$id_branch)
             ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('products.PK_products', 'desc')->paginate(6);
         }
@@ -135,7 +137,7 @@ class ProductController extends Controller
         'products.price','stock.avaible', 'products.status','products_images.image')
         ->where('products.status','=','1')
         ->where('_p_g_branches.PK_PG_branches','=','1')
-        ->where('products.destacado','=',1)
+        ->where('products.destacado','=','1')
         ->orderBy('products.PK_products', 'desc')
         ->limit(9)
         ->get();
@@ -347,8 +349,10 @@ class ProductController extends Controller
         $producto->status = '1';
         $producto->save();
     }
-    public function infoDestacado(Request $request){
-        $id = $request->PK_products;
+    public function infoDestacado(){
+        
+        return $producto=Product::where('products.destacado','=','1')
+        ->count();
 
 
     }

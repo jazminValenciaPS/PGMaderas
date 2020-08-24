@@ -30,7 +30,7 @@ import contra from '../assets/js/principal/Contra.vue';
 
 import navmenus from '../assets/js/principal/Menu.vue';
 import navusers from '../assets/js/principal/User.vue';
-import navsucursales from '../assets/js/principal/Sucursales.vue';
+import navsucursal from '../assets/js/principal/Sucursales.vue';
 import buscar from '../assets/js/principal/Search.vue';
 import productosb from '../assets/js/principal/ProductosBuscar.vue';
 
@@ -65,7 +65,7 @@ Vue.component('categoriasp',categoriasp);
 Vue.component('contra',contra);
 Vue.component('navmenu',navmenus);
 Vue.component('navuser',navusers);
-Vue.component('navsucursal',navsucursales);
+Vue.component('navsucursal',navsucursal);
 Vue.component('buscar',buscar);
 Vue.component('productosb',productosb);
 

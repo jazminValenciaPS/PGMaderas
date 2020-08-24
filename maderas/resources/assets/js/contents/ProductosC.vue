@@ -14,7 +14,7 @@
                             <h3 v-text="tituloModal"></h3>
                         </div>
                         <div class="col s12 center">
-                            <img v-if="tipoAccion==2" :src="'img/'+image"  class="tImagen" alt="">
+                            <img v-if="tipoAccion==2" :src="'img/'+image"  class="tImagen" alt="Imagen de los productos">
                         </div>
                         <div class="form-group row">
                             <input id="SKU" type="text" v-model="SKU" placeholder="Número único del producto(SKU)"  class="validate" >
@@ -115,7 +115,7 @@
                             <td v-text="producto.name"></td> 
                             <td class="hide-on-small-only"  v-text="producto.productscategories"></td>
                             <td class="hide-on-small-only"  v-text="producto.description"></td>
-                            <td class="hide-on-small-only"><img :src="'img/'+producto.image" class="tImagen square"></td>
+                            <td class="hide-on-small-only"><img :src="'img/'+producto.image" class="tImagen square" alt="Imagen del producto"></td>
                             <td class="hide-on-small-only"  v-text="producto.price"></td>
                             <td class="hide-on-small-only"  v-if="producto.status == 1">Activado</td>
                             <td class="hide-on-small-only"  v-if="producto.status == 0">Desactivado</td>
@@ -494,52 +494,74 @@ export default {
         activarDestacados(PK_products){
             let me = this;
 
-            var url='/producto/info/destacado?PK_products='+ PK_products;
+
+            var url='/producto/info/destacado';
 
             axios.get(url).then(function (response){
                 var respuesta= response.data;
-       
+                var destacado = respuesta;
+                console.log(destacado);
+
+                if(destacado < 9){
+                    console.log("hay menos de 9 destacados");
+
+                     Swal.fire({
+                    title: '¿Está seguro de activar como destacado este producto?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar!',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: 'btn btn-danger',
+                    buttonsStyling: false,
+                    reverseButtons: true
+                    }).then((result) => {
+                    if (result.value) {
+                        axios.put('/producto/activarDestacado',{
+                            'PK_products': PK_products
+                        }).then(function (response) {
+                            me.listarProductos(1,'','name');
+                            Swal.fire(
+                                'activado!',
+                                'El Producto ha sido destacado con éxito.',
+                                'success'
+                            )
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    
+                    } else if (
+                        // Read more about handling dismissals
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                                me.listarProductos(1,'','name');                    
+                    }
+                    }) 
+                
+
+
+                }else{
+                    console.log("hay más de 9 destacados");
+
+                   Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ya hay 9 productos marcados como "destacados"',
+                    footer: '<a>Si desea agregar este producto como destacado, desactive otro.</a>'
+                    })
+                    me.listarProductos(1,'','name');                    
+
+                }
+
             
             })
             .catch(function(error){
                 console.log(error);
             });
 
-            Swal.fire({
-            title: '¿Está seguro de activar como destacado este producto?',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Aceptar!',
-            cancelButtonText: 'Cancelar',
-            confirmButtonClass: 'btn btn-success',
-            cancelButtonClass: 'btn btn-danger',
-            buttonsStyling: false,
-            reverseButtons: true
-            }).then((result) => {
-            if (result.value) {
-                axios.put('/producto/activarDestacado',{
-                    'PK_products': PK_products
-                }).then(function (response) {
-                    me.listarProductos(1,'','name');
-                    Swal.fire(
-                        'activado!',
-                        'El Producto ha sido destacado con éxito.',
-                        'success'
-                    )
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            
-            } else if (
-                // Read more about handling dismissals
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                        me.listarProductos(1,'','name');                    
-            }
-            }) 
-                
+           
         },
         desactivarDestacados(PK_products){
             let me = this;

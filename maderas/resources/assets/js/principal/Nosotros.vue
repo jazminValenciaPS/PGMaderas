@@ -25,7 +25,7 @@
                         </b>
                 </div>
                 <div class="col l3 s3">
-                    <img src="img/20727973_1933165676896916_622146058497450787_n.png" alt="">
+                    <img alt='Logo de PG Maderas' src="img/20727973_1933165676896916_622146058497450787_n.png">
                 </div>
             </div>
         </div>

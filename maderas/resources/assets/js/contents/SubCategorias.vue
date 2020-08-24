@@ -246,32 +246,32 @@ export default {
             this.errorSubcategoria = 0;
             this.errorMostrarMsjSubcategoria = [];
         },
-        seleccionarImagen(img){
-            if (img == 1) {            
-                this.file = this.$refs.filea.files[0];
-                readURL(document.getElementsByClassName("categoriaAlta")[0], 1);
-            }
-            else {
-                this.file = this.$refs.filec.files[0];
-                readURL(document.getElementsByClassName("categoriaEdit")[0], 2);
-            }
-            this.cambio = 1;
+        // seleccionarImagen(img){
+        //     if (img == 1) {            
+        //         this.file = this.$refs.filea.files[0];
+        //         readURL(document.getElementsByClassName("categoriaAlta")[0], 1);
+        //     }
+        //     else {
+        //         this.file = this.$refs.filec.files[0];
+        //         readURL(document.getElementsByClassName("categoriaEdit")[0], 2);
+        //     }
+        //     this.cambio = 1;
 
-            function readURL(input, img) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        if (img == 1) {
-                            readURL('.imgAlta').attr('src', e.target.result);
-                        }
-                        else {
-                            readURL('.imgCambio').attr('src', e.target.result);
-                        }
-                    };
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-        },
+        //     function readURL(input, img) {
+        //         if (input.files && input.files[0]) {
+        //             var reader = new FileReader();
+        //             reader.onload = function (e) {
+        //                 if (img == 1) {
+        //                     readURL('.imgAlta').attr('src', e.target.result);
+        //                 }
+        //                 else {
+        //                     readURL('.imgCambio').attr('src', e.target.result);
+        //                 }
+        //             };
+        //             reader.readAsDataURL(input.files[0]);
+        //         }
+        //     }
+        // },
         abrirModal(modelo,accion, data = [],PK_subcategories){
             let m=this;
             switch(modelo){

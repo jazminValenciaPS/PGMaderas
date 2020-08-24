@@ -18,7 +18,7 @@
                             <h3 v-text="tituloModal"></h3>
                         </div>
                         <div class="col s12 center">
-                            <img v-if="tipoAccion==2" :src="'img/'+image"  class="tImagen imagenEdit" alt="">
+                            <img v-if="tipoAccion==2" :src="'img/'+image"  class="tImagen imagenEdit" alt="Imagen del slider">
                         </div>
                         <div class="form-group row">
                             <!-- input para el nombre del producto --> 
@@ -75,7 +75,7 @@
                     <tr>
                         <td v-text="slider.title"></td> 
                         <td class="hide-on-small-only"  v-text="slider.description"></td>
-                        <td class="hide-on-small-only" ><img :src="'img/'+slider.image" class="tImagen square"></td>
+                        <td class="hide-on-small-only" ><img :src="'img/'+slider.image" class="tImagen square" alt="Imagen del slider"></td>
                         <td class="hide-on-small-only"  v-if="slider.status == 1">Activado</td>
                         <td class="hide-on-small-only"  v-if="slider.status == 0">Desactivado</td>
                         <td>

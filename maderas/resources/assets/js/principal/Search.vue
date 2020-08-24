@@ -1,11 +1,9 @@
 <template>
     <section class="main-input">
         <div class="main-input-container">
-            <i class="material-icons color-main">search</i>
-            <!-- <form action="{{ route('search') }}" method="GET" > -->
-            <input v-model="busqueda" id="input-search-nav" type="search" required placeholder="Buscar" class=" letraTN">
-            <a class="main-icon" href=""></a>
-            <!-- </form> -->
+            <label style="cursor: pointer;" for="search" :title="'Buscar' +busqueda" @click="buscar()" class="label-icon"><i class="material-icons color-main">search</i></label>
+            <input v-model="busqueda" id="search" type="search" v-on:keyup.enter="buscar()" style="height: 40px;margin: 0; border-bottom: 1px solid #45954a;"  required placeholder="Buscar" class=" letraTN">
+            <i class="material-icons" @click="busqueda = ''" href="">close</i>
         </div> 
     </section>   
 </template>
@@ -15,25 +13,14 @@ import Swal from 'sweetalert2';
 export default {
     data(){
         return{
-            busqueda:'',
-       
+            busqueda:''
         }
     }, 
     methods:{
-        buscar(page,buscar,criterio){
+        buscar(){
             let m=this;
-            var url='/buscar?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
-
-            axios.get(url).then(function (response){
-    
-            console.log("si se pudo");
-            })
-            .catch(function(error){
-                console.log(error);
-            });
+            window.location = "/Productos?search="+m.busqueda;
         },
     },
-   
-  
 }
 </script>
