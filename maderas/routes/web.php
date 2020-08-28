@@ -185,3 +185,8 @@ Route::get('/buscar','ProductController@buscar');
 
 Route::get('/user/info','userController@info');
 Route::post('/user/update/branch','userController@updateBranch');
+
+
+Route::get('/descargar/file','DocumentController@optimizador');
+
+

@@ -24,16 +24,16 @@
                             En PG Maderas y Triplay, siempre podrás encontrar una pieza pensada para que materialices tus ideas en madera.
                         </b>
                 </div>
-                <div class="col l3 s3">
+                <div class="col l3 s6">
                     <img alt='Logo de PG Maderas' src="img/20727973_1933165676896916_622146058497450787_n.png">
                 </div>
             </div>
         </div>
 
          <div class="row green">
-            <div class="col l4">
+            <div class="col l4 m12 s12">
                 <div class="row ceter">
-                    <div class="col l12 center">
+                    <div class="col l12  m12 s12 center">
                          <h4 class="white-text">
                             MISION
                         </h4>
@@ -41,7 +41,7 @@
 
                     </div>
                     <br>
-                    <div class="col l12 center">
+                    <div class="col l12 m12 s12 center">
                         <img  src="img/objetivo.png"  class="iconos">
                     </div>
                 </div>
@@ -54,9 +54,9 @@
                     volumen y participación de nuestras empresas.
                 </p>
             </div>
-             <div class="col l4">
+             <div class="col l4 m12  s12">
                 <div class="row ceter">
-                    <div class="col l12 center">
+                    <div class="col l12 m12 s12 center">
                          <h4 class="white-text">
                             VISION
                         </h4>
@@ -65,7 +65,7 @@
                     </div>
                 <br>
 
-                    <div class="col l12 center">
+                    <div class="col l12 m12 s12 center">
                         <img  src="img/encontrar.png"  class="iconos">
                     </div>
                 </div>
@@ -76,16 +76,16 @@
                     sustentables, siendo un grupo fuertemente orientado a la satisfacción de nuestros clientes.
                 </p>
             </div>
-             <div class="col l4">
+             <div class="col l4 m12  s12">
                   <div class="row ceter">
-                    <div class="col l12 center">
+                    <div class="col l12 m12  s12 center">
                          <h4 class="white-text">
                             VALORES
                         </h4>
                     <br>
                     </div>
 
-                    <div class="col l12 center">
+                    <div class="col l12 m12  s12 center">
                         <img  src="img/estrella.png"  class="iconos">
                     </div>
                 </div>

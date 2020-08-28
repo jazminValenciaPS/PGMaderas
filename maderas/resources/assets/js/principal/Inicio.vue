@@ -5,6 +5,7 @@
         <vueper-slides autoplay class="sliders-inicio">
             <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" alt='imagenes de carrusel de PG Maderas' :image="'img/'+slider.image" />
         </vueper-slides>
+        <!-- Contactanos -->
         <div class="row center">
             <ul class="col l12 numeros center-align" >
                 <li>Puedes contactarnos en:</li>
@@ -13,10 +14,39 @@
                 <li><i class="Medium material-icons">call</i>Sucursal Monterrey 8147373452</li>
             </ul>
         </div>
+
+        <!-- Categorias -->
+        <ul class="container-categorias-icons">
+            <li class="categorias-icons">
+                <img src="img/woodPanel.png" alt="">
+                <h6>TABLEROS</h6>
+            </li>
+            <li class="categorias-icons">
+                <img src="img/woodIcon.png" alt="">
+                <h6>MADERA</h6>
+            </li>
+            <li class="categorias-icons">
+                <img src="img/herrajes.png" alt="">
+                <H6>HERRAJES</H6>
+            </li>
+            <li class="categorias-icons">
+                <img src="img/woodPanel.png" alt="">
+                <h6>CUBIERTAS</h6>
+            </li>
+            <li class="categorias-icons">
+                <img src="img/woodPanel.png" alt="">
+                <H6>LAMINADOS</H6>
+            </li>
+            <li class="categorias-icons">
+                 <img src="img/paint2.png" alt="">
+                <h6>PINTURA</h6>
+            </li>
+        </ul>
+
         <!-- Card Services -->
-        <h3 class="color-main center" >¡Nuestros Servicios!</h3>
+        <h3 class="color-main center title-index" >¡Nuestros Servicios!</h3>
         <div class="row" id="services-main">
-            <div class="col s12 m4">
+            <div class="col s12 m6 l4">
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Enbisagrado' src="img/servicio1.jpg">
@@ -25,7 +55,7 @@
                 </div>
             </div>
 
-            <div class="col s12 m4" >
+            <div class="col s12 m6 l4" >
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Enchapado de cantos' src="img/servicio2.jpg">
@@ -34,7 +64,7 @@
                 </div>
             </div>
 
-            <div class="col s12 m4">
+            <div class="col s12 m6 l4">
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Corte de tableros' src="img/servicio3.jpg">
@@ -43,7 +73,7 @@
                 </div>
             </div>
 
-             <div class="col s12 m4">
+             <div class="col s12 m6 l4">
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Corte de cubiertas'  src="img/servicio4.jpg">
@@ -52,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="col s12 m4">
+            <div class="col s12 m6 l4">
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Corte de maderas' src="img/servicio5.jpg">
@@ -61,70 +91,82 @@
                 </div>
             </div>
 
-            <div class="col s12 m4">
+            <div class="col s12 m6 l4">
                 <div class="card">
                     <div class="card-image">
-                        <img alt='imagen de Servicio de Cepillado de madera' src="img/servicio5.jpg">
+                        <img alt='imagen de Servicio de Cepillado de madera' src="img/servicio6.jpg">
                         <span class="card-title">Cepillado de madera</span>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Optimizador -->
+       <div class="row">
+           <div class="contenedorImg col l12 m12 s12">
+               <img src="img/servicio5.jpg" alt="Optimizador online de PG">
+                <ul class="texto-optimizador col l4">
+                    <li class="white-text">OPTIMIZADOR ONLINE PG (xlsx)</li>
+                    <li href="/descargar/file" class="black-text"> <i class="material-icons black-text">get_app</i> Descargar</li>
+                </ul>
+           </div>
+       </div>
+
+        <!-- Cintilla -->
         <div class="row color-cintilla">
             <div class="col l4 s4">
                 <div class="row ceter">
-                    <div class="col l12 s12 center">
+                    <div class="col l12 s12 m12 center">
                          <h4 class="cintilla-text">
                             ENTREGAS
                          </h4>
                     </div>
                     <br>
-                    <div class="col l12 center">
-                        <img src="img/enviado.png"  class="iconos">
+                    <div class="col l12 m12 s12 center">
+                        <img src="img/camion.png"  class="iconos">
                     </div>
                 </div>
-                <p class="cintilla-text center">
+                <p class="white-text center">
                     Comercializamos y ditribuimos oportunamente nuestros productos. Tenemos la opción de entregarle en nuestras instalaciones o directamente en su domicilio.
                 </p>
             </div>
              <div class="col l4 s4">
                 <div class="row ceter">
-                    <div class="col l12 center">
+                    <div class="col l12 m12 s12 center">
                          <h4 class="cintilla-text">
-                            ASESORIA
+                            ASESORÍA
                         </h4>
                     </div>
                 <br>
 
-                    <div class="col l12 center">
-                        <img  src="img/asignacion.png"  class="iconos">
+                    <div class="col l12 m12 s12 center">
+                        <img  src="img/consejo.png"  class="iconos">
                     </div>
                 </div>
-                <p class="cintilla-text center">
+                <p class="white-text center">
                     Contamos con un grupo de vendedores expertos en los productos maderables, dispuestos a asesorarlo en todo momento para que usted cuente con la mejor información para su proceso.
                 </p>
             </div>
              <div class="col l4 s4">
                   <div class="row ceter">
-                    <div class="col l12 center">
+                    <div class="col l12 m12 s12 center">
                          <h4 class="cintilla-text">
                             CALIDAD
                         </h4>
                     </div>
                 <br>
 
-                    <div class="col l12 center">
-                        <img  src="img/escudo.png"  class="iconos">
+                    <div class="col l12 m12 s12 center">
+                        <img  src="img/seguro.png"  class="iconos">
                     </div>
                 </div>
-                <p class="cintilla-text center">
+                <p class="white-text center">
                     En PG Maderas, contamos con el producto que usted necesita, para la realización de su proyecto, con la mejor calidad y al mejor precio.
                 </p>
             </div>
         </div>
         
-        <h3 class="color-main center">¡Conoce nuestros productos!</h3>
+        <h3 class="color-main center title-index">LO MÁS NUEVO EN EL MERCADO</h3>
          <section class="section-contianer-new-produc">
             <div class="row container-card" v-for="product in arrayProductos"  :key="product.PK_products">
                 <div class="col s12 m12 l12" >
@@ -146,7 +188,7 @@
          </section>
        
         <div class="center">
-            <h3 class="proveedores">NUESTROS PROVEEDORES</h3>
+            <h3 class="proveedores title-index">NUESTROS PROVEEDORES</h3>
         </div>
         <div class="container-prob-inicio">
             <vueper-slides autoplay  class="no-shadow" :visible-slides="3" :breakpoints="{ 800: { visibleSlides: 1, slideMultiple: 2 } }" :slide-ratio="1 / 4" :dragging-distance="70">

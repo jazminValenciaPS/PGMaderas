@@ -30,10 +30,10 @@
                     </select>  
                 </div>
                 <div v-show="errorStock" class="form-group row div-error">
-                        <div class="text-center text-error">
-                            <div v-for="error in errorMostrarMsjStock" :key="error" v-text="error">
-                            </div>
+                    <div class="text-center text-error">
+                        <div v-for="error in errorMostrarMsjStock" :key="error" v-text="error">
                         </div>
+                    </div>
                 </div>
                 <div class="button-container form formmodal-footer">
                     <button class="button-type" type="button" @click="actualizarStock(PK_stock,criterio)">Actualizar</button>
@@ -54,7 +54,6 @@
                             <option v-for="sucursal in arraySucursales" :value="sucursal.PK_PG_branches" :key="sucursal.PK_PG_branches" >{{ sucursal.street }}</option>
                         </select> 
                     </div>
-                  
                 </div>
             </div>
             <div class="col s12 m12 gl12 table-stock">

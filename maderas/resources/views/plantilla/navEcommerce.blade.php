@@ -15,7 +15,7 @@
                         <navuser></navuser>
                     </li>
                     <li class="linea "></li>
-                    <li ><a class="waves-effect waves-light" href="/Carrito"><i class="material-icons color-main">shopping_cart</i></a></li>
+                    <li ><a class="waves-effect waves-light" href="/Carrito"><img src="img/truckIcon2.png" alt=""></a></li>
                 </ul>
         </div>
     </nav>
@@ -26,10 +26,10 @@
                 <i class="material-icons color-main">menu</i>
             </a>
             <ul class="left hide-on-med-and-down">
-                <li><a class=" letraTN waves-effect waves-light color-main" href="/"><i class="Large material-icons color-main" style="padding:0 3px;">home</i>Inicio</a></li>
-                <li><a class=" letraTN waves-effect waves-light color-main" href="/Quienes-Somos"><i class="material-icons color-main" style="padding:0 3px;">info_outline</i>¿Quiénes Somos?</a></li>
+                <li class=""><a class=" letraTN waves-effect waves-light grey-text text-darken-2" href="/"><i class="Large material-icons color-main" style="padding:0 3px;">home</i>Inicio</a></li>
+                <li><a class=" letraTN waves-effect waves-light grey-text text-darken-2" href="/Quienes-Somos"><i class="material-icons color-main" style="padding:0 3px;">info_outline</i>¿Quiénes Somos?</a></li>
                 <li class="dropdown">
-                    <a class="letraTN waves-effect waves-light color-main dropbtn" href="#"><i class="material-icons color-main" style="padding:0 3px;">collections_bookmark</i>Catalogo</a>
+                    <a class="letraTN waves-effect waves-light grey-text text-darken-2 dropbtn" href="#"><i class="material-icons color-main" style="padding:0 3px;">collections_bookmark</i>Catalogo</a>
                     <div class="dropdown-content-custom titulo">
                         <div class="header">
                             <h5>Productos</h5>
@@ -37,7 +37,7 @@
                       <navmenu :categoriaid="idCateP" @ver-categoria-producto="verCategoriaProducto"></navmenu>
                     </div>
                 </li>
-                <li><a class=" letraTN waves-effect waves-light color-main" href="/Contacto"><i class="material-icons color-main" style="padding:0 3px;">message</i>Contacto</a></li>
+                <li><a class=" letraTN waves-effect waves-light grey-text text-darken-2" href="/Contacto"><i class="material-icons color-main" style="padding:0 3px;">message</i>Contacto</a></li>
             </ul>
         </div>
     

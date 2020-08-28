@@ -15,4 +15,5 @@ class Product extends Model
     {
         return $this->belongsTo('App\ProductCategories', 'id_products_categories', 'PK_products_categories');
     }
+
 }

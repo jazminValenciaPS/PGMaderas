@@ -9,6 +9,7 @@ use Request as Peticion;
 use File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Rimorsoft\Http\Request\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -20,25 +21,25 @@ class ProductController extends Controller
         
         if ($buscar==''){
             $producto = DB::table('products')
-        ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
-        ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
-        ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price', 'products.status','products.destacado','products_categories.PK_products_categories',
-        'products_categories.name as productscategories','products_images.image')
-        ->distinct()
-        ->orderBy('products.PK_products', 'desc')->paginate(5);
+            ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
+            ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+            ->select('products.PK_products','products.SKU','products.name','products.description',
+            'products.price', 'products.status','products.destacado','products_categories.PK_products_categories',
+            'products_categories.name as productscategories','products_images.image')
+            ->distinct()
+            ->orderBy('products.PK_products', 'desc')->paginate(5);
 
         }
         else{
             $producto = DB::table('products')
-        ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
-        ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
-        ->select('products.PK_products','products.SKU','products.name','products.description',
-        'products.price', 'products.status','products.destacado','products_categories.PK_products_categories',
-        'products_categories.name as productscategories','products_images.image')
-        ->distinct()
-        ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
-        ->orderBy('products.PK_products', 'desc')->paginate(5);
+            ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
+            ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+            ->select('products.PK_products','products.SKU','products.name','products.description',
+            'products.price', 'products.status','products.destacado','products_categories.PK_products_categories',
+            'products_categories.name as productscategories','products_images.image')
+            ->distinct()
+            ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('products.PK_products', 'desc')->paginate(5);
         }
         
 
@@ -114,6 +115,7 @@ class ProductController extends Controller
     public function mostrarProducto(Request $request){
 
         $id = $request->id;
+        $id_branch = $request->id_branch;
 
 
         return  $producto = DB::table('products')
@@ -123,12 +125,13 @@ class ProductController extends Controller
         ->select('products.PK_products','products.SKU','products.name','products.description',
         'products.price','stock.avaible', 'products.status','products_images.image')
         ->where('products.PK_products','=',$id)
-        ->where('_p_g_branches.PK_PG_branches','=','1')
+        ->where('_p_g_branches.PK_PG_branches','=',$id_branch)
         ->where('products.status','=','1')
         ->get();
     }
 
     public function productosNuevos(){
+        
         return  $producto = DB::table('products')
         ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
         ->join('stock','stock.id_product','=','products.PK_products')
@@ -197,6 +200,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // if (!$request->ajax()) return redirect('/administrador');
+        $rules = [
+            'SKU' => 'required|unique:products',
+
+        ];
+    
+        $customMessages = [
+            'SKU.unique' => 'El SKU Ya es utilizado por otro producto favor de usar otro numero'
+        ];
+    
+        $this->validate($request, $rules, $customMessages);
 
         $producto = new Product();
         $imagen = new ProductImage();
@@ -283,6 +296,7 @@ class ProductController extends Controller
     public function buscar(Request $request){
         $buscar = $request->buscar;
         $criterio = $request->criterio;
+        $id_branch = $request->id_branch;
 
      
         if ($buscar==''){
@@ -298,7 +312,7 @@ class ProductController extends Controller
             'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.status','=','1')
-            ->where('_p_g_branches.PK_PG_branches','=','1')
+            ->where('_p_g_branches.PK_PG_branches','=',$id_branch )
             ->orderBy('products.PK_products', 'desc')->paginate(6);
 
         }
@@ -313,7 +327,7 @@ class ProductController extends Controller
             'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.status','=','1')
-            ->where('_p_g_branches.PK_PG_branches','=','1')
+            ->where('_p_g_branches.PK_PG_branches','=',$id_branch )
             ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('products.PK_products', 'desc')->paginate(6);
         }

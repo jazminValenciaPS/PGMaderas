@@ -28,8 +28,7 @@ class OrderController extends Controller
         ->join('persons','users.id_person','=','persons.PK_persons')
         ->select('orders.total','order_status.status_name as statusOrder','shipments.subtotal',
         'persons.first_name','persons.last_name','shipment_status.name as statusShipments')
-        ->where('order_status.status_name', '=', 'Entregado','orshipment_status.name','shipment_status.name', '=', 'Entrgado')
-        ->distinct()
+        ->where('order_status.status_name', '=', 'Pendiente','or','shipment_status.name','shipment_status.name', '=', 'Pendiente')
         ->get();
         
     }

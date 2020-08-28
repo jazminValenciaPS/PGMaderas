@@ -88,7 +88,9 @@
                             <h6>total: ${{carrito.total}}</h6>
                         </li> 
                     </ul>
+           
             </section>
+           
             <section class="container-metodo-entrega" style="z-index:0">
                 <h6>Método de entrega</h6>
                  <form action="#">
@@ -105,50 +107,29 @@
                     </label>
                     </p>
                 </form>
-                <h6>informacion en tienda</h6>
-                <div class="informacion-tienda-select">
-                    <select v-model="tienda">
-                        <option value="" disabled selected>Seleccione su tienda</option>
-                        <option value="1">Matriz Culiacán</option>
-                        <option value="2">Sucursal Zapata</option>
-                        <option value="3">Sucursal Monterrey</option>
-                        <label>Materialize Select</label>
-                    </select> 
-                </div>
-                <div class="container-metodo-button">
-                    <a class="waves-effect bg-main waves-light btn aling " @click="guardarOrden()"><i class="material-icons right">attach_money</i>Ir a pagar</a>
-                </div>
-                
             </section>
-            <!-- <section class="container-metodo-tienda" style="z-index:1" >
-                <h6>informacion en tienda</h6>
-                    <div class="informacion-tienda-select">
-                        <select v-model="tienda">
-                            <option value="" disabled selected>Seleccione su tienda</option>
-                            <option value="1">Matriz Culiacán</option>
-                            <option value="2">Sucursal Zapata</option>
-                            <option value="3">Sucursal Monterrey</option>
-                            <label>Materialize Select</label>
-                        </select> 
-                    </div>
-            </section> -->
-            <section class="container-metodo-pago" style="z-index:0">
-                <h6>Método de pago</h6>
-                  <form action="#">
-                    <p>
-                    <label>
-                        <input name="group1" v-model="pago" value="1" type="radio"/>
-                        <span class="modal-trigger" data-target="modal1" @click="abrirModal('tarjeta','registrar')"><i class="material-icons left m-0 ">credit_card</i>Tarjeta de credito/ debito</span>
-                    </label>
-                    </p>
-                    <p>
-                    <label>
-                        <input name="group1" v-model="pago" value="2" type="radio"/>
-                        <span><i class="material-icons left m-0">attach_money</i>Efectivo</span>
-                    </label>
-                    </p>
-                </form>
-            </section>
+            <div class="container-metodo-button">
+                <a class="waves-effect bg-main waves-light btn aling " @click="guardarOrden()"><i class="material-icons right">attach_money</i>Ir a pagar</a>
+            </div>
+           
+        <section class="container-metodo-pago" style="z-index:0">
+            <h6>Método de pago</h6>
+            <form action="#">
+                <p>
+                <label>
+                    <input name="group1" v-model="pago" value="1" type="radio"/>
+                    <span class="modal-trigger" data-target="modal1" @click="abrirModal('tarjeta','registrar')"><i class="material-icons left m-0 ">credit_card</i>Tarjeta de credito/ debito</span>
+                </label>
+                </p>
+                <p v-if="entrega == 2">
+                <label>
+                    <input name="group1" v-model="pago" value="2" type="radio"/>
+                    <span><i class="material-icons left m-0">attach_money</i>Efectivo</span>
+                </label>
+                </p>
+            </form>
+        </section>
+
             <section class="container-carrito" style="z-index:0">
                 <h5 class="title">Carrito de Compra</h5>
                 <ul class="collection" v-for="carrito in carrito" :key="carrito.PK_products">
@@ -186,7 +167,7 @@ export default {
             nombre:'',
             apellido:'',
             telefono:'',
-            entrega:'',
+            entrega:'2',
             tienda:'',
             pago:'',
             tituloModal:'',

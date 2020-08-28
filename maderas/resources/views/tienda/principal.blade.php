@@ -41,6 +41,10 @@
     <script src="https://unpkg.com/vueperslides"></script>
 
     <script>
+    var el = document.querySelector('.tabs');
+    var instance = M.Tabs.init(el, {});
+    
+
         $(document).ready(function(){
           $(".wish-icon i").click(function(){
             $(this).toggleClass("fa-heart fa-heart-o");
@@ -50,6 +54,7 @@
       document.addEventListener('DOMContentLoaded', () => {
         M.Sidenav.init(document.querySelectorAll('.sidenav'), {});
         M.AutoInit();
+
 
         var options = {
             indicators: true,

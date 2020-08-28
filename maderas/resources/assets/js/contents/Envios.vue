@@ -4,6 +4,32 @@
             <div class="title" style="padding-bottom: 2%;">
                 <h5>Pedidos</h5>
             </div>
+            <section>
+                <div class="right input-field col s6 m6 g6">
+                        <select name="LeaveType" class="browser-default" v-model="criterio" >
+                            <option value="" disabled >Selecciona la sucursal</option>
+                            <option v-for="sucursal in arraySucursales" :value="sucursal.PK_PG_branches" :key="sucursal.PK_PG_branches" >{{ sucursal.street }}</option>
+                        </select> 
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a href="#test1">Test 1</a></li>
+                        <li class="tab col s3"><a class="active" href="#test2">Test 2</a></li>
+                        <li class="tab col s3 disabled"><a href="#test3">Disabled Tab</a></li>
+                        <li class="tab col s3"><a href="#test4">Test 4</a></li>
+                    </ul>
+                    </div>
+                    <div id="test1" class="col s12">Test 1</div>
+                    <div id="test2" class="col s12">Test 2</div>
+                    <div id="test3" class="col s12">Test 3</div>
+                    <div id="test4" class="col s12">Test 4</div>
+                </div>
+            </section>
+          
+
             <table class="tabla centered">
                 <thead>
                     <tr>
@@ -21,8 +47,8 @@
                         <td v-text="envios.first_name"></td> 
                         <td class="hide-on-small-only"  v-text="envios.subtotal"></td>
                         <td class="hide-on-small-only"  v-text="envios.total"></td>
-                        <td class="hide-on-small-only"  v-text="envios.statusS"></td>
-                        <td class="hide-on-small-only"  v-text="envios.statusO"></td>
+                        <td class="hide-on-small-only"  v-text="envios.statusShipments"></td>
+                        <td class="hide-on-small-only"  v-text="envios.statusOrder"></td>
                          <td>
                             <i class="material-icons color-text " @click="abrirModal('empleados','actualizar',user,user.id)">create</i>
                         </td>

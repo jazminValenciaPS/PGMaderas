@@ -4,7 +4,6 @@
             <div class="title">
                 <h5>Productos</h5>
             </div>
-           
             <!-- MODAL INICIO -->
             <div class="modal fade " tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg " role="document">
@@ -85,7 +84,7 @@
                                 <button type="submit" @click="listarProductos(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                             </div>
                              <div class=" form input-field col s3">
-                                <button type="summit" data-target="modal1" class="modal-trigger" @click="abrirModal('producto','registrar')">
+                                <button type="summit" data-target="modal1" class="modal-trigger"  @click="abrirModal('producto','registrar')">
                                     Agregar Productos
                                 </button>
                             </div>
@@ -187,17 +186,18 @@ export default {
             tipoAccion: 0,
             errorProducto : 0,
             errorMostrarMsjProducto : [],
-             pagination : {
-                    'total' : 0,
-                    'current_page' : 0,
-                    'per_page' : 0,
-                    'last_page' : 0,
-                    'from' : 0,
-                    'to' : 0,
-                },
+            pagination : {
+                'total' : 0,
+                'current_page' : 0,
+                'per_page' : 0,
+                'last_page' : 0,
+                'from' : 0,
+                'to' : 0,
+            },
             offset : 3,
             criterio : 'SKU',
-            buscar:''
+            buscar:'',
+            errors: [],
         }
     },
       computed:{
@@ -312,9 +312,25 @@ export default {
             .then(function (response) {
                 me.cerrarModal();
                 me.listarProductos(1,'','name');
+                me.errorMostrarMsjProducto = [];
+                me.errorProducto = 0;
             })
             .catch(function (error) {
-                console.log(error);
+                me.errorMostrarMsjProducto = [];
+                if (error.response && error.response.status === 500) {
+                    console.log(error.response.data)
+                }
+                if (error.response && error.response.status === 422) {
+                    me.errorProducto = 1;
+                    error.response.data.errors.SKU.forEach(function (element) {
+                        me.errorMostrarMsjProducto.push(element);
+                        console.log(me.errorMostrarMsjProducto,'me.errorMostrarMsjProducto');
+                    });
+                    console.clear();
+                } else {
+                    console.log(error);
+                }
+
             });
         },
         actualizarProducto(PK_products){
@@ -604,6 +620,7 @@ export default {
     mounted() {
         this.listarProductos(1,this.buscar,this.criterio);
         this.verSelects();
+
     }
 }
 </script>

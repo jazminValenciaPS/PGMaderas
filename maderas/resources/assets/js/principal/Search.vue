@@ -2,7 +2,7 @@
     <section class="main-input">
         <div class="main-input-container">
             <label style="cursor: pointer;" for="search" :title="'Buscar' +busqueda" @click="buscar()" class="label-icon"><i class="material-icons color-main">search</i></label>
-            <input v-model="busqueda" id="search" type="search" v-on:keyup.enter="buscar()" style="height: 40px;margin: 0; border-bottom: 1px solid #45954a;"  required placeholder="Buscar" class=" letraTN">
+            <input v-model="busqueda" id="search" type="search" v-on:keyup.enter="buscar()" style="height: 40px;margin: 0; border-bottom: 1px solid #616161;"  required placeholder="Buscar" class=" letraTN">
             <i class="material-icons" @click="busqueda = ''" href="">close</i>
         </div> 
     </section>   
