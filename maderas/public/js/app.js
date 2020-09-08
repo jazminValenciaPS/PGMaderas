@@ -6812,6 +6812,76 @@ $('.datepicker').datepicker({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6874,39 +6944,103 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
+      PK_orders: '',
       idPedidos: 0,
       first_name: '',
       last_name: '',
       id_user: 0,
       statusS: '',
       statusO: '',
+      estatus: '',
       id_person: 0,
       id_shipments: 0,
       total: 0,
       subtotal: 0,
-      arrayPedidos: []
-    };
+      arrayPedidos: [],
+      arrayStatus: [],
+      criterio: 'name',
+      buscar: ''
+    }, _defineProperty(_ref, "estatus", 'Todos'), _defineProperty(_ref, "date", ''), _defineProperty(_ref, "pagination", {
+      'total': 0,
+      'current_page': 0,
+      'per_page': 0,
+      'last_page': 0,
+      'from': 0,
+      'to': 0
+    }), _ref;
+  },
+  computed: {
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    //Calcula los elementos de la paginación
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+
+      var from = this.pagination.current_page - this.offset;
+
+      if (from < 1) {
+        from = 1;
+      }
+
+      var to = from + this.offset * 2;
+
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+
+      var pagesArray = [];
+
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+
+      return pagesArray;
+    }
   },
   methods: {
-    listarPedidos: function listarPedidos() {
-      var m = this;
-      axios.get('/order').then(function (response) {
-        m.arrayPedidos = response.data;
-        m.status = response.status.data;
+    cambiarPagina: function cambiarPagina(page, buscar, criterio) {
+      var me = this; //Actualiza la página actual
 
-        if (status == true) {
-          status = 1;
-        } else {
-          status = 0;
-        }
+      me.pagination.current_page = page; //Envia la petición para visualizar la data de esa página
+
+      me.listarPedidos(page, buscar, criterio, me.estatus);
+    },
+    listarPedidos: function listarPedidos(page, buscar, criterio, estatus) {
+      var m = this;
+      console.log(estatus);
+      axios.get('/order?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&status=' + estatus).then(function (response) {
+        var respuesta = response.data;
+        m.arrayPedidos = respuesta.orden.data;
+        m.pagination = respuesta.pagination; // m.status = response.orden.status.data;
+        // if(status == true){
+        //     status = 1
+        // }else{
+        //     status = 0
+        // }
       })["catch"](function (error) {
         console.log(error);
       });
-    }
+    },
+    listarStatus: function listarStatus() {
+      var m = this;
+      axios.get('/order/status').then(function (response) {
+        m.arrayStatus = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    actualizarStatus: function actualizarStatus() {}
   },
   mounted: function mounted() {
-    this.listarPedidos();
+    this.listarPedidos(1, this.buscar, this.criterio, this.estatus);
+    this.listarStatus();
   }
 });
 
@@ -7627,7 +7761,8 @@ __webpack_require__.r(__webpack_exports__);
       tipoAccion: 0,
       PK_slider: '',
       errorSlider: '',
-      errorMostrarMsjSlider: []
+      errorMostrarMsjSlider: [],
+      file: ''
     };
   },
   methods: {
@@ -8684,7 +8819,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       total: 0,
       subtotal: 0,
       user: false,
-      email: localStorage.getItem('email')
+      email: localStorage.getItem('email'),
+      branch: localStorage.getItem('branch')
     };
   },
   methods: {
@@ -8698,7 +8834,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 m = _this;
-                url = "/productoM/".concat(id);
+                url = '/productoM?id=' + id + '&id_branch=' + m.branch;
                 _context.next = 4;
                 return axios.get(url);
 
@@ -8711,6 +8847,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee);
+      }))();
+    },
+    selectBranch: function selectBranch() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var me, url;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                me = _this2;
+
+                if (!(typeof Storage !== "undefined")) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                if (localStorage.getItem("branch") === null) localStorage.setItem("branch", JSON.stringify(1));
+                url = "/user/info";
+                _context2.next = 6;
+                return axios.get(url).then(function (result) {
+                  console.log("selectBranch");
+                  console.log(result.data[0]);
+
+                  if ([undefined, null, 0, ""].includes(result.data[0])) {
+                    var LS = JSON.parse(localStorage.getItem("branch"));
+                    me.branch = LS; // me.listarProducto(id);
+
+                    console.log("idBranch en selectBranch recién asignado");
+                    console.log(me.branch);
+                  } else {
+                    me.branch = result.data[0].id_branch; //  me.listarProducto(id);
+                  }
+                })["catch"](function (err) {
+                  console.log(err);
+                });
+
+              case 6:
+                _context2.next = 9;
+                break;
+
+              case 8:
+                console.log("Sorry, your browser does not support Web Storage...");
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     },
     eliminarDeCarrito: function eliminarDeCarrito(PK_products) {
@@ -8750,47 +8937,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     }
   },
+  beforeMount: function beforeMount() {
+    var m = this;
+    m.selectBranch();
+  },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
       var carrito;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               carrito = JSON.parse(localStorage.getItem('carrito'));
 
               if (Array.isArray(carrito)) {
-                _this2.carrito = carrito;
+                _this3.carrito = carrito;
               }
 
-              _context3.next = 4;
-              return Promise.all(_this2.carrito.map( /*#__PURE__*/function () {
-                var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(producto) {
+              _context4.next = 4;
+              return Promise.all(_this3.carrito.map( /*#__PURE__*/function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(producto) {
                   var productoActualizado;
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
-                      switch (_context2.prev = _context2.next) {
+                      switch (_context3.prev = _context3.next) {
                         case 0:
-                          _context2.next = 2;
-                          return _this2.listarProductos(producto.PK_products);
+                          _context3.next = 2;
+                          return _this3.listarProductos(producto.PK_products);
 
                         case 2:
-                          productoActualizado = _context2.sent;
+                          productoActualizado = _context3.sent;
                           productoActualizado = productoActualizado.data[0];
                           producto.avaible = productoActualizado.avaible;
                           producto.price = productoActualizado.price;
                           producto.name = productoActualizado.name;
                           producto.image = productoActualizado.image;
-                          return _context2.abrupt("return", producto);
+                          return _context3.abrupt("return", producto);
 
                         case 9:
                         case "end":
-                          return _context2.stop();
+                          return _context3.stop();
                       }
                     }
-                  }, _callee2);
+                  }, _callee3);
                 }));
 
                 return function (_x) {
@@ -8799,19 +8990,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               }()));
 
             case 4:
-              _this2.carrito = _context3.sent;
+              _this3.carrito = _context4.sent;
 
-              _this2.calcularTotal(_this2.carrito); // this.User();
+              _this3.calcularTotal(_this3.carrito);
 
-
-              console.log(_this2.email);
+              console.log(_this3.email);
 
             case 7:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3);
+      }, _callee4);
     }))();
   }
 });
@@ -9383,6 +9573,76 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -9418,7 +9678,30 @@ __webpack_require__.r(__webpack_exports__);
         image: 'img/Valresa.png'
       }, {
         image: 'img/surtimex.png'
-      }]
+      }],
+      Pino: "Pino",
+      Parota: "Parota",
+      Cedro: "Cedro",
+      Tzalam: "Tzalam",
+      Cimbras: "Cimbras",
+      MDF: "MDF",
+      Aglomerados: "Aglomerados",
+      Enchapados: "Enchapados",
+      Correderas: "Correderas",
+      Jaladeras: "Jaladeras",
+      Perfiles: "Perfiles",
+      Bisagras: "Bisagras",
+      CubiertaAglomerado: "Cubierta Aglomerado",
+      Resina: "Resina",
+      Cuarzos: "Cuarzos",
+      Granito: "Granito",
+      Naturales: "Naturales",
+      Formaica: "Formaica",
+      Cromacore: "Cromacore",
+      Pinturas: "Pinturas",
+      Pegamento: "Pegamento",
+      Lijas: "Lijas",
+      Resanes: "Resanes"
     };
   },
   computed: {
@@ -9439,14 +9722,16 @@ __webpack_require__.r(__webpack_exports__);
       var m = this;
       axios.get('/productosNuevos').then(function (response) {
         m.arrayProductos = response.data;
-      })["catch"](function (error) {
-        console.log(error);
       });
+    },
+    verProductoLike: function verProductoLike(menu, id) {
+      var m = this;
+      var objeto = {
+        vMenu: menu,
+        like: buscar
+      };
+      m.$emit("listar-productos", objeto);
     }
-  },
-  mounted: function mounted() {
-    this.listarSliders();
-    this.nuevosProductos();
   }
 });
 
@@ -10168,6 +10453,7 @@ __webpack_require__.r(__webpack_exports__);
       errorContra: 0,
       errorMostrarMsjContra: [],
       datos: [],
+      arrayPedidos: [],
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
@@ -10325,6 +10611,18 @@ __webpack_require__.r(__webpack_exports__);
     listarPedidos: function listarPedidos() {
       var m = this;
       m.informacion = 4;
+      axios.get('/order/user?correo=' + m.correo).then(function (response) {
+        m.arrayPedidos = response.data;
+        m.status = response.status.data;
+
+        if (status == true) {
+          status = 1;
+        } else {
+          status = 0;
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
     logout: function logout() {
       axios.post('salir').then(function (response) {
@@ -10395,6 +10693,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -10413,11 +10712,63 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     listarProducto: function listarProducto(PK_products) {
       var m = this;
-      axios.get('/productoM/' + PK_products).then(function (response) {
+      axios.get('/productoM?id=' + PK_products + '&id_branch=' + m.branch).then(function (response) {
         m.arrayProducto = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    selectBranch: function selectBranch(id) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var me, url;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                me = _this;
+
+                if (!(typeof Storage !== "undefined")) {
+                  _context.next = 8;
+                  break;
+                }
+
+                if (localStorage.getItem("branch") === null) localStorage.setItem("branch", JSON.stringify(1));
+                url = "/user/info";
+                _context.next = 6;
+                return axios.get(url).then(function (result) {
+                  console.log("selectBranch");
+                  console.log(result.data[0]);
+
+                  if ([undefined, null, 0, ""].includes(result.data[0])) {
+                    var LS = JSON.parse(localStorage.getItem("branch"));
+                    me.branch = LS;
+                    me.listarProducto(id);
+                    console.log("idBranch en selectBranch recién asignado");
+                    console.log(me.branch);
+                  } else {
+                    me.branch = result.data[0].id_branch;
+                    me.listarProducto(id);
+                  }
+                })["catch"](function (err) {
+                  console.log(err);
+                });
+
+              case 6:
+                _context.next = 9;
+                break;
+
+              case 8:
+                console.log("Sorry, your browser does not support Web Storage...");
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     },
     actualizarCantidad: function actualizarCantidad(producto) {
       var cantidad = this.cantidad;
@@ -10465,34 +10816,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
       var m, queryString, urlParams, product, id, carrito;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              m = _this;
+              m = _this2;
               queryString = window.location.search;
               urlParams = new URLSearchParams(queryString);
               product = urlParams.get('id');
               id = product !== null && product !== '' && product !== undefined ? product : "";
-              m.listarProducto(id);
+              m.selectBranch(id); // m.idproduct = id;
+              // m.listarProducto(id);
+
               carrito = JSON.parse(localStorage.getItem('carrito'));
 
               if (Array.isArray(carrito)) {
                 m.carrito = carrito;
               }
 
-              console.log(_this.carrito, "carrito");
+              console.log(_this2.carrito, "carrito");
 
             case 9:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }))();
   }
 });
@@ -10574,6 +10927,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -10598,16 +10953,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       offset: 3,
       criterio: 'SKU',
       buscar: '',
-      idSubcat: ''
+      idSubcat: '',
+      buscarLike: ''
     };
   },
   methods: {
     listarProductos: function listarProductos(page, buscar, criterio) {
       var m = this;
-      console.log("Entré en listarProductos");
-      console.log("id de la branch");
-      console.log(m.branch);
-      var url = '/productoL?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&id=' + m.idSubcat + '&id_branch=' + m.branch;
+
+      if (m.idSubcat == '' && m.buscarLike != '') {
+        var url = '/productoL?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&buscarLike=' + m.buscarLike + '&id_branch=' + m.branch;
+      }
+
+      if (m.idSubcat != '' && m.buscarLike == '') {
+        var url = '/productoL?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&id=' + m.idSubcat + '&id_branch=' + m.branch;
+      }
+
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         m.pagination = respuesta.pagination;
@@ -10615,7 +10976,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       })["catch"](function (error) {
         console.log(error);
       });
-      console.log("Salí de listarProductos");
     },
     selectBranch: function selectBranch() {
       var _this = this;
@@ -10627,23 +10987,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 me = _this;
-                console.log("Entré en selectBranch");
 
                 if (!(typeof Storage !== "undefined")) {
-                  _context.next = 9;
+                  _context.next = 8;
                   break;
                 }
 
                 if (localStorage.getItem("branch") === null) localStorage.setItem("branch", JSON.stringify(1));
                 url = "/user/info";
-                _context.next = 7;
+                _context.next = 6;
                 return axios.get(url).then(function (result) {
                   console.log("selectBranch");
                   console.log(result.data[0]);
 
                   if ([undefined, null, 0, ""].includes(result.data[0])) {
                     var LS = JSON.parse(localStorage.getItem("branch"));
-                    me.branch = 2;
+                    me.branch = LS;
                     me.listarProductos(1, _this.buscar, _this.criterio);
                     console.log("idBranch en selectBranch recién asignado");
                     console.log(me.branch);
@@ -10655,14 +11014,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.log(err);
                 });
 
-              case 7:
-                _context.next = 10;
+              case 6:
+                _context.next = 9;
                 break;
 
-              case 9:
+              case 8:
                 console.log("Sorry, your browser does not support Web Storage...");
 
-              case 10:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -10688,8 +11047,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     productosCate: function productosCate(page, buscar, criterio, id) {
       var m = this;
-      console.log("id categoriaP");
-      console.log(id);
       var url = '/productoCategoria?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&id=' + id;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
@@ -10798,6 +11155,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
     var product = urlParams.get('id');
+    var like = urlParams.get('buscar');
+    var buscar = like !== null && like !== '' && like !== undefined ? like : "";
+    m.buscarLike = buscar;
     var id = product !== null && product !== '' && product !== undefined ? product : "";
     m.idSubcat = id;
     m.listarCat(id);
@@ -11041,16 +11401,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -34484,7 +34834,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "modal-trigger",
+                  staticClass: "modal-trigger ",
                   attrs: { type: "submit" },
                   on: {
                     click: function($event) {
@@ -36352,89 +36702,339 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "row hero" }, [
-    _c("div", { staticClass: "col s12 m12 gl6" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("section", [
-        _c("div", { staticClass: "right input-field col s6 m6 g6" }, [
-          _c(
-            "select",
-            {
-              directives: [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "col s12 m12 l12" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("br"),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group center" }, [
+          _c("div", { staticClass: "col l12 buscarC" }, [
+            _c("div", { staticClass: "input-field col s2" }, [
+              _c(
+                "select",
                 {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.criterio,
-                  expression: "criterio"
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.criterio,
+                      expression: "criterio"
+                    }
+                  ],
+                  staticClass: "browser-default",
+                  attrs: { name: "LeaveType" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.criterio = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    { attrs: { value: "", disabled: "", selected: "" } },
+                    [_vm._v("Selecciona con que buscar")]
+                  ),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "name" } }, [_vm._v("Nombre")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-field col s4" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.buscar,
+                    expression: "buscar"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Texto a buscar" },
+                domProps: { value: _vm.buscar },
+                on: {
+                  keyup: function($event) {
+                    if (
+                      !$event.type.indexOf("key") &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.listarPedidos(1, _vm.buscar, _vm.criterio)
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.buscar = $event.target.value
+                  }
                 }
-              ],
-              staticClass: "browser-default",
-              attrs: { name: "LeaveType" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.criterio = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
-              }
-            },
-            [
-              _c("option", { attrs: { value: "", disabled: "" } }, [
-                _vm._v("Selecciona la sucursal")
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-field col s2" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "left btn-floating",
+                  on: {
+                    click: function($event) {
+                      return _vm.listarPedidos(1, _vm.buscar, _vm.criterio)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "material-icons" }, [_vm._v("search")])]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: " form input-field col s6 botones" }, [
+              _c("div", { staticClass: "col s12 m12 l12" }, [
+                _c("div", { staticClass: "row estatus" }, [
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("p", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.estatus,
+                            expression: "estatus"
+                          }
+                        ],
+                        staticClass: "with-gap",
+                        attrs: {
+                          value: "Todos",
+                          name: "group1",
+                          type: "radio",
+                          checked: ""
+                        },
+                        domProps: { checked: _vm._q(_vm.estatus, "Todos") },
+                        on: {
+                          click: function($event) {
+                            return _vm.listarPedidos(1, "", "", _vm.estatus)
+                          },
+                          change: function($event) {
+                            _vm.estatus = "Todos"
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Todos")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.estatus,
+                            expression: "estatus"
+                          }
+                        ],
+                        staticClass: "with-gap",
+                        attrs: {
+                          value: "Pendientes",
+                          name: "group1",
+                          type: "radio"
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.estatus, "Pendientes")
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.listarPedidos(1, "", "", _vm.estatus)
+                          },
+                          change: function($event) {
+                            _vm.estatus = "Pendientes"
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Pendientes")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.estatus,
+                            expression: "estatus"
+                          }
+                        ],
+                        staticClass: "with-gap",
+                        attrs: {
+                          value: "Preparando",
+                          name: "group1",
+                          type: "radio"
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.estatus, "Preparando")
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.listarPedidos(1, "", "", _vm.estatus)
+                          },
+                          change: function($event) {
+                            _vm.estatus = "Preparando"
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Preparando")])
+                    ])
+                  ])
+                ])
               ]),
               _vm._v(" "),
-              _vm._l(_vm.arraySucursales, function(sucursal) {
-                return _c(
-                  "option",
-                  {
-                    key: sucursal.PK_PG_branches,
-                    domProps: { value: sucursal.PK_PG_branches }
-                  },
-                  [_vm._v(_vm._s(sucursal.street))]
-                )
-              })
-            ],
-            2
-          )
+              _c("div", { staticClass: "col s12 m12 l12" }, [
+                _c("div", { staticClass: "row estatus" }, [
+                  _c("p", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.estatus,
+                            expression: "estatus"
+                          }
+                        ],
+                        staticClass: "with-gap",
+                        attrs: {
+                          value: "Entregado",
+                          name: "group1",
+                          type: "radio"
+                        },
+                        domProps: { checked: _vm._q(_vm.estatus, "Entregado") },
+                        on: {
+                          click: function($event) {
+                            return _vm.listarPedidos(1, "", "", _vm.estatus)
+                          },
+                          change: function($event) {
+                            _vm.estatus = "Entregado"
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Entregado")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.estatus,
+                            expression: "estatus"
+                          }
+                        ],
+                        staticClass: "with-gap",
+                        attrs: {
+                          value: "Cancelado",
+                          name: "group1",
+                          type: "radio"
+                        },
+                        domProps: { checked: _vm._q(_vm.estatus, "Cancelado") },
+                        on: {
+                          click: function($event) {
+                            return _vm.listarPedidos(1, "", "", _vm.estatus)
+                          },
+                          change: function($event) {
+                            _vm.estatus = "Cancelado"
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Cancelado")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.estatus,
+                            expression: "estatus"
+                          }
+                        ],
+                        staticClass: "with-gap",
+                        attrs: { value: "PE", name: "group1", type: "radio" },
+                        domProps: { checked: _vm._q(_vm.estatus, "PE") },
+                        on: {
+                          click: function($event) {
+                            return _vm.listarPedidos(1, "", "", _vm.estatus)
+                          },
+                          change: function($event) {
+                            _vm.estatus = "PE"
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Parcialmente entregado")])
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
         ])
       ]),
       _vm._v(" "),
-      _vm._m(1),
+      _c("br"),
       _vm._v(" "),
       _c(
         "table",
         { staticClass: "tabla centered" },
         [
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
           _vm._l(_vm.arrayPedidos, function(envios) {
             return _c("tbody", { key: envios.id }, [
               _c("tr", [
                 _c("td", {
-                  domProps: { textContent: _vm._s(envios.first_name) }
+                  domProps: { textContent: _vm._s(envios.PK_orders) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(envios.full_name) }
                 }),
                 _vm._v(" "),
                 _c("td", {
                   staticClass: "hide-on-small-only",
-                  domProps: { textContent: _vm._s(envios.subtotal) }
+                  domProps: { textContent: _vm._s(envios.date) }
                 }),
                 _vm._v(" "),
                 _c("td", {
                   staticClass: "hide-on-small-only",
                   domProps: { textContent: _vm._s(envios.total) }
-                }),
-                _vm._v(" "),
-                _c("td", {
-                  staticClass: "hide-on-small-only",
-                  domProps: { textContent: _vm._s(envios.statusShipments) }
                 }),
                 _vm._v(" "),
                 _c("td", {
@@ -36466,6 +37066,84 @@ var render = function() {
           })
         ],
         2
+      ),
+      _vm._v(" "),
+      _c(
+        "ul",
+        { staticClass: "pagination" },
+        [
+          _vm.pagination.current_page > 1
+            ? _c("li", [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.cambiarPagina(
+                          _vm.pagination.current_page - 1,
+                          _vm.buscar,
+                          _vm.criterio
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons" }, [
+                      _vm._v("chevron_left")
+                    ])
+                  ]
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.pagesNumber, function(page) {
+            return _c(
+              "li",
+              { key: page, class: [page == _vm.isActived ? "active" : ""] },
+              [
+                _c("a", {
+                  attrs: { href: "#" },
+                  domProps: { textContent: _vm._s(page) },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.cambiarPagina(page, _vm.buscar, _vm.criterio)
+                    }
+                  }
+                })
+              ]
+            )
+          }),
+          _vm._v(" "),
+          _vm.pagination.current_page < _vm.pagination.last_page
+            ? _c("li", [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.cambiarPagina(
+                          _vm.pagination.current_page + 1,
+                          _vm.buscar,
+                          _vm.criterio
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons" }, [
+                      _vm._v("chevron_right")
+                    ])
+                  ]
+                )
+              ])
+            : _vm._e()
+        ],
+        2
       )
     ])
   ])
@@ -36475,56 +37153,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "title", staticStyle: { "padding-bottom": "2%" } },
-      [_c("h5", [_vm._v("Pedidos")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col s12" }, [
-          _c("ul", { staticClass: "tabs" }, [
-            _c("li", { staticClass: "tab col s3" }, [
-              _c("a", { attrs: { href: "#test1" } }, [_vm._v("Test 1")])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "tab col s3" }, [
-              _c("a", { staticClass: "active", attrs: { href: "#test2" } }, [
-                _vm._v("Test 2")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "tab col s3 disabled" }, [
-              _c("a", { attrs: { href: "#test3" } }, [_vm._v("Disabled Tab")])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "tab col s3" }, [
-              _c("a", { attrs: { href: "#test4" } }, [_vm._v("Test 4")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col s12", attrs: { id: "test1" } }, [
-          _vm._v("Test 1")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col s12", attrs: { id: "test2" } }, [
-          _vm._v("Test 2")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col s12", attrs: { id: "test3" } }, [
-          _vm._v("Test 3")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col s12", attrs: { id: "test4" } }, [
-          _vm._v("Test 4")
-        ])
-      ])
+    return _c("div", { staticClass: "col s12 m12 l12" }, [
+      _c(
+        "div",
+        { staticClass: "title", staticStyle: { "padding-bottom": "2%" } },
+        [_c("h5", [_vm._v("Pedidos")])]
+      )
     ])
   },
   function() {
@@ -36533,26 +37167,18 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", [_vm._v("ID")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Nombre del cliente")]),
         _vm._v(" "),
-        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("SubTotal")]),
+        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Fecha")]),
         _vm._v(" "),
         _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Total")]),
         _vm._v(" "),
-        _c("th", { staticClass: "hide-on-small-only" }, [
-          _vm._v("Estatus del Envio")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "hide-on-small-only" }, [
-          _vm._v("Estatus de la orden")
-        ]),
+        _c("th", { staticClass: "hide-on-small-only" }, [_vm._v("Estatus")]),
         _vm._v(" "),
         _c("th", { staticClass: "hide-on-small-only" }, [
           _vm._v("Editar estatus")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "hide-on-small-only" }, [
-          _vm._v("Actualizar estatus")
         ])
       ])
     ])
@@ -40105,6 +40731,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("main", { staticClass: "main-index" }, [
       _c("div", { staticClass: "row" }, [
+        _c("h1", [_vm._v("sadñalkdñals")]),
+        _vm._v(" "),
         _c("div", { staticClass: "col m6 s12 p-0 mb-2" }, [
           _c("h4", { staticClass: "mt-0 color-main" }, [_vm._v("Mi Cuenta")]),
           _vm._v(" "),
@@ -40239,9 +40867,69 @@ var render = function() {
       _vm._m(0),
       _vm._v(" "),
       _c("ul", { staticClass: "container-categorias-icons" }, [
-        _vm._m(1),
+        _c("li", { staticClass: "categorias-icons" }, [
+          _c("img", { attrs: { src: "img/woodPanel.png", alt: "" } }),
+          _vm._v(" "),
+          _c("h6", [_vm._v("TABLEROS")]),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Pino } },
+            [_vm._v("Pino")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Parota } },
+            [_vm._v("Parota")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Cedro } },
+            [_vm._v("Cedro")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Tzalam } },
+            [_vm._v("Tzalam")]
+          )
+        ]),
         _vm._v(" "),
-        _vm._m(2),
+        _c("li", { staticClass: "categorias-icons" }, [
+          _c("img", { attrs: { src: "img/woodIcon.png", alt: "" } }),
+          _vm._v(" "),
+          _c("h6", [_vm._v("MADERA")]),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Cimbras } },
+            [_vm._v("Cimbras")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.MDF } },
+            [_vm._v("MDF")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              attrs: { href: "/productos-Categorias?buscar=" + _vm.Aglomerados }
+            },
+            [_vm._v("Aglomerados")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              attrs: { href: "/productos-Categorias?buscar=" + _vm.Enchapados }
+            },
+            [_vm._v("Enchapados")]
+          )
+        ]),
         _vm._v(" "),
         _c(
           "li",
@@ -40249,39 +40937,166 @@ var render = function() {
           [
             _c("img", { attrs: { src: "img/herrajes.png", alt: "" } }),
             _vm._v(" "),
-            _c("H6", [_vm._v("HERRAJES")])
+            _c("H6", [_vm._v("HERRAJES")]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "/productos-Categorias?buscar=" + _vm.Correderas
+                }
+              },
+              [_vm._v("Correderas")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                attrs: { href: "/productos-Categorias?buscar=" + _vm.Jaladeras }
+              },
+              [_vm._v("Jaladeras")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                attrs: { href: "/productos-Categorias?buscar=" + _vm.Perfiles }
+              },
+              [_vm._v("Perfiles")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                attrs: { href: "/productos-Categorias?buscar=" + _vm.Bisagras }
+              },
+              [_vm._v("Bisagras")]
+            )
           ],
           1
         ),
         _vm._v(" "),
-        _vm._m(3),
+        _c("li", { staticClass: "categorias-icons" }, [
+          _c("img", { attrs: { src: "img/Cubierta80x80.png", alt: "" } }),
+          _vm._v(" "),
+          _c("h6", [_vm._v("CUBIERTAS")]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              attrs: {
+                href: "/productos-Categorias?buscar=" + _vm.CubiertaAglomerado
+              }
+            },
+            [_vm._v("Cubierta aglomerado")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Resina } },
+            [_vm._v("Resina")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Cuarzos } },
+            [_vm._v("Cuarzos")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Granito } },
+            [_vm._v("Granito")]
+          )
+        ]),
         _vm._v(" "),
         _c(
           "li",
-          { staticClass: "categorias-icons" },
+          {
+            staticClass: "categorias-icons",
+            staticStyle: { "align-content": "baseline" }
+          },
           [
-            _c("img", { attrs: { src: "img/woodPanel.png", alt: "" } }),
+            _c("img", {
+              attrs: { src: "img/LaminadosPlasticos80x80.png", alt: "" }
+            }),
             _vm._v(" "),
-            _c("H6", [_vm._v("LAMINADOS")])
+            _c("H6", [_vm._v("LAMINADOS")]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                attrs: { href: "/productos-Categorias?buscar=" + _vm.Naturales }
+              },
+              [_vm._v("Naturales")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                attrs: { href: "/productos-Categorias?buscar=" + _vm.Formaica }
+              },
+              [_vm._v("Formaica")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                attrs: { href: "/productos-Categorias?buscar=" + _vm.Cromacore }
+              },
+              [_vm._v("Cromacore")]
+            ),
+            _vm._v(" "),
+            _c("a", { attrs: { href: "" } })
           ],
           1
         ),
         _vm._v(" "),
-        _vm._m(4)
+        _c("li", { staticClass: "categorias-icons" }, [
+          _c("img", { attrs: { src: "img/paint2.png", alt: "" } }),
+          _vm._v(" "),
+          _c("h6", [_vm._v("PINTURA")]),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Pinturas } },
+            [_vm._v("Pinturas")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              attrs: { href: "/productos-Categorias?buscar=" + _vm.Pegamento }
+            },
+            [_vm._v("Pegamento")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Lijas } },
+            [_vm._v("Lijas")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Resanes } },
+            [_vm._v("Resanes")]
+          )
+        ])
       ]),
       _vm._v(" "),
       _c("h3", { staticClass: "color-main center title-index" }, [
         _vm._v("¡Nuestros Servicios!")
       ]),
       _vm._v(" "),
-      _vm._m(5),
+      _vm._m(1),
       _vm._v(" "),
-      _vm._m(6),
+      _vm._m(2),
       _vm._v(" "),
-      _vm._m(7),
+      _vm._m(3),
       _vm._v(" "),
-      _c("h3", { staticClass: "color-main center title-index" }, [
-        _vm._v("LO MÁS NUEVO EN EL MERCADO")
+      _c("h3", { staticClass: "text-title-init center title-index" }, [
+        _vm._v("Lo más nuevo en el mercado")
       ]),
       _vm._v(" "),
       _c(
@@ -40305,33 +41120,23 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "div",
-                    {
-                      staticClass: "card-content",
-                      staticStyle: { height: "150px" }
-                    },
+                    { staticClass: "card-content contend-products-home" },
                     [
                       _c("span", { staticClass: "card-title" }, [
                         _vm._v(_vm._s(product.name))
                       ]),
                       _vm._v(" "),
-                      _c("p", [_vm._v(_vm._s(product.description))]),
+                      _c(
+                        "p",
+                        { staticClass: "text-product hide-on-small-only" },
+                        [_vm._v(_vm._s(product.description))]
+                      ),
                       _vm._v(" "),
-                      _c("p", [_vm._v("$ " + _vm._s(product.price))])
+                      _c("p", { staticClass: "text-product" }, [
+                        _vm._v("$ " + _vm._s(product.price))
+                      ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-action" }, [
-                    _c(
-                      "a",
-                      {
-                        staticStyle: { color: "#419142 !important" },
-                        attrs: {
-                          href: "/Ver-Producto?id=" + product.PK_products
-                        }
-                      },
-                      [_vm._v("Ir a producto ")]
-                    )
-                  ])
+                  )
                 ])
               ])
             ]
@@ -40340,7 +41145,9 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _vm._m(8),
+      _vm._m(4),
+      _vm._v(" "),
+      _vm._m(5),
       _vm._v(" "),
       _c(
         "div",
@@ -40387,7 +41194,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("li", [
           _c("i", { staticClass: "Medium material-icons" }, [_vm._v("call")]),
-          _vm._v("Matriz Culiacán 7490021")
+          _vm._v("Lorem ipsum dolor sit 777777")
         ]),
         _vm._v(" "),
         _c("li", [
@@ -40406,48 +41213,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "categorias-icons" }, [
-      _c("img", { attrs: { src: "img/woodPanel.png", alt: "" } }),
-      _vm._v(" "),
-      _c("h6", [_vm._v("TABLEROS")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "categorias-icons" }, [
-      _c("img", { attrs: { src: "img/woodIcon.png", alt: "" } }),
-      _vm._v(" "),
-      _c("h6", [_vm._v("MADERA")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "categorias-icons" }, [
-      _c("img", { attrs: { src: "img/woodPanel.png", alt: "" } }),
-      _vm._v(" "),
-      _c("h6", [_vm._v("CUBIERTAS")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "categorias-icons" }, [
-      _c("img", { attrs: { src: "img/paint2.png", alt: "" } }),
-      _vm._v(" "),
-      _c("h6", [_vm._v("PINTURA")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row", attrs: { id: "services-main" } }, [
-      _c("div", { staticClass: "col s12 m6 l4" }, [
+      _c("div", { staticClass: "col s6 m6 l4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
             _c("img", {
@@ -40462,7 +41229,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col s12 m6 l4" }, [
+      _c("div", { staticClass: "col s6 m6 l4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
             _c("img", {
@@ -40479,7 +41246,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col s12 m6 l4" }, [
+      _c("div", { staticClass: "col s6 m6 l4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
             _c("img", {
@@ -40496,7 +41263,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col s12 m6 l4" }, [
+      _c("div", { staticClass: "col s6 m6 l4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
             _c("img", {
@@ -40513,7 +41280,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col s12 m6 l4" }, [
+      _c("div", { staticClass: "col s6 m6 l4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
             _c("img", {
@@ -40530,7 +41297,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col s12 m6 l4" }, [
+      _c("div", { staticClass: "col s6 m6 l4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-image" }, [
             _c("img", {
@@ -40555,7 +41322,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "contenedorImg col l12 m12 s12" }, [
         _c("img", {
-          attrs: { src: "img/servicio5.jpg", alt: "Optimizador online de PG" }
+          attrs: { src: "img/optimizador.png", alt: "Optimizador online de PG" }
         }),
         _vm._v(" "),
         _c("ul", { staticClass: "texto-optimizador col l4" }, [
@@ -40664,9 +41431,102 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("section", [
+      _c("div", [
+        _c("h3", { staticClass: "text-title-init center title-index" }, [
+          _vm._v("Conoce la experiencia de nuestros clientes")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "main-container-coments" }, [
+        _c("div", { staticClass: "cotainer-coments" }, [
+          _c("div", { staticClass: "contenerdor-comentarios-clientes" }, [
+            _c("p", [
+              _vm._v('"Muy buen servicio. Excelente calidad en maderas"')
+            ])
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "bold" }, [_vm._v("Persona1")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cotainer-coments" }, [
+          _c("div", { staticClass: "contenerdor-comentarios-clientes" }, [
+            _c("p", [
+              _vm._v('"Muy buen servicio. Excelente calidad en maderas"')
+            ])
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "bold" }, [_vm._v("Dalia Morales")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cotainer-coments" }, [
+          _c("div", { staticClass: "contenerdor-comentarios-clientes" }, [
+            _c("p", [_vm._v('"Super grande la variedad que manejan"')])
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "bold" }, [_vm._v("AR ETIQUETADO")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cotainer-coments" }, [
+          _c(
+            "div",
+            { staticClass: "contenerdor-comentarios-clientes content-big" },
+            [
+              _c("p", [
+                _vm._v(
+                  '"Encontré lo que buscaba muy buena atención y tienen mucha variedad de madera y triplay"'
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "bold" }, [_vm._v("Morales Medina")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cotainer-coments" }, [
+          _c(
+            "div",
+            {
+              staticClass: "contenerdor-comentarios-clientes content-big",
+              staticStyle: { padding: "0", margin: "0" }
+            },
+            [
+              _c("p", [
+                _vm._v(
+                  '"El Concepto de la compañía me parece excelente, Me diseñaron mi cocina me hicieron todos los servicios de las tablas \n                        y al final me explicaron como armarlo, mi esposo armo toda la cina y el ahorro fue muy bueno"'
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "bold" }, [_vm._v("Jazmin Parra")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cotainer-coments" }, [
+          _c(
+            "div",
+            { staticClass: "contenerdor-comentarios-clientes content-big" },
+            [
+              _c("p", [
+                _vm._v(
+                  '"Un lugar agradable, tienen muy buena atención y son muy profesionales"'
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "bold" }, [_vm._v("Guadalupe Alcaraz")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "center" }, [
-      _c("h3", { staticClass: "proveedores title-index" }, [
-        _vm._v("NUESTROS PROVEEDORES")
+      _c("h3", { staticClass: "text-title-init title-index" }, [
+        _vm._v("Nuestros Proveedores")
       ])
     ])
   }
@@ -41473,7 +42333,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "switch" }, [
-        _c("label", { attrs: { for: "last_name" } }, [
+        _c("label", { attrs: { for: "guardado" } }, [
           _vm._v("¿Desea guardar esta tarjeta para futuras compras?")
         ]),
         _vm._v(" "),
@@ -41488,6 +42348,17 @@ var staticRenderFns = [
             "\n                                            No\n                                            "
           )
         ])
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "a",
+          {
+            staticStyle: { "font-size": "10px", color: "green" },
+            attrs: { href: "https://conekta.com/" }
+          },
+          [_vm._v("Tus datos estan asegurados por conekta")]
+        )
       ])
     ])
   },
@@ -42411,9 +43282,31 @@ var render = function() {
         _vm._v(" "),
         _vm.informacion == 4
           ? _c("div", { staticClass: "col m9 s12" }, [
-              _c("h6", { staticClass: "center" }, [
-                _vm._v("Aún no tienes pedidos realizados :(")
-              ])
+              _c(
+                "table",
+                _vm._l(_vm.arrayPedidos, function(pedidos) {
+                  return _c("tbody", { key: pedidos.id }, [
+                    _c("tr", { staticClass: "border" }, [
+                      _c("td", [_vm._v("# " + _vm._s(pedidos.PK_orders))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(pedidos.date))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(pedidos.status_name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("$" + _vm._s(_vm.pedid))])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(2, true)
+                  ])
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _vm.arrayPedidos == ""
+                ? _c("h6", { staticClass: "center" }, [
+                    _vm._v("Aún no tienes pedidos realizados :(")
+                  ])
+                : _vm._e()
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -42605,6 +43498,42 @@ var staticRenderFns = [
         [_c("i", { staticClass: "material-icons" }, [_vm._v("add")])]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", { staticClass: "border" }, [
+      _c("td", { attrs: { colspan: "4" } }, [
+        _c("div", { staticClass: "col m12 s12 p-0" }, [
+          _c("span", { staticClass: "col m3 s3" }, [_vm._v("Producto")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "col m3 s3" }, [_vm._v("1")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "col m3 s3" }, [_vm._v("$798")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "col m3 s3" }, [_vm._v("$798")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "col m12 s12 mt-2 bold" }, [
+            _vm._v("Dirección de Entrega:")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "col m12 s12 mt-0" }, [
+            _vm._v(
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem consequuntur voluptatibus iure optio quisquam mollitia, ab illum tempora recusandae nobis sunt et inventore facilis omnis pariatur dolorem iusto fuga aliquam!"
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col m12 s12 right" }, [
+            _c("span", { staticClass: "col m3 s3 offset-m6 bold" }, [
+              _vm._v("Total:")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "col m3 s3" }, [_vm._v("$798")])
+          ])
+        ])
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -42668,6 +43597,12 @@ var render = function() {
                 "select",
                 {
                   directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: producto.avaible > 0,
+                      expression: "producto.avaible > 0"
+                    },
                     {
                       name: "model",
                       rawName: "v-model",
@@ -42735,6 +43670,35 @@ var render = function() {
                   _c("i", { staticClass: "material-icons left m-0" }, [
                     _vm._v("add_shopping_cart")
                   ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: producto.avaible == 0,
+                      expression: "producto.avaible == 0"
+                    }
+                  ],
+                  staticClass: "grey-text text-darken-2",
+                  attrs: { href: "" }
+                },
+                [
+                  _c(
+                    "i",
+                    {
+                      staticClass: "material-icons grey-text text-lig",
+                      attrs: { "ten-2": "" }
+                    },
+                    [_vm._v("remove_shopping_cart")]
+                  ),
+                  _vm._v(
+                    "No hay productos disponibles. para comprar en la tienda seleccionada"
+                  )
                 ]
               )
             ])
@@ -42844,14 +43808,6 @@ var render = function() {
             return _c(
               "div",
               {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: producto.avaible > 0,
-                    expression: "producto.avaible > 0"
-                  }
-                ],
                 key: producto.PK_products,
                 staticClass: "card sticky-action col m4 s12 contorno",
                 staticStyle: { "z-index": "0" }
@@ -42895,6 +43851,36 @@ var render = function() {
                   _vm._v(" "),
                   _c("p", [_vm._v("SKU: " + _vm._s(producto.SKU))]),
                   _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: producto.avaible == 0,
+                          expression: "producto.avaible == 0"
+                        }
+                      ]
+                    },
+                    [_vm._v("Disponibilidad: No disponible")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: producto.avaible > 0,
+                          expression: "producto.avaible > 0"
+                        }
+                      ]
+                    },
+                    [_vm._v("Disponibilidad: " + _vm._s(producto.avaible))]
+                  ),
+                  _vm._v(" "),
                   _c("h6", [_vm._v("$" + _vm._s(producto.price))])
                 ]),
                 _vm._v(" "),
@@ -42902,6 +43888,14 @@ var render = function() {
                   _c(
                     "a",
                     {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: producto.avaible > 0,
+                          expression: "producto.avaible > 0"
+                        }
+                      ],
                       staticClass:
                         "btn bg-main agregar-carrito hide-on-small-only",
                       on: {
@@ -43344,7 +44338,7 @@ var render = function() {
               }
             ],
             staticClass: "datepicker",
-            attrs: { type: "date", placeholder: "Fecha de nacimiento" },
+            attrs: { type: "text", placeholder: "Fecha de nacimiento" },
             domProps: { value: _vm.birth_date },
             on: {
               input: function($event) {
@@ -43820,22 +44814,6 @@ var staticRenderFns = [
         ),
         _c("i", { staticClass: "material-icons left color-main" }, [
           _vm._v("check")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _c("label", [
-          _c("input", { attrs: { type: "checkbox" } }),
-          _vm._v(" "),
-          _c("span", [_vm._v("Sí, quiero recibir promociones")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _c("label", [
-          _c("input", { attrs: { type: "checkbox" } }),
-          _vm._v(" "),
-          _c("span", [_vm._v("He leído y acepto los Términos y Condiciones")])
         ])
       ])
     ])
@@ -64515,7 +65493,8 @@ var app = new Vue({
   data: {
     menu: 0,
     idProducto: 0,
-    idCateP: 0
+    idCateP: 0,
+    buscar: ''
   },
   methods: {
     mostrarProducto: function mostrarProducto(objeto) {
@@ -64527,6 +65506,11 @@ var app = new Vue({
       var m = this;
       m.menu = objeto.valorMenu;
       m.idCateP = objeto.valorCateId;
+    },
+    verProductoLike: function verProductoLike() {
+      var m = this;
+      m.menu = objeto.vMenu;
+      m.buscar = objeto.like;
     }
   }
 });

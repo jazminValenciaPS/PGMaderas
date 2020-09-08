@@ -37,7 +37,7 @@ class SliderController extends Controller
         $prefijo = 'Image';
         $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
         $img->move('img', $nombreImagen);
-       
+        
         $slider->image = $nombreImagen;
         $slider->title = $request->title;
         $slider->description = $request->description;
@@ -59,8 +59,6 @@ class SliderController extends Controller
 
         File::delete('img/' . $slider->image);
 
-      
-       
         $slider->image = $nombreImagen;
         $slider->title = $request->title;
         $slider->description = $request->description;

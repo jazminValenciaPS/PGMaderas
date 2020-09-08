@@ -117,6 +117,7 @@ export default {
             PK_slider: '',
             errorSlider:'',
             errorMostrarMsjSlider: [],
+            file:'',
         }
     },
     methods:{

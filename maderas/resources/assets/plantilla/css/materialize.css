@@ -4896,7 +4896,7 @@ small {
 
 .card .card-content .card-title {
   display: block;
-  line-height: 32px;
+  /* line-height: 32px; */
   margin-bottom: 8px;
 }
 
@@ -5248,7 +5248,7 @@ small {
 
 .btn:focus, .btn-large:focus, .btn-small:focus,
 .btn-floating:focus {
-  background-color: #1d7d74;
+  background-color: #419142;
 }
 
 .btn, .btn-large, .btn-small {
@@ -5276,7 +5276,7 @@ small {
   height: 40px;
   line-height: 40px;
   padding: 0;
-  background-color: #26a69a;
+  background-color: #419142;
   border-radius: 50%;
   -webkit-transition: background-color .3s;
   transition: background-color .3s;
@@ -5285,7 +5285,7 @@ small {
 }
 
 .btn-floating:hover {
-  background-color: #26a69a;
+  background-color: #419142;
 }
 
 .btn-floating:before {

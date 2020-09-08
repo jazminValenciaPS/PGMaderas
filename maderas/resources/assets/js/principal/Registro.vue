@@ -22,26 +22,16 @@
                 <p>
                     Vuelve a comprar tus órdenes anteriores
                     <i class="material-icons left color-main">check</i>
-                </p>
+                </p> 
                 <p>
                     Recibe promociones y boletines especializados
                     <i class="material-icons left color-main">check</i>
                 </p>
-                    <p>
-                        <label>
-                            <input type="checkbox" />
-                            <span>Sí, quiero recibir promociones</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input type="checkbox" />
-                            <span>He leído y acepto los Términos y Condiciones</span>
-                        </label>
-                    </p>
+                    
             </div>
 
             <!-- Sign Up -->
+
 
             <div class="col m6 s12 p-0">
                 <div class="input-field col m12 s12 mb-0">
@@ -53,7 +43,7 @@
                     <label for="lastname">Apellido(s)</label>
                 </div>
                 <div class="input-field col m12 s12 mb-0">
-                    <input type="date" class="datepicker" v-model="birth_date" placeholder="Fecha de nacimiento" >
+                    <input type="text" class="datepicker" v-model="birth_date" placeholder="Fecha de nacimiento" >
                     <div class="input-field col s6">                          
                         <select name="LeaveType" class="browser-default" v-model="gender">
                             <option value="0" disabled selected>Selecciona el genero</option>

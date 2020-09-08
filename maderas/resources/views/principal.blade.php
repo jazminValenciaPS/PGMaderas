@@ -11,7 +11,7 @@
 
     <!-- General CSS -->
     <link rel="stylesheet" href='css/general.css' >
-    <link rel="stylesheet" href='css/plantilla.css' >
+    <!-- <link rel="stylesheet" href='css/plantilla.css' > -->
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Source+Serif+Pro:ital,wght@1,600&display=swap" rel="stylesheet">
 
     <link href="https://unpkg.com/vueperslides/dist/vueperslides.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 
     @include('plantilla.navEcommerce')
     <!-- Contenido principal -->
-    @yield('ecommerce')
+    <!-- @yield('ecommerce') -->
     <!-- Termina contenido principal -->
 
     <!-- Footer -->

@@ -9,7 +9,7 @@
         <div class="row center">
             <ul class="col l12 numeros center-align" >
                 <li>Puedes contactarnos en:</li>
-                <li><i class="Medium material-icons">call</i>Matriz Culiacán 7490021</li>
+                <li><i class="Medium material-icons">call</i>Lorem ipsum dolor sit 777777</li>
                 <li><i class="Medium material-icons">call</i>Sucursal Zapata 7662020</li>
                 <li><i class="Medium material-icons">call</i>Sucursal Monterrey 8147373452</li>
             </ul>
@@ -20,33 +20,58 @@
             <li class="categorias-icons">
                 <img src="img/woodPanel.png" alt="">
                 <h6>TABLEROS</h6>
+                <a  :href="'/productos-Categorias?buscar='+Pino">Pino</a>
+                <a :href="'/productos-Categorias?buscar='+Parota">Parota</a>
+                <a :href="'/productos-Categorias?buscar='+Cedro" >Cedro</a>
+                <a :href="'/productos-Categorias?buscar='+Tzalam">Tzalam</a>
             </li>
             <li class="categorias-icons">
                 <img src="img/woodIcon.png" alt="">
                 <h6>MADERA</h6>
+                <a :href="'/productos-Categorias?buscar='+Cimbras">Cimbras</a>
+                <a :href="'/productos-Categorias?buscar='+MDF">MDF</a>
+                <a :href="'/productos-Categorias?buscar='+Aglomerados">Aglomerados</a>
+                <a :href="'/productos-Categorias?buscar='+Enchapados">Enchapados</a>
             </li>
             <li class="categorias-icons">
                 <img src="img/herrajes.png" alt="">
                 <H6>HERRAJES</H6>
+                <a :href="'/productos-Categorias?buscar='+Correderas">Correderas</a>
+                <a :href="'/productos-Categorias?buscar='+Jaladeras">Jaladeras</a>
+                <a :href="'/productos-Categorias?buscar='+Perfiles">Perfiles</a>
+                <a :href="'/productos-Categorias?buscar='+Bisagras">Bisagras</a>
             </li>
             <li class="categorias-icons">
-                <img src="img/woodPanel.png" alt="">
+                <img src="img/Cubierta80x80.png" alt="">
                 <h6>CUBIERTAS</h6>
+                <a :href="'/productos-Categorias?buscar='+CubiertaAglomerado">Cubierta aglomerado</a>
+                <a :href="'/productos-Categorias?buscar='+Resina">Resina</a>
+                <a :href="'/productos-Categorias?buscar='+Cuarzos">Cuarzos</a>
+                <a :href="'/productos-Categorias?buscar='+Granito">Granito</a>
+                
             </li>
-            <li class="categorias-icons">
-                <img src="img/woodPanel.png" alt="">
+            <li class="categorias-icons" style="align-content: baseline;">
+                <img src="img/LaminadosPlasticos80x80.png" alt="">
                 <H6>LAMINADOS</H6>
+                <a :href="'/productos-Categorias?buscar='+Naturales">Naturales</a>
+                <a :href="'/productos-Categorias?buscar='+Formaica">Formaica</a>
+                <a :href="'/productos-Categorias?buscar='+Cromacore">Cromacore</a>
+                <a href=""></a>
             </li>
             <li class="categorias-icons">
                  <img src="img/paint2.png" alt="">
                 <h6>PINTURA</h6>
+                <a :href="'/productos-Categorias?buscar='+Pinturas">Pinturas</a>
+                <a :href="'/productos-Categorias?buscar='+Pegamento">Pegamento</a>
+                <a :href="'/productos-Categorias?buscar='+Lijas">Lijas</a>
+                <a :href="'/productos-Categorias?buscar='+Resanes">Resanes</a>
             </li>
         </ul>
 
         <!-- Card Services -->
         <h3 class="color-main center title-index" >¡Nuestros Servicios!</h3>
         <div class="row" id="services-main">
-            <div class="col s12 m6 l4">
+            <div class="col s6 m6 l4">
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Enbisagrado' src="img/servicio1.jpg">
@@ -55,7 +80,7 @@
                 </div>
             </div>
 
-            <div class="col s12 m6 l4" >
+            <div class="col s6 m6 l4" >
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Enchapado de cantos' src="img/servicio2.jpg">
@@ -64,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="col s12 m6 l4">
+            <div class="col s6 m6 l4">
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Corte de tableros' src="img/servicio3.jpg">
@@ -73,7 +98,7 @@
                 </div>
             </div>
 
-             <div class="col s12 m6 l4">
+             <div class="col s6 m6 l4">
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Corte de cubiertas'  src="img/servicio4.jpg">
@@ -82,7 +107,7 @@
                 </div>
             </div>
 
-            <div class="col s12 m6 l4">
+            <div class="col s6 m6 l4">
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Corte de maderas' src="img/servicio5.jpg">
@@ -91,7 +116,7 @@
                 </div>
             </div>
 
-            <div class="col s12 m6 l4">
+            <div class="col s6 m6 l4">
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Cepillado de madera' src="img/servicio6.jpg">
@@ -104,7 +129,7 @@
         <!-- Optimizador -->
        <div class="row">
            <div class="contenedorImg col l12 m12 s12">
-               <img src="img/servicio5.jpg" alt="Optimizador online de PG">
+               <img src="img/optimizador.png" alt="Optimizador online de PG">
                 <ul class="texto-optimizador col l4">
                     <li class="white-text">OPTIMIZADOR ONLINE PG (xlsx)</li>
                     <li href="/descargar/file" class="black-text"> <i class="material-icons black-text">get_app</i> Descargar</li>
@@ -166,29 +191,74 @@
             </div>
         </div>
         
-        <h3 class="color-main center title-index">LO MÁS NUEVO EN EL MERCADO</h3>
+        <h3 class="text-title-init center title-index">Lo más nuevo en el mercado</h3>
          <section class="section-contianer-new-produc">
             <div class="row container-card" v-for="product in arrayProductos"  :key="product.PK_products">
                 <div class="col s12 m12 l12" >
-                    <div class="card">
+                    <div class="card" >
                         <div class="card-image">
                             <img alt='imagen de productos PG Maderas' :src="'img/'+product.image">
                         </div>
-                        <div class="card-content" style="height: 150px;">
-                            <span  class="card-title">{{product.name}}</span>
-                            <p>{{product.description}}</p>
-                            <p>$ {{product.price}}</p>
+                        <div class="card-content contend-products-home">
+                            <span class="card-title">{{product.name}}</span>
+                            <p class="text-product hide-on-small-only">{{product.description}}</p>
+                            <p class="text-product">$ {{product.price}}</p>
                         </div>
-                        <div class="card-action">
+                        <!-- <div class="card-action">
                             <a style="color:#419142 !important" :href="'/Ver-Producto?id='+product.PK_products">Ir a producto </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
          </section>
+        
+        <section>
+            <div>
+                <h3 class="text-title-init center title-index">Conoce la experiencia de nuestros clientes</h3>
+            </div> 
+            <div class="main-container-coments">
+                <div class="cotainer-coments" >
+                    <div class="contenerdor-comentarios-clientes">
+                        <p>"Muy buen servicio. Excelente calidad en maderas"</p>
+                    </div>
+                    <p class="bold">Persona1</p>
+                </div>
+                <div class="cotainer-coments" >
+                    <div class="contenerdor-comentarios-clientes">
+                        <p>"Muy buen servicio. Excelente calidad en maderas"</p>
+                    </div>
+                    <p class="bold">Dalia Morales</p>
+                </div>
+                <div class="cotainer-coments" >
+                    <div class="contenerdor-comentarios-clientes">
+                        <p>"Super grande la variedad que manejan"</p>
+                    </div>
+                    <p class="bold">AR ETIQUETADO</p>
+                </div>
+                <div class="cotainer-coments" >
+                    <div class="contenerdor-comentarios-clientes content-big">
+                        <p>"Encontré lo que buscaba muy buena atención y tienen mucha variedad de madera y triplay"</p>
+                    </div>
+                    <p class="bold">Morales Medina</p>
+                </div>
+                <div class="cotainer-coments" >
+                    <div class="contenerdor-comentarios-clientes content-big" style="padding: 0; margin: 0;">
+                        <p>"El Concepto de la compañía me parece excelente, Me diseñaron mi cocina me hicieron todos los servicios de las tablas 
+                            y al final me explicaron como armarlo, mi esposo armo toda la cina y el ahorro fue muy bueno"</p>
+                    </div>
+                    <p class="bold">Jazmin Parra</p>
+                </div>
+                <div class="cotainer-coments">
+                    <div class="contenerdor-comentarios-clientes content-big">
+                        <p>"Un lugar agradable, tienen muy buena atención y son muy profesionales"</p>
+                    </div>
+                    <p class="bold">Guadalupe Alcaraz</p>
+                </div>
+            </div>    
+        </section>
        
         <div class="center">
-            <h3 class="proveedores title-index">NUESTROS PROVEEDORES</h3>
+            <h3 class="text-title-init title-index">Nuestros Proveedores</h3>
         </div>
         <div class="container-prob-inicio">
             <vueper-slides autoplay  class="no-shadow" :visible-slides="3" :breakpoints="{ 800: { visibleSlides: 1, slideMultiple: 2 } }" :slide-ratio="1 / 4" :dragging-distance="70">
@@ -245,6 +315,30 @@
                         image: 'img/surtimex.png'
                     },
                 ],
+                Pino:"Pino",
+                Parota:"Parota",
+                Cedro:"Cedro",
+                Tzalam:"Tzalam",
+                Cimbras:"Cimbras",
+                MDF:"MDF",
+                Aglomerados:"Aglomerados",
+                Enchapados:"Enchapados",
+                Correderas:"Correderas",
+                Jaladeras:"Jaladeras",
+                Perfiles:"Perfiles",
+                Bisagras:"Bisagras",
+                CubiertaAglomerado:"Cubierta Aglomerado",
+                Resina:"Resina",
+                Cuarzos:"Cuarzos",
+                Granito:"Granito",
+                Naturales:"Naturales",
+                Formaica:"Formaica",
+                Cromacore:"Cromacore",
+                Pinturas:"Pinturas",
+                Pegamento:"Pegamento",
+                Lijas:"Lijas",
+                Resanes:"Resanes",
+             
             }
         },
         computed: {
@@ -269,16 +363,16 @@
 
                 axios.get('/productosNuevos').then(function (response){
                     m.arrayProductos = response.data;
-                
-                })
-                .catch(function(error){
-                    console.log(error);
-               });
+                });
             },
+            verProductoLike(menu,id){
+            let m=this;
+            var objeto = {
+                vMenu: menu,
+                like: buscar
+            }
+            m.$emit("listar-productos",objeto);
         },
-        mounted() {
-            this.listarSliders();
-            this.nuevosProductos();
-        }
-     }
- </script>
+        },
+    }
+ </script>  

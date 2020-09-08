@@ -62,6 +62,18 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <script>
+  $(document).ready(function(){
+    $('.tabs').tabs();
+  });
+     let tabs = document.querySelector(".tabs")
+        var instance = M.Tabs.init(tabs);
+
+    $(document).ready(function(){
+    $('ul.tabs').tabs({
+      swipeable : false,
+      responsiveThreshold : 1920
+    });
+  });
   $(document).ready(function() {
     $('input#input_text, textarea#textarea2').characterCounter();
   });

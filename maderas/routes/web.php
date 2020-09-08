@@ -35,6 +35,10 @@ Route::get('/Ver-Categoria-Producto', function () {
     return view('tienda.pagina.Productos');
 })->name('CategoriaProducto');
 
+Route::get('/productos-Categorias', function () {
+    return view('tienda.pagina.Productos');
+})->name('CategoriaProductoInicio');
+
 Route::get('/Carrito', function () {
     return view('tienda.pagina.Carrito');
 })->name('carrito');
@@ -131,6 +135,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/rol','RolController@index');
     
         Route::get('/order','OrderController@index');
+        Route::get('/order/status','OrderStatusController@index');
+
 
         Route::get('/stock','StockController@index');
         Route::post('/stock/actualizar','StockController@update');
@@ -157,7 +163,7 @@ Route::get('/productoL','ProductController@listarProductos');
 Route::get('/categoriaProductoL','CategoriesProductsController@listarCateP');
 
 
-Route::get('/productoM/{id}', 'ProductController@mostrarProducto')->name('productos');
+Route::get('/productoM', 'ProductController@mostrarProducto')->name('productos');
 Route::get('/productosNuevos', 'ProductController@productosNuevos');
 
 
@@ -170,6 +176,9 @@ Route::get('/user/cliented/{correo}','UserController@clientData');
 Route::post('/user/registrarC','UserController@registroCliente');
 Route::post('/cliente/actualizar','UserController@updateClient');
 Route::post('/client/passwordUpdate','UserController@passwordUpdate');
+Route::get('/order/user','OrderController@clientData');
+
+
 
 Route::get('/categoriaV','CategorieController@listar');
 
@@ -187,6 +196,8 @@ Route::get('/user/info','userController@info');
 Route::post('/user/update/branch','userController@updateBranch');
 
 
+
 Route::get('/descargar/file','DocumentController@optimizador');
+Route::get('/productosCategorias', 'ProductController@productosPorDefecto');
 
 

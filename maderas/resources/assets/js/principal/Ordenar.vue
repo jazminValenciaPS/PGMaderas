@@ -52,13 +52,16 @@
                                         </div>
                                         <div class="row">
                                             <div class="switch">
-                                                <label for="last_name">¿Desea guardar esta tarjeta para futuras compras?</label>
+                                                <label for="guardado">¿Desea guardar esta tarjeta para futuras compras?</label>
                                                 <label>
                                                 Si
                                                 <input type="checkbox">
                                                 <span class="lever"></span>
                                                 No
                                                 </label>
+                                            </div>
+                                            <div>
+                                                <a href="https://conekta.com/" style="font-size:10px; color:green;">Tus datos estan asegurados por conekta</a>
                                             </div>
                                         </div>
                                         <div class="card-action center">
@@ -143,9 +146,6 @@
                     </li>
                 </ul>
             </section>
-            <!-- <section class="container-metodo-button" style="z-index:0">
-                <a class="waves-effect bg-main waves-light btn aling" @click="guardarOrden()"><i class="material-icons right">attach_money</i>Ir a pagar</a>
-            </section> -->
         </div>
     </main>
 </template>

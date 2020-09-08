@@ -59,7 +59,7 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
      -webkit-box-shadow: none !important; 
      box-shadow: none !important;  
 }
-#Productos .card .card-content { padding: 10px 20px; }
+#Productos .card .card-content {  padding: 10px 20px; }
 #Productos .card .card-action { border: none !important; }
 #Productos .card .card-image img { padding: 20px !important; }
 
@@ -126,10 +126,8 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
 }
 
 /* nuevos productos */
-
 .section-contianer-new-produc{
     padding: 0 10%;
-    
 }
 
 .section-contianer-new-produc .container-card{
@@ -140,7 +138,7 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
 }
 
 .section-contianer-new-produc .container-card img{
-    height:250px !important;
+    height:150px !important;
 }
 
 
@@ -152,7 +150,7 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
     margin-top: 5%;
 } 
 .main-index{ 
-    padding: 10px 1px;
+    padding-top: 10px ;
 }
 
 .letraTN{
@@ -676,11 +674,9 @@ nav div ul li a {
     height: 80px !important;   
 
 }
-.proveedores{
+.text-title-init{
     font-size: 50px;
     color: #419142;
-
-
 }
 
 
@@ -723,6 +719,63 @@ nav div ul li a {
     width: 100%;
 }
 
+.contend-products-home{
+    height: 150px;
+}
+.container-categorias-icons .categorias-icons a {
+    color: grey ;
+}
+
+.main-container-coments{
+    display: grid;
+    padding: 0 5%;
+    padding-top: 2%;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(2,1fr);
+    grid-gap: 2%;
+}
+
+.cotainer-coments{
+    text-align: center;
+}
+
+.contenerdor-comentarios-clientes::before{
+    content: url("../img/ComillaIzquierda20.png");
+    background-repeat: no-repeat;
+    left: -9px;
+    background-color: #fff;
+    top: 5px;
+    display: flex;
+    position: relative;
+    width: 10px;
+}
+
+.contenerdor-comentarios-clientes::after{
+    content: url("../img/ComillaDerecha20.png");
+    /* background-color: ; */
+    background-repeat: no-repeat;
+    right: -403px;
+    background-color: #fff;
+    bottom: 5px;
+    padding: 0;
+    margin: 0;
+    width: 10px;
+    display: flex;
+    position: relative;
+}
+.content-big{
+    height: 171px;
+}
+
+.cotainer-coments img{
+    width: 25px;
+    height: 25px;
+}
+
+.contenerdor-comentarios-clientes{
+    border:1px solid gray;
+}
+
 @media screen and (max-width: 958px){
     .title-index { 
         font-size: xx-large;
@@ -755,17 +808,18 @@ nav div ul li a {
     /* productos nuevos */
 
     .section-contianer-new-produc{
-        display: grid; 
+        /* display: grid;  */
+        padding: 0 5%;
     }
 
     .section-contianer-new-produc .container-card{
-        width: 75% ; 
+        /* height: 200px !important; */
         justify-content: center;
         align-content: center;
     }
 
     .section-contianer-new-produc .container-card img{
-        height:300px !important;
+        height:200px !important;
         width: 100% !important;
     }
     .iconos{
@@ -774,11 +828,20 @@ nav div ul li a {
     
     }
 
+    .contend-products-home{
+        height: 180px;
+    }
+
+   
+
 }
 
 
 @media screen and (max-width: 507px) {
-    
+    .main-index{ 
+        padding-top: 3% ;
+    }
+
     .centrar{
         margin-left: 0% !important;
       }
@@ -855,9 +918,9 @@ nav div ul li a {
         color: #ffff;
         width: 100%;
         justify-content: center;
-        font-size: 15px;
+        font-size: small;
         margin: 0;    
-        display: block;
+        display: flex;
     }
 
     .section-contianer-new-produc{
@@ -872,11 +935,22 @@ nav div ul li a {
     }
 
     .section-contianer-new-produc .container-card{
-        width: 100% !important; 
+        width: 50%; 
+    }
+
+    .section-contianer-new-produc .card-content{
+        height: 180px ;
+        font-size: initial !important;
+    }
+    .section-contianer-new-produc .card-content .card-title{
+        font-size: 14px !important;
+    }
+    .section-contianer-new-produc .card-content .text-product{
+        font-size: 10px !important;
     }
 
     .section-contianer-new-produc .container-card img{
-        height:300px !important;
+        height:150px !important;
         width: 100% !important;
     }
     .categorias-icons{
@@ -901,12 +975,19 @@ nav div ul li a {
         font-weight: bold;
         font-size: larger;
     }
+    .section_sucursal {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
 }
 
-@media (max-width:350px){
+@media screen and (max-width:380px){
 
     main{
         margin-top: 10% ;
+    }
+    .main-index{ 
+        padding-top: 5% ;
     }
 
     .section_sucursal {
@@ -931,21 +1012,8 @@ nav div ul li a {
 
       /* productos nuevos */
 
-    .section-contianer-new-produc{
-        display: grid; 
-    }
-
-    .section-contianer-new-produc .container-card{
-        width: 100% !important; 
-    }
-
-    .section-contianer-new-produc .container-card img{
-        height:20% !important;
-        width: 100% !important;
-    }
-    .cintilla-text{
-        color: #fff;
-        font-weight: bold;
-        font-size: larger;
+      .section-contianer-new-produc .card-content{
+        height: 130px ;
+        font-size: initial !important;
     }
 }

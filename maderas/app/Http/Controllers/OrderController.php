@@ -18,20 +18,91 @@ class OrderController extends Controller
      */
     
 
-    public function index()
+    public function index(Request $request)
     {
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        $status = $request->status;
+
+        // print_r($status);
+
+
+
+
+        if ($buscar =='' and $status =='Todos'){
+            // print($status);
+            $orden = DB::table('orders')
+            ->join('order_status','order_status.PK_order_status','=','orders.status')
+            ->join('shipments','orders.id_shipment','=','shipments.PK_shipments' )
+            ->join('shipment_status','shipment_status.PK_shipment_status','=','shipments.status')
+            ->join('users','orders.id_user','=','users.id' )
+            ->join('persons','users.id_person','=','persons.PK_persons')
+            ->select('orders.PK_orders','orders.total','order_status.status_name as statusOrder','orders.date','shipments.subtotal',
+                'shipment_status.name as statusShipments',
+                DB::raw("CONCAT(persons.first_name,' ',persons.last_name) AS full_name"))
+                ->paginate(10);
+        }
+        elseif($buscar==''){
+        $orden = DB::table('orders')
+        ->join('order_status','order_status.PK_order_status','=','orders.status')
+        ->join('shipments','orders.id_shipment','=','shipments.PK_shipments' )
+        ->join('shipment_status','shipment_status.PK_shipment_status','=','shipments.status')
+        ->join('users','orders.id_user','=','users.id' )
+        ->join('persons','users.id_person','=','persons.PK_persons')
+        ->select('orders.PK_orders','orders.total','order_status.status_name as statusOrder','orders.date','shipments.subtotal',
+                'shipment_status.name as statusShipments',
+                DB::raw("CONCAT(persons.first_name,' ',persons.last_name) AS full_name"))
+        ->where('order_status.status_name', '=', $status)
+        ->paginate(10);
+        }else{
+            $orden = DB::table('orders')
+            ->join('order_status','order_status.PK_order_status','=','orders.status')
+            ->join('shipments','orders.id_shipment','=','shipments.PK_shipments' )
+            ->join('shipment_status','shipment_status.PK_shipment_status','=','shipments.status')
+            ->join('users','orders.id_user','=','users.id' )
+            ->join('persons','users.id_person','=','persons.PK_persons')
+            ->select('orders.PK_orders','orders.total','order_status.status_name as statusOrder','orders.date','shipments.subtotal',
+                'shipment_status.name as statusShipments',
+                DB::raw("CONCAT(persons.first_name,' ',persons.last_name) AS full_name"))
+            ->where($criterio, 'like', '%'. $buscar . '%')
+            ->where('order_status.status_name', '=', $status)
+            ->paginate(10);
+
+        }
+
+
+        return [
+            'pagination' => [
+                'total'        => $orden->total(),
+                'current_page' => $orden->currentPage(),
+                'per_page'     => $orden->perPage(),
+                'last_page'    => $orden->lastPage(),
+                'from'         => $orden->firstItem(),
+                'to'           => $orden->lastItem(),
+            ],
+            'orden' => $orden
+        ];
+        
+    }
+
+ 
+
+    public function clientData(Request $request){
+
         return $orden = DB::table('orders')
         ->join('order_status','order_status.PK_order_status','=','orders.status')
         ->join('shipments','orders.id_shipment','=','shipments.PK_shipments' )
         ->join('shipment_status','shipment_status.PK_shipment_status','=','shipments.status')
         ->join('users','orders.id_user','=','users.id' )
         ->join('persons','users.id_person','=','persons.PK_persons')
-        ->select('orders.total','order_status.status_name as statusOrder','shipments.subtotal',
-        'persons.first_name','persons.last_name','shipment_status.name as statusShipments')
-        ->where('order_status.status_name', '=', 'Pendiente','or','shipment_status.name','shipment_status.name', '=', 'Pendiente')
+        ->select('orders.PK_orders','orders.total','order_status.status_name as statusOrder','orders.date','shipments.subtotal',
+            'shipment_status.name as statusShipments',
+            DB::raw("CONCAT(persons.first_name,' ',persons.last_name) AS full_name"))
+            ->where('order_status.status_name', '=', 'Pendiente','or','shipment_status.name','shipment_status.name', '=', 'Pendiente')
         ->get();
-        
+
     }
+
 
     public function store(Request $request)
     {

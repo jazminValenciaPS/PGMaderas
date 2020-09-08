@@ -76,7 +76,8 @@ const app = new Vue({
   data :{
       menu: 0,
       idProducto: 0,
-      idCateP:0
+      idCateP:0,
+      buscar:''
   },
   methods:{
     mostrarProducto(objeto){
@@ -88,6 +89,12 @@ const app = new Vue({
         let m = this;
         m.menu = objeto.valorMenu;
         m.idCateP = objeto.valorCateId;
+      },
+      verProductoLike(){
+        let m=this;
+        m.menu = objeto.vMenu;
+        m.buscar = objeto.like
       }
+
   }
 });

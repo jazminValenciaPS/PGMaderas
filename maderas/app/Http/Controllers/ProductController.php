@@ -61,41 +61,82 @@ class ProductController extends Controller
         $criterio = $request->criterio;
         $idSubCat = $request->id;
         $id_branch = $request->id_branch;
+        $like =$request->buscarLike;
 
-        
-        if ($buscar==''){
+        if($like == ''){
+            if ($buscar==''){
 
-            $producto = DB::table('products')
-            ->join('stock','stock.id_product','=','products.PK_products')
-            ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
-            ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products_categories.id_subcategories')
-            ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
-            ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','stock.id_PG_branches')
-            ->select('products.PK_products','products.SKU','products.name','products.description',
-            'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
-            'products_categories.name as productscategories','products_images.image')
-            ->distinct()
-            ->where('products.status','=','1')
-            ->where('_p_g_branches.PK_PG_branches','=',$id_branch)
-            ->where('subcategories.PK_subcategories','=',$idSubCat)
-            ->orderBy('products.PK_products', 'desc')->paginate(6);
+                $producto = DB::table('products')
+                ->join('stock','stock.id_product','=','products.PK_products')
+                ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
+                ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products_categories.id_subcategories')
+                ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+                ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','stock.id_PG_branches')
+                ->select('products.PK_products','products.SKU','products.name','products.description',
+                'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
+                'products_categories.name as productscategories','products_images.image','_p_g_branches.PK_PG_branches')
+                ->distinct()
+                ->where('products.status','=','1')
+                ->where('_p_g_branches.PK_PG_branches','=',$id_branch)
+                ->where('subcategories.PK_subcategories','=',$idSubCat)
+                ->orderBy('products.PK_products', 'desc')->paginate(6);
+    
+            }
+            else{
+                $producto = DB::table('products')
+                -join('stock','stock.id_product','=','products.PK_products')
+                ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
+                ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+                ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','stock.id_PG_branches')
+                ->select('products.PK_products','products.SKU','products.name','products.description',
+                'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
+                'products_categories.name as productscategories','products_images.image')
+                ->distinct()
+                ->where('products.status','=','1')
+                ->where('_p_g_branches.PK_PG_branches','=',$id_branch)
+                ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
+                ->orderBy('products.PK_products', 'desc')->paginate(6);
+            }
+            
+        }elseif($idSubCat == ''){
+            if ($buscar==''){
+
+                $producto = DB::table('products')
+                ->join('stock','stock.id_product','=','products.PK_products')
+                ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
+                ->join('subcategories', 'subcategories.PK_subcategories', '=', 'products_categories.id_subcategories')
+                ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+                ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','stock.id_PG_branches')
+                ->select('products.PK_products','products.SKU','products.name','products.description',
+                'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
+                'products_categories.name as productscategories','products_images.image','_p_g_branches.PK_PG_branches')
+                ->distinct()
+                ->where('products.status','=','1')
+                ->where('_p_g_branches.PK_PG_branches','=',$id_branch)
+                ->where('products.name','like','%'. $like . '%')
+                // ->where('subcategories.PK_subcategories','=',$idSubCat)
+                ->orderBy('products.PK_products', 'desc')->paginate(6);
+    
+            }
+            else{
+                $producto = DB::table('products')
+                -join('stock','stock.id_product','=','products.PK_products')
+                ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
+                ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
+                ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','stock.id_PG_branches')
+                ->select('products.PK_products','products.SKU','products.name','products.description',
+                'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
+                'products_categories.name as productscategories','products_images.image')
+                ->distinct()
+                ->where('products.status','=','1')
+                ->where('_p_g_branches.PK_PG_branches','=',$id_branch)
+                ->where('products.name','like','%'. $like . '%')
+                ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
+                ->orderBy('products.PK_products', 'desc')->paginate(6);
+            }
 
         }
-        else{
-            $producto = DB::table('products')
-            -join('stock','stock.id_product','=','products.PK_products')
-            ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
-            ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
-            ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','stock.id_PG_branches')
-            ->select('products.PK_products','products.SKU','products.name','products.description',
-            'products.price','stock.avaible', 'products.status','products_categories.PK_products_categories',
-            'products_categories.name as productscategories','products_images.image')
-            ->distinct()
-            ->where('products.status','=','1')
-            ->where('_p_g_branches.PK_PG_branches','=',$id_branch)
-            ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
-            ->orderBy('products.PK_products', 'desc')->paginate(6);
-        }
+      
         
 
         return [
@@ -393,6 +434,17 @@ class ProductController extends Controller
         $producto = Product::findOrFail($id);
         $producto->destacado = '1';
         $producto->save();
+    }
+
+    public function productosPorDefecto(Request $request){
+
+        $buscar = $request->buscar;
+
+        return $producto = DB::table('products')
+        ->join('products_categories','products_categories.PK_products_categories', '=', 'products.id_products_categories')
+        ->select('products.name as Producto', 'products_categories.name as Categoria')
+        ->where('products.name','like','%'. $buscar . '%')
+        ->get();
     }
 
 }

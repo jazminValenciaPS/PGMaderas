@@ -4,6 +4,16 @@
   <li @click="menu=4"><a href="#">Empleados</a></li>
   <li @click="menu=5"><a href="#">Clientes</a></li>
 </ul>
+
+<ul id="dropdown3" class="dropdown-content">
+<li @click="menu=7"><a href="#">Cambiar contraseña </a></li>
+      <li>
+        <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
+      </li>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+        {{ csrf_field() }}
+      </form> 
+</ul>
 <nav>
 <img class="navImg hide-on-small-only" src="img/image.png" alt="">
 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons" style="color=black; ">menu</i></a>
@@ -18,16 +28,14 @@
       <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Usuarios<i class="material-icons right">arrow_drop_down</i></a></li>
       <li @click="menu=6"><a href="#">Pedidos</a></li>
       <li @click="menu=9"><a href="#">Stocks</a></li>
-      <li @click="menu=7"><a href="#">Cambiar contraseña </a></li>
-      <li>
-        <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
-      </li>
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" >
-        {{ csrf_field() }}
-      </form> 
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown3">{{ auth()->user()->email}}<i class="material-icons right">arrow_drop_down</i></a></li>
+
+      
     </ul>
   </div>
 </nav>
+
+
 
 <ul id="dropdown2" class="dropdown-content">
   <li @click="menu=4"><a href="#">Empleados</a></li>

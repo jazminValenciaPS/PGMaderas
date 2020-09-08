@@ -40,6 +40,13 @@ nav { box-shadow: none; -webkit-box-shadow: none; }
 #Productos .card .card-image img { padding: 20px !important; }
 
 
+[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
+    background-color: #419141 !important;
+}
+[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:before, [type="radio"].with-gap:checked+span:after {
+    border: 2px solid #419141 !important;
+}
+
 /* Custom */
 .nav-2 { position: absolute; }
 .espace-top { margin-top: 65px; }
@@ -48,9 +55,28 @@ main { padding: 10px 30px; }
 
 .buscarC{
     border: 1px  #419142 solid;
- 
-
+    display: flex; 
 }
+
+.botones{
+    padding-top: 0px;
+    margin-top: 0px !important;
+}
+
+.estatus p{
+    margin-right: 15% !important;
+    padding: 0px !important;
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+}
+
+
+.estatus{
+    padding-top: 0px; 
+    display: flex; 
+    margin-bottom: 0px !important;
+}
+
 table thead {
     color: #fff;
     background-color: #424242;

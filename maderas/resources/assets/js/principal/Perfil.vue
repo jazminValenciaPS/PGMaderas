@@ -189,13 +189,13 @@
 
             <!-- Orders Details -->
             <div class="col m9 s12" v-if="informacion==4">
-                <!-- <table>
-                    <tbody>
+                <table>
+                    <tbody v-for="pedidos in arrayPedidos" :key="pedidos.id">
                         <tr class="border">
-                            <td>#123456789</td>
-                            <td>12/12/9999</td>
-                            <td>En Transito</td>
-                            <td>$798</td>
+                            <td># {{pedidos.PK_orders}}</td>
+                            <td>{{pedidos.date}}</td>
+                            <td>{{pedidos.status_name}}</td>
+                            <td>${{pedid}}</td>
                         </tr>
                         <tr class="border">
                             <td colspan="4">
@@ -215,8 +215,8 @@
                         </tr>
                         
                     </tbody>
-                </table> -->
-                <h6 class="center">Aún no tienes pedidos realizados :(</h6>
+                </table>
+                <h6 v-if="arrayPedidos == '' " class="center">Aún no tienes pedidos realizados :(</h6>
             </div>
             <!-- Cambiar contraseña -->                
             <div class="col m9 s12" v-if="informacion==5">
@@ -286,10 +286,8 @@ export default {
             errorContra:0,
             errorMostrarMsjContra:[],
             datos:[],
+            arrayPedidos:[],
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-             
-
-
 
         }
     },
@@ -305,11 +303,7 @@ export default {
             })
             .catch(function(error){
                 console.log(error);
-            });
-
-              
-  
-      
+            });      
         },
         editarDatos(datos = []){
             let m=this;
@@ -477,6 +471,20 @@ export default {
         listarPedidos(){
             let m=this;
              m.informacion= 4;
+
+                axios.get('/order/user?correo='+m.correo).then(function (response){
+                m.arrayPedidos = response.data;
+                m.status = response.status.data;
+                if(status == true){
+                    status = 1
+                }else{
+                    status = 0
+                }
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+   
         },
         logout(){
                axios.post('salir').then(response => {

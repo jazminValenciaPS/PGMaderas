@@ -73,7 +73,7 @@
                             <input type="text" v-model="buscar" @keyup.enter="listarCategoria(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                         </div>
                         <div class="form  input-field col s3">
-                            <button type="submit" @click="listarCategoria(1,buscar,criterio)" class="modal-trigger"><i class="fa fa-search"></i> Buscar</button>
+                            <button type="submit" @click="listarCategoria(1,buscar,criterio)" class="modal-trigger "><i class="fa fa-search"></i> Buscar</button>
                         </div>
                             <div class="form input-field col s3">
                             <button type="summit"  data-target="modal1" class="modal-trigger" @click="abrirModal('categorias','registrar')">

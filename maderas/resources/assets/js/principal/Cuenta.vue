@@ -2,6 +2,7 @@
       <main  class="main-index">
         <!-- Container -->
         <div class="row">
+            <h1>sadñalkdñals</h1>
             <!-- Sign In -->
             <div class="col m6 s12 p-0 mb-2">
                 <h4 class="mt-0 color-main">Mi Cuenta</h4>
@@ -42,5 +43,6 @@
                 </div>
             </div>
         </div>
+        
     </main>
 </template>

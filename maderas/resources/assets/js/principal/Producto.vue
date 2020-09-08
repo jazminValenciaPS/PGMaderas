@@ -17,11 +17,12 @@
                         <h6 class="mt-2"><span class="color-main">{{producto.avaible}}</span> Disponibles para compra en línea</h6>
                     </div>
                     <div class="col m8 s12 row mt-2" >
-                        <select class="col m3 s5 browser-default" v-model="producto.cantidad" >
+                        <select v-show="producto.avaible > 0" class="col m3 s5 browser-default" v-model="producto.cantidad" >
                             <option value="" disabled selected >Disponibilidad del producto</option>
                             <option v-for="items in producto.avaible" :key="items.index">{{ items }}</option>
                         </select> 
                          <a class="col m8 s6 btn bg-main ml-1" @click="actualizarCantidad(producto)" v-show="producto.avaible > 0">Agregar al carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
+                         <a href="" class="grey-text text-darken-2" v-show="producto.avaible == 0"><i class="material-icons grey-text text-lig"ten-2>remove_shopping_cart</i>No hay productos disponibles. para comprar en la tienda seleccionada</a>
                     </div>
                 </div>
             </div>
@@ -48,13 +49,46 @@ export default {
     methods:{
         listarProducto(PK_products){
              let m=this;
-             axios.get('/productoM/'+PK_products).then(function (response){
+             axios.get('/productoM?id='+PK_products + '&id_branch=' + m.branch).then(function (response){
                 m.arrayProducto = response.data;
             
             })
             .catch(function(error){
                 console.log(error);
             });
+        },
+          async selectBranch(id) {
+            let me = this;
+            if (typeof(Storage) !== "undefined") {
+                if (localStorage.getItem("branch") === null)
+                    localStorage.setItem("branch", JSON.stringify(1));
+
+                const url = "/user/info";
+                await axios.get(url).then((result) => {
+                    console.log("selectBranch");
+                    console.log(result.data[0]);
+                    if ([undefined, null, 0, ""].includes(result.data[0])) {
+                        const LS = JSON.parse(localStorage.getItem("branch"));
+                        me.branch = LS;
+                        me.listarProducto(id);
+
+                        console.log("idBranch en selectBranch recién asignado");
+
+                        console.log(me.branch);
+                    }
+                    else {  
+                        me.branch = result.data[0].id_branch;
+                         me.listarProducto(id);
+
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            }
+            else {
+                console.log("Sorry, your browser does not support Web Storage...");
+            }
         },
        actualizarCantidad(producto){
             let cantidad = this.cantidad;
@@ -108,13 +142,16 @@ export default {
     },
      async mounted() {
             let m=this;
+
             const queryString = window.location.search;      
             const urlParams = new URLSearchParams(queryString);        
             const product = urlParams.get('id');      
             let id = (product !== null && product !== '' && product !== undefined)? product : "";
-            m.listarProducto(id);
+            m.selectBranch(id);
 
-            
+            // m.idproduct = id;
+            // m.listarProducto(id);
+
             let carrito = JSON.parse(localStorage.getItem('carrito'));
             if (Array.isArray(carrito)){
                 m.carrito = carrito;

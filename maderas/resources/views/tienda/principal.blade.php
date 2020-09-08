@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- General CSS -->
     <link rel="stylesheet" href='css/general.css' >
+
     <link href="https://unpkg.com/vueperslides/dist/vueperslides.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
     <link rel="shortcut icon" href="img/44742972_183514302527228_7107553413201657856_n.jpg" type="image/x-icon">
     <!--Let browser know website is optimized for mobile-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -31,19 +30,25 @@
       <!-- Footer -->
       @include('plantilla.footerPrincipal')
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  
     <script src="./js/plantilla.js"></script>
     <script src="./js/app.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vueperslides"></script>
 
     <script>
-    var el = document.querySelector('.tabs');
-    var instance = M.Tabs.init(el, {});
     
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+ 
+
+  
 
         $(document).ready(function(){
           $(".wish-icon i").click(function(){
@@ -71,6 +76,9 @@
             M.Carousel.getInstance(elem).next();
         }
       });
+
+      
+
     </script>
   </body>
 </html>

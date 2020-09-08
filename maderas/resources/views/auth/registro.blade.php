@@ -30,7 +30,7 @@
                     Recibe promociones y boletines especializados
                     <i class="material-icons left color-main">check</i>
                 </p>
-                <form action="#" class="mt-2 px-2">
+                <!-- <form action="#" class="mt-2 px-2">
                     <p>
                         <label>
                             <input type="checkbox" />
@@ -42,7 +42,7 @@
                             <input type="checkbox" />
                             <span>He leído y acepto los Términos y Condiciones</span>
                         </label>
-                    </p>
+                    </p> -->
             </div>
 
             <!-- Sign Up -->

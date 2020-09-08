@@ -22,7 +22,7 @@
             <!-- Products -->
             <div  id="listaproductos" >
                 <div class="col m9 s12" id="Productos">
-                    <div style="z-index:0" v-for="producto in arrayProductos" :key="producto.PK_products" class="card sticky-action col m4 s12 contorno" v-show="producto.avaible > 0">
+                    <div style="z-index:0" v-for="producto in arrayProductos" :key="producto.PK_products" class="card sticky-action col m4 s12 contorno" >
                         <div class="card-image waves-effect waves-block waves-light tamaImagen " >
                             <a :href="'/Ver-Producto?id='+producto.PK_products"> <img :src="'img/'+producto.image" :alt="producto.name" class="pImagen" > </a>
                         </div>
@@ -30,10 +30,12 @@
                             <br>
                             <span class="card-title grey-text text-darken-4">{{producto.name}}</span>
                             <p>SKU: {{producto.SKU}}</p>
+                            <p v-show="producto.avaible == 0">Disponibilidad: No disponible</p> 
+                            <p v-show="producto.avaible > 0">Disponibilidad: {{producto.avaible}}</p> 
                             <h6>${{producto.price}}</h6>
                         </div>
                         <div class="card-action">
-                            <a class="btn bg-main agregar-carrito hide-on-small-only" v-on:click="cantidad = 1"  @click="agregarCarrito(producto)" >Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
+                            <a class="btn bg-main agregar-carrito hide-on-small-only" v-on:click="cantidad = 1"  v-show="producto.avaible > 0" @click="agregarCarrito(producto)" >Agregar a Carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
                         </div> 
                     </div>
                 </div>
@@ -82,20 +84,21 @@ export default {
             criterio : 'SKU',
             buscar:'',
             idSubcat:'',
+            buscarLike:''
 
         }
     }, 
     methods:{
         listarProductos(page,buscar,criterio){
             let m=this;
-            console.log("Entré en listarProductos");
 
-            console.log("id de la branch");
-            console.log(m.branch);
-
+            if(m.idSubcat=='' && m.buscarLike != ''){
+            var url='/productoL?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio +'&buscarLike='+m.buscarLike + '&id_branch=' + m.branch;
+            }if(m.idSubcat!='' && m.buscarLike == '')
+            { 
             var url='/productoL?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio +'&id='+m.idSubcat + '&id_branch=' + m.branch;
-
-            axios.get(url).then(function (response){
+            }
+           axios.get(url).then(function (response){
                 var respuesta= response.data;
                 m.pagination= respuesta.pagination;
                 m.arrayProductos = respuesta.producto.data;
@@ -104,13 +107,9 @@ export default {
             .catch(function(error){
                 console.log(error);
             });
-            console.log("Salí de listarProductos");
-
         },
         async selectBranch() {
             let me = this;
-            console.log("Entré en selectBranch");
-
             if (typeof(Storage) !== "undefined") {
                 if (localStorage.getItem("branch") === null)
                     localStorage.setItem("branch", JSON.stringify(1));
@@ -121,7 +120,7 @@ export default {
                     console.log(result.data[0]);
                     if ([undefined, null, 0, ""].includes(result.data[0])) {
                         const LS = JSON.parse(localStorage.getItem("branch"));
-                        me.branch = 2;
+                        me.branch = LS;
                         me.listarProductos(1,this.buscar,this.criterio);
 
                         console.log("idBranch en selectBranch recién asignado");
@@ -163,9 +162,6 @@ export default {
         },
         productosCate(page,buscar,criterio,id){
             let m=this;
-            console.log("id categoriaP");
-
-            console.log(id);
             var url='/productoCategoria?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio +'&id='+id;
 
             axios.get(url).then(function (response){
@@ -276,8 +272,17 @@ export default {
     mounted() {
         let m=this;
         const queryString = window.location.search;      
-        const urlParams = new URLSearchParams(queryString);        
+        const urlParams = new URLSearchParams(queryString);       
         const product = urlParams.get('id');
+        const like = urlParams.get('buscar');
+
+        let buscar = (like !== null && like !== '' && like !== undefined)? like : "";
+
+        m.buscarLike = buscar;
+
+
+
+
 
         let id = (product !== null && product !== '' && product !== undefined)? product : "";
         m.idSubcat= id;

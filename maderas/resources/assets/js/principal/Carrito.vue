@@ -75,13 +75,48 @@ export default {
             subtotal:0,
             user:false,
             email : localStorage.getItem('email'),
+            branch: localStorage.getItem('branch')
         }
     },
     methods:{
         async listarProductos(id){
             let m=this;
-            var url= `/productoM/${id}`;
+
+            var url= '/productoM?id='+id+ '&id_branch=' + m.branch;
             return await axios.get(url);
+        },
+        async selectBranch() {
+            let me = this;
+            if (typeof(Storage) !== "undefined") {
+                if (localStorage.getItem("branch") === null)
+                    localStorage.setItem("branch", JSON.stringify(1));
+
+                const url = "/user/info";
+                await axios.get(url).then((result) => {
+                    console.log("selectBranch");
+                    console.log(result.data[0]);
+                    if ([undefined, null, 0, ""].includes(result.data[0])) {
+                        const LS = JSON.parse(localStorage.getItem("branch"));
+                        me.branch = LS;
+                        // me.listarProducto(id);
+
+                        console.log("idBranch en selectBranch recién asignado");
+
+                        console.log(me.branch);
+                    }
+                    else {  
+                        me.branch = result.data[0].id_branch;
+                        //  me.listarProducto(id);
+
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            }
+            else {
+                console.log("Sorry, your browser does not support Web Storage...");
+            }
         },
         eliminarDeCarrito(PK_products){
             let productosLS = this.carrito;
@@ -120,6 +155,10 @@ export default {
             }
         }
 
+    },beforeMount(){
+        let m=this;
+
+        m.selectBranch();
     },
     async mounted() {
         let carrito = JSON.parse(localStorage.getItem('carrito'));
@@ -136,7 +175,6 @@ export default {
             return producto;
         }));
         this.calcularTotal(this.carrito);
-        // this.User();
         console.log(this.email);
     }
 }
