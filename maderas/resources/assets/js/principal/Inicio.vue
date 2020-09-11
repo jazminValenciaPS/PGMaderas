@@ -132,9 +132,7 @@
                <img src="img/optimizador.png" alt="Optimizador online de PG">
                 <ul class="texto-optimizador col l4">
                     <li class="white-text">OPTIMIZADOR ONLINE PG (xlsx)</li>
-                    <!-- <li href="/descargar/file" class="black-text"> <i class="material-icons black-text">get_app</i> Descargar</li> -->
-                    <!-- <li  href = "/descargar/file "  class = " black-text " > <i  class = " material-icons black-text " > get_app </i > Descargar </li > -->
-                    <li href="/descargar/file" class="black-text descargar"><a href="/descargar/file"> <i class="material-icons black-text">get_app</i>Descargar</a></li>
+                    <li href="/descargar/file" class="black-text descargar"><a href="/descargar/file"> <i class="material-icons black-text">get_app</i></a></li>
                 </ul>
            </div>
        </div>
@@ -196,10 +194,10 @@
         <!-- Proyecto en modulos -->
         <div class="row">
            <div class="contenedorImg col l12 m12 s12">
-               <img src="img/proyectoModulos.png" alt="Optimizador online de PG">
+               <img src="img/proyectoModulos.png" alt="tu proyecto en modulos de PG">
                 <ul class="texto-optimizador col l4">
                     <li class="white-text">Tu Proyecto en modulos(PDF)</li>
-                    <li href="/descargar/modulos" class="black-text descargar"><a href="/descargar/modulos"> <i class="material-icons black-text">get_app</i>Descargar</a></li>
+                    <li href="/descargar/modulos" class="black-text descargar"><a href="/descargar/modulos"> <i class="material-icons black-text">get_app</i></a></li>
                 
                 </ul>
            </div>

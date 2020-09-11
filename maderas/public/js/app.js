@@ -9665,8 +9665,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -41283,8 +41281,7 @@ var staticRenderFns = [
               _c("a", { attrs: { href: "/descargar/file" } }, [
                 _c("i", { staticClass: "material-icons black-text" }, [
                   _vm._v("get_app")
-                ]),
-                _vm._v("Descargar")
+                ])
               ])
             ]
           )
@@ -41384,7 +41381,7 @@ var staticRenderFns = [
         _c("img", {
           attrs: {
             src: "img/proyectoModulos.png",
-            alt: "Optimizador online de PG"
+            alt: "tu proyecto en modulos de PG"
           }
         }),
         _vm._v(" "),
@@ -41403,8 +41400,7 @@ var staticRenderFns = [
               _c("a", { attrs: { href: "/descargar/modulos" } }, [
                 _c("i", { staticClass: "material-icons black-text" }, [
                   _vm._v("get_app")
-                ]),
-                _vm._v("Descargar")
+                ])
               ])
             ]
           )
