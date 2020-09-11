@@ -9175,6 +9175,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 $(document).on('submit', '[id^=form]', function (e) {
   e.preventDefault();
@@ -9643,6 +9646,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -9732,6 +9756,10 @@ __webpack_require__.r(__webpack_exports__);
       };
       m.$emit("listar-productos", objeto);
     }
+  },
+  mounted: function mounted() {
+    this.listarSliders();
+    this.nuevosProductos();
   }
 });
 
@@ -40346,6 +40374,10 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
+                _c("h4", { staticClass: "center " }, [
+                  _vm._v("¿En qué podemos ayudarle?")
+                ]),
+                _vm._v(" "),
                 _c("div", { staticClass: "input-field col s6" }, [
                   _c("i", { staticClass: "material-icons prefix" }, [
                     _vm._v("account_circle")
@@ -40499,7 +40531,11 @@ var render = function() {
           )
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("br")
   ])
 }
 var staticRenderFns = [
@@ -40867,69 +40903,9 @@ var render = function() {
       _vm._m(0),
       _vm._v(" "),
       _c("ul", { staticClass: "container-categorias-icons" }, [
-        _c("li", { staticClass: "categorias-icons" }, [
-          _c("img", { attrs: { src: "img/woodPanel.png", alt: "" } }),
-          _vm._v(" "),
-          _c("h6", [_vm._v("TABLEROS")]),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Pino } },
-            [_vm._v("Pino")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Parota } },
-            [_vm._v("Parota")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Cedro } },
-            [_vm._v("Cedro")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Tzalam } },
-            [_vm._v("Tzalam")]
-          )
-        ]),
+        _vm._m(1),
         _vm._v(" "),
-        _c("li", { staticClass: "categorias-icons" }, [
-          _c("img", { attrs: { src: "img/woodIcon.png", alt: "" } }),
-          _vm._v(" "),
-          _c("h6", [_vm._v("MADERA")]),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Cimbras } },
-            [_vm._v("Cimbras")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.MDF } },
-            [_vm._v("MDF")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              attrs: { href: "/productos-Categorias?buscar=" + _vm.Aglomerados }
-            },
-            [_vm._v("Aglomerados")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              attrs: { href: "/productos-Categorias?buscar=" + _vm.Enchapados }
-            },
-            [_vm._v("Enchapados")]
-          )
-        ]),
+        _vm._m(2),
         _vm._v(" "),
         _c(
           "li",
@@ -40939,83 +40915,22 @@ var render = function() {
             _vm._v(" "),
             _c("H6", [_vm._v("HERRAJES")]),
             _vm._v(" "),
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: "/productos-Categorias?buscar=" + _vm.Correderas
-                }
-              },
-              [_vm._v("Correderas")]
-            ),
+            _c("a", [_vm._v("Correderas")]),
             _vm._v(" "),
-            _c(
-              "a",
-              {
-                attrs: { href: "/productos-Categorias?buscar=" + _vm.Jaladeras }
-              },
-              [_vm._v("Jaladeras")]
-            ),
+            _c("a", [_vm._v("Jaladeras")]),
             _vm._v(" "),
-            _c(
-              "a",
-              {
-                attrs: { href: "/productos-Categorias?buscar=" + _vm.Perfiles }
-              },
-              [_vm._v("Perfiles")]
-            ),
+            _c("a", [_vm._v("Perfiles")]),
             _vm._v(" "),
-            _c(
-              "a",
-              {
-                attrs: { href: "/productos-Categorias?buscar=" + _vm.Bisagras }
-              },
-              [_vm._v("Bisagras")]
-            )
+            _c("a", [_vm._v("Bisagras")])
           ],
           1
         ),
         _vm._v(" "),
-        _c("li", { staticClass: "categorias-icons" }, [
-          _c("img", { attrs: { src: "img/Cubierta80x80.png", alt: "" } }),
-          _vm._v(" "),
-          _c("h6", [_vm._v("CUBIERTAS")]),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              attrs: {
-                href: "/productos-Categorias?buscar=" + _vm.CubiertaAglomerado
-              }
-            },
-            [_vm._v("Cubierta aglomerado")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Resina } },
-            [_vm._v("Resina")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Cuarzos } },
-            [_vm._v("Cuarzos")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Granito } },
-            [_vm._v("Granito")]
-          )
-        ]),
+        _vm._m(3),
         _vm._v(" "),
         _c(
           "li",
-          {
-            staticClass: "categorias-icons",
-            staticStyle: { "align-content": "baseline" }
-          },
+          { staticClass: "categorias-icons" },
           [
             _c("img", {
               attrs: { src: "img/LaminadosPlasticos80x80.png", alt: "" }
@@ -41023,77 +40938,31 @@ var render = function() {
             _vm._v(" "),
             _c("H6", [_vm._v("LAMINADOS")]),
             _vm._v(" "),
-            _c(
-              "a",
-              {
-                attrs: { href: "/productos-Categorias?buscar=" + _vm.Naturales }
-              },
-              [_vm._v("Naturales")]
-            ),
+            _c("a", [_vm._v("Naturales")]),
             _vm._v(" "),
-            _c(
-              "a",
-              {
-                attrs: { href: "/productos-Categorias?buscar=" + _vm.Formaica }
-              },
-              [_vm._v("Formaica")]
-            ),
+            _c("a", [_vm._v("Formaica")]),
             _vm._v(" "),
-            _c(
-              "a",
-              {
-                attrs: { href: "/productos-Categorias?buscar=" + _vm.Cromacore }
-              },
-              [_vm._v("Cromacore")]
-            ),
+            _c("a", [_vm._v("Cromacore")]),
             _vm._v(" "),
-            _c("a", { attrs: { href: "" } })
+            _c("a")
           ],
           1
         ),
         _vm._v(" "),
-        _c("li", { staticClass: "categorias-icons" }, [
-          _c("img", { attrs: { src: "img/paint2.png", alt: "" } }),
-          _vm._v(" "),
-          _c("h6", [_vm._v("PINTURA")]),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Pinturas } },
-            [_vm._v("Pinturas")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              attrs: { href: "/productos-Categorias?buscar=" + _vm.Pegamento }
-            },
-            [_vm._v("Pegamento")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Lijas } },
-            [_vm._v("Lijas")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "/productos-Categorias?buscar=" + _vm.Resanes } },
-            [_vm._v("Resanes")]
-          )
-        ])
+        _vm._m(4)
       ]),
       _vm._v(" "),
       _c("h3", { staticClass: "color-main center title-index" }, [
         _vm._v("¡Nuestros Servicios!")
       ]),
       _vm._v(" "),
-      _vm._m(1),
+      _vm._m(5),
       _vm._v(" "),
-      _vm._m(2),
+      _vm._m(6),
       _vm._v(" "),
-      _vm._m(3),
+      _vm._m(7),
+      _vm._v(" "),
+      _vm._m(8),
       _vm._v(" "),
       _c("h3", { staticClass: "text-title-init center title-index" }, [
         _vm._v("Lo más nuevo en el mercado")
@@ -41145,9 +41014,9 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _vm._m(4),
+      _vm._m(9),
       _vm._v(" "),
-      _vm._m(5),
+      _vm._m(10),
       _vm._v(" "),
       _c(
         "div",
@@ -41194,7 +41063,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("li", [
           _c("i", { staticClass: "Medium material-icons" }, [_vm._v("call")]),
-          _vm._v("Lorem ipsum dolor sit 777777")
+          _vm._v("Heroico Colegio Militar 7490021")
         ]),
         _vm._v(" "),
         _c("li", [
@@ -41213,6 +41082,78 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "categorias-icons" }, [
+      _c("img", { attrs: { src: "img/woodPanel.png", alt: "" } }),
+      _vm._v(" "),
+      _c("h6", [_vm._v("TABLEROS")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Pino")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Parota")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Cedro")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Tzalam")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "categorias-icons" }, [
+      _c("img", { attrs: { src: "img/woodIcon.png", alt: "" } }),
+      _vm._v(" "),
+      _c("h6", [_vm._v("MADERA")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Cimbras")]),
+      _vm._v(" "),
+      _c("a", [_vm._v(" MDF")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Aglomerados")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Enchapados")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "categorias-icons" }, [
+      _c("img", { attrs: { src: "img/Cubierta80x80.png", alt: "" } }),
+      _vm._v(" "),
+      _c("h6", [_vm._v("CUBIERTAS")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Cubierta aglomerado")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Resina")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Cuarzos")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Granito")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "categorias-icons" }, [
+      _c("img", { attrs: { src: "img/paint2.png", alt: "" } }),
+      _vm._v(" "),
+      _c("h6", [_vm._v("PINTURA")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Pinturas")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Pegamento")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Lijas")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Resanes")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row", attrs: { id: "services-main" } }, [
       _c("div", { staticClass: "col s6 m6 l4" }, [
         _c("div", { staticClass: "card" }, [
@@ -41224,7 +41165,9 @@ var staticRenderFns = [
               }
             }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [_vm._v("Enbisagrado")])
+            _c("span", { staticClass: "card-title servicios-card" }, [
+              _vm._v("Enbisagrado")
+            ])
           ])
         ])
       ]),
@@ -41239,7 +41182,7 @@ var staticRenderFns = [
               }
             }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [
+            _c("span", { staticClass: "card-title servicios-card" }, [
               _vm._v("Enchapado de cantos")
             ])
           ])
@@ -41256,7 +41199,7 @@ var staticRenderFns = [
               }
             }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [
+            _c("span", { staticClass: "card-title servicios-card" }, [
               _vm._v("Corte de tableros")
             ])
           ])
@@ -41273,7 +41216,7 @@ var staticRenderFns = [
               }
             }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [
+            _c("span", { staticClass: "card-title servicios-card" }, [
               _vm._v("Corte de cubiertas")
             ])
           ])
@@ -41290,7 +41233,7 @@ var staticRenderFns = [
               }
             }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [
+            _c("span", { staticClass: "card-title servicios-card" }, [
               _vm._v("Corte de maderas")
             ])
           ])
@@ -41307,7 +41250,7 @@ var staticRenderFns = [
               }
             }),
             _vm._v(" "),
-            _c("span", { staticClass: "card-title" }, [
+            _c("span", { staticClass: "card-title servicios-card" }, [
               _vm._v("Cepillado de madera")
             ])
           ])
@@ -41332,12 +41275,17 @@ var staticRenderFns = [
           _vm._v(" "),
           _c(
             "li",
-            { staticClass: "black-text", attrs: { href: "/descargar/file" } },
+            {
+              staticClass: "black-text descargar",
+              attrs: { href: "/descargar/file" }
+            },
             [
-              _c("i", { staticClass: "material-icons black-text" }, [
-                _vm._v("get_app")
-              ]),
-              _vm._v(" Descargar")
+              _c("a", { attrs: { href: "/descargar/file" } }, [
+                _c("i", { staticClass: "material-icons black-text" }, [
+                  _vm._v("get_app")
+                ]),
+                _vm._v("Descargar")
+              ])
             ]
           )
         ])
@@ -41431,7 +41379,44 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", [
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "contenedorImg col l12 m12 s12" }, [
+        _c("img", {
+          attrs: {
+            src: "img/proyectoModulos.png",
+            alt: "Optimizador online de PG"
+          }
+        }),
+        _vm._v(" "),
+        _c("ul", { staticClass: "texto-optimizador col l4" }, [
+          _c("li", { staticClass: "white-text" }, [
+            _vm._v("Tu Proyecto en modulos(PDF)")
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "black-text descargar",
+              attrs: { href: "/descargar/modulos" }
+            },
+            [
+              _c("a", { attrs: { href: "/descargar/modulos" } }, [
+                _c("i", { staticClass: "material-icons black-text" }, [
+                  _vm._v("get_app")
+                ]),
+                _vm._v("Descargar")
+              ])
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "section-coments" }, [
       _c("div", [
         _c("h3", { staticClass: "text-title-init center title-index" }, [
           _vm._v("Conoce la experiencia de nuestros clientes")
@@ -41440,29 +41425,50 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "main-container-coments" }, [
         _c("div", { staticClass: "cotainer-coments" }, [
-          _c("div", { staticClass: "contenerdor-comentarios-clientes" }, [
-            _c("p", [
-              _vm._v('"Muy buen servicio. Excelente calidad en maderas"')
-            ])
-          ]),
+          _c(
+            "div",
+            {
+              staticClass:
+                "contenerdor-comentarios-clientes comentarios-clientes-tanaño"
+            },
+            [
+              _c("p", [
+                _vm._v(
+                  '\n                        "Encontré lo que buscaba muy buena atención y tienen mucha variedad de madera y triplay"\n                    '
+                )
+              ])
+            ]
+          ),
           _vm._v(" "),
-          _c("p", { staticClass: "bold" }, [_vm._v("Persona1")])
+          _c("p", { staticClass: "bold" }, [_vm._v("Morales Medina")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "cotainer-coments" }, [
-          _c("div", { staticClass: "contenerdor-comentarios-clientes" }, [
-            _c("p", [
-              _vm._v('"Muy buen servicio. Excelente calidad en maderas"')
-            ])
-          ]),
+          _c(
+            "div",
+            {
+              staticClass:
+                "contenerdor-comentarios-clientes comentarios-clientes-tanaño"
+            },
+            [
+              _c("p", [
+                _vm._v('"Muy buen servicio. Excelente calidad en maderas"')
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("p", { staticClass: "bold" }, [_vm._v("Dalia Morales")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "cotainer-coments" }, [
-          _c("div", { staticClass: "contenerdor-comentarios-clientes" }, [
-            _c("p", [_vm._v('"Super grande la variedad que manejan"')])
-          ]),
+          _c(
+            "div",
+            {
+              staticClass:
+                "contenerdor-comentarios-clientes comentarios-clientes-tanaño"
+            },
+            [_c("p", [_vm._v('"Super grande la variedad que manejan"')])]
+          ),
           _vm._v(" "),
           _c("p", { staticClass: "bold" }, [_vm._v("AR ETIQUETADO")])
         ]),
@@ -41474,13 +41480,13 @@ var staticRenderFns = [
             [
               _c("p", [
                 _vm._v(
-                  '"Encontré lo que buscaba muy buena atención y tienen mucha variedad de madera y triplay"'
+                  '"Excelente calidad y variedad en materiales, atención personalizada, servicio de primera en cortes y enchapados."'
                 )
               ])
             ]
           ),
           _vm._v(" "),
-          _c("p", { staticClass: "bold" }, [_vm._v("Morales Medina")])
+          _c("p", { staticClass: "bold" }, [_vm._v("DECO STUDIO")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "cotainer-coments" }, [

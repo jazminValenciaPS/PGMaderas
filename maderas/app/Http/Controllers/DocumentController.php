@@ -26,14 +26,25 @@ class DocumentController extends Controller
      * @return \Illuminate\Http\Response
      */
   
-     public function optimizador(){
+    public function optimizador(){
 
         $file = public_path()."/descargas/optimizador.xlsx";
 
             $header = array(
                 'Content-Type: application/xlsx',
+                
             );
-        return Storage::download($file,"OPTIMIZADOR ONLINE PG.xlsx", $header);
+        return response()->download($file,"OPTIMIZADOR ONLINE PG.xlsx", $header);
+    }
+
+    public function modulos(){
+
+        $modulos = public_path(). "/descargas/modulos.pdf";
+
+        $header = [
+            'Content-Type' => 'application/pdf',
+         ];
+        return response()->download($modulos,"Tu proyecto en modulos.pdf", $header);
 
      }
 

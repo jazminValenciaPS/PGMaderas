@@ -9,7 +9,7 @@
         <div class="row center">
             <ul class="col l12 numeros center-align" >
                 <li>Puedes contactarnos en:</li>
-                <li><i class="Medium material-icons">call</i>Lorem ipsum dolor sit 777777</li>
+                <li><i class="Medium material-icons">call</i>Heroico Colegio Militar 7490021</li>
                 <li><i class="Medium material-icons">call</i>Sucursal Zapata 7662020</li>
                 <li><i class="Medium material-icons">call</i>Sucursal Monterrey 8147373452</li>
             </ul>
@@ -17,54 +17,54 @@
 
         <!-- Categorias -->
         <ul class="container-categorias-icons">
-            <li class="categorias-icons">
+            <li class="categorias-icons" >
                 <img src="img/woodPanel.png" alt="">
                 <h6>TABLEROS</h6>
-                <a  :href="'/productos-Categorias?buscar='+Pino">Pino</a>
-                <a :href="'/productos-Categorias?buscar='+Parota">Parota</a>
-                <a :href="'/productos-Categorias?buscar='+Cedro" >Cedro</a>
-                <a :href="'/productos-Categorias?buscar='+Tzalam">Tzalam</a>
+                <a>Pino</a>
+                <a>Parota</a>
+                <a>Cedro</a>
+                <a>Tzalam</a>
             </li>
-            <li class="categorias-icons">
+            <li class="categorias-icons" >
                 <img src="img/woodIcon.png" alt="">
                 <h6>MADERA</h6>
-                <a :href="'/productos-Categorias?buscar='+Cimbras">Cimbras</a>
-                <a :href="'/productos-Categorias?buscar='+MDF">MDF</a>
-                <a :href="'/productos-Categorias?buscar='+Aglomerados">Aglomerados</a>
-                <a :href="'/productos-Categorias?buscar='+Enchapados">Enchapados</a>
+                <a>Cimbras</a>
+                <a> MDF</a>
+                <a>Aglomerados</a>
+                <a>Enchapados</a>
             </li>
-            <li class="categorias-icons">
+            <li class="categorias-icons" >
                 <img src="img/herrajes.png" alt="">
                 <H6>HERRAJES</H6>
-                <a :href="'/productos-Categorias?buscar='+Correderas">Correderas</a>
-                <a :href="'/productos-Categorias?buscar='+Jaladeras">Jaladeras</a>
-                <a :href="'/productos-Categorias?buscar='+Perfiles">Perfiles</a>
-                <a :href="'/productos-Categorias?buscar='+Bisagras">Bisagras</a>
+                <a>Correderas</a>
+                <a>Jaladeras</a>
+                <a>Perfiles</a>
+                <a>Bisagras</a>
             </li>
-            <li class="categorias-icons">
+            <li class="categorias-icons" >
                 <img src="img/Cubierta80x80.png" alt="">
                 <h6>CUBIERTAS</h6>
-                <a :href="'/productos-Categorias?buscar='+CubiertaAglomerado">Cubierta aglomerado</a>
-                <a :href="'/productos-Categorias?buscar='+Resina">Resina</a>
-                <a :href="'/productos-Categorias?buscar='+Cuarzos">Cuarzos</a>
-                <a :href="'/productos-Categorias?buscar='+Granito">Granito</a>
+                <a>Cubierta aglomerado</a>
+                <a>Resina</a>
+                <a>Cuarzos</a>
+                <a>Granito</a>
                 
             </li>
-            <li class="categorias-icons" style="align-content: baseline;">
+            <li class="categorias-icons" >
                 <img src="img/LaminadosPlasticos80x80.png" alt="">
                 <H6>LAMINADOS</H6>
-                <a :href="'/productos-Categorias?buscar='+Naturales">Naturales</a>
-                <a :href="'/productos-Categorias?buscar='+Formaica">Formaica</a>
-                <a :href="'/productos-Categorias?buscar='+Cromacore">Cromacore</a>
-                <a href=""></a>
+                <a>Naturales</a>
+                <a>Formaica</a>
+                <a>Cromacore</a>
+                <a></a>
             </li>
-            <li class="categorias-icons">
+            <li class="categorias-icons" >
                  <img src="img/paint2.png" alt="">
                 <h6>PINTURA</h6>
-                <a :href="'/productos-Categorias?buscar='+Pinturas">Pinturas</a>
-                <a :href="'/productos-Categorias?buscar='+Pegamento">Pegamento</a>
-                <a :href="'/productos-Categorias?buscar='+Lijas">Lijas</a>
-                <a :href="'/productos-Categorias?buscar='+Resanes">Resanes</a>
+                <a>Pinturas</a>
+                <a>Pegamento</a>
+                <a>Lijas</a>
+                <a>Resanes</a>
             </li>
         </ul>
 
@@ -75,7 +75,7 @@
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Enbisagrado' src="img/servicio1.jpg">
-                        <span class="card-title">Enbisagrado</span>
+                        <span class="card-title servicios-card">Enbisagrado</span>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Enchapado de cantos' src="img/servicio2.jpg">
-                        <span class="card-title">Enchapado de cantos</span>
+                        <span class="card-title servicios-card">Enchapado de cantos</span>
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Corte de tableros' src="img/servicio3.jpg">
-                        <span class="card-title">Corte de tableros</span>
+                        <span class="card-title servicios-card">Corte de tableros</span>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Corte de cubiertas'  src="img/servicio4.jpg">
-                        <span class="card-title">Corte de cubiertas</span>
+                        <span class="card-title servicios-card">Corte de cubiertas</span>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Corte de maderas' src="img/servicio5.jpg">
-                        <span class="card-title">Corte de maderas</span>
+                        <span class="card-title servicios-card">Corte de maderas</span>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                 <div class="card">
                     <div class="card-image">
                         <img alt='imagen de Servicio de Cepillado de madera' src="img/servicio6.jpg">
-                        <span class="card-title">Cepillado de madera</span>
+                        <span class="card-title servicios-card">Cepillado de madera</span>
                     </div>
                 </div>
             </div>
@@ -132,7 +132,9 @@
                <img src="img/optimizador.png" alt="Optimizador online de PG">
                 <ul class="texto-optimizador col l4">
                     <li class="white-text">OPTIMIZADOR ONLINE PG (xlsx)</li>
-                    <li href="/descargar/file" class="black-text"> <i class="material-icons black-text">get_app</i> Descargar</li>
+                    <!-- <li href="/descargar/file" class="black-text"> <i class="material-icons black-text">get_app</i> Descargar</li> -->
+                    <!-- <li  href = "/descargar/file "  class = " black-text " > <i  class = " material-icons black-text " > get_app </i > Descargar </li > -->
+                    <li href="/descargar/file" class="black-text descargar"><a href="/descargar/file"> <i class="material-icons black-text">get_app</i>Descargar</a></li>
                 </ul>
            </div>
        </div>
@@ -191,6 +193,19 @@
             </div>
         </div>
         
+        <!-- Proyecto en modulos -->
+        <div class="row">
+           <div class="contenedorImg col l12 m12 s12">
+               <img src="img/proyectoModulos.png" alt="Optimizador online de PG">
+                <ul class="texto-optimizador col l4">
+                    <li class="white-text">Tu Proyecto en modulos(PDF)</li>
+                    <li href="/descargar/modulos" class="black-text descargar"><a href="/descargar/modulos"> <i class="material-icons black-text">get_app</i>Descargar</a></li>
+                
+                </ul>
+           </div>
+        </div>
+
+        <!-- Productos destacados -->
         <h3 class="text-title-init center title-index">Lo más nuevo en el mercado</h3>
          <section class="section-contianer-new-produc">
             <div class="row container-card" v-for="product in arrayProductos"  :key="product.PK_products">
@@ -210,36 +225,40 @@
                     </div>
                 </div>
             </div>
-         </section>
+        </section>
         
-        <section>
+
+        <!-- Experiencia -->
+        <section class="section-coments">
             <div>
                 <h3 class="text-title-init center title-index">Conoce la experiencia de nuestros clientes</h3>
             </div> 
             <div class="main-container-coments">
                 <div class="cotainer-coments" >
-                    <div class="contenerdor-comentarios-clientes">
-                        <p>"Muy buen servicio. Excelente calidad en maderas"</p>
+                    <div class="contenerdor-comentarios-clientes comentarios-clientes-tanaño">
+                        <p>
+                            "Encontré lo que buscaba muy buena atención y tienen mucha variedad de madera y triplay"
+                        </p>
                     </div>
-                    <p class="bold">Persona1</p>
+                    <p class="bold">Morales Medina</p>
                 </div>
                 <div class="cotainer-coments" >
-                    <div class="contenerdor-comentarios-clientes">
+                    <div class="contenerdor-comentarios-clientes comentarios-clientes-tanaño">
                         <p>"Muy buen servicio. Excelente calidad en maderas"</p>
                     </div>
                     <p class="bold">Dalia Morales</p>
                 </div>
                 <div class="cotainer-coments" >
-                    <div class="contenerdor-comentarios-clientes">
+                    <div class="contenerdor-comentarios-clientes comentarios-clientes-tanaño">
                         <p>"Super grande la variedad que manejan"</p>
-                    </div>
+                    </div>    
                     <p class="bold">AR ETIQUETADO</p>
                 </div>
                 <div class="cotainer-coments" >
                     <div class="contenerdor-comentarios-clientes content-big">
-                        <p>"Encontré lo que buscaba muy buena atención y tienen mucha variedad de madera y triplay"</p>
+                        <p>"Excelente calidad y variedad en materiales, atención personalizada, servicio de primera en cortes y enchapados."</p>
                     </div>
-                    <p class="bold">Morales Medina</p>
+                    <p class="bold">DECO STUDIO</p>
                 </div>
                 <div class="cotainer-coments" >
                     <div class="contenerdor-comentarios-clientes content-big" style="padding: 0; margin: 0;">
@@ -257,6 +276,8 @@
             </div>    
         </section>
        
+
+       <!-- Proveedores -->
         <div class="center">
             <h3 class="text-title-init title-index">Nuestros Proveedores</h3>
         </div>
@@ -373,6 +394,10 @@
             }
             m.$emit("listar-productos",objeto);
         },
-        },
+    },
+     mounted(){
+        this.listarSliders();
+        this.nuevosProductos();
     }
+}
  </script>  

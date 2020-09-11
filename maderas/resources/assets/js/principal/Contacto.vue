@@ -43,6 +43,7 @@
                         </p>
                         <input type="hidden" name="_token" :value="csrf">
                         <div class="row">
+                            <h4 class="center ">¿En qué podemos ayudarle?</h4>
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">account_circle</i>
                                 <input id="last_name" name="nombre" v-model="nombre" type="text" required="required" class="validate">
@@ -77,6 +78,8 @@
                 </div>
             </section>
         </section>
+        <br>
+        <br>
     </main>
 </template>
 <script>

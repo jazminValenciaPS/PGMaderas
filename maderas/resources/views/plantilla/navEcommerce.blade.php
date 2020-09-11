@@ -28,7 +28,7 @@
             <ul class="left hide-on-med-and-down">
                 <li class=""><a class=" letraTN waves-effect waves-light grey-text text-darken-2" href="/"><i class="Large material-icons color-main" style="padding:0 3px;">home</i>Inicio</a></li>
                 <li><a class=" letraTN waves-effect waves-light grey-text text-darken-2" href="/Quienes-Somos"><i class="material-icons color-main" style="padding:0 3px;">info_outline</i>¿Quiénes Somos?</a></li>
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a class="letraTN waves-effect waves-light grey-text text-darken-2 dropbtn" href="#"><i class="material-icons color-main" style="padding:0 3px;">collections_bookmark</i>Catalogo</a>
                     <div class="dropdown-content-custom titulo">
                         <div class="header">
@@ -36,7 +36,7 @@
                         </div>
                       <navmenu :categoriaid="idCateP" @ver-categoria-producto="verCategoriaProducto"></navmenu>
                     </div>
-                </li>
+                </li> -->
                 <li><a class=" letraTN waves-effect waves-light grey-text text-darken-2" href="/Contacto"><i class="material-icons color-main" style="padding:0 3px;">message</i>Contacto</a></li>
             </ul>
         </div>
@@ -56,7 +56,7 @@
             <li ><a class="waves-effect waves-light color-main" href="/Carrito"><i class="material-icons color-main">shopping_cart</i>Carrito</a></li>
             <li ><a class="waves-effect waves-light color-main" href="/"><i class="material-icons color-main">home</i>Inicio</a></li>
             <li ><a class="waves-effect waves-light color-main" href="/Quienes-Somos"><i class="material-icons color-main">info_outline</i>¿Quiénes Somos?</a></li>
-            <li ><a class="waves-effect waves-light color-main" href="/Productos"><i class="material-icons color-main">local_drink</i>Productos</a></li>
+            <!-- <li ><a class="waves-effect waves-light color-main" href="/Productos"><i class="material-icons color-main">local_drink</i>Productos</a></li> -->
             <li ><a class="waves-effect waves-light color-main" href="/Contacto"><i class="material-icons color-main">message</i>Contacto</a></li>
         </ul>
     </nav>

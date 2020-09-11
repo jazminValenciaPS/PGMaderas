@@ -198,6 +198,7 @@ Route::post('/user/update/branch','userController@updateBranch');
 
 
 Route::get('/descargar/file','DocumentController@optimizador');
+Route::get('/descargar/modulos','DocumentController@modulos');
 Route::get('/productosCategorias', 'ProductController@productosPorDefecto');
 
 

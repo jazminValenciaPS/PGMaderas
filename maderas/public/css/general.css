@@ -723,7 +723,7 @@ nav div ul li a {
     height: 150px;
 }
 .container-categorias-icons .categorias-icons a {
-    color: grey ;
+    color: grey;
 }
 
 .main-container-coments{
@@ -776,7 +776,31 @@ nav div ul li a {
     border:1px solid gray;
 }
 
+.descargar{
+    margin-left: 30% !important;
+}
+
+.comentarios-clientes-tanaño{
+    height: 126px;
+}
+
+.container-categorias-icons .categorias-icons {
+    align-content: baseline;
+}
+
+
+.servicios-card{
+    font-size: 16px !important;
+    color: white;
+    background: gray;
+    padding: 0px !important;
+
+}
+
 @media screen and (max-width: 958px){
+    .descargar{
+        margin-left: 20% !important;
+    }
     .title-index { 
         font-size: xx-large;
     }
@@ -831,13 +855,41 @@ nav div ul li a {
     .contend-products-home{
         height: 180px;
     }
+    
+    .contenerdor-comentarios-clientes::after{
+        content: url("../img/ComillaDerecha20.png");
+        background-repeat: no-repeat;
+        right: -266px;
+        background-color: #fff;
+        bottom: 5px;
+        padding: 0;
+        margin: 0;
+        width: 10px;
+        display: flex;
+        position: relative;
+    }
 
-   
+    .contenerdor-comentarios-clientes p{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .servicios-card{
+        font-size: 12px !important;
+        background: gray;
+        padding: 0px !important;
+    }
 
 }
 
 
 @media screen and (max-width: 507px) {
+    .servicios-card{
+        font-size: 12px !important;
+        background: gray;
+        padding: 0px !important;
+    }
+
     .main-index{ 
         padding-top: 3% ;
     }
@@ -979,9 +1031,77 @@ nav div ul li a {
         display: grid;
         grid-template-columns: 1fr;
     }
+
+    .main-container-coments{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3,1fr);
+
+    }
+
+    .contenerdor-comentarios-clientes::after{
+        right: -446px;
+
+    }
+
+    .comentarios-clientes-tanaño{
+        height: 91px;
+    }
+
+    .content-big{
+        height: 126px;
+    }
+
+    .section-coments{
+        padding-bottom: 100px;
+    }
+
+    .container-categorias-icons .categorias-icons a{
+        font-size: x-small;
+        padding: 0 20%;
+        display: grid;
+        text-align: center;
+    }
+
+    .container-prob-inicio{
+        padding: 0 0 10%;
+    }
+
+    
+}
+
+@media Screen and (max-width:411px){
+    .contenerdor-comentarios-clientes::after {
+        right: -357px;
+        background-color: #fff;
+    }
+
+    .servicios-card{
+        font-size: 12px !important;
+        background: gray;
+        padding: 0px !important;
+    }
+}
+
+@media Screen and (max-width:414px){
+    .contenerdor-comentarios-clientes::after {
+        right: -360px;
+        background-color: #fff;
+    }
+
+    .servicios-card{
+        font-size: 12px !important;
+        background: gray;
+        padding: 0px !important;
+    }
 }
 
 @media screen and (max-width:380px){
+
+    .servicios-card{
+        font-size: 9px !important;
+        background: gray;
+        padding: 0px !important;
+    }
 
     main{
         margin-top: 10% ;
@@ -1012,8 +1132,38 @@ nav div ul li a {
 
       /* productos nuevos */
 
-      .section-contianer-new-produc .card-content{
+    .section-contianer-new-produc .card-content{
         height: 130px ;
         font-size: initial !important;
+    }
+
+    .contenerdor-comentarios-clientes::after {
+        right: -330px;
+        background-color: #fff;
+    }
+
+    .content-big {
+        height: 151px;
+    }
+}
+
+@media screen and (max-width:360px) {
+    .contenerdor-comentarios-clientes::after {
+        right: -326px;
+        background-color: #fff;
+    }
+
+    .container-categorias-icons .categorias-icons a {
+        font-size: 10px;
+        padding: 0 20%;
+        display: grid;
+        text-align: center;
+    }
+
+    .numeros li {
+        /* padding: 10px; */
+        display: flex;
+        justify-content: center;
+        align-content: center;
     }
 }
