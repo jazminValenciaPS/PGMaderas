@@ -9179,26 +9179,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-$(document).on('submit', '[id^=form]', function (e) {
-  e.preventDefault();
-  var data = $(this).serialize();
-  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-    icon: 'success',
-    title: '¡Gracias por escribirnos!',
-    text: 'En breve nos contactaremos contigo'
-  }).then(function () {
-    $('#form').submit();
-  });
-  return false;
-});
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      nombre: "",
-      telefono: '',
-      email: '',
-      mensaje: '',
+      // nombre: "",
+      // telefono: '',
+      // email:'',
+      // mensaje:'',
       errorform: 0,
       errorMostrarMsjform: [],
       urlrsc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3622.4699506639154!2d-107.3698098849335!3d24.77935648409222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86bcd7240c5d8d75%3A0x9c2c1c4bc41afaed!2sHeroico%20Colegio%20Militar%203100%2C%2021%20de%20Marzo%2C%2080280%20Culiac%C3%A1n%20Rosales%2C%20Sin.!5e0!3m2!1ses-419!2smx!4v1593721558618!5m2!1ses-419!2smx"
@@ -9220,19 +9208,26 @@ $(document).on('submit', '[id^=form]', function (e) {
       }
 
       if (!this.mensaje) {
-        this.errorform.push('El mensaje es obligatoria.');
+        this.errorform.push('El mensaje es obligatorio.');
       }
 
       if (!this.email) {
-        this.errorform.push('El E-mail es obligatoria.');
+        this.errorform.push('El E-mail es obligatorio.');
       }
 
       e.preventDefault();
+    },
+    sendForm: function sendForm() {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        icon: 'success',
+        title: '¡Gracias por escribirnos!',
+        text: 'En breve nos contactaremos contigo'
+      }).then(function (result) {
+        $('#form').submit();
+      });
     }
   },
-  mounted: function mounted() {
-    console.log("Component mounted");
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -40347,10 +40342,7 @@ var render = function() {
         _c("div", [
           _c(
             "form",
-            {
-              attrs: { id: "form", method: "post", action: "/contact" },
-              on: { submit: _vm.checkForm }
-            },
+            { attrs: { action: "contact", method: "POST", id: "form" } },
             [
               _vm.errorform.length
                 ? _c("p", [
@@ -40371,160 +40363,28 @@ var render = function() {
                 domProps: { value: _vm.csrf }
               }),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("h4", { staticClass: "center " }, [
-                  _vm._v("¿En qué podemos ayudarle?")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-field col s6" }, [
-                  _c("i", { staticClass: "material-icons prefix" }, [
-                    _vm._v("account_circle")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.nombre,
-                        expression: "nombre"
-                      }
-                    ],
-                    staticClass: "validate",
-                    attrs: {
-                      id: "last_name",
-                      name: "nombre",
-                      type: "text",
-                      required: "required"
-                    },
-                    domProps: { value: _vm.nombre },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.nombre = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "name" } }, [_vm._v("Nombre")])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-field col s6" }, [
-                  _c("i", { staticClass: "material-icons prefix" }, [
-                    _vm._v("phone")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.telefono,
-                        expression: "telefono"
-                      }
-                    ],
-                    staticClass: "validate",
-                    attrs: {
-                      id: "last_name",
-                      name: "telefono",
-                      type: "tel",
-                      required: "required"
-                    },
-                    domProps: { value: _vm.telefono },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.telefono = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "Telefono" } }, [
-                    _vm._v("Telefono")
-                  ])
-                ])
-              ]),
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "input-field col s12" }, [
-                  _c("i", { staticClass: "material-icons prefix" }, [
-                    _vm._v("email")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.email,
-                        expression: "email"
-                      }
-                    ],
-                    staticClass: "validate",
-                    attrs: {
-                      id: "email",
-                      name: "email",
-                      type: "email",
-                      required: "required"
-                    },
-                    domProps: { value: _vm.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _c("div", { staticClass: "col s12 from-button" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn bg-main waves-effect waves-light",
+                      on: {
+                        click: function($event) {
+                          return _vm.sendForm()
                         }
-                        _vm.email = $event.target.value
                       }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "email" } }, [_vm._v("Email")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "input-field col s12" }, [
-                  _c("i", { staticClass: "material-icons prefix" }, [
-                    _vm._v("mode_edit")
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.mensaje,
-                        expression: "mensaje"
-                      }
-                    ],
-                    staticClass: "materialize-textarea",
-                    attrs: {
-                      id: "icon_prefix2",
-                      name: "mensaje",
-                      required: "required"
                     },
-                    domProps: { value: _vm.mensaje },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.mensaje = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "Mensaje" } }, [
-                    _vm._v("Mensaje")
-                  ])
+                    [_vm._v(" Enviar Mensaje")]
+                  )
                 ])
-              ]),
-              _vm._v(" "),
-              _vm._m(0)
+              ])
             ]
           )
         ])
@@ -40542,15 +40402,83 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col s12 from-button" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn bg-main waves-effect waves-light",
-            attrs: { type: "submit", name: "action" }
-          },
-          [_vm._v("Enviar Mensaje")]
-        )
+      _c("h4", { staticClass: "center " }, [
+        _vm._v("¿En qué podemos ayudarle?")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-field col s6" }, [
+        _c("i", { staticClass: "material-icons prefix" }, [
+          _vm._v("account_circle")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "validate",
+          attrs: {
+            id: "last_name",
+            name: "nombre",
+            type: "text",
+            required: "required"
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "name" } }, [_vm._v("Nombre")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-field col s6" }, [
+        _c("i", { staticClass: "material-icons prefix" }, [_vm._v("phone")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "validate",
+          attrs: {
+            id: "last_name",
+            name: "telefono",
+            type: "tel",
+            required: "required"
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "Telefono" } }, [_vm._v("Telefono")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "input-field col s12" }, [
+        _c("i", { staticClass: "material-icons prefix" }, [_vm._v("email")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "validate",
+          attrs: {
+            id: "email",
+            name: "email",
+            type: "email",
+            required: "required"
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "email" } }, [_vm._v("Email")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "input-field col s12" }, [
+        _c("i", { staticClass: "material-icons prefix" }, [
+          _vm._v("mode_edit")
+        ]),
+        _vm._v(" "),
+        _c("textarea", {
+          staticClass: "materialize-textarea",
+          attrs: { id: "icon_prefix2", name: "mensaje", required: "required" }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "Mensaje" } }, [_vm._v("Mensaje")])
       ])
     ])
   }
@@ -40926,35 +40854,14 @@ var render = function() {
         _vm._v(" "),
         _vm._m(3),
         _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "categorias-icons" },
-          [
-            _c("img", {
-              attrs: { src: "img/LaminadosPlasticos80x80.png", alt: "" }
-            }),
-            _vm._v(" "),
-            _c("H6", [_vm._v("LAMINADOS")]),
-            _vm._v(" "),
-            _c("a", [_vm._v("Naturales")]),
-            _vm._v(" "),
-            _c("a", [_vm._v("Formaica")]),
-            _vm._v(" "),
-            _c("a", [_vm._v("Cromacore")]),
-            _vm._v(" "),
-            _c("a")
-          ],
-          1
-        ),
+        _vm._m(4),
         _vm._v(" "),
-        _vm._m(4)
+        _vm._m(5)
       ]),
       _vm._v(" "),
       _c("h3", { staticClass: "color-main center title-index" }, [
         _vm._v("¡Nuestros Servicios!")
       ]),
-      _vm._v(" "),
-      _vm._m(5),
       _vm._v(" "),
       _vm._m(6),
       _vm._v(" "),
@@ -41016,36 +40923,7 @@ var render = function() {
       _vm._v(" "),
       _vm._m(10),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "container-prob-inicio" },
-        [
-          _c(
-            "vueper-slides",
-            {
-              staticClass: "no-shadow",
-              attrs: {
-                autoplay: "",
-                "visible-slides": 3,
-                breakpoints: { 800: { visibleSlides: 1, slideMultiple: 2 } },
-                "slide-ratio": 1 / 4,
-                "dragging-distance": 70
-              }
-            },
-            _vm._l(_vm.slides, function(slide, i) {
-              return _c("vueper-slide", {
-                key: i,
-                attrs: {
-                  alt: "imagenes de proveedores de PG Maderas",
-                  image: slide.image
-                }
-              })
-            }),
-            1
-          )
-        ],
-        1
-      )
+      _vm._m(11)
     ],
     1
   )
@@ -41128,6 +41006,24 @@ var staticRenderFns = [
       _c("a", [_vm._v("Cuarzos")]),
       _vm._v(" "),
       _c("a", [_vm._v("Granito")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "categorias-icons" }, [
+      _c("img", { attrs: { src: "img/LaminadosPlasticos80x80.png", alt: "" } }),
+      _vm._v(" "),
+      _c("h6", [_vm._v("LAMINADOS")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Naturales")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Formaica")]),
+      _vm._v(" "),
+      _c("a", [_vm._v("Cromacore")]),
+      _vm._v(" "),
+      _c("a")
     ])
   },
   function() {
@@ -43692,10 +43588,7 @@ var render = function() {
                 [
                   _c(
                     "i",
-                    {
-                      staticClass: "material-icons grey-text text-lig",
-                      attrs: { "ten-2": "" }
-                    },
+                    { staticClass: "material-icons grey-text text-lig" },
                     [_vm._v("remove_shopping_cart")]
                   ),
                   _vm._v(
@@ -57533,10 +57426,10 @@ module.exports = function (exec, SKIP_CLOSING) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_vuetify_loader_lib_loader_js_ref_18_0_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslide_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("d14b");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_vuetify_loader_lib_loader_js_ref_18_0_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslide_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_vuetify_loader_lib_loader_js_ref_18_0_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslide_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslide_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4192");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslide_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslide_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_vuetify_loader_lib_loader_js_ref_18_0_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslide_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslide_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -57860,13 +57753,6 @@ defineIterator(String, 'String', function (iterated) {
 
 /***/ }),
 
-/***/ "3f69":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "3f8c":
 /***/ (function(module, exports) {
 
@@ -57889,6 +57775,13 @@ $({ target: 'Array', proto: true, forced: [].forEach != forEach }, {
   forEach: forEach
 });
 
+
+/***/ }),
+
+/***/ "4192":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -58441,10 +58334,10 @@ module.exports = function (originalArray, length) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_vuetify_loader_lib_loader_js_ref_18_0_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslides_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("3f69");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_vuetify_loader_lib_loader_js_ref_18_0_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslides_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_vuetify_loader_lib_loader_js_ref_18_0_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslides_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslides_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("fe3f");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslides_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslides_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_vuetify_loader_lib_loader_js_ref_18_0_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslides_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vueperslides_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -60610,13 +60503,6 @@ module.exports = function (namespace, method) {
 
 /***/ }),
 
-/***/ "d14b":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "d1e7":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -61306,12 +61192,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"48c8ebf9-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/vuetify-loader/lib/loader.js??ref--18-0!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vueperslides/vueperslides.vue?vue&type=template&id=040a50de&lang=pug&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"29e41338-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vueperslides/vueperslides.vue?vue&type=template&id=0122d70a&lang=pug&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"vueperslides",staticClass:"vueperslides",class:_vm.vueperslidesClasses,style:(_vm.vueperslidesStyles),attrs:{"aria-label":"Slideshow"}},[(_vm.slidesCount && _vm.conf.slideContentOutside === 'top')?_c('div',{staticClass:"vueperslide__content-wrapper vueperslide__content-wrapper--outside-top",class:_vm.conf.slideContentOutsideClass},[(_vm.currentSlide.contentSlot)?_c('vnodes',{attrs:{"vnodes":_vm.currentSlide.contentSlot}}):[(_vm.currentSlide.title)?_c('div',{staticClass:"vueperslide__title",domProps:{"innerHTML":_vm._s(_vm.currentSlide.title)}}):_vm._e(),(_vm.currentSlide.content)?_c('div',{staticClass:"vueperslide__content",domProps:{"innerHTML":_vm._s(_vm.currentSlide.content)}}):_vm._e()]],2):_vm._e(),_c('div',{staticClass:"vueperslides__inner"},[_c('div',{staticClass:"vueperslides__parallax-wrapper",style:(("padding-bottom: " + (_vm.conf.slideRatio * 100) + "%")),attrs:{"aria-live":"polite"}},[_c('div',{ref:"track",staticClass:"vueperslides__track",class:{ 'vueperslides__track--dragging': _vm.touch.dragging, 'vueperslides__track--mousedown': _vm.mouseDown },style:(_vm.trackStyles)},[_c('div',{staticClass:"vueperslides__track-inner",style:(_vm.trackInnerStyles)},[_vm._t("default"),(_vm.isReady && _vm.conf.infinite && _vm.canSlide && _vm.lastSlide)?_c('vueper-slide',{staticClass:"vueperslide--clone vueperslide--clone-1",style:(_vm.lastSlide.style),attrs:{"clone":"","title":_vm.lastSlide.title,"content":_vm.lastSlide.content,"image":_vm.lastSlide.image,"link":_vm.lastSlide.link,"lazyloaded":_vm.lastSlide.loaded,"aria-hidden":"true"}},[(_vm.lastSlide.contentSlot)?_c('template',{slot:"content"},[_c('vnodes',{attrs:{"vnodes":_vm.lastSlide.contentSlot}})],1):_vm._e(),(_vm.conf.lazy && !_vm.lastSlide.loaded)?_c('template',{slot:"loader"},[_c('vnodes',{attrs:{"vnodes":_vm.lastSlide.loaderSlot}})],1):_vm._e()],2):_vm._e(),(_vm.isReady && _vm.conf.infinite && _vm.canSlide && _vm.firstSlide)?_c('vueper-slide',{staticClass:"vueperslide--clone vueperslide--clone-2",style:(_vm.firstSlide.style),attrs:{"clone":"","title":_vm.firstSlide.title,"content":_vm.firstSlide.content,"image":_vm.firstSlide.image,"link":_vm.firstSlide.link,"lazyloaded":_vm.firstSlide.loaded,"aria-hidden":"true"}},[(_vm.firstSlide.contentSlot)?_c('template',{slot:"content"},[_c('vnodes',{attrs:{"vnodes":_vm.firstSlide.contentSlot}})],1):_vm._e(),(_vm.conf.lazy && !_vm.firstSlide.loaded)?_c('template',{slot:"loader"},[_c('vnodes',{attrs:{"vnodes":_vm.firstSlide.loaderSlot}})],1):_vm._e()],2):_vm._e()],2)])]),(_vm.conf.pauseOnHover && _vm.$slots.pause)?_c('div',{staticClass:"vueperslides__paused"},[_vm._t("pause")],2):_vm._e(),(_vm.conf.progress)?_c('div',{staticClass:"vueperslides__progress"},[_vm._t("progress",[_c('div',{style:(("width: " + ((_vm.slides.current + 1) * 100 / _vm.slidesCount) + "%"))})],{"current":_vm.slides.current + 1,"total":_vm.slidesCount})],2):_vm._e(),(_vm.conf.fractions)?_c('div',{staticClass:"vueperslides__fractions"},[_vm._t("fraction",[_vm._v(_vm._s(((_vm.slides.current + 1) + " / " + _vm.slidesCount)))],{"current":_vm.slides.current + 1,"total":_vm.slidesCount})],2):_vm._e(),(_vm.conf.arrows && _vm.canSlide && !_vm.disable)?_c('div',{staticClass:"vueperslides__arrows",class:{ 'vueperslides__arrows--outside': _vm.conf.arrowsOutside }},[_c('button',{directives:[{name:"show",rawName:"v-show",value:(!_vm.arrowPrevDisabled),expression:"!arrowPrevDisabled"}],staticClass:"vueperslides__arrow vueperslides__arrow--prev",attrs:{"type":"button","aria-label":"Previous"},on:{"click":function($event){return _vm.previous()},"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"left",37,$event.key,["Left","ArrowLeft"])){ return null; }if('button' in $event && $event.button !== 0){ return null; }return _vm.previous()},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"right",39,$event.key,["Right","ArrowRight"])){ return null; }if('button' in $event && $event.button !== 2){ return null; }return _vm.next()}]}},[_vm._t("arrow-left",[_c('svg',{attrs:{"viewBox":"0 0 9 18"}},[_c('path',{attrs:{"stroke-linecap":"round","d":"m8 1 l-7 8 7 8"}})])])],2),_c('button',{directives:[{name:"show",rawName:"v-show",value:(!_vm.arrowNextDisabled),expression:"!arrowNextDisabled"}],staticClass:"vueperslides__arrow vueperslides__arrow--next",attrs:{"type":"button","aria-label":"Next"},on:{"click":function($event){return _vm.next()},"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"left",37,$event.key,["Left","ArrowLeft"])){ return null; }if('button' in $event && $event.button !== 0){ return null; }return _vm.previous()},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"right",39,$event.key,["Right","ArrowRight"])){ return null; }if('button' in $event && $event.button !== 2){ return null; }return _vm.next()}]}},[_vm._t("arrow-right",[_c('svg',{attrs:{"viewBox":"0 0 9 18"}},[_c('path',{attrs:{"stroke-linecap":"round","d":"m1 1 l7 8 -7 8"}})])])],2)]):_vm._e(),(_vm.conf.bullets && _vm.canSlide && !_vm.disable && !_vm.conf.bulletsOutside)?_c('div',{ref:"bullets",staticClass:"vueperslides__bullets",attrs:{"role":"tablist","aria-label":"Slideshow navigation"}},[_vm._t("bullets",_vm._l((_vm.bulletIndexes),function(slideIndex,i){return _c('button',{key:i,staticClass:"vueperslides__bullet",class:{ 'vueperslides__bullet--active': _vm.slides.current === slideIndex },attrs:{"type":"button","role":"tab","aria-label":("Slide " + (i + 1))},on:{"click":function($event){return _vm.goToSlide(slideIndex)},"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"left",37,$event.key,["Left","ArrowLeft"])){ return null; }if('button' in $event && $event.button !== 0){ return null; }return _vm.previous()},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"right",39,$event.key,["Right","ArrowRight"])){ return null; }if('button' in $event && $event.button !== 2){ return null; }return _vm.next()}]}},[_vm._t("bullet",[_c('div',{staticClass:"default"},[_c('span',[_vm._v(_vm._s(i + 1))])])],{"active":_vm.slides.current === slideIndex,"slideIndex":slideIndex,"index":i + 1})],2)}),{"currentSlide":_vm.slides.current,"bulletIndexes":_vm.bulletIndexes,"goToSlide":_vm.goToSlide,"previous":_vm.previous,"next":_vm.next})],2):_vm._e()]),(_vm.conf.bullets && _vm.canSlide && !_vm.disable && _vm.conf.bulletsOutside)?_c('div',{ref:"bullets",staticClass:"vueperslides__bullets vueperslides__bullets--outside",attrs:{"role":"tablist","aria-label":"Slideshow navigation"}},[_vm._t("bullets",_vm._l((_vm.bulletIndexes),function(slideIndex,i){return _c('button',{key:i,staticClass:"vueperslides__bullet",class:{ 'vueperslides__bullet--active': _vm.slides.current === slideIndex },attrs:{"type":"button","role":"tab","aria-label":("Slide " + (i + 1))},on:{"click":function($event){return _vm.goToSlide(slideIndex)},"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"left",37,$event.key,["Left","ArrowLeft"])){ return null; }if('button' in $event && $event.button !== 0){ return null; }return _vm.previous()},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"right",39,$event.key,["Right","ArrowRight"])){ return null; }if('button' in $event && $event.button !== 2){ return null; }return _vm.next()}]}},[_vm._t("bullet",[_c('div',{staticClass:"default"},[_c('span',[_vm._v(_vm._s(i + 1))])])],{"active":_vm.slides.current === slideIndex,"slideIndex":slideIndex,"index":i + 1})],2)}),{"currentSlide":_vm.slides.current,"bulletIndexes":_vm.bulletIndexes,"goToSlide":_vm.goToSlide,"previous":_vm.previous,"next":_vm.next})],2):_vm._e(),(_vm.slidesCount && _vm.conf.slideContentOutside === 'bottom')?_c('div',{staticClass:"vueperslide__content-wrapper vueperslide__content-wrapper--outside-bottom",class:_vm.conf.slideContentOutsideClass},[(_vm.currentSlide.contentSlot)?_c('vnodes',{attrs:{"vnodes":_vm.currentSlide.contentSlot}}):[(_vm.currentSlide.title)?_c('div',{staticClass:"vueperslide__title",domProps:{"innerHTML":_vm._s(_vm.currentSlide.title)}}):_vm._e(),(_vm.currentSlide.content)?_c('div',{staticClass:"vueperslide__content",domProps:{"innerHTML":_vm._s(_vm.currentSlide.content)}}):_vm._e()]],2):_vm._e()])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/vueperslides/vueperslides.vue?vue&type=template&id=040a50de&lang=pug&
+// CONCATENATED MODULE: ./src/components/vueperslides/vueperslides.vue?vue&type=template&id=0122d70a&lang=pug&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -61512,17 +61398,17 @@ function _objectSpread2(target) {
 
   return target;
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"48c8ebf9-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/vuetify-loader/lib/loader.js??ref--18-0!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vueperslides/vueperslide.vue?vue&type=template&id=df349e5c&lang=pug&
-var vueperslidevue_type_template_id_df349e5c_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.link ? 'a' : 'div',{tag:"div",staticClass:"vueperslide",class:_vm.slideClasses,style:(_vm.slideStyles),attrs:{"href":_vm.link && !_vm.justDragged ? _vm.link : false,"face":_vm.slideFace3d,"aria-hidden":_vm.$parent.slides.activeId === _vm._uid || _vm.isSlideVisible ? 'false' : 'true'},on:{"mouseenter":function($event){return _vm.$emit('mouse-enter', { slideIndex: _vm.slideIndex, title: _vm.title, content: _vm.content, image: _vm.image, link: _vm.link }, _vm.$el)},"mouseleave":function($event){return _vm.$emit('mouse-leave')}}},[(_vm.imageSrc && _vm.conf.slideImageInside)?_c('div',{staticClass:"vueperslide__image",style:(_vm.imageStyles)}):_vm._e(),(_vm.conf.slideContentOutside)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.conf.slideContentOutside),expression:"!conf.slideContentOutside"}]},[_vm._t("content",[_c('div',{staticClass:"vueperslide__content-wrapper"},[(_vm.title)?_c('div',{staticClass:"vueperslide__title",domProps:{"innerHTML":_vm._s(_vm.title)}}):_vm._e(),(_vm.content)?_c('div',{staticClass:"vueperslide__content",domProps:{"innerHTML":_vm._s(_vm.content)}}):_vm._e()])])],2):_vm._t("content",[_c('div',{staticClass:"vueperslide__content-wrapper"},[(_vm.title)?_c('div',{staticClass:"vueperslide__title",domProps:{"innerHTML":_vm._s(_vm.title)}}):_vm._e(),(_vm.content)?_c('div',{staticClass:"vueperslide__content",domProps:{"innerHTML":_vm._s(_vm.content)}}):_vm._e()])]),(_vm.conf.lazy && !_vm.loaded)?_c('div',{staticClass:"vueperslide__loader"},[_vm._t("loader")],2):_vm._e()],2)}
-var vueperslidevue_type_template_id_df349e5c_lang_pug_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"29e41338-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vueperslides/vueperslide.vue?vue&type=template&id=abe84c70&lang=pug&
+var vueperslidevue_type_template_id_abe84c70_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.link ? 'a' : 'div',{tag:"div",staticClass:"vueperslide",class:_vm.slideClasses,style:(_vm.slideStyles),attrs:{"href":_vm.link && !_vm.justDragged ? _vm.link : false,"face":_vm.slideFace3d,"aria-hidden":_vm.slides.activeId === _vm._uid || _vm.isSlideVisible ? 'false' : 'true'},on:{"mouseenter":function($event){return _vm.$emit('mouse-enter', { slideIndex: _vm.slideIndex, title: _vm.title, content: _vm.content, image: _vm.image, link: _vm.link }, _vm.$el)},"mouseleave":function($event){return _vm.$emit('mouse-leave')}}},[(_vm.imageSrc && _vm.conf.slideImageInside)?_c('div',{staticClass:"vueperslide__image",style:(_vm.imageStyles)}):_vm._e(),(_vm.conf.slideContentOutside)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(false),expression:"false"}]},[_vm._t("content",[_c('div',{staticClass:"vueperslide__content-wrapper"},[(_vm.title)?_c('div',{staticClass:"vueperslide__title",domProps:{"innerHTML":_vm._s(_vm.title)}}):_vm._e(),(_vm.content)?_c('div',{staticClass:"vueperslide__content",domProps:{"innerHTML":_vm._s(_vm.content)}}):_vm._e()])])],2):_vm._t("content",[_c('div',{staticClass:"vueperslide__content-wrapper"},[(_vm.title)?_c('div',{staticClass:"vueperslide__title",domProps:{"innerHTML":_vm._s(_vm.title)}}):_vm._e(),(_vm.content)?_c('div',{staticClass:"vueperslide__content",domProps:{"innerHTML":_vm._s(_vm.content)}}):_vm._e()])]),(_vm.conf.lazy && !_vm.loaded)?_c('div',{staticClass:"vueperslide__loader"},[_vm._t("loader")],2):_vm._e()],2)}
+var vueperslidevue_type_template_id_abe84c70_lang_pug_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/vueperslides/vueperslide.vue?vue&type=template&id=df349e5c&lang=pug&
+// CONCATENATED MODULE: ./src/components/vueperslides/vueperslide.vue?vue&type=template&id=abe84c70&lang=pug&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.values.js
 var es_object_values = __webpack_require__("07ac");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vuetify-loader/lib/loader.js??ref--18-0!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vueperslides/vueperslide.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vueperslides/vueperslide.vue?vue&type=script&lang=js&
 
 
 
@@ -61555,6 +61441,7 @@ var es_object_values = __webpack_require__("07ac");
 //
 //
 /* harmony default export */ var vueperslidevue_type_script_lang_js_ = ({
+  inject: ['slides', 'touch', 'updateSlide', 'addClone', 'addSlide', 'removeSlide'],
   props: {
     clone: {
       type: Boolean,
@@ -61599,7 +61486,7 @@ var es_object_values = __webpack_require__("07ac");
     },
     slideClasses: function slideClasses() {
       return {
-        'vueperslide--active': this.$parent.slides.activeId === this._uid,
+        'vueperslide--active': this.slides.activeId === this._uid,
         'vueperslide--previous-slide': this.isPreviousSlide,
         'vueperslide--next-slide': this.isNextSlide,
         'vueperslide--visible': this.isSlideVisible,
@@ -61631,28 +61518,26 @@ var es_object_values = __webpack_require__("07ac");
     slideFace3d: function slideFace3d() {
       if (!this.conf['3d']) return false;
       var faces = ['front', 'right', 'back', 'left'];
-      var prevSlideIndex = (this.$parent.slides.current - 1 + this.slidesCount) % this.slidesCount;
-      var nextSlideIndex = (this.$parent.slides.current + 1) % this.slidesCount;
-      if (this.slideIndex === prevSlideIndex) return faces[(4 + this.$parent.slides.current - 1) % 4];else if (this.slideIndex === nextSlideIndex) return faces[(this.$parent.slides.current + 1) % 4];
+      var prevSlideIndex = (this.slides.current - 1 + this.slidesCount) % this.slidesCount;
+      var nextSlideIndex = (this.slides.current + 1) % this.slidesCount;
+      if (this.slideIndex === prevSlideIndex) return faces[(4 + this.slides.current - 1) % 4];else if (this.slideIndex === nextSlideIndex) return faces[(this.slides.current + 1) % 4];
       return faces[this.slideIndex % 4];
     },
     isPreviousSlide: function isPreviousSlide() {
       if (!this.conf['3d']) return false;
-      var prevSlideIndex = (this.$parent.slides.current - 1 + this.slidesCount) % this.slidesCount;
-      return this._uid === this.$parent.slides.list[prevSlideIndex].id;
+      var prevSlideIndex = (this.slides.current - 1 + this.slidesCount) % this.slidesCount;
+      return this._uid === this.slides.list[prevSlideIndex].id;
     },
     isNextSlide: function isNextSlide() {
       if (!this.conf['3d']) return false;
-      var nextSlideIndex = (this.$parent.slides.current + 1) % this.slidesCount;
-      return this._uid === this.$parent.slides.list[nextSlideIndex].id;
+      var nextSlideIndex = (this.slides.current + 1) % this.slidesCount;
+      return this._uid === this.slides.list[nextSlideIndex].id;
     },
     isSlideVisible: function isSlideVisible() {
-      var activeSlideUid = this.$parent.slides.activeId;
-      var activeSlideIndex = this.slidesList.indexOf(activeSlideUid);
-      return this.slideIndex >= activeSlideIndex && this.slideIndex < activeSlideIndex + this.conf.visibleSlides;
+      return this.slideIndex >= this.slides.firstVisible && this.slideIndex < this.slides.firstVisible + this.conf.visibleSlides;
     },
     slidesList: function slidesList() {
-      return this.$parent.slides.list.map(function (slide) {
+      return this.slides.list.map(function (slide) {
         return slide.id;
       });
     },
@@ -61663,15 +61548,16 @@ var es_object_values = __webpack_require__("07ac");
       return this.slidesList.indexOf(this._uid);
     },
     justDragged: function justDragged() {
-      return this.$parent.touch.justDragged;
+      return this.touch.justDragged;
     },
     shouldSkipUpdate: function shouldSkipUpdate() {
       return this.clone || !this.conf.infinite || !this.conf.slideContentOutside && !this.conf.alwaysRefreshClones;
     }
   },
   methods: {
-    updateSlide: function updateSlide(props) {
-      this.$parent.updateSlide(this._uid, props);
+    updateThisSlide: function updateThisSlide(props) {
+      // Injected method.
+      this.updateSlide(this._uid, props);
     },
     // Only for lazy loading, this method is called from the Vueperslides component.
     loadImage: function loadImage() {
@@ -61704,8 +61590,8 @@ var es_object_values = __webpack_require__("07ac");
   },
   created: function created() {
     this.imageSrc = this.conf.lazy ? '' : this.image;
-    if (this.clone) return this.$parent.addClone();
-    this.$parent.addSlide({
+    if (this.clone) return this.addClone();
+    this.addSlide({
       id: this._uid,
       image: this.imageSrc,
       title: this.title,
@@ -61724,7 +61610,7 @@ var es_object_values = __webpack_require__("07ac");
   },
   mounted: function mounted() {
     if (this.clone) return;
-    this.updateSlide({
+    this.updateThisSlide({
       contentSlot: this.$slots.content,
       loaderSlot: this.$slots.loader,
       // For lazy loading.
@@ -61733,7 +61619,7 @@ var es_object_values = __webpack_require__("07ac");
   },
   beforeUpdate: function beforeUpdate() {
     if (this.shouldSkipUpdate || !Object.values(this.$slots).length) return;
-    this.updateSlide({
+    this.updateThisSlide({
       contentSlot: this.$slots.content,
       loaderSlot: this.$slots.loader,
       // For lazy loading.
@@ -61742,7 +61628,7 @@ var es_object_values = __webpack_require__("07ac");
   },
   destroyed: function destroyed() {
     // When removing a slide programmatically, remove it from the list of slides.
-    if (!this.clone) this.$parent.removeSlide(this._uid);
+    if (!this.clone) this.removeSlide(this._uid);
   },
   watch: {
     image: function image() {
@@ -61751,7 +61637,7 @@ var es_object_values = __webpack_require__("07ac");
       this.imageSrc = this.conf.lazy && !this.isSlideVisible ? '' : this.image;
 
       if (!this.clone) {
-        this.updateSlide(_objectSpread2({
+        this.updateThisSlide(_objectSpread2({
           image: this.imageSrc
         }, !this.conf.slideImageInside && {
           style: this.slideStyles
@@ -61759,17 +61645,17 @@ var es_object_values = __webpack_require__("07ac");
       }
     },
     title: function title() {
-      if (!this.clone) this.updateSlide({
+      if (!this.clone) this.updateThisSlide({
         title: this.title
       });
     },
     content: function content() {
-      if (!this.clone) this.updateSlide({
+      if (!this.clone) this.updateThisSlide({
         content: this.content
       });
     },
     link: function link() {
-      if (!this.clone) this.updateSlide({
+      if (!this.clone) this.updateThisSlide({
         link: this.link
       });
     },
@@ -61894,8 +61780,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   vueperslides_vueperslidevue_type_script_lang_js_,
-  vueperslidevue_type_template_id_df349e5c_lang_pug_render,
-  vueperslidevue_type_template_id_df349e5c_lang_pug_staticRenderFns,
+  vueperslidevue_type_template_id_abe84c70_lang_pug_render,
+  vueperslidevue_type_template_id_abe84c70_lang_pug_staticRenderFns,
   false,
   null,
   null,
@@ -61907,7 +61793,7 @@ var component = normalizeComponent(
 // EXTERNAL MODULE: ./src/components/vueperslides/styles.scss
 var styles = __webpack_require__("0b32");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vuetify-loader/lib/loader.js??ref--18-0!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vueperslides/vueperslides.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vueperslides/vueperslides.vue?vue&type=script&lang=js&
 
 
 
@@ -62084,6 +61970,20 @@ var styles = __webpack_require__("0b32");
       }
     }
   },
+  provide: function provide() {
+    return {
+      // By design in Vue, provided variables are not reactive unless they are in an object.
+      // Objects.
+      conf: this.conf,
+      slides: this.slides,
+      touch: this.touch,
+      // Methods.
+      updateSlide: this.updateSlide,
+      addClone: this.addClone,
+      addSlide: this.addSlide,
+      removeSlide: this.removeSlide
+    };
+  },
   props: {
     alwaysRefreshClones: {
       type: Boolean,
@@ -62176,7 +62076,7 @@ var styles = __webpack_require__("0b32");
       type: [Boolean, Number],
       default: false
     },
-    parallaxScrollingElement: {
+    pageScrollingElement: {
       type: String,
       default: ''
     },
@@ -62240,7 +62140,9 @@ var styles = __webpack_require__("0b32");
         current: 0,
         // Index of current slide.
         // Don't loose the focused slide when changing breakpoint & slideMultiple > 1.
-        focus: 0
+        focus: 0,
+        firstVisible: 0 // The first visible slide on the left. Useful when visibleSlides > 1.
+
       },
       mouseDown: false,
       mouseOver: false,
@@ -62295,7 +62197,7 @@ var styles = __webpack_require__("0b32");
 
       if (conf.visibleSlides > 1 && conf.arrowsOutside === null) conf.arrowsOutside = true;
       if (conf.visibleSlides > 1 && conf.bulletsOutside === null) conf.bulletsOutside = true;
-      if (this.touchEnabled !== conf.touchable) this.toggleTouchableOption(conf.touchable);
+      if (this.touch.enabled !== conf.touchable) this.toggleTouchableOption(conf.touchable);
 
       if (conf.parallax && conf.parallaxFixedContent) {
         conf.slideContentOutside = 'top';
@@ -62329,6 +62231,7 @@ var styles = __webpack_require__("0b32");
 
       return gapsCount;
     },
+    // The number of slides remaining on the right of the current slide.
     slidesAfterCurrent: function slidesAfterCurrent() {
       return this.slidesCount - (this.slides.current + 1);
     },
@@ -62346,9 +62249,11 @@ var styles = __webpack_require__("0b32");
     },
     touchEnabled: {
       get: function get() {
-        return this.slidesCount > 1 && this.touchable;
+        return this.slidesCount > 1 && this.touch.enabled;
       },
-      set: function set() {}
+      set: function set(value) {
+        this.touch.enabled = value;
+      }
     },
     canSlide: function canSlide() {
       return this.slidesCount / this.conf.visibleSlides > 1;
@@ -62396,7 +62301,7 @@ var styles = __webpack_require__("0b32");
         'vueperslides--bullets-outside': this.conf.bulletsOutside,
         'vueperslides--animated': this.transition.animated,
         // While transitioning.
-        'vueperslides--no-animation': !this.isReady || !this.transition.animated
+        'vueperslides--no-animation': !this.isReady
       };
     },
     vueperslidesStyles: function vueperslidesStyles() {
@@ -62579,9 +62484,9 @@ var styles = __webpack_require__("0b32");
         this.refreshParallax(); // Then add event listener.
         // The scrolling DOM element may be a different element than the HTML document.
 
-        if (this.parallaxScrollingElement) {
+        if (this.pageScrollingElement) {
           // Store the found DOM element in variable for fast access in onScroll().
-          this.parallaxData.scrollingEl = document.querySelector(this.parallaxScrollingElement);
+          this.parallaxData.scrollingEl = document.querySelector(this.pageScrollingElement);
           this.parallaxData.scrollingEl.addEventListener('scroll', this.onScroll);
         } else document.addEventListener('scroll', this.onScroll);
       }
@@ -62780,19 +62685,16 @@ var styles = __webpack_require__("0b32");
       // The translation is modified as user slides just to look nicer.
 
 
-      if (visibleSlides > 1 && slideMultiple === 1) {
-        // If not infinite sliding.
-        if (!infinite) {
-          // The preferred position is the most center slide amongst the visible ones,
-          // if `visibleSlides` is an odd number the preferred position can never be at the center,
-          // so take the closest on the left side.
-          var preferredPositionIsPassed = this.slidePosAfterPreferred > 0; // Subtract the first slides without translation, until we reach the preferred position.
+      if (this.multipleSlides1by1 && !infinite) {
+        // The preferred position is the most center slide amongst the visible ones,
+        // if `visibleSlides` is an odd number the preferred position can never be at the center,
+        // so take the closest on the left side.
+        var preferredPositionIsPassed = this.slidePosAfterPreferred > 0; // Subtract the first slides without translation, until we reach the preferred position.
 
-          var subtractFromTranslation = Math.min(this.preferredPosition, this.slides.current); // From next position after the preferred position.
+        var subtractFromTranslation = Math.min(this.preferredPosition, this.slides.current); // From next position after the preferred position.
 
-          if (preferredPositionIsPassed) subtractFromTranslation += this.slidePosAfterPreferred;
-          translation -= subtractFromTranslation / visibleSlides;
-        }
+        if (preferredPositionIsPassed) subtractFromTranslation += this.slidePosAfterPreferred;
+        translation -= subtractFromTranslation / visibleSlides;
       }
 
       this.transition.currentTranslation = -translation * 100;
@@ -62833,13 +62735,25 @@ var styles = __webpack_require__("0b32");
     },
 
     /**
-     * When visibleSlides > 1 and slideMultiple > 1, get the first visible slide from given index.
+     * When visibleSlides > 1, get the first visible slide from given index.
+     * The first visible slide may be before the given index (on the left).
      *
      * @param {number} index the slide index where to get the next visible one from.
      * @return {number} the first visible slide index.
      */
     getFirstVisibleSlide: function getFirstVisibleSlide(index) {
-      return Math.floor(index / this.conf.slideMultiple) * this.conf.slideMultiple;
+      var _this$conf5 = this.conf,
+          slideMultiple = _this$conf5.slideMultiple,
+          visibleSlides = _this$conf5.visibleSlides;
+      var firstVisible = this.slides.current;
+
+      if (visibleSlides > 1 && slideMultiple === visibleSlides) {
+        firstVisible = Math.floor(index / visibleSlides) * visibleSlides;
+      } else if (this.multipleSlides1by1) {
+        firstVisible = index - Math.min(index, this.preferredPosition) - Math.max(this.slidePosAfterPreferred, 0);
+      }
+
+      return firstVisible;
     },
     getSlideInRange: function getSlideInRange(index, autoPlaying) {
       var clone = false; // If infinite enabled, going out of range takes the first slide from the other end.
@@ -62890,7 +62804,7 @@ var styles = __webpack_require__("0b32");
       if (this.conf.autoplay && autoPlaying) this.pauseAutoplay();
       this.transition.animated = animation;
       setTimeout(function () {
-        return _this6.transition.animated = true;
+        return _this6.transition.animated = false;
       }, this.transitionSpeed); // Get the next slide index and whether it's a clone.
 
       var _this$getSlideInRange2 = this.getSlideInRange(index, autoPlaying),
@@ -62940,7 +62854,8 @@ var styles = __webpack_require__("0b32");
         }, this.transition.speed - 50);
       }
 
-      this.slides.current = nextSlide; // Don't change the focus slide if calling goToSlide from breakpoint change.
+      this.slides.current = nextSlide;
+      this.slides.firstVisible = this.getFirstVisibleSlide(nextSlide); // Don't change the focus slide if calling goToSlide from breakpoint change.
       // The focused slide is to keep track which slide to snap to when switching
       // between 2 breakpoints that have multiple visible slides.
 
@@ -62965,7 +62880,18 @@ var styles = __webpack_require__("0b32");
         if (this.isReady && this.conf.bullets && !autoPlaying && !jumping && this.$refs.bullets) {
           var bulletButtons = this.$refs.bullets.children;
           var activeBulletButton = bulletButtons && bulletButtons[this.slides.current / this.conf.slideMultiple];
-          if (activeBulletButton && activeBulletButton.nodeName.toLowerCase() === 'button') activeBulletButton.focus();
+
+          if (activeBulletButton && activeBulletButton.nodeName.toLowerCase() === 'button') {
+            // Prevent auto-scrolling to a slideshow that is not in viewport on bullet focus.
+            var scrollingDomEl = document.documentElement;
+            if (this.pageScrollingElement) scrollingDomEl = document.querySelector(this.pageScrollingElement);
+            var scrollTop = scrollingDomEl.scrollTop;
+            activeBulletButton.focus({
+              preventScroll: true
+            }); // Safari can't `preventScroll`, hence the scrollTop.
+
+            scrollingDomEl.scrollTop = scrollTop;
+          }
         }
       }
     },
@@ -63065,8 +62991,8 @@ var styles = __webpack_require__("0b32");
   beforeDestroy: function beforeDestroy() {
     this.removeEventListeners();
 
-    if (this.parallaxScrollingElement) {
-      document.querySelector(this.parallaxScrollingElement).removeEventListener('scroll', this.onScroll);
+    if (this.pageScrollingElement) {
+      document.querySelector(this.pageScrollingElement).removeEventListener('scroll', this.onScroll);
     } else document.removeEventListener('scroll', this.onScroll);
 
     document.removeEventListener('scroll', this.onScroll);
@@ -63240,6 +63166,13 @@ module.exports = NATIVE_SYMBOL
   // eslint-disable-next-line no-undef
   && typeof Symbol.iterator == 'symbol';
 
+
+/***/ }),
+
+/***/ "fe3f":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ })
 

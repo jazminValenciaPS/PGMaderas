@@ -22,7 +22,7 @@
                             <option v-for="items in producto.avaible" :key="items.index">{{ items }}</option>
                         </select> 
                          <a class="col m8 s6 btn bg-main ml-1" @click="actualizarCantidad(producto)" v-show="producto.avaible > 0">Agregar al carrito<i class="material-icons left m-0">add_shopping_cart</i></a>
-                         <a href="" class="grey-text text-darken-2" v-show="producto.avaible == 0"><i class="material-icons grey-text text-lig"ten-2>remove_shopping_cart</i>No hay productos disponibles. para comprar en la tienda seleccionada</a>
+                         <a href="" class="grey-text text-darken-2" v-show="producto.avaible == 0"><i class="material-icons grey-text text-lig">remove_shopping_cart</i>No hay productos disponibles. para comprar en la tienda seleccionada</a>
                     </div>
                 </div>
             </div>

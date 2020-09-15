@@ -1,5 +1,6 @@
 require('./bootstrap');
 
+
 // consola
 import VueRouter from 'vue-router';
 import categorias from '../assets/js/contents/Categorias.vue';

@@ -11,12 +11,14 @@ const mix = require('laravel-mix');
  |
  */
 
-
 mix.styles([
-    'resources/assets/plantilla/css/*',
+    'resources/assets/plantilla/css/general.css',
+    'resources/assets/plantilla/css/materialize.css',
+    'resources/assets/plantilla/css/materialize.min.css',
 ],'public/css/plantilla.css')
 .scripts([
-    'resources/assets/plantilla/js/*'
+    'resources/assets/plantilla/js/materialize.js',
+    'resources/assets/plantilla/js/materialize.min.js'
 ], 'public/js/plantilla.js')
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css').version();

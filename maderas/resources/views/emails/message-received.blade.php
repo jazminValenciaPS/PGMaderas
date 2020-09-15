@@ -11,7 +11,6 @@
     <p>Con el Email: {{$msg['email']}}</p>
     <p>Su teléfono es: {{$msg['telefono']}}</p>
     <p><strong>Mensaje:</strong>{{$msg['mensaje']}}</p>
-    <p>Melissa estuvo akí</p>
 
 </body>
 </html>

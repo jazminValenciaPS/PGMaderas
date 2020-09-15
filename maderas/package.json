@@ -28,6 +28,6 @@
         "vue-material": "^1.0.0-beta-7",
         "vue-md-date-picker": "^1.0.16",
         "vue-multiselect": "^2.1.6",
-        "vueperslides": "^2.10.2"
+        "vueperslides": "^2.10.8"
     }
 }

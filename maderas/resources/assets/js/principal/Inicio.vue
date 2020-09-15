@@ -5,6 +5,7 @@
         <vueper-slides autoplay class="sliders-inicio">
             <vueper-slide  v-for="slider in arraySliders"  :key="slider.PK_slider" alt='imagenes de carrusel de PG Maderas' :image="'img/'+slider.image" />
         </vueper-slides>
+        
         <!-- Contactanos -->
         <div class="row center">
             <ul class="col l12 numeros center-align" >
@@ -52,7 +53,7 @@
             </li>
             <li class="categorias-icons" >
                 <img src="img/LaminadosPlasticos80x80.png" alt="">
-                <H6>LAMINADOS</H6>
+                <h6>LAMINADOS</h6>
                 <a>Naturales</a>
                 <a>Formaica</a>
                 <a>Cromacore</a>
@@ -191,21 +192,10 @@
             </div>
         </div>
         
-        <!-- Proyecto en modulos -->
-        <div class="row">
-           <div class="contenedorImg col l12 m12 s12">
-               <img src="img/proyectoModulos.png" alt="tu proyecto en modulos de PG">
-                <ul class="texto-optimizador col l4">
-                    <li class="white-text">Tu Proyecto en modulos(PDF)</li>
-                    <li href="/descargar/modulos" class="black-text descargar"><a href="/descargar/modulos"> <i class="material-icons black-text">get_app</i></a></li>
-                
-                </ul>
-           </div>
-        </div>
-
+       
         <!-- Productos destacados -->
         <h3 class="text-title-init center title-index">Lo más nuevo en el mercado</h3>
-         <section class="section-contianer-new-produc">
+        <section class="section-contianer-new-produc">
             <div class="row container-card" v-for="product in arrayProductos"  :key="product.PK_products">
                 <div class="col s12 m12 l12" >
                     <div class="card" >
@@ -225,6 +215,16 @@
             </div>
         </section>
         
+        <!-- Proyecto en modulos -->
+        <div class="row">
+            <div class="contenedorImg col l12 m12 s12">
+                <img src="img/proyectoModulos.png" alt="tu proyecto en modulos de PG">
+                <ul class="texto-optimizador col l4">
+                    <li class="white-text">Tu Proyecto en modulos(PDF)</li>
+                    <li href="/descargar/modulos" class="black-text descargar"><a href="/descargar/modulos"> <i class="material-icons black-text">get_app</i></a></li>
+                </ul>
+            </div>
+        </div>
 
         <!-- Experiencia -->
         <section class="section-coments">
@@ -279,11 +279,11 @@
         <div class="center">
             <h3 class="text-title-init title-index">Nuestros Proveedores</h3>
         </div>
-        <div class="container-prob-inicio">
+        <!-- <div class="container-prob-inicio">
             <vueper-slides autoplay  class="no-shadow" :visible-slides="3" :breakpoints="{ 800: { visibleSlides: 1, slideMultiple: 2 } }" :slide-ratio="1 / 4" :dragging-distance="70">
                 <vueper-slide v-for="(slide, i) in slides" :key="i" alt='imagenes de proveedores de PG Maderas' :image="slide.image"/>
             </vueper-slides>
-        </div>         
+        </div>    -->
     </main> 
 </template>
 
