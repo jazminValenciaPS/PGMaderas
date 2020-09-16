@@ -9179,6 +9179,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+$(document).on('submit', '[id^=form]', function (e) {
+  e.preventDefault();
+  var data = $(this).serialize();
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+    icon: 'success',
+    title: '¡Gracias por escribirnos!',
+    text: 'En breve nos contactaremos contigo'
+  }).then(function (result) {
+    if (result.value) {
+      form.submit();
+    }
+  });
+});
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -9218,13 +9231,30 @@ __webpack_require__.r(__webpack_exports__);
       e.preventDefault();
     },
     sendForm: function sendForm() {
-      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-        icon: 'success',
-        title: '¡Gracias por escribirnos!',
-        text: 'En breve nos contactaremos contigo'
-      }).then(function (result) {
-        $('#form').submit();
+      $(document).on('submit', '[id^=form]', function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          icon: 'success',
+          title: '¡Gracias por escribirnos!',
+          text: 'En breve nos contactaremos contigo'
+        }).then(function () {
+          $('#form').submit();
+        });
+        return false;
       });
+
+      if (checkForm()) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          icon: 'success',
+          title: '¡Gracias por escribirnos!',
+          text: 'En breve nos contactaremos contigo'
+        }).then(function (result) {
+          $('#form').submit();
+        });
+      } else {
+        console.log("Favor de llenar todo el formulario");
+      }
     }
   },
   mounted: function mounted() {}
@@ -40280,7 +40310,7 @@ var render = function() {
           _vm._v(" "),
           _c("p", { staticClass: "text-contactos" }, [
             _vm._v(
-              "\n                    Blvd. Emiliano Zapata #1860-a Col. Centro C.P 8000, Culiacán Sinaloa tel. 7662020\n                "
+              "\n                    Blvd. Emiliano Zapata #1860-a Col. Centro C.P 8000, Culiacán Sinaloa tel. 7662020 \n                "
             )
           ]),
           _vm._v(" "),
@@ -40369,22 +40399,7 @@ var render = function() {
               _vm._v(" "),
               _vm._m(2),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col s12 from-button" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn bg-main waves-effect waves-light",
-                      on: {
-                        click: function($event) {
-                          return _vm.sendForm()
-                        }
-                      }
-                    },
-                    [_vm._v(" Enviar Mensaje")]
-                  )
-                ])
-              ])
+              _vm._m(3)
             ]
           )
         ])
@@ -40479,6 +40494,23 @@ var staticRenderFns = [
         }),
         _vm._v(" "),
         _c("label", { attrs: { for: "Mensaje" } }, [_vm._v("Mensaje")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col s12 from-button" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn bg-main waves-effect waves-light",
+            attrs: { type: "submit" }
+          },
+          [_vm._v(" Enviar Mensaje")]
+        )
       ])
     ])
   }
@@ -40923,7 +40955,38 @@ var render = function() {
       _vm._v(" "),
       _vm._m(10),
       _vm._v(" "),
-      _vm._m(11)
+      _vm._m(11),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "container-prob-inicio" },
+        [
+          _c(
+            "vueper-slides",
+            {
+              staticClass: "no-shadow",
+              attrs: {
+                autoplay: "",
+                "visible-slides": 3,
+                breakpoints: { 800: { visibleSlides: 1, slideMultiple: 2 } },
+                "slide-ratio": 1 / 4,
+                "dragging-distance": 70
+              }
+            },
+            _vm._l(_vm.slides, function(slide, i) {
+              return _c("vueper-slide", {
+                key: i,
+                attrs: {
+                  alt: "imagenes de proveedores de PG Maderas",
+                  image: slide.image
+                }
+              })
+            }),
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )

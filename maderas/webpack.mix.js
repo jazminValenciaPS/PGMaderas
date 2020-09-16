@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -21,4 +20,4 @@ mix.styles([
     'resources/assets/plantilla/js/materialize.min.js'
 ], 'public/js/plantilla.js')
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css').version();
+    .sass('resources/sass/app.scss', 'public/css');

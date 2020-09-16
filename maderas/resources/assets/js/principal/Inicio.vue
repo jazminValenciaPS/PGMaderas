@@ -279,11 +279,11 @@
         <div class="center">
             <h3 class="text-title-init title-index">Nuestros Proveedores</h3>
         </div>
-        <!-- <div class="container-prob-inicio">
+        <div class="container-prob-inicio">
             <vueper-slides autoplay  class="no-shadow" :visible-slides="3" :breakpoints="{ 800: { visibleSlides: 1, slideMultiple: 2 } }" :slide-ratio="1 / 4" :dragging-distance="70">
                 <vueper-slide v-for="(slide, i) in slides" :key="i" alt='imagenes de proveedores de PG Maderas' :image="slide.image"/>
             </vueper-slides>
-        </div>    -->
+        </div>   
     </main> 
 </template>
 

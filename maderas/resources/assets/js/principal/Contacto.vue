@@ -16,7 +16,7 @@
                 <article>
                     <p class="title-contactos">SUCURSAL ZAPATA:</p>
                     <p class="text-contactos">
-                        Blvd. Emiliano Zapata #1860-a Col. Centro C.P 8000, Culiacán Sinaloa tel. 7662020
+                        Blvd. Emiliano Zapata #1860-a Col. Centro C.P 8000, Culiacán Sinaloa tel. 7662020 
                     </p>
                     <div class="col s12">
                         <button class="btn bg-main waves-effect waves-light" style="z-index:0" v-on:click="url('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3622.0650527304224!2d-107.41557908493323!3d24.793225884085654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86bcd0947b0eeb13%3A0x22883c47a5c130ef!2sBlvd.%20Emiliano%20Zapata%201860%2C%20Centro%20Sinaloa%2C%2080000%20Culiac%C3%A1n%20Rosales%2C%20Sin.!5e0!3m2!1ses-419!2smx!4v1593721635010!5m2!1ses-419!2smx')" type="submit" name="action">Ver sucursal</button>
@@ -35,7 +35,7 @@
             <br>
             <section class="container-form">
                 <div>
-                    <form action="contact" method="POST" id="form">
+                    <form action="contact" method="POST"  id="form">
                         <p v-if="errorform.length">
                             <ul>
                                 <li v-for="error in errorform" :key="error.id">{{error}}</li>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="row">
                             <div class="col s12 from-button">
-                                <button  class="btn bg-main waves-effect waves-light" @click="sendForm()" > Enviar Mensaje</button>
+                                <button  class="btn bg-main waves-effect waves-light" type="submit" > Enviar Mensaje</button>
                             </div>
                         </div>
                     </form>
@@ -85,7 +85,19 @@
 <script>
   import Swal from 'sweetalert2';  
 
-  
+  $(document).on('submit', '[id^=form]', function (e) {
+    e.preventDefault();
+    var data = $(this).serialize();
+    Swal.fire({
+        icon: 'success',
+        title: '¡Gracias por escribirnos!',
+        text: 'En breve nos contactaremos contigo',
+    }).then((result) => {
+        if (result.value) {
+            form.submit();
+        }
+    });
+});
 
     export default {
         data(){
@@ -124,7 +136,22 @@
                 e.preventDefault();
             },
             sendForm(){
-                Swal.fire({
+                   $(document).on('submit', '[id^=form]', function (e) {
+                    e.preventDefault();
+                    var data = $(this).serialize();
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Gracias por escribirnos!',
+                        text: 'En breve nos contactaremos contigo',
+                    }).then(function () {
+                        $('#form').submit();
+                    });
+                    return false;
+                    });
+
+
+                if(checkForm()){
+                    Swal.fire({
                     icon: 'success',
                     title: '¡Gracias por escribirnos!',
                     text: 'En breve nos contactaremos contigo',
@@ -133,6 +160,11 @@
                       $('#form').submit();
                     
                 });
+
+                }else{
+                console.log("Favor de llenar todo el formulario");
+                }
+                
   
             }
         },
