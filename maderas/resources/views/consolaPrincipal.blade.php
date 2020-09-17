@@ -29,24 +29,20 @@
   </style>
   <body>
     <div id="app">
-
-
-  
       @if(Auth::check())
-        @if(Auth::user()->id_role == 4)
+        @if(Auth::user()->id_role == 2)
           @include('plantilla.consolaNavMarketing') 
-        @elseif(Auth::user()->id_role == 2)  
+        @elseif(Auth::user()->id_role == 1)  
           @include('plantilla.consolaNavAdmin')
-        @elseif(Auth::user()->id_role == 5)
+        @elseif(Auth::user()->id_role == 4)
           @include('plantilla.consolaNavAlmacenero')
+        @elseif(Auth::user()->id_role == 5)
+          @include('plantilla.consolaNavVentas')
           @else
         @endif 
-
       @endif
 
-
       <!-- Contenido principal -->
-
       @yield('consola')
       <!-- Termina contenido principal -->
 
@@ -56,7 +52,7 @@
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="js/plantilla.js"></script>
-<script src="{{ mix('/js/app.js') }}" defer></script>
+<script src="./js/app.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      

@@ -91,10 +91,8 @@
                 </div>
                 <p class="white-text center">
                     <br>
-
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse voluptatum iste atque assumenda aliquid voluptatem voluptatibus corporis nemo incidunt distinctio officia optio praesentium numquam, omnis odit, sunt beatae nostrum ipsam.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse voluptatum iste atque assumenda aliquid voluptatem voluptatibus corporis nemo incidunt distinctio officia optio praesentium numquam, omnis odit, sunt beatae nostrum ipsam.
-
+                    PG Maderas tenemos un compromiso con nuestros clientes, contamos con excelencia en todas nuestras áreas, Calidad en todos los
+                    productos que manejamos, Honestidad y compromiso con nuestros clientes y proveedores, para nosotros el trabajo en equipo y convivencia entre todos los empleados y clientes es de suma importancia.
                 </p>
             </div>
         </div>

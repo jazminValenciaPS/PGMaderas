@@ -31,15 +31,14 @@ class StockController extends Controller
         $buscar = $request->buscar;
         $criterio = $request->criterio;
         
-        if ($criterio){
+        if ($criterio ==''){
            
             $stock = DB::table('stock')
             ->join('products','products.PK_products','=','stock.id_product')
             ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','stock.id_PG_branches')
             ->select('_p_g_branches.city','stock.PK_stock','_p_g_branches.street','stock.id_product','products.name',
             'stock.avaible','stock.status')
-            ->where('_p_g_branches.PK_PG_branches','=',$criterio)
-            ->paginate(6);
+            ->paginate(10);
             
         }
         else{
@@ -48,8 +47,8 @@ class StockController extends Controller
             ->join('_p_g_branches','_p_g_branches.PK_PG_branches','=','stock.id_PG_branches')
             ->select('_p_g_branches.city','_p_g_branches.street','stock.id_product','products.name',
             'stock.avaible','stock.status')
-            ->paginate(6)
-            ->get();
+            ->where('_p_g_branches.PK_PG_branches','=',$criterio)
+            ->paginate(10);
         }
        
       

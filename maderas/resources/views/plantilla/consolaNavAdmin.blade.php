@@ -26,8 +26,8 @@
       <li @click="menu=2"><a href="#">Productos</a></li>
       <li @click="menu=3"><a href="#">Sliders</a></li>
       <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Usuarios<i class="material-icons right">arrow_drop_down</i></a></li>
-      <li @click="menu=6"><a href="#">Pedidos</a></li>
-      <li @click="menu=9"><a href="#">Stocks</a></li>
+      <!-- <li @click="menu=6"><a href="#">Pedidos</a></li> -->
+      <!-- <li @click="menu=9"><a href="#">Stocks</a></li> -->
       <li><a class="dropdown-trigger" href="#!" data-target="dropdown3">{{ auth()->user()->email}}<i class="material-icons right">arrow_drop_down</i></a></li>
 
       
@@ -50,7 +50,7 @@
     <li @click="menu=2"><a href="#">Productos</a></li>
     <li @click="menu=3"><a href="#">Sliders</a></li>
     <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Usuarios<i class="material-icons right">arrow_drop_down</i></a></li>
-    <li @click="menu=6"><a href="#">Pedidos</a></li>
+    <!-- <li @click="menu=6"><a href="#">Pedidos</a></li> -->
     <li @click="menu=9"><a href="#">Stocks</a></li>
     <li @click="menu=7"><a class="black-text" href="#">Cambiar contraseña </a></li>
     <li>

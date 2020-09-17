@@ -14,9 +14,10 @@
                         </div>
                         <div class="col s12 center">
                             <img v-if="tipoAccion==2" :src="'img/'+image"  class="tImagen" alt="Imagen de los productos">
+                            <h5 v-if="tipoAccion==2">SKU: {{SKU}}</h5>
                         </div>
                         <div class="form-group row">
-                            <input id="SKU" type="text" v-model="SKU" placeholder="Número único del producto(SKU)"  class="validate" >
+                            <input id="SKU" type="text" v-if="tipoAccion==1" v-model="SKU" placeholder="Número único del producto(SKU)"  class="validate" >
                             <!-- input para el nombre del producto --> 
                             <input id="nombre" type="text" v-model="name" placeholder="Nombre del producto"  class="validate" >
                             <!-- <label  for="nombre">Nombre</label> -->
@@ -170,6 +171,7 @@ export default {
     data(){
         return{
             PK_products:'',
+            PK_Product_images:'',
             id_products_categories: '',
             SKU:'',
             name: '',
@@ -277,6 +279,7 @@ export default {
                             m.SKU=data['SKU'];
                             // m.avaible =data['avaible'];
                             m.description=data['description'];
+                            m.PK_Product_images=data['PK_Product_images'];
                             m.price = data['price']
                             m.id_products_categories= data['PK_products_categories'];
                             m.tituloModal = 'Actualizar producto';
@@ -346,7 +349,9 @@ export default {
                 formData.append('id_products_categories', me.id_products_categories);
                 formData.append('description', me.description);
                 formData.append('price', me.price);
-                formData.append('SKU', me.SKU);
+                formData.append('PK_Product_images', me.PK_Product_images);
+
+                // formData.append('SKU', me.SKU);
                 // formData.append('avaible', me.avaible);
 
                 //Registramos la informacion
@@ -418,7 +423,7 @@ export default {
             this.errorProducto = 0;
             this.errorMostrarMsjProducto = [];
 
-                if (!this.file ) this.errorMostrarMsjProducto.push("Se tiene que ingresar una imagen.");
+                // if (!this.file ) this.errorMostrarMsjProducto.push("Se tiene que ingresar una imagen.");
                 if (!this.name) this.errorMostrarMsjProducto.push("El nombre de la subcategoría no puede estar vacío.");
                 if (!this.description) this.errorMostrarMsjProducto.push("La descripción de la subcategoría no puede estar vacío.");
                 if (!this.price) this.errorMostrarMsjProducto.push("Se tiene que ingresar precio.");

@@ -24,7 +24,7 @@ class ProductController extends Controller
             ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
             ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
             ->select('products.PK_products','products.SKU','products.name','products.description',
-            'products.price', 'products.status','products.destacado','products_categories.PK_products_categories',
+            'products.price', 'products.status','products.destacado','products_images.PK_Product_images','products_categories.PK_products_categories',
             'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->orderBy('products.PK_products', 'desc')->paginate(5);
@@ -35,7 +35,7 @@ class ProductController extends Controller
             ->join('products_categories', 'products_categories.PK_products_categories', '=', 'products.id_products_categories')
             ->join('products_images', 'products_images.id_product', '=', 'products.PK_products')
             ->select('products.PK_products','products.SKU','products.name','products.description',
-            'products.price', 'products.status','products.destacado','products_categories.PK_products_categories',
+            'products.price', 'products.status','products.destacado','products_images.PK_Product_images','products_categories.PK_products_categories',
             'products_categories.name as productscategories','products_images.image')
             ->distinct()
             ->where('products.'.$criterio, 'like', '%'. $buscar . '%')
@@ -266,6 +266,7 @@ class ProductController extends Controller
 
         $idProduc = $producto->PK_products;
 
+       if(Peticion::file('file')){
         $img = Peticion::file('file');
         
         $extension = $img->guessExtension();
@@ -278,6 +279,14 @@ class ProductController extends Controller
         $imagen ->image = $nombreImagen;
 
         $imagen->save();
+
+       } else{
+        $imagen->id_product = $idProduc;
+
+        $imagen ->image = 'default.png';
+
+        $imagen->save();
+       }
         
         $sucursal = DB::table('_p_g_branches')
         ->select('PK_PG_branches as idBranches')
@@ -304,34 +313,44 @@ class ProductController extends Controller
         // if (!$request->ajax()) return redirect('/administrador');
 
         $id = $request->PK_products;
+        $pk_img = $request->PK_Product_images;
+
+
+        // print($id);
 
         $producto = Product::findOrFail($id);
 
-        $producto->SKU = $request->SKU;
+        // $producto->SKU = $request->SKU;
         $producto->id_products_categories = $request->id_products_categories;
         $producto->name = $request->name;
         $producto->description = $request->description;
         $producto->price = $request->price;
         // $producto->avaible = $request->avaible;
         $producto->status = '1';
-
+        
         $producto->save();
+        
+        if(Peticion::file('file')){
+           
+         
 
-        $imagenP = ProductImage::findOrFail($id);
+            $imagenP = ProductImage::findOrFail($pk_img);
+            $imagen = Peticion::file('file');
+            $extension = $imagen -> guessExtension();
+            $date = date('d-m-Y_h-i-s-ms-a');
+            $prefijo = 'Image';
+            $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+            $imagen->move('img', $nombreImagen);
+            
+            if($imagenP->image != 'default.png'){
+                File::delete('img/' . $imagenP->image);
+            }
 
-        $imagen = Peticion::file('file');
-        $extension = $imagen -> guessExtension();
-        $date = date('d-m-Y_h-i-s-ms-a');
-        $prefijo = 'Image';
-        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
-        $imagen->move('img', $nombreImagen);
-
-        File::delete('img/' . $imagenP->image);
-
-        $imagenP ->image = $nombreImagen;
-
-        $imagenP->save();
-       
+           
+            $imagenP ->image = $nombreImagen;
+            $imagenP->save();
+        }  
+        
     }
 
     public function buscar(Request $request){

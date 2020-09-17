@@ -18,25 +18,23 @@ class SubcategoriesController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-
-        $subcategorias = DB::table('subcategories')
-        ->join('categories', 'categories.PK_categories', '=', 'subcategories.id_category')
-        ->select('subcategories.PK_subcategories','subcategories.name','subcategories.description'
-        ,'subcategories.image','subcategories.status','categories.name as categoria','subcategories.id_category')
-        ->distinct()
-        ->orderBy('PK_subcategories', 'desc')
-        ->paginate(6);
+            $subcategorias = DB::table('subcategories')
+            ->join('categories', 'categories.PK_categories', '=', 'subcategories.id_category')
+            ->select('subcategories.PK_subcategories','subcategories.name','subcategories.description'
+            ,'subcategories.image','subcategories.status','categories.name as categoria','subcategories.id_category')
+            ->distinct()
+            ->orderBy('PK_subcategories', 'desc')
+            ->paginate(10);
         }
         else{
-        $subcategorias = DB::table('subcategories')
-        ->join('categories', 'categories.PK_categories', '=', 'subcategories.id_category')
-        ->select('subcategories.PK_subcategories','subcategories.name','subcategories.description'
-        ,'subcategories.image','subcategories.status','categories.name as categoria','subcategories.id_category')
-        ->distinct()
-        ->where('subcategories.'.$criterio, 'like', '%'. $buscar . '%')
-        ->orderBy('PK_subcategories', 'desc')
-        ->paginate(6);
-
+            $subcategorias = DB::table('subcategories')
+            ->join('categories', 'categories.PK_categories', '=', 'subcategories.id_category')
+            ->select('subcategories.PK_subcategories','subcategories.name','subcategories.description'
+            ,'subcategories.image','subcategories.status','categories.name as categoria','subcategories.id_category')
+            ->distinct()
+            ->where('subcategories.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('PK_subcategories', 'desc')
+            ->paginate(10);
         }
 
 
@@ -51,6 +49,8 @@ class SubcategoriesController extends Controller
             ],
             'subcategorias' => $subcategorias
         ];
+
+       
     }
 
     public function listar(){

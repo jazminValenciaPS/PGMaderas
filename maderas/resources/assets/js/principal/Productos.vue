@@ -22,6 +22,9 @@
             <!-- Products -->
             <div  id="listaproductos" >
                 <div class="col m9 s12" id="Productos">
+                    <div v-if(!arrayProductos) class="center">
+                        <img src="img/Product Not Found.png" alt="" class="noEncontrado">
+                    </div>
                     <div style="z-index:0" v-for="producto in arrayProductos" :key="producto.PK_products" class="card sticky-action col m4 s12 contorno" >
                         <div class="card-image waves-effect waves-block waves-light tamaImagen " >
                             <a :href="'/Ver-Producto?id='+producto.PK_products"> <img :src="'img/'+producto.image" :alt="producto.name" class="pImagen" > </a>

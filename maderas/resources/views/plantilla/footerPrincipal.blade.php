@@ -1,5 +1,5 @@
 <a class="appWhats" href="https://api.whatsapp.com/send?phone=526677662020&text=Hola!&nbsp;me&nbsp;pueden&nbsp;apoyar?" target = "_blank">
-    <img src="img/whatsapp (1).png" alt="">
+    <img src="img/whatsapp.png" alt="">
 </a>
 <footer class="page-footer">
     <div class="container">

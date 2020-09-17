@@ -5685,6 +5685,8 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     //Calcula los elementos de la paginación
     pagesNumber: function pagesNumber() {
+      console.log(this.pagination.to);
+
       if (!this.pagination.to) {
         return [];
       }
@@ -7225,6 +7227,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7232,6 +7235,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     return _ref = {
       PK_products: '',
+      PK_Product_images: '',
       id_products_categories: '',
       SKU: '',
       name: '',
@@ -7335,6 +7339,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   m.SKU = data['SKU']; // m.avaible =data['avaible'];
 
                   m.description = data['description'];
+                  m.PK_Product_images = data['PK_Product_images'];
                   m.price = data['price'];
                   m.id_products_categories = data['PK_products_categories'];
                   m.tituloModal = 'Actualizar producto';
@@ -7400,7 +7405,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       formData.append('id_products_categories', me.id_products_categories);
       formData.append('description', me.description);
       formData.append('price', me.price);
-      formData.append('SKU', me.SKU); // formData.append('avaible', me.avaible);
+      formData.append('PK_Product_images', me.PK_Product_images); // formData.append('SKU', me.SKU);
+      // formData.append('avaible', me.avaible);
       //Registramos la informacion
 
       axios.post('/producto/actualizar', formData, {
@@ -7472,8 +7478,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     validarProducto: function validarProducto() {
       this.errorProducto = 0;
-      this.errorMostrarMsjProducto = [];
-      if (!this.file) this.errorMostrarMsjProducto.push("Se tiene que ingresar una imagen.");
+      this.errorMostrarMsjProducto = []; // if (!this.file ) this.errorMostrarMsjProducto.push("Se tiene que ingresar una imagen.");
+
       if (!this.name) this.errorMostrarMsjProducto.push("El nombre de la subcategoría no puede estar vacío.");
       if (!this.description) this.errorMostrarMsjProducto.push("La descripción de la subcategoría no puede estar vacío.");
       if (!this.price) this.errorMostrarMsjProducto.push("Se tiene que ingresar precio.");
@@ -8402,6 +8408,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('select');
   var instances = M.FormSelect.init(elems);
@@ -8435,6 +8442,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'from': 0,
         'to': 0
       },
+      offset: 3,
       criterio: 'name',
       buscar: ''
     };
@@ -8507,31 +8515,6 @@ document.addEventListener('DOMContentLoaded', function () {
       this.errorSubcategoria = 0;
       this.errorMostrarMsjSubcategoria = [];
     },
-    // seleccionarImagen(img){
-    //     if (img == 1) {            
-    //         this.file = this.$refs.filea.files[0];
-    //         readURL(document.getElementsByClassName("categoriaAlta")[0], 1);
-    //     }
-    //     else {
-    //         this.file = this.$refs.filec.files[0];
-    //         readURL(document.getElementsByClassName("categoriaEdit")[0], 2);
-    //     }
-    //     this.cambio = 1;
-    //     function readURL(input, img) {
-    //         if (input.files && input.files[0]) {
-    //             var reader = new FileReader();
-    //             reader.onload = function (e) {
-    //                 if (img == 1) {
-    //                     readURL('.imgAlta').attr('src', e.target.result);
-    //                 }
-    //                 else {
-    //                     readURL('.imgCambio').attr('src', e.target.result);
-    //                 }
-    //             };
-    //             reader.readAsDataURL(input.files[0]);
-    //         }
-    //     }
-    // },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
       var PK_subcategories = arguments.length > 3 ? arguments[3] : undefined;
@@ -10922,6 +10905,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
 //
 //
 //
@@ -37299,35 +37285,41 @@ var render = function() {
                           alt: "Imagen de los productos"
                         }
                       })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.tipoAccion == 2
+                    ? _c("h5", [_vm._v("SKU: " + _vm._s(_vm.SKU))])
                     : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.SKU,
-                        expression: "SKU"
-                      }
-                    ],
-                    staticClass: "validate",
-                    attrs: {
-                      id: "SKU",
-                      type: "text",
-                      placeholder: "Número único del producto(SKU)"
-                    },
-                    domProps: { value: _vm.SKU },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                  _vm.tipoAccion == 1
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.SKU,
+                            expression: "SKU"
+                          }
+                        ],
+                        staticClass: "validate",
+                        attrs: {
+                          id: "SKU",
+                          type: "text",
+                          placeholder: "Número único del producto(SKU)"
+                        },
+                        domProps: { value: _vm.SKU },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.SKU = $event.target.value
+                          }
                         }
-                        _vm.SKU = $event.target.value
-                      }
-                    }
-                  }),
+                      })
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -40860,46 +40852,17 @@ var render = function() {
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
-      _c("ul", { staticClass: "container-categorias-icons" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "categorias-icons" },
-          [
-            _c("img", { attrs: { src: "img/herrajes.png", alt: "" } }),
-            _vm._v(" "),
-            _c("H6", [_vm._v("HERRAJES")]),
-            _vm._v(" "),
-            _c("a", [_vm._v("Correderas")]),
-            _vm._v(" "),
-            _c("a", [_vm._v("Jaladeras")]),
-            _vm._v(" "),
-            _c("a", [_vm._v("Perfiles")]),
-            _vm._v(" "),
-            _c("a", [_vm._v("Bisagras")])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _vm._m(4),
-        _vm._v(" "),
-        _vm._m(5)
-      ]),
+      _vm._m(1),
       _vm._v(" "),
       _c("h3", { staticClass: "color-main center title-index" }, [
         _vm._v("¡Nuestros Servicios!")
       ]),
       _vm._v(" "),
-      _vm._m(6),
+      _vm._m(2),
       _vm._v(" "),
-      _vm._m(7),
+      _vm._m(3),
       _vm._v(" "),
-      _vm._m(8),
+      _vm._m(4),
       _vm._v(" "),
       _c("h3", { staticClass: "text-title-init center title-index" }, [
         _vm._v("Lo más nuevo en el mercado")
@@ -40951,11 +40914,11 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _vm._m(9),
+      _vm._m(5),
       _vm._v(" "),
-      _vm._m(10),
+      _vm._m(6),
       _vm._v(" "),
-      _vm._m(11),
+      _vm._m(7),
       _vm._v(" "),
       _c(
         "div",
@@ -41021,90 +40984,95 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "categorias-icons" }, [
-      _c("img", { attrs: { src: "img/woodPanel.png", alt: "" } }),
+    return _c("ul", { staticClass: "container-categorias-icons" }, [
+      _c("li", { staticClass: "categorias-icons" }, [
+        _c("img", { attrs: { src: "img/woodPanel.png", alt: "" } }),
+        _vm._v(" "),
+        _c("h6", [_vm._v("TABLEROS")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Pino")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Parota")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Cedro")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Tzalam")])
+      ]),
       _vm._v(" "),
-      _c("h6", [_vm._v("TABLEROS")]),
+      _c("li", { staticClass: "categorias-icons" }, [
+        _c("img", { attrs: { src: "img/woodIcon.png", alt: "" } }),
+        _vm._v(" "),
+        _c("h6", [_vm._v("MADERA")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Cimbras")]),
+        _vm._v(" "),
+        _c("a", [_vm._v(" MDF")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Aglomerados")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Enchapados")])
+      ]),
       _vm._v(" "),
-      _c("a", [_vm._v("Pino")]),
+      _c("li", { staticClass: "categorias-icons" }, [
+        _c("img", { attrs: { src: "img/herrajes.png", alt: "" } }),
+        _vm._v(" "),
+        _c("h6", [_vm._v("HERRAJES")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Correderas")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Jaladeras")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Perfiles")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Bisagras")])
+      ]),
       _vm._v(" "),
-      _c("a", [_vm._v("Parota")]),
+      _c("li", { staticClass: "categorias-icons" }, [
+        _c("img", { attrs: { src: "img/Cubierta80x80.png", alt: "" } }),
+        _vm._v(" "),
+        _c("h6", [_vm._v("CUBIERTAS")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Cubierta aglomerado")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Resina")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Cuarzos")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Granito")])
+      ]),
       _vm._v(" "),
-      _c("a", [_vm._v("Cedro")]),
+      _c("li", { staticClass: "categorias-icons" }, [
+        _c("img", {
+          attrs: { src: "img/LaminadosPlasticos80x80.png", alt: "" }
+        }),
+        _vm._v(" "),
+        _c("h6", [_vm._v("LAMINADOS")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Naturales")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Formaica")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Cromacore")]),
+        _vm._v(" "),
+        _c("a")
+      ]),
       _vm._v(" "),
-      _c("a", [_vm._v("Tzalam")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "categorias-icons" }, [
-      _c("img", { attrs: { src: "img/woodIcon.png", alt: "" } }),
-      _vm._v(" "),
-      _c("h6", [_vm._v("MADERA")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Cimbras")]),
-      _vm._v(" "),
-      _c("a", [_vm._v(" MDF")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Aglomerados")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Enchapados")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "categorias-icons" }, [
-      _c("img", { attrs: { src: "img/Cubierta80x80.png", alt: "" } }),
-      _vm._v(" "),
-      _c("h6", [_vm._v("CUBIERTAS")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Cubierta aglomerado")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Resina")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Cuarzos")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Granito")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "categorias-icons" }, [
-      _c("img", { attrs: { src: "img/LaminadosPlasticos80x80.png", alt: "" } }),
-      _vm._v(" "),
-      _c("h6", [_vm._v("LAMINADOS")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Naturales")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Formaica")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Cromacore")]),
-      _vm._v(" "),
-      _c("a")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "categorias-icons" }, [
-      _c("img", { attrs: { src: "img/paint2.png", alt: "" } }),
-      _vm._v(" "),
-      _c("h6", [_vm._v("PINTURA")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Pinturas")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Pegamento")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Lijas")]),
-      _vm._v(" "),
-      _c("a", [_vm._v("Resanes")])
+      _c("li", { staticClass: "categorias-icons" }, [
+        _c("img", {
+          staticStyle: { opacity: "0.7" },
+          attrs: { src: "img/paint2.png", alt: "" }
+        }),
+        _vm._v(" "),
+        _c("h6", [_vm._v("PINTURA")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Pinturas")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Pegamento")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Lijas")]),
+        _vm._v(" "),
+        _c("a", [_vm._v("Resanes")])
+      ])
     ])
   },
   function() {
@@ -41710,7 +41678,7 @@ var staticRenderFns = [
           _c("p", { staticClass: "white-text center" }, [
             _c("br"),
             _vm._v(
-              "\n\n                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse voluptatum iste atque assumenda aliquid voluptatem voluptatibus corporis nemo incidunt distinctio officia optio praesentium numquam, omnis odit, sunt beatae nostrum ipsam.\n                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse voluptatum iste atque assumenda aliquid voluptatem voluptatibus corporis nemo incidunt distinctio officia optio praesentium numquam, omnis odit, sunt beatae nostrum ipsam.\n\n            "
+              "\n                PG Maderas tenemos un compromiso con nuestros clientes, contamos con excelencia en todas nuestras áreas, Calidad en todos los\n                productos que manejamos, Honestidad y compromiso con nuestros clientes y proveedores, para nosotros el trabajo en equipo y convivencia entre todos los empleados y clientes es de suma importancia.\n            "
             )
           ])
         ])
@@ -43762,123 +43730,144 @@ var render = function() {
         _c(
           "div",
           { staticClass: "col m9 s12", attrs: { id: "Productos" } },
-          _vm._l(_vm.arrayProductos, function(producto) {
-            return _c(
+          [
+            _c(
               "div",
               {
-                key: producto.PK_products,
-                staticClass: "card sticky-action col m4 s12 contorno",
-                staticStyle: { "z-index": "0" }
+                directives: [
+                  {
+                    name: "if(!arrayProductos)",
+                    rawName: "v-if(!arrayProductos)"
+                  }
+                ],
+                staticClass: "center"
               },
               [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "card-image waves-effect waves-block waves-light tamaImagen "
-                  },
-                  [
+                _c("img", {
+                  staticClass: "noEncontrado",
+                  attrs: { src: "img/Product Not Found.png", alt: "" }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.arrayProductos, function(producto) {
+              return _c(
+                "div",
+                {
+                  key: producto.PK_products,
+                  staticClass: "card sticky-action col m4 s12 contorno",
+                  staticStyle: { "z-index": "0" }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "card-image waves-effect waves-block waves-light tamaImagen "
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href: "/Ver-Producto?id=" + producto.PK_products
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "pImagen",
+                            attrs: {
+                              src: "img/" + producto.image,
+                              alt: producto.name
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-content tamaLetras " }, [
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      { staticClass: "card-title grey-text text-darken-4" },
+                      [_vm._v(_vm._s(producto.name))]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("SKU: " + _vm._s(producto.SKU))]),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: producto.avaible == 0,
+                            expression: "producto.avaible == 0"
+                          }
+                        ]
+                      },
+                      [_vm._v("Disponibilidad: No disponible")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: producto.avaible > 0,
+                            expression: "producto.avaible > 0"
+                          }
+                        ]
+                      },
+                      [_vm._v("Disponibilidad: " + _vm._s(producto.avaible))]
+                    ),
+                    _vm._v(" "),
+                    _c("h6", [_vm._v("$" + _vm._s(producto.price))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-action" }, [
                     _c(
                       "a",
                       {
-                        attrs: {
-                          href: "/Ver-Producto?id=" + producto.PK_products
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: producto.avaible > 0,
+                            expression: "producto.avaible > 0"
+                          }
+                        ],
+                        staticClass:
+                          "btn bg-main agregar-carrito hide-on-small-only",
+                        on: {
+                          click: [
+                            function($event) {
+                              _vm.cantidad = 1
+                            },
+                            function($event) {
+                              return _vm.agregarCarrito(producto)
+                            }
+                          ]
                         }
                       },
                       [
-                        _c("img", {
-                          staticClass: "pImagen",
-                          attrs: {
-                            src: "img/" + producto.image,
-                            alt: producto.name
-                          }
-                        })
+                        _vm._v("Agregar a Carrito"),
+                        _c("i", { staticClass: "material-icons left m-0" }, [
+                          _vm._v("add_shopping_cart")
+                        ])
                       ]
                     )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-content tamaLetras " }, [
-                  _c("br"),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    { staticClass: "card-title grey-text text-darken-4" },
-                    [_vm._v(_vm._s(producto.name))]
-                  ),
-                  _vm._v(" "),
-                  _c("p", [_vm._v("SKU: " + _vm._s(producto.SKU))]),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: producto.avaible == 0,
-                          expression: "producto.avaible == 0"
-                        }
-                      ]
-                    },
-                    [_vm._v("Disponibilidad: No disponible")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: producto.avaible > 0,
-                          expression: "producto.avaible > 0"
-                        }
-                      ]
-                    },
-                    [_vm._v("Disponibilidad: " + _vm._s(producto.avaible))]
-                  ),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v("$" + _vm._s(producto.price))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-action" }, [
-                  _c(
-                    "a",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: producto.avaible > 0,
-                          expression: "producto.avaible > 0"
-                        }
-                      ],
-                      staticClass:
-                        "btn bg-main agregar-carrito hide-on-small-only",
-                      on: {
-                        click: [
-                          function($event) {
-                            _vm.cantidad = 1
-                          },
-                          function($event) {
-                            return _vm.agregarCarrito(producto)
-                          }
-                        ]
-                      }
-                    },
-                    [
-                      _vm._v("Agregar a Carrito"),
-                      _c("i", { staticClass: "material-icons left m-0" }, [
-                        _vm._v("add_shopping_cart")
-                      ])
-                    ]
-                  )
-                ])
-              ]
-            )
-          }),
-          0
+                  ])
+                ]
+              )
+            })
+          ],
+          2
         ),
         _vm._v(" "),
         _c("br"),

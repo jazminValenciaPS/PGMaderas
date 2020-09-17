@@ -125,16 +125,17 @@
                     </tbody>
                 </table>
                  <ul class="pagination">
-                <li  v-if="pagination.current_page > 1">
-                    <a href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
-                </li>
-                <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                    <a href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
-                </li>
-                <li v-if="pagination.current_page < pagination.last_page">
-                    <a href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
-                </li>
-            </ul>
+                    <li  v-if="pagination.current_page > 1">
+                        <a  href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)"><i class="material-icons">chevron_left</i></a>
+                        <!-- <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)" ></a> -->
+                    </li>
+                    <li  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                        <a  href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a  href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)" ><i class="material-icons">chevron_right</i></a>
+                    </li>
+                </ul>
             </div>  
         </div>
     </main>
@@ -175,6 +176,7 @@ export default {
                 'from' : 0,
                 'to' : 0,
             },
+            offset : 3,
             criterio : 'name',
             buscar:''
         }
@@ -246,32 +248,6 @@ export default {
             this.errorSubcategoria = 0;
             this.errorMostrarMsjSubcategoria = [];
         },
-        // seleccionarImagen(img){
-        //     if (img == 1) {            
-        //         this.file = this.$refs.filea.files[0];
-        //         readURL(document.getElementsByClassName("categoriaAlta")[0], 1);
-        //     }
-        //     else {
-        //         this.file = this.$refs.filec.files[0];
-        //         readURL(document.getElementsByClassName("categoriaEdit")[0], 2);
-        //     }
-        //     this.cambio = 1;
-
-        //     function readURL(input, img) {
-        //         if (input.files && input.files[0]) {
-        //             var reader = new FileReader();
-        //             reader.onload = function (e) {
-        //                 if (img == 1) {
-        //                     readURL('.imgAlta').attr('src', e.target.result);
-        //                 }
-        //                 else {
-        //                     readURL('.imgCambio').attr('src', e.target.result);
-        //                 }
-        //             };
-        //             reader.readAsDataURL(input.files[0]);
-        //         }
-        //     }
-        // },
         abrirModal(modelo,accion, data = [],PK_subcategories){
             let m=this;
             switch(modelo){

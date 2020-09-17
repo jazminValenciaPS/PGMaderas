@@ -36,7 +36,7 @@
             </li>
             <li class="categorias-icons" >
                 <img src="img/herrajes.png" alt="">
-                <H6>HERRAJES</H6>
+                <h6>HERRAJES</h6>
                 <a>Correderas</a>
                 <a>Jaladeras</a>
                 <a>Perfiles</a>
@@ -60,7 +60,7 @@
                 <a></a>
             </li>
             <li class="categorias-icons" >
-                 <img src="img/paint2.png" alt="">
+                 <img src="img/paint2.png" style="opacity: 0.7;" alt="">
                 <h6>PINTURA</h6>
                 <a>Pinturas</a>
                 <a>Pegamento</a>

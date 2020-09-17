@@ -796,8 +796,17 @@ nav div ul li a {
     padding: 0px !important;
 
 }
+.noEncontrado{
+    width: 600px;
+    height:300px
+}
 
 @media screen and (max-width: 958px){
+    .noEncontrado{
+        width: 600px;
+        height:300px
+    }
+
     .descargar{
         margin-left: 20% !important;
     }
@@ -884,6 +893,10 @@ nav div ul li a {
 
 
 @media screen and (max-width: 507px) {
+    .noEncontrado{
+        width: 250px;
+        height:150px
+    }
     .servicios-card{
         font-size: 12px !important;
         background: gray;
@@ -1070,6 +1083,10 @@ nav div ul li a {
 }
 
 @media Screen and (max-width:411px){
+    .noEncontrado{
+        width: 250px;
+        height:150px
+    }
     .contenerdor-comentarios-clientes::after {
         right: -357px;
         background-color: #fff;

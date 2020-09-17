@@ -179,6 +179,8 @@ export default {
             },
             //Calcula los elementos de la paginación
             pagesNumber: function() {
+                console.log(this.pagination.to);
+
                 if(!this.pagination.to) {
                     return [];
                 }
