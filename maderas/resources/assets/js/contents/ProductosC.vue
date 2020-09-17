@@ -57,7 +57,7 @@
                         </div>
                         <div class="button-container form formmodal-footer">
                             <button class="button-type" type="button" v-if="tipoAccion==1"  @click="nuevoProducto()">Guardar</button>
-                            <button class="button-type" type="button" v-if="tipoAccion==2" @click="actualizarProducto(PK_products)">Actualizar</button>
+                            <button class="button-type" type="button" v-if="tipoAccion==2" @click="actualizarProducto(PK_products,PK_Product_images)">Actualizar</button>
                             <button class="button-type" type="button" @click="cerrarModal()">Cerrar</button>
                         </div>
                     </div>
@@ -336,7 +336,7 @@ export default {
 
             });
         },
-        actualizarProducto(PK_products){
+        actualizarProducto(PK_products,PK_Product_images){
             if (this.validarProducto()){
                 return;
             }
@@ -349,7 +349,7 @@ export default {
                 formData.append('id_products_categories', me.id_products_categories);
                 formData.append('description', me.description);
                 formData.append('price', me.price);
-                formData.append('PK_Product_images', me.PK_Product_images);
+                formData.append('PK_Product_images',PK_Product_images);
 
                 // formData.append('SKU', me.SKU);
                 // formData.append('avaible', me.avaible);

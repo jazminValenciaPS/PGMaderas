@@ -7392,7 +7392,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    actualizarProducto: function actualizarProducto(PK_products) {
+    actualizarProducto: function actualizarProducto(PK_products, PK_Product_images) {
       if (this.validarProducto()) {
         return;
       }
@@ -7405,7 +7405,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       formData.append('id_products_categories', me.id_products_categories);
       formData.append('description', me.description);
       formData.append('price', me.price);
-      formData.append('PK_Product_images', me.PK_Product_images); // formData.append('SKU', me.SKU);
+      formData.append('PK_Product_images', PK_Product_images); // formData.append('SKU', me.SKU);
       // formData.append('avaible', me.avaible);
       //Registramos la informacion
 
@@ -37544,7 +37544,10 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.actualizarProducto(_vm.PK_products)
+                                return _vm.actualizarProducto(
+                                  _vm.PK_products,
+                                  _vm.PK_Product_images
+                                )
                               }
                             }
                           },

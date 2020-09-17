@@ -320,7 +320,6 @@ class ProductController extends Controller
 
         $producto = Product::findOrFail($id);
 
-        // $producto->SKU = $request->SKU;
         $producto->id_products_categories = $request->id_products_categories;
         $producto->name = $request->name;
         $producto->description = $request->description;
@@ -329,27 +328,27 @@ class ProductController extends Controller
         $producto->status = '1';
         
         $producto->save();
+
+        print($pk_img);
+       
+        $imagenProdu  = ProductImage::findOrFail($pk_img);
+
+        $imagen = Peticion::file('file');
+        $extension = $imagen -> guessExtension();
+        $date = date('d-m-Y_h-i-s-ms-a');
+        $prefijo = 'Image';
+        $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
+        $imagen->move('img', $nombreImagen);
+
+        File::delete('img/' . $imagenProdu->image);
+
+        $imagenProdu->image = $nombreImagen;
+        print($imagenProdu);
+        $imagenProdu->save();
+
+
         
-        if(Peticion::file('file')){
-           
-         
-
-            $imagenP = ProductImage::findOrFail($pk_img);
-            $imagen = Peticion::file('file');
-            $extension = $imagen -> guessExtension();
-            $date = date('d-m-Y_h-i-s-ms-a');
-            $prefijo = 'Image';
-            $nombreImagen = $prefijo.'_'.$date.'.'.$extension;
-            $imagen->move('img', $nombreImagen);
-            
-            if($imagenP->image != 'default.png'){
-                File::delete('img/' . $imagenP->image);
-            }
-
-           
-            $imagenP ->image = $nombreImagen;
-            $imagenP->save();
-        }  
+       
         
     }
 
