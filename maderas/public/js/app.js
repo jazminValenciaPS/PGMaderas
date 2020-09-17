@@ -42567,40 +42567,12 @@ var render = function() {
                 {
                   on: {
                     click: function($event) {
-                      return _vm.listarTarjetas()
-                    }
-                  }
-                },
-                [_vm._v("Mis Tarjetas")]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  on: {
-                    click: function($event) {
                       _vm.informacion = 5
                     }
                   }
                 },
                 [_vm._v("Cambiar Contraseña")]
               )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "collection-item" }, [
-              _c("h6", [
-                _c(
-                  "a",
-                  {
-                    on: {
-                      click: function($event) {
-                        return _vm.listarPedidos()
-                      }
-                    }
-                  },
-                  [_vm._v("Mis Pedidos")]
-                )
-              ])
             ]),
             _vm._v(" "),
             _c("li", { staticClass: "collection-item" }, [

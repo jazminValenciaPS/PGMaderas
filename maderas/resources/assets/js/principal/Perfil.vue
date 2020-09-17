@@ -22,12 +22,12 @@
                     <li class="collection-item">
                         <h6>Configuración</h6>
                         <a  @click="listarDatos(email)">Datos personales</a>
-                        <a @click="listarTarjetas()" >Mis Tarjetas</a>
+                        <!-- <a @click="listarTarjetas()" >Mis Tarjetas</a> -->
                         <a  @click="informacion=5">Cambiar Contraseña</a>
                     </li>
-                    <li class="collection-item">
+                    <!-- <li class="collection-item">
                         <h6><a @click="listarPedidos()" >Mis Pedidos</a></h6>
-                    </li>
+                    </li> -->
                     <li class="collection-item">
                        <h6> <a href="#" @click.prevent="logout">Cerrar sesión</a></h6>
                     </li>
